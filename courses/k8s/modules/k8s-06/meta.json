@@ -1,0 +1,57 @@
+{
+  "id": "k8s-06",
+  "title": {
+    "ko": "스케줄링 — 어피니티·테인트·DaemonSet",
+    "en": "Scheduling — Affinity, Taints, DaemonSets",
+    "ja": "スケジューリング — アフィニティ・テイント・DaemonSet",
+    "zh-CN": "调度 —— 亲和性、污点与 DaemonSet",
+    "zh-TW": "排程 —— 親和性、汙點與 DaemonSet",
+    "es": "Planificación: afinidad, taints y DaemonSets",
+    "de": "Scheduling – Affinity, Taints, DaemonSets"
+  },
+  "desc": {
+    "ko": "nodeSelector·어피니티·테인트/톨러레이션·DaemonSet 으로 파드 배치를 직접 통제",
+    "en": "Control pod placement with nodeSelector, affinity, taints/tolerations and DaemonSets"
+  },
+  "duration": 40,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "노드 레이블과 nodeAffinity",
+        "en": "Node labels and nodeAffinity",
+        "ja": "ノードラベルと nodeAffinity",
+        "zh-CN": "节点标签与 nodeAffinity",
+        "zh-TW": "節點標籤與 nodeAffinity",
+        "es": "Etiquetas de nodo y nodeAffinity",
+        "de": "Node-Labels und nodeAffinity"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "테인트와 톨러레이션",
+        "en": "Taints and tolerations",
+        "ja": "テイントとトレレーション",
+        "zh-CN": "污点与容忍",
+        "zh-TW": "汙點與容忍",
+        "es": "Taints y tolerations",
+        "de": "Taints und Tolerations"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "DaemonSet",
+        "en": "DaemonSet",
+        "ja": "DaemonSet",
+        "zh-CN": "DaemonSet",
+        "zh-TW": "DaemonSet",
+        "es": "DaemonSet",
+        "de": "DaemonSet"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "snacklab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    {{- include "snacklab.selectorLabels" . | nindent 4 }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 3000
+      protocol: TCP
+      name: http

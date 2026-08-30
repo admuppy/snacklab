@@ -1,0 +1,47 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "snacklab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+rules:
+  # pod 드라이버: 학습자 pod CRUD + label(patch) + exec(터미널·checks)
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "delete", "patch"]
+  - apiGroups: [""]
+    resources: ["pods/exec", "pods/attach"]
+    verbs: ["create", "get"]
+  - apiGroups: [""]
+    resources: ["pods/log"]
+    verbs: ["get"]
+{{- if eq .Values.driver "kubevirt" }}
+  - apiGroups: ["kubevirt.io"]
+    resources: ["virtualmachines", "virtualmachineinstances"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["cdi.kubevirt.io"]
+    resources: ["datavolumes"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: ["subresources.kubevirt.io"]
+    resources: ["virtualmachineinstances/console", "virtualmachineinstances/vnc"]
+    verbs: ["get"]
+{{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "snacklab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "snacklab.fullname" . }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "snacklab.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+{{- end }}

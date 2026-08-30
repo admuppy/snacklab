@@ -1,0 +1,87 @@
+:root {
+  --bg: #0f1115;
+  --surface: #171a21;
+  --surface-2: #1e222b;
+  --ink: #e8eaf0;
+  --ink-2: #a8adbb;
+  --muted: #6b7180;
+  --line: #2a2f3a;
+  --accent: #2cc490;
+  --accent-ink: #0b2b20;
+  --accent-soft: rgba(44, 196, 144, 0.12);
+  --warn: #e5a13d;
+  --danger: #e46a6a;
+  --blue: #5b9ce6;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+a { color: var(--blue); text-decoration: none; }
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+.topbar {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 18px; border-bottom: 1px solid var(--line); background: var(--surface);
+}
+.topbar .logo { font-weight: 800; letter-spacing: -0.01em; }
+.topbar .logo b { color: var(--accent); }
+.topbar .spacer { flex: 1; }
+.chip {
+  font-size: 12px; padding: 3px 10px; border-radius: 99px;
+  background: var(--surface-2); border: 1px solid var(--line); color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.chip.ok { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.chip.warn { color: var(--warn); border-color: var(--warn); }
+.chip.danger { color: var(--danger); border-color: var(--danger); }
+
+.btn {
+  display: inline-block; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+  border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+/* Author display rules beat the UA's [hidden] { display: none } — without this override,
+ * `el.hidden = true` silently stops working on anything styled with a display value
+ * (e.g. the per-step [Check] button that must disappear in exam labs). */
+[hidden] { display: none !important; }
+.btn:hover { border-color: var(--muted); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.grid th {
+  text-align: left; font-size: 11.5px; color: var(--muted); font-weight: 700;
+  letter-spacing: 0.05em; padding: 8px 12px; border-bottom: 1px solid var(--line); white-space: nowrap;
+}
+table.grid td { padding: 8px 12px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+
+/* ── 뱃지 (모듈 이수 메달 · 트랙 완주 특별 뱃지) ── */
+.badge-medal { display: inline-flex; flex-direction: column; align-items: center; gap: 5px; width: 66px; }
+.badge-medal .coin {
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 21px;
+  background: radial-gradient(circle at 32% 28%, var(--surface-2), var(--surface));
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft), 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+.badge-medal .lbl { font-size: 10px; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.badge-medal.gold .coin {
+  border-color: #e8b93c; font-size: 23px; width: 50px; height: 50px;
+  background: radial-gradient(circle at 32% 28%, rgba(232, 185, 60, 0.28), rgba(232, 185, 60, 0.06));
+  box-shadow: 0 0 0 3px rgba(232, 185, 60, 0.18), 0 2px 12px rgba(232, 185, 60, 0.35);
+}
+.badge-medal.gold .lbl { color: #e8b93c; font-weight: 700; }
+.badge-medal.locked .coin { filter: grayscale(1); opacity: 0.28; border-color: var(--line); box-shadow: none; }
+.badge-medal.locked .lbl { opacity: 0.5; }
+.badge-medal.sm { width: auto; }
+.badge-medal.sm .coin { width: 26px; height: 26px; font-size: 13px; border-width: 1.5px; box-shadow: none; }
+.badge-medal.sm.gold .coin { width: 28px; height: 28px; font-size: 14px; }
+.badge-strip { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }

@@ -1,0 +1,128 @@
+{
+  "step1m1": {
+    "ko": "FAIL: 노드에 disktype=ssd 레이블이 없습니다 (kubectl label node {0} disktype=ssd).",
+    "ja": "FAIL: ノードに disktype=ssd のラベルがありません（kubectl label node {0} disktype=ssd）。",
+    "zh-CN": "FAIL: 节点上没有 disktype=ssd 标签（kubectl label node {0} disktype=ssd）。",
+    "zh-TW": "FAIL: 節點上沒有 disktype=ssd 標籤（kubectl label node {0} disktype=ssd）。",
+    "es": "FAIL: el nodo no tiene la etiqueta disktype=ssd (kubectl label node {0} disktype=ssd).",
+    "de": "FAIL: Dem Node fehlt das Label disktype=ssd (kubectl label node {0} disktype=ssd).",
+    "en": "FAIL: the node has no disktype=ssd label (kubectl label node {0} disktype=ssd)."
+  },
+  "step1m2": {
+    "ko": "FAIL: 파드 'affine' 이 없습니다.",
+    "ja": "FAIL: Pod 'affine' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'affine'。",
+    "zh-TW": "FAIL: 沒有 Pod 'affine'。",
+    "es": "FAIL: no existe el Pod 'affine'.",
+    "de": "FAIL: Der Pod 'affine' fehlt.",
+    "en": "FAIL: the Pod 'affine' does not exist."
+  },
+  "step1m3": {
+    "ko": "FAIL: 파드 affine 에 nodeAffinity 가 없습니다.",
+    "ja": "FAIL: Pod affine に nodeAffinity がありません。",
+    "zh-CN": "FAIL: Pod affine 没有 nodeAffinity。",
+    "zh-TW": "FAIL: Pod affine 沒有 nodeAffinity。",
+    "es": "FAIL: el Pod affine no tiene nodeAffinity.",
+    "de": "FAIL: Dem Pod affine fehlt nodeAffinity.",
+    "en": "FAIL: the Pod affine has no nodeAffinity."
+  },
+  "step1m4": {
+    "ko": "FAIL: 파드 affine 이 Running 이 아닙니다 (현재 {0}). 레이블/어피니티가 맞는지 확인하세요.",
+    "ja": "FAIL: Pod affine が Running ではありません（現在 {0}）。ラベルとアフィニティが一致するか確認してください。",
+    "zh-CN": "FAIL: Pod affine 不是 Running（当前 {0}）。请确认标签与亲和性是否匹配。",
+    "zh-TW": "FAIL: Pod affine 不是 Running（目前 {0}）。請確認標籤與親和性是否相符。",
+    "es": "FAIL: el Pod affine no está en Running (actualmente {0}). Comprueba que la etiqueta y la afinidad coinciden.",
+    "de": "FAIL: Der Pod affine ist nicht Running (aktuell {0}). Prüfe, ob Label und Affinity zusammenpassen.",
+    "en": "FAIL: the Pod affine is not Running (currently {0}). Check that the label and the affinity match."
+  },
+  "step1m5": {
+    "ko": "PASS: nodeAffinity 로 파드 affine 이 disktype=ssd 노드에 스케줄되어 Running 입니다.",
+    "ja": "PASS: nodeAffinity により Pod affine が disktype=ssd のノードにスケジュールされ Running です。",
+    "zh-CN": "PASS: 借助 nodeAffinity，Pod affine 已调度到 disktype=ssd 节点并处于 Running。",
+    "zh-TW": "PASS: 藉由 nodeAffinity，Pod affine 已排程到 disktype=ssd 節點並處於 Running。",
+    "es": "PASS: gracias a nodeAffinity, el Pod affine se ha planificado en el nodo disktype=ssd y está Running.",
+    "de": "PASS: Dank nodeAffinity läuft der Pod affine auf dem Node mit disktype=ssd.",
+    "en": "PASS: nodeAffinity scheduled the Pod affine onto the disktype=ssd node and it is Running."
+  },
+  "step2m1": {
+    "ko": "FAIL: 노드에 lab=...:NoSchedule 테인트가 없습니다 (kubectl taint nodes {0} lab=demo:NoSchedule).",
+    "ja": "FAIL: ノードに lab=…:NoSchedule のテイントがありません（kubectl taint nodes {0} lab=demo:NoSchedule）。",
+    "zh-CN": "FAIL: 节点上没有 lab=…:NoSchedule 污点（kubectl taint nodes {0} lab=demo:NoSchedule）。",
+    "zh-TW": "FAIL: 節點上沒有 lab=…:NoSchedule 汙點（kubectl taint nodes {0} lab=demo:NoSchedule）。",
+    "es": "FAIL: el nodo no tiene el taint lab=…:NoSchedule (kubectl taint nodes {0} lab=demo:NoSchedule).",
+    "de": "FAIL: Dem Node fehlt der Taint lab=…:NoSchedule (kubectl taint nodes {0} lab=demo:NoSchedule).",
+    "en": "FAIL: the node has no lab=…:NoSchedule taint (kubectl taint nodes {0} lab=demo:NoSchedule)."
+  },
+  "step2m2": {
+    "ko": "FAIL: 파드 'tolerant' 가 없습니다.",
+    "ja": "FAIL: Pod 'tolerant' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'tolerant'。",
+    "zh-TW": "FAIL: 沒有 Pod 'tolerant'。",
+    "es": "FAIL: no existe el Pod 'tolerant'.",
+    "de": "FAIL: Der Pod 'tolerant' fehlt.",
+    "en": "FAIL: the Pod 'tolerant' does not exist."
+  },
+  "step2m3": {
+    "ko": "FAIL: 파드 tolerant 에 key=lab 톨러레이션이 없습니다.",
+    "ja": "FAIL: Pod tolerant に key=lab のトレレーションがありません。",
+    "zh-CN": "FAIL: Pod tolerant 没有 key=lab 的容忍。",
+    "zh-TW": "FAIL: Pod tolerant 沒有 key=lab 的容忍。",
+    "es": "FAIL: el Pod tolerant no tiene una toleration con key=lab.",
+    "de": "FAIL: Dem Pod tolerant fehlt eine Toleration mit key=lab.",
+    "en": "FAIL: the Pod tolerant has no toleration with key=lab."
+  },
+  "step2m4": {
+    "ko": "FAIL: 파드 tolerant 이 Running 이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: Pod tolerant が Running ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: Pod tolerant 不是 Running（当前 {0}）。",
+    "zh-TW": "FAIL: Pod tolerant 不是 Running（目前 {0}）。",
+    "es": "FAIL: el Pod tolerant no está en Running (actualmente {0}).",
+    "de": "FAIL: Der Pod tolerant ist nicht Running (aktuell {0}).",
+    "en": "FAIL: the Pod tolerant is not Running (currently {0})."
+  },
+  "step2m5": {
+    "ko": "PASS: 테인트된 노드에서 톨러레이션을 가진 파드 tolerant 이 Running 입니다.",
+    "ja": "PASS: テイントされたノードで、トレレーションを持つ Pod tolerant が Running です。",
+    "zh-CN": "PASS: 在带污点的节点上，具备容忍的 Pod tolerant 正在 Running。",
+    "zh-TW": "PASS: 在帶汙點的節點上，具備容忍的 Pod tolerant 正在 Running。",
+    "es": "PASS: en el nodo con taint, el Pod tolerant con su toleration está Running.",
+    "de": "PASS: Auf dem Node mit Taint läuft der Pod tolerant dank seiner Toleration.",
+    "en": "PASS: on the tainted node, the Pod tolerant with its toleration is Running."
+  },
+  "step3m1": {
+    "ko": "FAIL: DaemonSet 'node-agent' 가 없습니다.",
+    "ja": "FAIL: DaemonSet 'node-agent' がありません。",
+    "zh-CN": "FAIL: 没有 DaemonSet 'node-agent'。",
+    "zh-TW": "FAIL: 沒有 DaemonSet 'node-agent'。",
+    "es": "FAIL: no existe el DaemonSet 'node-agent'.",
+    "de": "FAIL: Das DaemonSet 'node-agent' fehlt.",
+    "en": "FAIL: the DaemonSet 'node-agent' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: DaemonSet 이 아직 어느 노드에도 스케줄되지 않았습니다 (desired={0}). 테인트를 톨러레이트하나요?",
+    "ja": "FAIL: DaemonSet がまだどのノードにもスケジュールされていません（desired={0}）。テイントをトレレートしていますか？",
+    "zh-CN": "FAIL: DaemonSet 尚未调度到任何节点（desired={0}）。是否容忍了污点？",
+    "zh-TW": "FAIL: DaemonSet 尚未排程到任何節點（desired={0}）。是否容忍了汙點？",
+    "es": "FAIL: el DaemonSet todavía no se ha planificado en ningún nodo (desired={0}). ¿Tolera el taint?",
+    "de": "FAIL: Das DaemonSet wurde noch auf keinem Node eingeplant (desired={0}). Toleriert es den Taint?",
+    "en": "FAIL: the DaemonSet has not been scheduled on any node yet (desired={0}). Does it tolerate the taint?"
+  },
+  "step3m3": {
+    "ko": "FAIL: DaemonSet 파드가 모두 Ready 가 아닙니다 (ready={0}/desired={1}).",
+    "ja": "FAIL: DaemonSet の Pod がすべて Ready ではありません（ready={0}/desired={1}）。",
+    "zh-CN": "FAIL: DaemonSet 的 Pod 未全部 Ready（ready={0}/desired={1}）。",
+    "zh-TW": "FAIL: DaemonSet 的 Pod 未全部 Ready（ready={0}/desired={1}）。",
+    "es": "FAIL: no todos los Pods del DaemonSet están Ready (ready={0}/desired={1}).",
+    "de": "FAIL: Nicht alle Pods des DaemonSets sind Ready (ready={0}/desired={1}).",
+    "en": "FAIL: not all DaemonSet Pods are Ready (ready={0}/desired={1})."
+  },
+  "step3m4": {
+    "ko": "PASS: DaemonSet node-agent 이 {0}개 노드에서 모두 Ready 입니다.",
+    "ja": "PASS: DaemonSet node-agent が {0} ノードすべてで Ready です。",
+    "zh-CN": "PASS: DaemonSet node-agent 在 {0} 个节点上全部 Ready。",
+    "zh-TW": "PASS: DaemonSet node-agent 在 {0} 個節點上全部 Ready。",
+    "es": "PASS: el DaemonSet node-agent está Ready en los {0} nodos.",
+    "de": "PASS: Das DaemonSet node-agent ist auf allen {0} Nodes Ready.",
+    "en": "PASS: the DaemonSet node-agent is Ready on all {0} node(s)."
+  }
+}

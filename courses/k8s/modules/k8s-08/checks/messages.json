@@ -1,0 +1,101 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ServiceAccount 'deployer' 가 없습니다.",
+    "ja": "FAIL: ServiceAccount 'deployer' がありません。",
+    "zh-CN": "FAIL: 没有 ServiceAccount 'deployer'。",
+    "zh-TW": "FAIL: 沒有 ServiceAccount 'deployer'。",
+    "es": "FAIL: no existe la ServiceAccount 'deployer'.",
+    "de": "FAIL: Der ServiceAccount 'deployer' fehlt.",
+    "en": "FAIL: the ServiceAccount 'deployer' does not exist."
+  },
+  "step1m2": {
+    "ko": "PASS: ServiceAccount deployer 가 존재합니다.",
+    "ja": "PASS: ServiceAccount deployer が存在します。",
+    "zh-CN": "PASS: ServiceAccount deployer 已存在。",
+    "zh-TW": "PASS: ServiceAccount deployer 已存在。",
+    "es": "PASS: la ServiceAccount deployer existe.",
+    "de": "PASS: Der ServiceAccount deployer existiert.",
+    "en": "PASS: the ServiceAccount deployer exists."
+  },
+  "step2m1": {
+    "ko": "FAIL: Role 'pod-reader' 가 없습니다.",
+    "ja": "FAIL: Role 'pod-reader' がありません。",
+    "zh-CN": "FAIL: 没有 Role 'pod-reader'。",
+    "zh-TW": "FAIL: 沒有 Role 'pod-reader'。",
+    "es": "FAIL: no existe el Role 'pod-reader'.",
+    "de": "FAIL: Die Role 'pod-reader' fehlt.",
+    "en": "FAIL: the Role 'pod-reader' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: Role pod-reader 에 pods 에 대한 list 권한 규칙이 없습니다.",
+    "ja": "FAIL: Role pod-reader に pods への list 権限のルールがありません。",
+    "zh-CN": "FAIL: Role pod-reader 中没有对 pods 的 list 权限规则。",
+    "zh-TW": "FAIL: Role pod-reader 中沒有對 pods 的 list 權限規則。",
+    "es": "FAIL: el Role pod-reader no tiene una regla con permiso list sobre pods.",
+    "de": "FAIL: In der Role pod-reader fehlt eine Regel mit list-Recht auf pods.",
+    "en": "FAIL: the Role pod-reader has no rule granting list on pods."
+  },
+  "step2m3": {
+    "ko": "FAIL: RoleBinding 'read-pods' 가 없습니다.",
+    "ja": "FAIL: RoleBinding 'read-pods' がありません。",
+    "zh-CN": "FAIL: 没有 RoleBinding 'read-pods'。",
+    "zh-TW": "FAIL: 沒有 RoleBinding 'read-pods'。",
+    "es": "FAIL: no existe el RoleBinding 'read-pods'.",
+    "de": "FAIL: Das RoleBinding 'read-pods' fehlt.",
+    "en": "FAIL: the RoleBinding 'read-pods' does not exist."
+  },
+  "step2m4": {
+    "ko": "FAIL: RoleBinding read-pods 의 roleRef 가 pod-reader 가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: RoleBinding read-pods の roleRef が pod-reader ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: RoleBinding read-pods 的 roleRef 不是 pod-reader（当前 {0}）。",
+    "zh-TW": "FAIL: RoleBinding read-pods 的 roleRef 不是 pod-reader（目前 {0}）。",
+    "es": "FAIL: el roleRef del RoleBinding read-pods no es pod-reader (actualmente {0}).",
+    "de": "FAIL: Der roleRef des RoleBindings read-pods ist nicht pod-reader (aktuell {0}).",
+    "en": "FAIL: the roleRef of the RoleBinding read-pods is not pod-reader (currently {0})."
+  },
+  "step2m5": {
+    "ko": "FAIL: RoleBinding read-pods 의 대상에 ServiceAccount deployer 가 없습니다.",
+    "ja": "FAIL: RoleBinding read-pods の subjects に ServiceAccount deployer がありません。",
+    "zh-CN": "FAIL: RoleBinding read-pods 的 subjects 中没有 ServiceAccount deployer。",
+    "zh-TW": "FAIL: RoleBinding read-pods 的 subjects 中沒有 ServiceAccount deployer。",
+    "es": "FAIL: los subjects del RoleBinding read-pods no incluyen la ServiceAccount deployer.",
+    "de": "FAIL: In den subjects des RoleBindings read-pods fehlt der ServiceAccount deployer.",
+    "en": "FAIL: the subjects of the RoleBinding read-pods do not include the ServiceAccount deployer."
+  },
+  "step2m6": {
+    "ko": "PASS: Role pod-reader(pods get/list/watch) 를 RoleBinding read-pods 로 deployer 에 부여했습니다.",
+    "ja": "PASS: Role pod-reader（pods の get/list/watch）を RoleBinding read-pods で deployer に付与しました。",
+    "zh-CN": "PASS: 已通过 RoleBinding read-pods 把 Role pod-reader（pods 的 get/list/watch）授予 deployer。",
+    "zh-TW": "PASS: 已透過 RoleBinding read-pods 把 Role pod-reader（pods 的 get/list/watch）授予 deployer。",
+    "es": "PASS: has concedido el Role pod-reader (get/list/watch sobre pods) a deployer mediante el RoleBinding read-pods.",
+    "de": "PASS: Die Role pod-reader (get/list/watch auf pods) wurde deployer über das RoleBinding read-pods zugewiesen.",
+    "en": "PASS: the Role pod-reader (get/list/watch on pods) is granted to deployer via the RoleBinding read-pods."
+  },
+  "step3m1": {
+    "ko": "FAIL: deployer 가 pods 를 list 할 수 없습니다 (can-i list pods → {0}). Role/RoleBinding 을 확인하세요.",
+    "ja": "FAIL: deployer が pods を list できません（can-i list pods → {0}）。Role と RoleBinding を確認してください。",
+    "zh-CN": "FAIL: deployer 无法 list pods（can-i list pods → {0}）。请检查 Role 与 RoleBinding。",
+    "zh-TW": "FAIL: deployer 無法 list pods（can-i list pods → {0}）。請檢查 Role 與 RoleBinding。",
+    "es": "FAIL: deployer no puede listar pods (can-i list pods → {0}). Revisa el Role y el RoleBinding.",
+    "de": "FAIL: deployer kann pods nicht auflisten (can-i list pods → {0}). Prüfe Role und RoleBinding.",
+    "en": "FAIL: deployer cannot list pods (can-i list pods → {0}). Check the Role and the RoleBinding."
+  },
+  "step3m2": {
+    "ko": "FAIL: deployer 가 pods 를 delete 할 수 있습니다 (can-i delete pods → {0}). 최소권한 원칙 위반 — delete 권한을 주지 마세요.",
+    "ja": "FAIL: deployer が pods を delete できてしまいます（can-i delete pods → {0}）。最小権限の原則に反します — delete 権限は与えないでください。",
+    "zh-CN": "FAIL: deployer 竟然可以 delete pods（can-i delete pods → {0}）。这违反最小权限原则 —— 不要授予 delete 权限。",
+    "zh-TW": "FAIL: deployer 竟然可以 delete pods（can-i delete pods → {0}）。這違反最小權限原則 —— 不要授予 delete 權限。",
+    "es": "FAIL: deployer puede borrar pods (can-i delete pods → {0}). Eso viola el mínimo privilegio: no concedas el permiso delete.",
+    "de": "FAIL: deployer darf pods löschen (can-i delete pods → {0}). Das verletzt das Prinzip minimaler Rechte – vergib kein delete.",
+    "en": "FAIL: deployer can delete pods (can-i delete pods → {0}). That breaks least privilege — do not grant delete."
+  },
+  "step3m3": {
+    "ko": "PASS: deployer 는 pods list=yes, delete=no — 최소권한이 올바르게 적용되었습니다.",
+    "ja": "PASS: deployer は pods list=yes, delete=no — 最小権限が正しく適用されています。",
+    "zh-CN": "PASS: deployer 对 pods 是 list=yes、delete=no —— 最小权限已正确应用。",
+    "zh-TW": "PASS: deployer 對 pods 是 list=yes、delete=no —— 最小權限已正確套用。",
+    "es": "PASS: deployer tiene list=yes y delete=no sobre pods: el mínimo privilegio está bien aplicado.",
+    "de": "PASS: deployer hat für pods list=yes und delete=no – minimale Rechte korrekt umgesetzt.",
+    "en": "PASS: deployer has list=yes and delete=no on pods — least privilege applied correctly."
+  }
+}

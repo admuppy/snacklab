@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin — SnackLab</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  .page { max-width: 1080px; margin: 0 auto; padding: 30px 20px 80px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .sub { color: var(--ink-2); margin-bottom: 20px; font-size: 13px; }
+  .stats { display: flex; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+  .stat {
+    border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+    padding: 12px 18px; min-width: 140px;
+  }
+  .stat .k { font-size: 11.5px; color: var(--muted); letter-spacing: 0.04em; }
+  .stat .v { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .stat .v small { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .panel { border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow-x: auto; }
+  .state-Running { color: var(--accent); }
+  .state-Provisioning { color: var(--warn); }
+  .state-Expired, .state-Terminated, .state-Idle { color: var(--muted); }
+  .warmpanel {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    margin: -8px 0 22px; padding: 10px 14px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+  }
+  .warmpanel .wlabel { font-weight: 700; font-size: 13px; }
+  .warmpanel label { font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 5px; }
+  .warmpanel input { width: 58px; padding: 5px 7px; border: 1px solid var(--line); border-radius: 7px; background: var(--bg); color: inherit; font-variant-numeric: tabular-nums; }
+  .warmpanel .whint { font-size: 11.5px; color: var(--muted); flex: 1 1 260px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><b>SnackLab</b></a>
+  <span class="chip" data-i18n="adminDash">관리자 대시보드</span>
+  <span class="spacer"></span>
+  <a class="btn" href="/" data-i18n="catalog">카탈로그</a>
+</div>
+<div class="page">
+  <h1 data-i18n="adminTitle">세션 현황</h1>
+  <div class="sub" data-i18n="adminSub">3초마다 자동 갱신</div>
+  <div class="stats" id="stats"></div>
+  <div class="warmpanel" id="warmpanel" style="display:none">
+    <span class="wlabel" data-i18n="warmCtl">웜풀 조정</span>
+    <label data-i18n="min" data-for="wmin">최소</label><input id="wmin" type="number" min="0" step="1" aria-label="min">
+    <label data-i18n="max" data-for="wmax">최대</label><input id="wmax" type="number" min="0" step="1" aria-label="max">
+    <button class="btn primary" id="wapply" data-i18n="apply">적용</button>
+    <span class="whint" id="whint"></span>
+  </div>
+  <div class="panel">
+    <table class="grid">
+      <thead><tr>
+        <th data-i18n="thSession">세션</th><th data-i18n="thUser">사용자</th><th data-i18n="thModule">모듈</th><th data-i18n="thState">상태</th><th data-i18n="thAlloc">할당</th><th data-i18n="thProgress">진도</th><th data-i18n="thRemaining">남은 시간</th><th data-i18n="thIdle">유휴</th><th data-i18n="thExtend">연장</th><th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div id="usersSection" style="display:none">
+    <h1 style="margin-top:36px" data-i18n="usersTitle">계정 관리</h1>
+    <div class="sub" id="usersSub"></div>
+    <div class="panel">
+      <table class="grid">
+        <thead><tr>
+          <th data-i18n="thUser">사용자</th><th data-i18n="thName">이름</th><th data-i18n="thTeam">팀</th><th data-i18n="thEmail">이메일</th><th data-i18n="thStatus">상태</th><th data-i18n="thJoined">가입일</th><th></th>
+        </tr></thead>
+        <tbody id="userRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <h1 style="margin-top:36px" data-i18n="boardTitle">수료 현황</h1>
+  <div class="sub" id="boardSub"></div>
+  <div class="panel">
+    <table class="grid">
+      <thead><tr>
+        <th data-i18n="thUser">사용자</th><th data-i18n="thBadges">획득 뱃지</th><th data-i18n="thCompleted">이수 모듈</th><th data-i18n="thTrackDone">트랙 완주</th>
+      </tr></thead>
+      <tbody id="boardRows"></tbody>
+    </table>
+  </div>
+</div>
+<script src="/i18n.js"></script>
+<script>
+function fmt(sec) {
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+// 웜풀 조절 패널: 목표/대기 현황 표시 + min/max 입력값은 최초 1회·적용 후에만 동기화(편집 중 덮어쓰기 방지)
+let warmInit = false;
+function renderWarm(d) {
+  if (d.warmPoolMin == null || d.warmPoolMax == null) return; // 드라이버가 웜풀 미지원
+  const panel = document.getElementById('warmpanel');
+  panel.style.display = '';
+  const mn = document.getElementById('wmin'), mx = document.getElementById('wmax');
+  const cap = d.warmPoolHardCap ?? 10;
+  mn.max = cap; mx.max = cap;
+  if (!warmInit && document.activeElement !== mn && document.activeElement !== mx) {
+    mn.value = d.warmPoolMin; mx.value = d.warmPoolMax; warmInit = true;
+  }
+  document.getElementById('whint').textContent = t('warmHint', d.warmTarget ?? d.warmPoolSize, d.warmPool, cap);
+}
+async function applyWarm() {
+  const btn = document.getElementById('wapply');
+  const min = Number(document.getElementById('wmin').value);
+  const max = Number(document.getElementById('wmax').value);
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/admin/warmpool', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ min, max }),
+    });
+    const j = await res.json();
+    if (!res.ok) { alert(j.error || 'error'); return; }
+    document.getElementById('wmin').value = j.warmPoolMin;
+    document.getElementById('wmax').value = j.warmPoolMax;
+    document.getElementById('whint').textContent = t('warmSaved', j.warmPoolMin, j.warmPoolMax);
+    refresh();
+  } finally { btn.disabled = false; }
+}
+async function refresh() {
+  const res = await fetch('/api/admin/summary');
+  if (res.status === 401) { location.href = '/auth/login?next=' + encodeURIComponent(location.pathname); return; }
+  if (res.status === 403) { document.body.innerHTML = `<div style="padding:40px">${t('adminNeeded')} <a href="/">${t('backToCatalog')}</a></div>`; return; }
+  const d = await res.json();
+  const active = d.sessions.filter(s => s.state === 'Running' || s.state === 'Provisioning');
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="k">${t('stActive')}</div><div class="v">${active.length}<small> / ${d.maxSessions ?? '?'}</small></div></div>
+    <div class="stat"><div class="k">${t('stWarm')}</div><div class="v">${d.warmPool}<small> / ${t('stTarget')} ${d.warmTarget ?? d.warmPoolSize} (${d.warmPoolMin ?? '?'}~${d.warmPoolMax ?? '?'})</small></div></div>
+    <div class="stat"><div class="k">${t('stTTL')}</div><div class="v">${d.ttlMinutes}<small>${t('minuteUnit')}</small></div></div>
+    <div class="stat"><div class="k">${t('stTotal')}</div><div class="v">${d.sessions.length}</div></div>`;
+  renderWarm(d);
+  const tb = document.getElementById('rows');
+  tb.innerHTML = '';
+  for (const s of d.sessions.sort((a, b) => b.createdAt - a.createdAt)) {
+    const done = Object.values(s.checks).filter(c => c.pass).length;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><code>${s.id}</code></td>
+      <td>${s.user}</td>
+      <td>${s.labTitle}</td>
+      <td class="state-${s.state}">${s.state}</td>
+      <td>${s.warm ? t('warmAlloc') : t('coldAlloc')}</td>
+      <td>${t('stepsPassed', done)}</td>
+      <td>${s.state === 'Running' || s.state === 'Provisioning' ? fmt(s.remainingSec) : '—'}</td>
+      <td>${s.state === 'Running' && s.idleSec != null ? fmt(s.idleSec) : '—'}</td>
+      <td>${s.extended ? t('used') : '—'}</td>
+      <td></td>`;
+    if (s.state === 'Running' || s.state === 'Provisioning') {
+      const btn = document.createElement('button');
+      btn.className = 'btn danger'; btn.style.cssText = 'padding:3px 10px;font-size:11.5px';
+      btn.textContent = t('forceEnd');
+      btn.onclick = async () => {
+        if (confirm(t('forceEndConfirm', s.id, s.user))) {
+          await fetch('/api/sessions/' + s.id, { method: 'DELETE' });
+          refresh();
+        }
+      };
+      tr.lastElementChild.appendChild(btn);
+    }
+    tb.appendChild(tr);
+  }
+}
+/* 수료 현황(상황판): 사용자별 획득 뱃지 — 트랙 완주 🏆가 맨 앞, 이수 모듈 수·완주 일자 표기 */
+async function refreshBoard() {
+  const res = await fetch('/api/admin/progress');
+  if (!res.ok) return;
+  const d = await res.json();
+  document.getElementById('boardSub').textContent = ''; // 사용자가 없을 때만 안내
+  const tb = document.getElementById('boardRows');
+  tb.innerHTML = '';
+  if (!d.users.length) { document.getElementById('boardSub').textContent = t('boardEmpty'); return; }
+  const byEarned = us => us.badges.filter(b => b.type === 'module').length +
+    us.badges.filter(b => b.type === 'track').length * 100; // 완주자 우선 정렬
+  for (const u of d.users.sort((a, b) => byEarned(b) - byEarned(a) || a.user.localeCompare(b.user))) {
+    const tr = document.createElement('tr');
+    const tdUser = document.createElement('td');
+    tdUser.textContent = u.user;
+    const tdBadges = document.createElement('td');
+    const strip = document.createElement('span');
+    strip.className = 'badge-strip';
+    for (const b of [...u.badges].sort((a, b) => (a.type === 'track' ? -1 : 1) - (b.type === 'track' ? -1 : 1))) {
+      strip.appendChild(badgeEl(b, { small: true }));
+    }
+    tdBadges.appendChild(strip);
+    const tdDone = document.createElement('td');
+    tdDone.textContent = `${Object.values(u.labs).filter(l => l.completedAt).length} / ${d.modules.length}`;
+    const tdTrack = document.createElement('td');
+    tdTrack.textContent = u.badges.filter(b => b.type === 'track')
+      .map(b => `🏆 ${b.trackTitle || b.track} (${new Date(b.earnedAt).toLocaleDateString()})`).join(' · ') || '—';
+    tr.append(tdUser, tdBadges, tdDone, tdTrack);
+    tb.appendChild(tr);
+  }
+}
+/* 계정 관리 (local 모드에서만 표시): 승인 대기 계정 승인/삭제 */
+async function refreshUsers() {
+  const res = await fetch('/api/admin/users');
+  if (!res.ok) return;
+  const d = await res.json();
+  if (d.mode !== 'local') return; // oidc/off 모드에서는 패널 숨김 유지
+  document.getElementById('usersSection').style.display = '';
+  const pending = d.users.filter(u => !u.approved).length;
+  document.getElementById('usersSub').textContent = t('usersSub', d.users.length, pending);
+  const tb = document.getElementById('userRows');
+  tb.innerHTML = '';
+  // 승인 대기 우선, 그 다음 가입일 역순
+  for (const u of d.users.sort((a, b) => (a.approved - b.approved) || (b.createdAt || 0) - (a.createdAt || 0))) {
+    const tr = document.createElement('tr');
+    const cells = [u.user, u.name || '—', u.team || '—', u.email || '—'];
+    for (const v of cells) {
+      const td = document.createElement('td');
+      td.textContent = v;
+      tr.appendChild(td);
+    }
+    const tdState = document.createElement('td');
+    tdState.innerHTML = u.admin || u.approved
+      ? `<span style="color:var(--accent)">${u.admin ? t('stAdmin') : t('stApproved')}</span>`
+      : `<span style="color:var(--warn)">${t('stPending')}</span>`;
+    const tdJoined = document.createElement('td');
+    tdJoined.textContent = u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—';
+    const tdAct = document.createElement('td');
+    if (!u.approved) {
+      const ok = document.createElement('button');
+      ok.className = 'btn primary'; ok.style.cssText = 'padding:3px 10px;font-size:11.5px';
+      ok.textContent = t('approveBtn');
+      ok.onclick = async () => {
+        await fetch('/api/admin/users/' + encodeURIComponent(u.user) + '/approve', { method: 'POST' });
+        refreshUsers();
+      };
+      tdAct.appendChild(ok);
+    }
+    if (!u.admin) {
+      const del = document.createElement('button');
+      del.className = 'btn danger'; del.style.cssText = 'padding:3px 10px;font-size:11.5px;margin-left:6px';
+      del.textContent = t('deleteBtn');
+      del.onclick = async () => {
+        if (confirm(t('deleteConfirm', u.user))) {
+          const r = await fetch('/api/admin/users/' + encodeURIComponent(u.user), { method: 'DELETE' });
+          if (!r.ok) alert((await r.json().catch(() => ({}))).error || 'failed');
+          refreshUsers();
+        }
+      };
+      tdAct.appendChild(del);
+    }
+    tr.append(tdState, tdJoined, tdAct);
+    tb.appendChild(tr);
+  }
+}
+document.getElementById('wapply').onclick = applyWarm;
+refresh();
+refreshBoard();
+refreshUsers();
+setInterval(refresh, 3000);
+setInterval(refreshBoard, 15000);
+setInterval(refreshUsers, 15000);
+</script>
+</body>
+</html>

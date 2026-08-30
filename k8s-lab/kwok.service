@@ -1,0 +1,26 @@
+[Unit]
+Description=KWOK fake-node controller (kubelet-less worker nodes for exam labs)
+Documentation=https://kwok.sigs.k8s.io
+# Needs the in-pod k3s apiserver; keeps retrying via Restart until it is up.
+After=k3s.service
+Wants=k3s.service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+# Out-of-cluster mode: talks to the in-pod k3s over its admin kubeconfig and manages
+# only Nodes carrying the kwok.x-k8s.io/node=fake annotation. stage-fast.yaml drives
+# instant node readiness and pod Running/eviction transitions (measured RSS 57MiB).
+# --node-lease-duration-seconds is mandatory out-of-cluster: without it kwok keeps no
+# node Lease, so after ~40s the node lifecycle controller flags the fake nodes
+# NotReady and permanently marks their pods Ready=False (observed 2026-08-06 E2E).
+ExecStart=/usr/local/bin/kwok \
+  --kubeconfig=/etc/rancher/k3s/k3s.yaml \
+  --config=/etc/kwok/stage-fast.yaml \
+  --manage-nodes-with-annotation-selector=kwok.x-k8s.io/node=fake \
+  --cidr=10.42.100.0/24 \
+  --node-ip=10.42.100.1 \
+  --node-lease-duration-seconds=40
+Restart=always
+RestartSec=3s

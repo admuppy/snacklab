@@ -1,0 +1,57 @@
+{
+  "id": "k8s-01",
+  "title": {
+    "ko": "Deployment 와 롤아웃",
+    "en": "Deployments and Rollouts",
+    "ja": "Deployment とロールアウト",
+    "zh-CN": "Deployment 与滚动发布",
+    "zh-TW": "Deployment 與滾動發布",
+    "es": "Deployments y despliegues progresivos",
+    "de": "Deployments und Rollouts"
+  },
+  "desc": {
+    "ko": "레플리카 선언·롤링 업데이트·리비전 롤백까지 Deployment 컨트롤러의 수렴 동작을 손으로 확인",
+    "en": "Declare replicas, roll out an update, and roll back a revision to see the Deployment controller converge"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "Deployment 생성 (3 레플리카)",
+        "en": "Create a Deployment (3 replicas)",
+        "ja": "Deployment の作成（3 レプリカ）",
+        "zh-CN": "创建 Deployment（3 个副本）",
+        "zh-TW": "建立 Deployment（3 個副本）",
+        "es": "Crear un Deployment (3 réplicas)",
+        "de": "Ein Deployment anlegen (3 Replicas)"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "롤링 업데이트",
+        "en": "Rolling update",
+        "ja": "ローリングアップデート",
+        "zh-CN": "滚动更新",
+        "zh-TW": "滾動更新",
+        "es": "Actualización progresiva",
+        "de": "Rolling Update"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "롤백",
+        "en": "Rollback",
+        "ja": "ロールバック",
+        "zh-CN": "回滚",
+        "zh-TW": "回溯",
+        "es": "Rollback",
+        "de": "Rollback"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "step1m1": {
+    "ko": "FAIL: lab-app.service를 읽을 수 없습니다.",
+    "ja": "FAIL: lab-app.service を読み取れません。",
+    "zh-CN": "FAIL: 无法读取 lab-app.service。",
+    "zh-TW": "FAIL: 無法讀取 lab-app.service。",
+    "es": "FAIL: no se puede leer lab-app.service.",
+    "de": "FAIL: lab-app.service kann nicht gelesen werden.",
+    "en": "FAIL: lab-app.service cannot be read."
+  },
+  "step1m2": {
+    "ko": "FAIL: ExecStart({0})가 실행 가능한 파일이 아닙니다. journalctl -u lab-app 의 203/EXEC를 따라가 보세요.",
+    "ja": "FAIL: ExecStart（{0}）が実行可能なファイルではありません。journalctl -u lab-app の 203/EXEC をたどってみてください。",
+    "zh-CN": "FAIL: ExecStart（{0}）不是可执行文件。请顺着 journalctl -u lab-app 的 203/EXEC 排查。",
+    "zh-TW": "FAIL: ExecStart（{0}）不是可執行檔。請順著 journalctl -u lab-app 的 203/EXEC 排查。",
+    "es": "FAIL: ExecStart ({0}) no es un archivo ejecutable. Sigue el 203/EXEC en journalctl -u lab-app.",
+    "de": "FAIL: ExecStart ({0}) ist keine ausführbare Datei. Folge dem 203/EXEC in journalctl -u lab-app.",
+    "en": "FAIL: ExecStart ({0}) is not an executable file. Follow the 203/EXEC in journalctl -u lab-app."
+  },
+  "step1m3": {
+    "ko": "PASS: ExecStart가 실재하는 인터프리터를 가리킵니다 ({0}).",
+    "ja": "PASS: ExecStart が実在するインタープリタを指しています（{0}）。",
+    "zh-CN": "PASS: ExecStart 指向了真实存在的解释器（{0}）。",
+    "zh-TW": "PASS: ExecStart 指向了真實存在的直譯器（{0}）。",
+    "es": "PASS: ExecStart apunta a un intérprete que existe ({0}).",
+    "de": "PASS: ExecStart verweist auf einen vorhandenen Interpreter ({0}).",
+    "en": "PASS: ExecStart points to an interpreter that exists ({0})."
+  },
+  "step2m1": {
+    "ko": "FAIL: lab-squatter가 아직 8080을 물고 있습니다. 정지(+disable)하세요.",
+    "ja": "FAIL: lab-squatter がまだ 8080 をつかんでいます。停止（+ disable）してください。",
+    "zh-CN": "FAIL: lab-squatter 仍占着 8080。请停止（并 disable）。",
+    "zh-TW": "FAIL: lab-squatter 仍占著 8080。請停止（並 disable）。",
+    "es": "FAIL: lab-squatter sigue ocupando el 8080. Deténlo (y deshabilítalo).",
+    "de": "FAIL: lab-squatter belegt weiterhin Port 8080. Stoppe (und deaktiviere) es.",
+    "en": "FAIL: lab-squatter still holds port 8080. Stop it (and disable it)."
+  },
+  "step2m2": {
+    "ko": "FAIL: lab-squatter가 여전히 enabled입니다. 재부팅하면 또 충돌합니다 — disable 하세요.",
+    "ja": "FAIL: lab-squatter がまだ enabled です。再起動するとまた衝突します — disable してください。",
+    "zh-CN": "FAIL: lab-squatter 仍是 enabled。重启后还会冲突 —— 请 disable。",
+    "zh-TW": "FAIL: lab-squatter 仍是 enabled。重新開機後還會衝突 —— 請 disable。",
+    "es": "FAIL: lab-squatter sigue habilitado. Tras reiniciar volverá a chocar: deshabilítalo.",
+    "de": "FAIL: lab-squatter ist weiterhin aktiviert. Nach einem Neustart kollidiert es erneut – deaktiviere es.",
+    "en": "FAIL: lab-squatter is still enabled. It will clash again after a reboot — disable it."
+  },
+  "step2m3": {
+    "ko": "FAIL: lab-app.service가 active가 아닙니다. 포트가 비었는데도 안 뜬다면 journal을 다시 보세요.",
+    "ja": "FAIL: lab-app.service が active ではありません。ポートが空いているのに起動しないなら journal をもう一度確認してください。",
+    "zh-CN": "FAIL: lab-app.service 不是 active。端口已空却仍起不来的话，请再看看 journal。",
+    "zh-TW": "FAIL: lab-app.service 不是 active。連接埠已空卻仍起不來的話，請再看看 journal。",
+    "es": "FAIL: lab-app.service no está activo. Si el puerto está libre y aun así no arranca, vuelve a mirar el journal.",
+    "de": "FAIL: lab-app.service ist nicht aktiv. Wenn der Port frei ist und es trotzdem nicht startet, sieh erneut ins Journal.",
+    "en": "FAIL: lab-app.service is not active. If the port is free and it still will not start, look at the journal again."
+  },
+  "step2m4": {
+    "ko": "PASS: 포트 충돌이 해소되고 lab-app이 기동했습니다.",
+    "ja": "PASS: ポート衝突が解消され lab-app が起動しました。",
+    "zh-CN": "PASS: 端口冲突已解决，lab-app 已启动。",
+    "zh-TW": "PASS: 連接埠衝突已解決，lab-app 已啟動。",
+    "es": "PASS: el conflicto de puerto se ha resuelto y lab-app ha arrancado.",
+    "de": "PASS: Der Portkonflikt ist gelöst und lab-app läuft.",
+    "en": "PASS: the port conflict is resolved and lab-app has started."
+  },
+  "step3m1": {
+    "ko": "FAIL: lab-app.service가 active가 아닙니다.",
+    "ja": "FAIL: lab-app.service が active ではありません。",
+    "zh-CN": "FAIL: lab-app.service 不是 active 状态。",
+    "zh-TW": "FAIL: lab-app.service 不是 active 狀態。",
+    "es": "FAIL: lab-app.service no está activo.",
+    "de": "FAIL: lab-app.service ist nicht aktiv.",
+    "en": "FAIL: lab-app.service is not active."
+  },
+  "step3m2": {
+    "ko": "FAIL: index.html 응답이 없거나 404입니다. 서비스는 labapp 사용자로 돕니다 — 그 사용자가 파일을 읽을 수 있는지 확인하세요.",
+    "ja": "FAIL: index.html の応答がないか 404 です。サービスは labapp ユーザーで動きます — そのユーザーがファイルを読めるか確認してください。",
+    "zh-CN": "FAIL: index.html 无响应或返回 404。该服务以 labapp 用户运行 —— 请确认该用户能否读取文件。",
+    "zh-TW": "FAIL: index.html 無回應或回傳 404。該服務以 labapp 使用者執行 —— 請確認該使用者能否讀取檔案。",
+    "es": "FAIL: index.html no responde o devuelve 404. El servicio corre como el usuario labapp: comprueba que pueda leer el archivo.",
+    "de": "FAIL: index.html antwortet nicht oder liefert 404. Der Dienst läuft als Benutzer labapp – prüfe, ob dieser die Datei lesen kann.",
+    "en": "FAIL: index.html does not respond or returns 404. The service runs as the labapp user — check that it can read the file."
+  },
+  "step3m3": {
+    "ko": "FAIL: 응답 내용이 기대(LAB APP OK)와 다릅니다.",
+    "ja": "FAIL: 応答内容が期待（LAB APP OK）と違います。",
+    "zh-CN": "FAIL: 响应内容与期望（LAB APP OK）不符。",
+    "zh-TW": "FAIL: 回應內容與預期（LAB APP OK）不符。",
+    "es": "FAIL: el contenido de la respuesta no es el esperado (LAB APP OK).",
+    "de": "FAIL: Der Antwortinhalt entspricht nicht der Erwartung (LAB APP OK).",
+    "en": "FAIL: the response body is not what was expected (LAB APP OK)."
+  },
+  "step3m4": {
+    "ko": "PASS: 권한 문제가 해결되어 페이지가 정상 응답합니다.",
+    "ja": "PASS: 権限の問題が解決し、ページが正常に応答しています。",
+    "zh-CN": "PASS: 权限问题已解决，页面响应正常。",
+    "zh-TW": "PASS: 權限問題已解決，頁面回應正常。",
+    "es": "PASS: el problema de permisos está resuelto y la página responde correctamente.",
+    "de": "PASS: Das Rechteproblem ist behoben, die Seite antwortet korrekt.",
+    "en": "PASS: the permission problem is fixed and the page responds correctly."
+  },
+  "step4m1": {
+    "ko": "FAIL: lab-app.service가 enabled가 아닙니다 (현재: {0}). 재부팅 후에도 떠야 합니다.",
+    "ja": "FAIL: lab-app.service が enabled ではありません（現在: {0}）。再起動後も立ち上がる必要があります。",
+    "zh-CN": "FAIL: lab-app.service 不是 enabled（当前：{0}）。重启后也必须能自动启动。",
+    "zh-TW": "FAIL: lab-app.service 不是 enabled（目前：{0}）。重新開機後也必須能自動啟動。",
+    "es": "FAIL: lab-app.service no está habilitado (actualmente: {0}). Debe arrancar también tras un reinicio.",
+    "de": "FAIL: lab-app.service ist nicht aktiviert (aktuell: {0}). Es muss auch nach einem Neustart hochkommen.",
+    "en": "FAIL: lab-app.service is not enabled (currently: {0}). It must come up after a reboot too."
+  },
+  "step4m2": {
+    "ko": "FAIL: ~/work/final.txt 가 없습니다. 최종 응답을 저장하세요.",
+    "ja": "FAIL: ~/work/final.txt がありません。最終応答を保存してください。",
+    "zh-CN": "FAIL: 没有 ~/work/final.txt。请保存最终响应。",
+    "zh-TW": "FAIL: 沒有 ~/work/final.txt。請儲存最終回應。",
+    "es": "FAIL: no existe ~/work/final.txt. Guarda la respuesta final.",
+    "de": "FAIL: ~/work/final.txt fehlt. Speichere die finale Antwort.",
+    "en": "FAIL: ~/work/final.txt does not exist. Save the final response."
+  },
+  "step4m3": {
+    "ko": "FAIL: final.txt에 서비스 응답(LAB APP OK)이 없습니다.",
+    "ja": "FAIL: final.txt にサービスの応答（LAB APP OK）が含まれていません。",
+    "zh-CN": "FAIL: final.txt 中没有服务响应（LAB APP OK）。",
+    "zh-TW": "FAIL: final.txt 中沒有服務回應（LAB APP OK）。",
+    "es": "FAIL: final.txt no contiene la respuesta del servicio (LAB APP OK).",
+    "de": "FAIL: In final.txt fehlt die Antwort des Dienstes (LAB APP OK).",
+    "en": "FAIL: final.txt does not contain the service response (LAB APP OK)."
+  },
+  "step4m4": {
+    "ko": "PASS: 서비스 복구 완료 + 재발 방지(enable)까지 마쳤습니다. 수고하셨습니다!",
+    "ja": "PASS: サービスの復旧と再発防止（enable）まで完了しました。お疲れさまでした！",
+    "zh-CN": "PASS: 服务已恢复，并完成了防复发设置（enable）。辛苦了！",
+    "zh-TW": "PASS: 服務已恢復，並完成了防止復發的設定（enable）。辛苦了！",
+    "es": "PASS: servicio recuperado y protegido frente a recurrencias (enable). ¡Buen trabajo!",
+    "de": "PASS: Dienst wiederhergestellt und gegen Wiederholung abgesichert (enable). Gut gemacht!",
+    "en": "PASS: the service is restored and protected against recurrence (enabled). Well done!"
+  }
+}

@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SnackLab</title>
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/vendor/xterm.css">
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  body { display: flex; flex-direction: column; }
+  .topbar { flex: none; }
+  .layout { display: flex; flex: 1; min-height: 0; }
+  /* ── 좌: 가이드 ── */
+  .guide { width: 46%; min-width: 380px; border-right: 1px solid var(--line); display: flex; flex-direction: column; background: var(--bg); }
+  .steps-nav { display: flex; gap: 6px; padding: 12px 16px 0; flex-wrap: wrap; }
+  .step-tab {
+    font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 99px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink-2);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .step-tab.cur { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .step-tab.done::before { content: '✓'; color: var(--accent); font-weight: 900; }
+  .guide-body { flex: 1; min-height: 0; overflow-y: auto; padding: 10px 22px 20px; }
+  .guide-body h1 { font-size: 1.3rem; letter-spacing: -0.015em; margin: 12px 0 10px; }
+  .guide-body h2 { font-size: 1.1rem; margin: 18px 0 10px; letter-spacing: -0.01em; }
+  .guide-body p { color: var(--ink-2); }
+  .guide-body strong { color: var(--ink); }
+  .guide-body table { border-collapse: collapse; font-size: 12.5px; margin: 10px 0; }
+  .guide-body th, .guide-body td { border: 1px solid var(--line); padding: 5px 10px; text-align: left; }
+  .guide-body th { color: var(--muted); font-size: 11.5px; }
+  .guide-body pre {
+    background: #0a0c10; border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px 12px; font-size: 12.5px; overflow-x: auto; position: relative; cursor: pointer;
+  }
+  .guide-body pre:hover { border-color: var(--accent); }
+  /* 힌트 문구는 i18n.js 가 --run-hint 로 주입(로케일 7종) — CSS 에 언어별 규칙을 늘리지 않는다 */
+  .guide-body pre::after {
+    content: var(--run-hint, '클릭 → 터미널 실행'); position: absolute; top: 6px; right: 8px;
+    font-size: 10px; color: var(--muted); font-family: inherit;
+  }
+  .guide-body code { font-size: 0.9em; }
+  .guide-body blockquote { border-left: 3px solid var(--warn); margin: 10px 0; padding: 2px 14px; color: var(--ink-2); }
+  .check-bar {
+    border-top: 1px solid var(--line); background: var(--surface); padding: 12px 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .check-result {
+    flex: 1; font-size: 12px; font-family: ui-monospace, Menlo, monospace;
+    white-space: pre-wrap; max-height: 110px; overflow-y: auto; color: var(--ink-2);
+  }
+  .check-result.pass { color: var(--accent); }
+  .check-result.fail { color: var(--danger); }
+  /* ── 시험형 랩(제출·일괄채점) ── */
+  .exam-card {
+    flex: none; border-bottom: 1px solid var(--line); background: var(--surface);
+    padding: 10px 18px 12px; max-height: 42%; overflow-y: auto;
+  }
+  .exam-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .exam-score { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+  .exam-verdict { font-size: 12px; font-weight: 800; padding: 2px 10px; border-radius: 99px; }
+  .exam-verdict.pass { color: var(--accent); background: var(--accent-soft); }
+  .exam-verdict.fail { color: var(--danger); background: rgba(226, 84, 84, 0.12); }
+  .exam-sub { font-size: 11.5px; color: var(--muted); }
+  .exam-bar { position: relative; height: 7px; border-radius: 99px; background: var(--line); margin: 9px 0 10px; }
+  .exam-bar i { position: absolute; inset: 0 auto 0 0; border-radius: 99px; background: var(--accent); }
+  .exam-bar i.fail { background: var(--danger); }
+  .exam-bar u {                                   /* 합격선 눈금 */
+    position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--ink-2);
+  }
+  .exam-qs { display: flex; flex-wrap: wrap; gap: 5px; }
+  .q-chip {
+    font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 6px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink-2);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .q-chip.full { border-color: var(--accent); color: var(--accent); }
+  .q-chip.part { border-color: var(--warn); color: var(--warn); }
+  .q-chip.zero { border-color: var(--danger); color: var(--danger); }
+  .q-chip.cur { background: var(--accent-soft); }
+  .exam-parts { margin-top: 10px; border-top: 1px dashed var(--line); padding-top: 8px; }
+  .exam-parts h4 { font-size: 11.5px; color: var(--muted); margin: 0 0 6px; font-weight: 700; }
+  .exam-parts div { font-size: 12px; color: var(--ink-2); display: flex; gap: 7px; padding: 1.5px 0; }
+  .exam-parts div b { flex: none; font-variant-numeric: tabular-nums; }
+  .exam-parts .ok { color: var(--accent); }
+  .exam-parts .no { color: var(--danger); }
+  .exam-explain { margin-top: 26px; border-top: 2px solid var(--line); padding-top: 6px; }
+  .exam-explain > h2 { font-size: 1.05rem; color: var(--warn); }
+  .exam-explain details {
+    border: 1px solid var(--line); border-radius: 8px; margin: 8px 0; padding: 6px 12px; background: var(--surface);
+  }
+  .exam-explain summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 3px 0; }
+  .exam-explain details[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 6px; }
+  /* 축하 모달 */
+  .congrats { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center;
+    background: rgba(10, 12, 16, 0.72); }
+  .congrats .box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 30px 34px; text-align: center; max-width: 460px; box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  }
+  .congrats .emo { font-size: 54px; line-height: 1; }
+  .congrats h3 { font-size: 1.35rem; margin: 12px 0 6px; }
+  .congrats p { color: var(--ink-2); font-size: 13.5px; margin: 4px 0; }
+  .congrats .medal { margin: 14px 0 4px; display: flex; justify-content: center; gap: 8px; }
+  /* Keyboard-shortcut guide modal: left-aligned rows with <kbd> chips */
+  .congrats .keys { text-align: left; margin: 12px 0 0; }
+  .congrats .keys p { margin: 7px 0; }
+  .congrats .keys .kh { color: var(--ink); font-weight: 700; font-size: 13px; margin-top: 12px; }
+  .congrats kbd {
+    background: var(--surface-2); border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 5px; padding: 1px 6px; font: 600 11.5px ui-monospace, Menlo, Consolas, monospace;
+    color: var(--ink); white-space: nowrap;
+  }
+  /* ── 우: 터미널 ── */
+  .termwrap { flex: 1; min-width: 0; display: flex; flex-direction: column; background: #0a0c10; }
+  .termhead {
+    display: flex; align-items: center; gap: 10px; padding: 8px 14px;
+    border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted);
+  }
+  #term { flex: 1; min-height: 0; overflow: hidden; padding: 8px 4px 8px 10px; }
+  /* ── 프로비저닝 오버레이 ── */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(10, 12, 16, 0.92); z-index: 50;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  }
+  .overlay .spin {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 3px solid var(--line); border-top-color: var(--accent);
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .overlay .big { font-size: 16px; font-weight: 700; }
+  .overlay .sub { font-size: 13px; color: var(--ink-2); }
+  .overlay.done-state .spin { display: none; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="logo" href="/"><b>SnackLab</b></a>
+  <span class="chip" id="labTitle">…</span>
+  <span class="spacer"></span>
+  <button class="btn" id="examLangBtn" hidden style="padding:3px 10px;font-size:11.5px"></button>
+  <span class="chip ok" id="ttl">--:--</span>
+  <button class="btn" id="extendBtn" data-i18n="extend">시간 연장</button>
+  <button class="btn danger" id="endBtn" data-i18n="end">세션 종료</button>
+</div>
+
+<div class="layout">
+  <div class="guide">
+    <div class="steps-nav" id="stepsNav"></div>
+    <div class="exam-card" id="examCard" hidden></div>
+    <div class="guide-body" id="guideBody"></div>
+    <div class="check-bar">
+      <button class="btn primary" id="checkBtn" data-i18n="check">체크</button>
+      <button class="btn primary" id="submitBtn" data-i18n="examSubmit" hidden>제출하고 채점하기</button>
+      <div class="check-result" id="checkResult" data-i18n="checkHint">이 단계의 과제를 완료한 뒤 [체크]를 누르세요.</div>
+      <button class="btn" id="nextBtn" disabled data-i18n="next">다음 →</button>
+    </div>
+  </div>
+  <div class="termwrap">
+    <div class="termhead">
+      <span>learner@lab — <span data-i18n="session">세션</span> <span id="sid"></span></span>
+      <span class="spacer" style="flex:1"></span>
+      <button class="btn" id="discBtn" style="padding:2px 10px;font-size:11.5px" data-i18n="disconnect">연결종료</button>
+      <button class="btn" id="reconnBtn" style="padding:2px 10px;font-size:11.5px" data-i18n="reconnect">재연결</button>
+    </div>
+    <div id="term"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="spin"></div>
+  <div class="big" id="ovTitle" data-i18n="ovProvisioning">실습 환경 프로비저닝 중…</div>
+  <div class="sub" id="ovSub"></div>
+</div>
+
+<script src="/i18n.js"></script>
+<script src="/vendor/marked.js"></script>
+<script src="/vendor/xterm.js"></script>
+<script src="/vendor/addon-fit.js"></script>
+<script>
+const sid = new URLSearchParams(location.search).get('s');
+document.getElementById('sid').textContent = sid;
+
+let meta = null, intro = '', stepMds = [], cur = 0, session = null, ws = null;
+// 시험형 랩: 문항별 [체크] 없이 [제출] 한 번으로 전 문항 채점 — exam 은 마지막 채점 결과
+let isExam = false, exam = null, grading = false;
+// Exam language: if the real exam doesn't offer the user's locale, ask them to pick one of
+// the exam languages every time they enter a session (choice lives in per-tab/session
+// sessionStorage — a fresh entry asks again). Picking "my language anyway" enables native
+// mode — later requests carry ?native=1.
+let langInfo = null;
+const nativeKey = 'examNativeLang:', choiceKey = () => 'examLangChoice:' + sid;
+const nativeMode = () => localStorage.getItem(nativeKey + (session ? session.labId : '')) === '1';
+const examChoice = () => sessionStorage.getItem(choiceKey());
+const langQuery = (sep = '?') => {
+  if (nativeMode()) return `${sep}lang=${encodeURIComponent(LANG)}&native=1`;
+  const c = examChoice();
+  return c ? `${sep}examLang=${encodeURIComponent(c)}` : '';
+};
+
+const term = new Terminal({
+  fontSize: 13, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+  cursorBlink: true, theme: { background: '#0a0c10', foreground: '#d6dae2', cursor: '#2cc490' },
+});
+const fit = new FitAddon.FitAddon();
+term.loadAddon(fit);
+term.open(document.getElementById('term'));
+
+// Mirror the real CKA terminal's copy shortcut (Ctrl+Shift+C) where the browser lets the
+// keydown through (Chrome may reserve it for DevTools — the entry guide points to the
+// right-click menu and Ctrl+Insert as fallbacks). Paste needs no code: xterm leaves
+// Ctrl+Shift+V / Shift+Insert uncancelled, so the browser's native paste event fires.
+term.attachCustomKeyEventHandler(e => {
+  if (e.type === 'keydown' && e.ctrlKey && e.shiftKey && e.code === 'KeyC' && term.hasSelection()) {
+    copyText(term.getSelection());
+    e.preventDefault();
+    return false;
+  }
+  return true;
+});
+function copyText(s) {
+  if (navigator.clipboard && window.isSecureContext) { navigator.clipboard.writeText(s); return; }
+  // execCommand fallback for plain-HTTP deployments where the Clipboard API is unavailable
+  const ta = document.createElement('textarea');
+  ta.value = s;
+  ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); } finally { ta.remove(); term.focus(); }
+}
+
+function connectTerm() {
+  disconnectTerm(true);
+  const sock = new WebSocket((location.protocol === 'https:' ? 'wss://' : 'ws://') + location.host + '/ws/term/' + sid);
+  ws = sock;
+  sock.binaryType = 'arraybuffer';
+  sock.onopen = () => { fit.fit(); sendResize(); term.focus(); };
+  sock.onmessage = e => term.write(typeof e.data === 'string' ? e.data : new Uint8Array(e.data));
+  // 재연결로 대체된 옛 소켓의 close는 무시 (ws가 이미 새 소켓)
+  sock.onclose = () => { if (ws === sock) { ws = null; term.write(t('termClosed')); } };
+}
+function disconnectTerm(silent) {
+  if (!ws) return;
+  const sock = ws; ws = null;
+  try { sock.close(); } catch {}
+  if (!silent) term.write(t('termDisconnected'));
+}
+function sendResize() {
+  if (ws && ws.readyState === 1) {
+    ws.send(new TextEncoder().encode(JSON.stringify({ type: 'resize', cols: term.cols, rows: term.rows })));
+  }
+}
+term.onData(d => ws && ws.readyState === 1 && ws.send(d));
+term.onResize(sendResize);
+window.addEventListener('resize', () => fit.fit());
+document.getElementById('reconnBtn').onclick = connectTerm;
+document.getElementById('discBtn').onclick = () => disconnectTerm(false);
+
+/* 가이드 코드블록 클릭 → 터미널에 명령 주입 */
+document.getElementById('guideBody').addEventListener('click', e => {
+  const pre = e.target.closest('pre');
+  if (!pre || !ws || ws.readyState !== 1) return;
+  ws.send(pre.innerText.trim() + '\n');
+  term.focus();
+});
+
+function fmtTTL(sec) {
+  const m = Math.floor(sec / 60), s = sec % 60;
+  return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+}
+
+function renderSteps() {
+  const nav = document.getElementById('stepsNav');
+  nav.innerHTML = '';
+  meta.steps.forEach((st, i) => {
+    const t = document.createElement('span');
+    t.className = 'step-tab' + (i === cur ? ' cur' : '') + (session.checks[i] && session.checks[i].pass ? ' done' : '');
+    t.textContent = (i + 1) + '. ' + st.title;
+    t.onclick = () => { cur = i; renderSteps(); renderGuide(); renderExamCard(); };
+    nav.appendChild(t);
+  });
+}
+
+/* ── 채점 결과 카드(상단) ─────────────────────────
+ * 제출 후에만 표시. 총점·합격선·문항별 획득 점수와, 지금 보고 있는 문항의 채점 항목을 펼친다. */
+function renderExamCard() {
+  const card = document.getElementById('examCard');
+  if (!exam) { card.hidden = true; return; }
+  card.hidden = false;
+  card.replaceChildren();
+
+  const head = document.createElement('div');
+  head.className = 'exam-head';
+  const score = document.createElement('span');
+  score.className = 'exam-score';
+  score.textContent = t('examScore', exam.total, exam.max);
+  const verdict = document.createElement('span');
+  verdict.className = 'exam-verdict ' + (exam.passed ? 'pass' : 'fail');
+  verdict.textContent = exam.passed ? t('examPassed') : t('examNotPassed');
+  const sub = document.createElement('span');
+  sub.className = 'exam-sub';
+  sub.textContent = t('examPassLine', exam.passScore)
+    + (exam.at ? ' · ' + t('examGradedAt', new Date(exam.at).toLocaleTimeString()) : '');
+  head.append(score, verdict, sub);
+  card.appendChild(head);
+
+  const bar = document.createElement('div');
+  bar.className = 'exam-bar';
+  const fill = document.createElement('i');
+  fill.className = exam.passed ? '' : 'fail';
+  fill.style.width = Math.min(100, exam.max ? exam.total / exam.max * 100 : 0) + '%';
+  const line = document.createElement('u');
+  line.style.left = (exam.max ? exam.passScore / exam.max * 100 : 0) + '%';
+  bar.append(fill, line);
+  card.appendChild(bar);
+
+  const qs = document.createElement('div');
+  qs.className = 'exam-qs';
+  exam.results.forEach((r, i) => {
+    const c = document.createElement('span');
+    const cls = r.earned >= r.max ? 'full' : r.earned > 0 ? 'part' : 'zero';
+    c.className = 'q-chip ' + cls + (i === cur ? ' cur' : '');
+    c.textContent = `Q${i + 1} ${r.earned}/${r.max} ${cls === 'full' ? '✓' : cls === 'part' ? '△' : '✗'}`;
+    c.title = r.title;
+    c.onclick = () => { cur = i; renderSteps(); renderGuide(); renderExamCard(); };
+    qs.appendChild(c);
+  });
+  card.appendChild(qs);
+
+  const r = exam.results[cur];
+  if (r && (r.parts || []).length) {
+    const box = document.createElement('div');
+    box.className = 'exam-parts';
+    const h = document.createElement('h4');
+    h.textContent = `Q${cur + 1} · ${t('examCriteria')}`;
+    box.appendChild(h);
+    for (const p of r.parts) {
+      const row = document.createElement('div');
+      const mark = document.createElement('b');
+      const okp = p.earned >= p.max;
+      mark.className = okp ? 'ok' : 'no';
+      mark.textContent = `${okp ? '✓' : '✗'} ${p.earned}/${p.max}`;
+      const txt = document.createElement('span');
+      txt.textContent = p.text;
+      row.append(mark, txt);
+      box.appendChild(row);
+    }
+    card.appendChild(box);
+  }
+}
+
+/* 틀린 문항 해설 — 가이드 본문 맨 아래에 붙인다(현재 보고 있는 문항 것은 펼친 상태) */
+function appendExplanations(body) {
+  const wrong = (exam.results || []).filter(r => r.earned < r.max && r.explain);
+  if (!wrong.length) return;
+  const box = document.createElement('div');
+  box.className = 'exam-explain';
+  const h = document.createElement('h2');
+  h.textContent = t('examWrongTitle', wrong.length);
+  box.appendChild(h);
+  for (const r of wrong) {
+    const d = document.createElement('details');
+    if (r.step === cur) d.open = true;
+    const s = document.createElement('summary');
+    s.textContent = `Q${r.step + 1} · ${r.title} — ${r.earned}/${r.max}`;
+    const c = document.createElement('div');
+    c.innerHTML = marked.parse(String(r.explain).replace(/^## .*\n/, ''));
+    for (const a of c.querySelectorAll('a[href]')) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    d.append(s, c);
+    box.appendChild(d);
+  }
+  body.appendChild(box);
+}
+
+function renderGuide() {
+  const md = (cur === 0 ? intro + '\n\n' : '') + '## ' + stepMds[cur];
+  const body = document.getElementById('guideBody');
+  body.innerHTML = marked.parse(md);
+  // 참고문서 등 외부 링크는 항상 새 창에서 열기 (내부 #앵커는 제외)
+  for (const a of body.querySelectorAll('a[href]')) {
+    if (/^https?:/i.test(a.getAttribute('href'))) {
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+    }
+  }
+  if (isExam && exam) appendExplanations(body);
+  body.scrollTop = 0;
+  const r = document.getElementById('checkResult');
+  if (isExam) {
+    // 시험은 문항을 순서와 무관하게 풀 수 있으므로 [다음]은 항상 열어 둔다
+    document.getElementById('nextBtn').disabled = cur >= meta.steps.length - 1;
+    if (!grading) {
+      const q = exam && exam.results[cur];
+      r.className = 'check-result' + (q ? (q.earned >= q.max ? ' pass' : ' fail') : '');
+      r.textContent = q ? t('examQScore', cur + 1, q.earned, q.max) : t('examHint');
+    }
+    return;
+  }
+  const done = session.checks[cur] && session.checks[cur].pass;
+  r.className = 'check-result' + (done ? ' pass' : '');
+  r.textContent = done ? t('checkPassed') : t('checkHint');
+  document.getElementById('nextBtn').disabled = !done || cur >= meta.steps.length - 1;
+}
+
+document.getElementById('checkBtn').onclick = async () => {
+  const btn = document.getElementById('checkBtn');
+  const r = document.getElementById('checkResult');
+  btn.disabled = true; btn.textContent = t('checking');
+  const res = await fetch(`/api/sessions/${sid}/verify`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ step: cur }),
+  });
+  const j = await res.json();
+  btn.disabled = false; btn.textContent = t('check');
+  if (!res.ok) { r.className = 'check-result fail'; r.textContent = j.error; return; }
+  session.checks[cur] = { pass: j.pass };
+  r.className = 'check-result ' + (j.pass ? 'pass' : 'fail');
+  r.textContent = j.output;
+  renderSteps();
+  document.getElementById('nextBtn').disabled = !j.pass || cur >= meta.steps.length - 1;
+  if (j.pass && cur === meta.steps.length - 1) {
+    r.textContent += t('moduleDone');
+  }
+  // 서버가 이수/완주를 새로 기록했을 때만 내려옴 — 뱃지 획득 축하
+  if (j.labCompleted) r.textContent += t('badgeEarned', session.labTitle);
+  if (j.trackCompleted) r.textContent += t('trackBadgeEarned');
+};
+document.getElementById('nextBtn').onclick = () => { cur++; renderSteps(); renderGuide(); renderExamCard(); };
+
+/* ── 제출 → 전 문항 일괄 채점 ───────────────────── */
+document.getElementById('submitBtn').onclick = async () => {
+  if (grading) return;
+  if (!confirm(t('examConfirm'))) return;
+  // 채점은 서버에서 백그라운드로 돈다(문항마다 실제 클러스터 확인 — 1~2분). 진행 상황과 결과는
+  // 세션 폴링으로 받아온다. 탭을 새로고침해도 채점은 계속되고 결과가 세션에 남는다.
+  const prevAt = exam ? exam.at : 0;
+  await trackGrading(async () => {
+    const res = await fetch(`/api/sessions/${sid}/submit` + langQuery(), { method: 'POST' });
+    const j = await res.json();
+    if (!res.ok) throw new Error(j.error || t('examError'));
+  }, prevAt);
+};
+
+// 채점이 끝날 때까지 버튼·진행표시를 잡고 있다가 결과를 화면에 반영한다.
+// start 는 채점을 시작시키는 동작(재접속 시에는 이미 돌고 있으므로 생략).
+async function trackGrading(start, prevAt) {
+  const btn = document.getElementById('submitBtn');
+  const r = document.getElementById('checkResult');
+  grading = true;
+  btn.disabled = true;
+  btn.textContent = t('examGradingBtn');
+  r.className = 'check-result';
+  r.textContent = t('examGradingProgress', 0, meta.steps.length);
+  let done = null;
+  try {
+    if (start) await start();
+    done = await waitForGrading(prevAt);
+  } catch (e) {
+    r.className = 'check-result fail';
+    r.textContent = e.message || t('examError');
+    return;
+  } finally {
+    grading = false;
+    btn.disabled = false;
+    btn.textContent = t('examResubmit');
+  }
+  exam = done;
+  for (const q of exam.results) session.checks[q.step] = { pass: q.max > 0 && q.earned >= q.max };
+  renderSteps(); renderExamCard(); renderGuide();
+  if (exam.passed) showCongrats(exam);
+}
+
+async function waitForGrading(prevAt) {
+  for (;;) {
+    await new Promise(r => setTimeout(r, 1500));
+    const res = await fetch(`/api/sessions/${sid}`);
+    if (!res.ok) throw new Error(t('examError'));
+    const s = await res.json();
+    if (s.examError) throw new Error(s.examError);
+    if (s.grading) {
+      document.getElementById('checkResult').textContent =
+        t('examGradingProgress', s.grading.done, s.grading.total);
+      continue;
+    }
+    if (s.exam && s.exam.at > prevAt) return s.exam;
+    if (s.state !== 'Running') throw new Error(t('examError'));
+  }
+}
+
+/* ── Exam language prompt ─────────────────────────
+ * Learners whose language the real exam doesn't offer get a popup on every session entry
+ * asking them to pick one of the exam languages. The top-bar button toggles between the
+ * native translation (practice only) and the exam language. */
+function setupExamLang() {
+  if (!langInfo || !langInfo.examLanguages) return;
+  const forced = langInfo.contentLang !== langInfo.userLang;
+  const btn = document.getElementById('examLangBtn');
+  if (langInfo.nativeAvailable && (forced || nativeMode())) {
+    btn.hidden = false;
+    btn.textContent = nativeMode()
+      ? t('examLangUseExam', langName(examDefaultLang()))
+      : t('examLangUseNative', langName(langInfo.userLang));
+    btn.onclick = () => {
+      const k = nativeKey + session.labId;
+      if (nativeMode()) localStorage.removeItem(k); else localStorage.setItem(k, '1');
+      location.reload();
+    };
+  }
+  if (forced && !examChoice()) showLangNotice(showKeysGuide);
+  else showKeysGuide();
+}
+const langName = l => (typeof LANG_NAMES === 'object' && LANG_NAMES[l]) || l;
+const examDefaultLang = () =>
+  (langInfo.examLanguages || []).includes('en') ? 'en' : (langInfo.examLanguages || ['en'])[0];
+
+// onDone runs when the dialog closes without a reload (reload paths re-enter setupExamLang,
+// which shows the keys guide on its own once a language choice is stored).
+function showLangNotice(onDone) {
+  const ov = document.createElement('div');
+  ov.className = 'congrats';
+  const box = document.createElement('div');
+  box.className = 'box';
+  const emo = document.createElement('div');
+  emo.className = 'emo';
+  emo.textContent = '🌐';
+  const h = document.createElement('h3');
+  h.textContent = t('examLangChoose');
+  const p1 = document.createElement('p');
+  p1.textContent = t('examLangBody', langInfo.examName || 'CKA',
+    langInfo.examLanguages.map(langName).join(' · '));
+  const p2 = document.createElement('p');
+  p2.textContent = t('examLangNote');
+  box.append(emo, h, p1, p2);
+
+  // One button per exam language — the server's default (contentLang) comes first as primary.
+  // The choice lasts only for this tab/session (sessionStorage); the next entry asks again.
+  const row = document.createElement('div');
+  row.style.cssText = 'margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap';
+  const pick = l => {
+    sessionStorage.setItem(choiceKey(), l);
+    if (l === langInfo.contentLang) { ov.remove(); if (onDone) onDone(); }
+    else location.reload();
+  };
+  const ordered = [langInfo.contentLang,
+    ...langInfo.examLanguages.filter(l => l !== langInfo.contentLang)];
+  for (const l of ordered) {
+    const b = document.createElement('button');
+    b.className = 'btn' + (l === langInfo.contentLang ? ' primary' : '');
+    b.textContent = langName(l);
+    b.onclick = () => pick(l);
+    row.appendChild(b);
+  }
+  if (langInfo.nativeAvailable) {
+    const native = document.createElement('button');
+    native.className = 'btn';
+    native.textContent = t('examLangUseNative', langName(langInfo.userLang));
+    native.onclick = () => {
+      localStorage.setItem(nativeKey + session.labId, '1');
+      location.reload();
+    };
+    row.appendChild(native);
+  }
+  box.appendChild(row);
+  ov.appendChild(box);
+  ov.onclick = e => { if (e.target === ov) { ov.remove(); if (onDone) onDone(); } };
+  document.body.appendChild(ov);
+}
+
+/* ── Terminal basics guide ────────────────────────
+ * Shown once per tab+session on exam-lab entry (after the language dialog, if any).
+ * Copy/paste shortcuts differ between this browser terminal and the real exam's remote
+ * desktop terminal, so both are spelled out. */
+function showKeysGuide() {
+  const k = 'examKeysSeen:' + sid;
+  if (sessionStorage.getItem(k)) return;
+  sessionStorage.setItem(k, '1');
+  const ov = document.createElement('div');
+  ov.className = 'congrats';
+  const box = document.createElement('div');
+  box.className = 'box';
+  box.innerHTML = `
+    <div class="emo">⌨️</div>
+    <h3>${t('examKeysTitle')}</h3>
+    <div class="keys">
+      <p class="kh">${t('examKeysLabHead')}</p>
+      <p>${t('examKeysLabCopy')}</p>
+      <p>${t('examKeysLabPaste')}</p>
+      <p>${t('examKeysCaveat')}</p>
+      <p class="kh">${t('examKeysRealHead')}</p>
+      <p>${t('examKeysRealNote')}</p>
+      <p class="kh">${t('examKeysMoreHead')}</p>
+      <p>${t('examKeysClickCmd')}</p>
+    </div>`;
+  const row = document.createElement('div');
+  row.style.cssText = 'margin-top:16px;display:flex;justify-content:center';
+  const ok = document.createElement('button');
+  ok.className = 'btn primary';
+  ok.textContent = t('examKeysOk');
+  ok.onclick = () => { ov.remove(); term.focus(); };
+  row.appendChild(ok);
+  box.appendChild(row);
+  ov.appendChild(box);
+  ov.onclick = e => { if (e.target === ov) { ov.remove(); term.focus(); } };
+  document.body.appendChild(ov);
+}
+
+function showCongrats(j) {
+  const ov = document.createElement('div');
+  ov.className = 'congrats';
+  const box = document.createElement('div');
+  box.className = 'box';
+  const emo = document.createElement('div');
+  emo.className = 'emo';
+  emo.textContent = '🎉';
+  const h = document.createElement('h3');
+  h.textContent = t('examCongrats');
+  const p1 = document.createElement('p');
+  p1.textContent = t('examCongratsSub', exam.total, exam.max, exam.passScore);
+  box.append(emo, h, p1);
+  if (j.labCompleted) {
+    const medal = document.createElement('div');
+    medal.className = 'medal';
+    medal.appendChild(badgeEl({ type: 'module', track: session.labId.split('-')[0], title: session.labTitle }));
+    const p2 = document.createElement('p');
+    p2.textContent = t('examBadge');
+    box.append(medal, p2);
+  }
+  if (j.trackCompleted) {
+    const p3 = document.createElement('p');
+    p3.textContent = t('trackBadgeEarned').trim();
+    box.appendChild(p3);
+  }
+  const close = document.createElement('button');
+  close.className = 'btn primary';
+  close.style.marginTop = '16px';
+  close.textContent = t('examClose');
+  close.onclick = () => ov.remove();
+  box.appendChild(close);
+  ov.appendChild(box);
+  ov.onclick = e => { if (e.target === ov) ov.remove(); };
+  document.body.appendChild(ov);
+}
+
+document.getElementById('extendBtn').onclick = async () => {
+  const res = await fetch(`/api/sessions/${sid}/extend`, { method: 'POST' });
+  const j = await res.json();
+  if (!res.ok) return alert(j.error);
+  session = j;
+  document.getElementById('extendBtn').disabled = true;
+};
+document.getElementById('endBtn').onclick = async () => {
+  if (!confirm(t('endConfirm'))) return;
+  await fetch(`/api/sessions/${sid}`, { method: 'DELETE' });
+  location.href = '/';
+};
+
+function toLogin() { location.href = '/auth/login?next=' + encodeURIComponent(location.pathname + location.search); }
+
+async function poll() {
+  const res = await fetch(`/api/sessions/${sid}`);
+  if (res.status === 401) { toLogin(); return; }
+  if (!res.ok) { showGone(t('notFound')); return; }
+  session = await res.json();
+  // 채점은 문항마다 학습자 환경에서 스크립트를 돌려 1~2분 걸린다 — 진행 상황을 보여준다
+  if (grading && session.grading) {
+    const g = session.grading;
+    document.getElementById('checkResult').textContent = t('examGradingProgress', g.done, g.total);
+  }
+  const ttlEl = document.getElementById('ttl');
+  ttlEl.textContent = fmtTTL(session.remainingSec);
+  ttlEl.className = 'chip ' + (session.remainingSec < 300 ? 'danger' : session.remainingSec < 900 ? 'warn' : 'ok');
+  if (session.extended) document.getElementById('extendBtn').disabled = true;
+  if (session.state === 'Expired' || session.state === 'Terminated' || session.state === 'Idle') {
+    showGone(session.state === 'Expired' ? t('goneExpired')
+      : session.state === 'Idle' ? t('goneIdle') : t('goneTerminated'));
+    return;
+  }
+  setTimeout(poll, grading ? 1500 : 5000);
+}
+function showGone(msg) {
+  const ov = document.getElementById('overlay');
+  ov.style.display = 'flex';
+  ov.classList.add('done-state');
+  document.getElementById('ovTitle').textContent = msg;
+  const a = document.createElement('a');
+  a.href = '/'; a.textContent = t('backToCatalog');
+  document.getElementById('ovSub').replaceChildren(a);
+}
+
+async function boot() {
+  const res = await fetch(`/api/sessions/${sid}`);
+  if (res.status === 401) { toLogin(); return; }
+  if (!res.ok) { showGone(t('notFound')); return; }
+  session = await res.json();
+  const g = await (await fetch(`/api/labs/${session.labId}/guide` + langQuery())).json();
+  meta = g.meta;
+  langInfo = g;
+  const parts = g.markdown.split(/\n(?=## )/);
+  intro = parts[0];
+  stepMds = parts.slice(1).map(p => p.replace(/^## /, ''));
+  document.getElementById('labTitle').textContent = session.labTitle;
+  document.title = session.labTitle + ' — SnackLab';
+
+  // 시험형 랩이면 문항별 [체크] 대신 [제출] 하나 — 채점은 제출 시점에 전 문항 일괄로 한다
+  isExam = !!meta.exam;
+  if (isExam) {
+    document.getElementById('checkBtn').hidden = true;
+    const sb = document.getElementById('submitBtn');
+    sb.hidden = false;
+    exam = session.exam || null;          // 새로고침해도 마지막 채점 결과를 유지
+    if (exam) sb.textContent = t('examResubmit');
+    document.getElementById('checkResult').textContent = t('examHint');
+    setupExamLang();
+  }
+
+  document.getElementById('ovSub').textContent = session.warm ? t('ovSubWarm') : t('ovSubCold');
+
+  while (session.state === 'Provisioning') {
+    await new Promise(r => setTimeout(r, 700));
+    session = await (await fetch(`/api/sessions/${sid}`)).json();
+  }
+  document.getElementById('overlay').style.display = 'none';
+  renderSteps(); renderExamCard(); renderGuide();
+  // 채점 중에 새로고침했다면 진행 중인 채점에 다시 붙는다
+  if (isExam && session.grading) trackGrading(null, exam ? exam.at : 0);
+  connectTerm();
+  poll();
+}
+boot();
+</script>
+</body>
+</html>

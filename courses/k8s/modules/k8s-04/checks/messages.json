@@ -1,0 +1,83 @@
+{
+  "step1m1": {
+    "ko": "FAIL: app=web 라벨 파드가 없습니다. Deployment web 을 만들었나요?",
+    "ja": "FAIL: app=web ラベルの Pod がありません。Deployment web を作成しましたか？",
+    "zh-CN": "FAIL: 没有带 app=web 标签的 Pod。是否创建了 Deployment web？",
+    "zh-TW": "FAIL: 沒有帶 app=web 標籤的 Pod。是否建立了 Deployment web？",
+    "es": "FAIL: no hay Pods con la etiqueta app=web. ¿Creaste el Deployment web?",
+    "de": "FAIL: Keine Pods mit dem Label app=web. Hast du das Deployment web angelegt?",
+    "en": "FAIL: there are no Pods labelled app=web. Did you create the Deployment web?"
+  },
+  "step1m2": {
+    "ko": "FAIL: 컨테이너에 livenessProbe 가 정의되지 않았습니다.",
+    "ja": "FAIL: コンテナに livenessProbe が定義されていません。",
+    "zh-CN": "FAIL: 容器没有定义 livenessProbe。",
+    "zh-TW": "FAIL: 容器沒有定義 livenessProbe。",
+    "es": "FAIL: el contenedor no define un livenessProbe.",
+    "de": "FAIL: Im Container ist kein livenessProbe definiert.",
+    "en": "FAIL: the container defines no livenessProbe."
+  },
+  "step1m3": {
+    "ko": "PASS: 파드 {0} 에 livenessProbe 가 정의되어 있습니다.",
+    "ja": "PASS: Pod {0} に livenessProbe が定義されています。",
+    "zh-CN": "PASS: Pod {0} 已定义 livenessProbe。",
+    "zh-TW": "PASS: Pod {0} 已定義 livenessProbe。",
+    "es": "PASS: el Pod {0} tiene un livenessProbe definido.",
+    "de": "PASS: Im Pod {0} ist ein livenessProbe definiert.",
+    "en": "PASS: the Pod {0} has a livenessProbe defined."
+  },
+  "step2m1": {
+    "ko": "FAIL: app=web 라벨 파드가 없습니다.",
+    "ja": "FAIL: app=web ラベルの Pod がありません。",
+    "zh-CN": "FAIL: 没有带 app=web 标签的 Pod。",
+    "zh-TW": "FAIL: 沒有帶 app=web 標籤的 Pod。",
+    "es": "FAIL: no hay Pods con la etiqueta app=web.",
+    "de": "FAIL: Keine Pods mit dem Label app=web.",
+    "en": "FAIL: there are no Pods labelled app=web."
+  },
+  "step2m2": {
+    "ko": "FAIL: 컨테이너에 readinessProbe 가 정의되지 않았습니다.",
+    "ja": "FAIL: コンテナに readinessProbe が定義されていません。",
+    "zh-CN": "FAIL: 容器没有定义 readinessProbe。",
+    "zh-TW": "FAIL: 容器沒有定義 readinessProbe。",
+    "es": "FAIL: el contenedor no define un readinessProbe.",
+    "de": "FAIL: Im Container ist kein readinessProbe definiert.",
+    "en": "FAIL: the container defines no readinessProbe."
+  },
+  "step2m3": {
+    "ko": "PASS: 파드 {0} 에 readinessProbe 가 정의되어 있습니다.",
+    "ja": "PASS: Pod {0} に readinessProbe が定義されています。",
+    "zh-CN": "PASS: Pod {0} 已定义 readinessProbe。",
+    "zh-TW": "PASS: Pod {0} 已定義 readinessProbe。",
+    "es": "PASS: el Pod {0} tiene un readinessProbe definido.",
+    "de": "PASS: Im Pod {0} ist ein readinessProbe definiert.",
+    "en": "PASS: the Pod {0} has a readinessProbe defined."
+  },
+  "step3m1": {
+    "ko": "FAIL: app=web 라벨 파드가 없습니다.",
+    "ja": "FAIL: app=web ラベルの Pod がありません。",
+    "zh-CN": "FAIL: 没有带 app=web 标签的 Pod。",
+    "zh-TW": "FAIL: 沒有帶 app=web 標籤的 Pod。",
+    "es": "FAIL: no hay Pods con la etiqueta app=web.",
+    "de": "FAIL: Keine Pods mit dem Label app=web.",
+    "en": "FAIL: there are no Pods labelled app=web."
+  },
+  "step3m2": {
+    "ko": "FAIL: 재시작이 아직 없습니다 (restartCount={0}). liveness 실패 후 재시작까지 ~40초 기다렸다가 다시 확인하세요.",
+    "ja": "FAIL: まだ再起動が発生していません（restartCount={0}）。liveness 失敗から再起動まで約 40 秒待ってから再確認してください。",
+    "zh-CN": "FAIL: 尚未发生重启（restartCount={0}）。请在 liveness 失败后等待约 40 秒再确认。",
+    "zh-TW": "FAIL: 尚未發生重啟（restartCount={0}）。請在 liveness 失敗後等待約 40 秒再確認。",
+    "es": "FAIL: aún no ha habido reinicios (restartCount={0}). Espera unos 40 s tras el fallo del liveness y vuelve a comprobar.",
+    "de": "FAIL: Bisher kein Neustart (restartCount={0}). Warte nach dem liveness-Fehler etwa 40 s und prüfe erneut.",
+    "en": "FAIL: no restart yet (restartCount={0}). Wait about 40 s after the liveness failure and check again."
+  },
+  "step3m3": {
+    "ko": "PASS: liveness 실패로 컨테이너가 {0}회 자동 재시작되었습니다 (자가치유).",
+    "ja": "PASS: liveness の失敗によりコンテナが {0} 回自動再起動しました（自己修復）。",
+    "zh-CN": "PASS: 因 liveness 失败，容器自动重启了 {0} 次（自愈）。",
+    "zh-TW": "PASS: 因 liveness 失敗，容器自動重啟了 {0} 次（自我修復）。",
+    "es": "PASS: el contenedor se ha reiniciado automáticamente {0} veces por fallos del liveness (autorreparación).",
+    "de": "PASS: Der Container wurde wegen fehlgeschlagener liveness {0}-mal automatisch neu gestartet (Selbstheilung).",
+    "en": "PASS: the container restarted automatically {0} time(s) due to liveness failures (self-healing)."
+  }
+}

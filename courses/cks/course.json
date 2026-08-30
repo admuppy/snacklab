@@ -1,0 +1,35 @@
+{
+  "id": "cks",
+  "title": {
+    "ko": "CKS 모의고사",
+    "en": "CKS Practice Exam",
+    "ja": "CKS 模擬試験",
+    "zh-CN": "CKS 模拟考试",
+    "zh-TW": "CKS 模擬考試",
+    "es": "Examen de práctica CKS",
+    "de": "CKS-Übungsprüfung"
+  },
+  "desc": {
+    "ko": "Linux Foundation CKS(Certified Kubernetes Security Specialist) 실기 시험 형식을 옮긴 120분 모의고사. 전용 단일노드 클러스터에서 16개 과제를 시험과 같은 도메인 배점(클러스터 셋업 15 · 클러스터 하드닝 15 · 시스템 하드닝 10 · 마이크로서비스 취약점 최소화 20 · 공급망 보안 20 · 모니터링/로깅/런타임 보안 20)으로 푼다.",
+    "en": "A 120-minute mock exam modelled on the Linux Foundation CKS performance test. Solve 16 tasks on your own single-node cluster, weighted like the real exam (Cluster Setup 15 · Cluster Hardening 15 · System Hardening 10 · Minimize Microservice Vulnerabilities 20 · Supply Chain Security 20 · Monitoring, Logging & Runtime Security 20).",
+    "ja": "Linux Foundation CKS(Certified Kubernetes Security Specialist) 実技試験の形式を移した 120 分の模擬試験。専用のシングルノードクラスタで、本番と同じドメイン配点(クラスタセットアップ 15 · クラスタハードニング 15 · システムハードニング 10 · マイクロサービスの脆弱性最小化 20 · サプライチェーンセキュリティ 20 · モニタリング/ロギング/ランタイムセキュリティ 20)の 16 問を解きます。",
+    "zh-CN": "完全按照 Linux Foundation CKS（Certified Kubernetes Security Specialist）实操考试形式设计的 120 分钟模拟考试。在你专属的单节点集群上完成 16 道题，权重与真实考试一致（集群设置 15 · 集群加固 15 · 系统加固 10 · 微服务漏洞最小化 20 · 供应链安全 20 · 监控、日志与运行时安全 20）。"
+  },
+  "image": "snacklab-k8s:v5",
+  "hostModules": true,
+  "ttlMinutes": 120,
+  "idleMinutes": 40,
+  "resources": {
+    "requests": {
+      "cpu": "500m",
+      "memory": "1Gi"
+    },
+    "limits": {
+      "cpu": "2",
+      "memory": "4Gi"
+    }
+  },
+  "modules": [
+    "cks-01"
+  ]
+}

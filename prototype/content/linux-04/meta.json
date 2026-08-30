@@ -1,0 +1,64 @@
+{
+  "id": "linux-04",
+  "title": {
+    "ko": "Bash 스크립팅",
+    "en": "Bash Scripting",
+    "ja": "Bash スクリプティング",
+    "zh-CN": "Bash 脚本编程",
+    "zh-TW": "Bash 指令碼",
+    "es": "Scripting en Bash",
+    "de": "Bash-Skripting"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "안전한 스크립트 골격",
+        "en": "A safe script skeleton",
+        "ja": "安全なスクリプトの骨格",
+        "zh-CN": "安全的脚本骨架",
+        "zh-TW": "安全的指令碼骨架",
+        "es": "Un esqueleto de script seguro",
+        "de": "Ein sicheres Skriptgerüst"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "인자 처리와 종료 코드",
+        "en": "Arguments and exit codes",
+        "ja": "引数処理と終了コード",
+        "zh-CN": "参数处理与退出码",
+        "zh-TW": "參數處理與結束碼",
+        "es": "Argumentos y códigos de salida",
+        "de": "Argumente und Exit-Codes"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "trap으로 정리 보장",
+        "en": "Guaranteed cleanup with trap",
+        "ja": "trap で後始末を保証",
+        "zh-CN": "用 trap 保证清理",
+        "zh-TW": "用 trap 保證清理",
+        "es": "Limpieza garantizada con trap",
+        "de": "Garantiertes Aufräumen mit trap"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "고장난 스크립트 수리",
+        "en": "Fixing a broken script",
+        "ja": "壊れたスクリプトの修復",
+        "zh-CN": "修复损坏的脚本",
+        "zh-TW": "修復損壞的指令碼",
+        "es": "Reparar un script roto",
+        "de": "Ein kaputtes Skript reparieren"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

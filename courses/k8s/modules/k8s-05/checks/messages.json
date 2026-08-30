@@ -1,0 +1,92 @@
+{
+  "step1m1": {
+    "ko": "FAIL: 파드 'guaranteed' 가 없습니다.",
+    "ja": "FAIL: Pod 'guaranteed' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'guaranteed'。",
+    "zh-TW": "FAIL: 沒有 Pod 'guaranteed'。",
+    "es": "FAIL: no existe el Pod 'guaranteed'.",
+    "de": "FAIL: Der Pod 'guaranteed' fehlt.",
+    "en": "FAIL: the Pod 'guaranteed' does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: QoS 가 Guaranteed 가 아닙니다 (현재 {0}). cpu·memory 의 requests 와 limits 를 같게 설정하세요.",
+    "ja": "FAIL: QoS が Guaranteed ではありません（現在 {0}）。cpu と memory の requests と limits を同じ値にしてください。",
+    "zh-CN": "FAIL: QoS 不是 Guaranteed（当前 {0}）。请把 cpu、memory 的 requests 与 limits 设为相同值。",
+    "zh-TW": "FAIL: QoS 不是 Guaranteed（目前 {0}）。請把 cpu、memory 的 requests 與 limits 設為相同值。",
+    "es": "FAIL: la QoS no es Guaranteed (actualmente {0}). Iguala requests y limits de cpu y memory.",
+    "de": "FAIL: Die QoS ist nicht Guaranteed (aktuell {0}). Setze requests und limits für cpu und memory gleich.",
+    "en": "FAIL: the QoS class is not Guaranteed (currently {0}). Set equal requests and limits for cpu and memory."
+  },
+  "step1m3": {
+    "ko": "PASS: 파드 guaranteed 의 QoS 클래스가 Guaranteed 입니다.",
+    "ja": "PASS: Pod guaranteed の QoS クラスは Guaranteed です。",
+    "zh-CN": "PASS: Pod guaranteed 的 QoS 类别为 Guaranteed。",
+    "zh-TW": "PASS: Pod guaranteed 的 QoS 類別為 Guaranteed。",
+    "es": "PASS: la clase QoS del Pod guaranteed es Guaranteed.",
+    "de": "PASS: Die QoS-Klasse des Pods guaranteed ist Guaranteed.",
+    "en": "PASS: the QoS class of the Pod guaranteed is Guaranteed."
+  },
+  "step2m1": {
+    "ko": "FAIL: 파드 'burstable' 가 없습니다.",
+    "ja": "FAIL: Pod 'burstable' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'burstable'。",
+    "zh-TW": "FAIL: 沒有 Pod 'burstable'。",
+    "es": "FAIL: no existe el Pod 'burstable'.",
+    "de": "FAIL: Der Pod 'burstable' fehlt.",
+    "en": "FAIL: the Pod 'burstable' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: QoS 가 Burstable 이 아닙니다 (현재 {0}). requests 를 두되 limits 를 더 크게(또는 일부만) 설정하세요.",
+    "ja": "FAIL: QoS が Burstable ではありません（現在 {0}）。requests は設定しつつ、limits をより大きく（または一部だけ）設定してください。",
+    "zh-CN": "FAIL: QoS 不是 Burstable（当前 {0}）。请设置 requests，并把 limits 设得更大（或只设置部分）。",
+    "zh-TW": "FAIL: QoS 不是 Burstable（目前 {0}）。請設定 requests，並把 limits 設得更大（或只設定部分）。",
+    "es": "FAIL: la QoS no es Burstable (actualmente {0}). Define requests y pon limits mayores (o solo algunos).",
+    "de": "FAIL: Die QoS ist nicht Burstable (aktuell {0}). Setze requests und wähle größere limits (oder nur teilweise).",
+    "en": "FAIL: the QoS class is not Burstable (currently {0}). Set requests and make limits larger (or set only some of them)."
+  },
+  "step2m3": {
+    "ko": "PASS: 파드 burstable 의 QoS 클래스가 Burstable 입니다.",
+    "ja": "PASS: Pod burstable の QoS クラスは Burstable です。",
+    "zh-CN": "PASS: Pod burstable 的 QoS 类别为 Burstable。",
+    "zh-TW": "PASS: Pod burstable 的 QoS 類別為 Burstable。",
+    "es": "PASS: la clase QoS del Pod burstable es Burstable.",
+    "de": "PASS: Die QoS-Klasse des Pods burstable ist Burstable.",
+    "en": "PASS: the QoS class of the Pod burstable is Burstable."
+  },
+  "step3m1": {
+    "ko": "FAIL: LimitRange 'mem-defaults' 가 없습니다.",
+    "ja": "FAIL: LimitRange 'mem-defaults' がありません。",
+    "zh-CN": "FAIL: 没有 LimitRange 'mem-defaults'。",
+    "zh-TW": "FAIL: 沒有 LimitRange 'mem-defaults'。",
+    "es": "FAIL: no existe el LimitRange 'mem-defaults'.",
+    "de": "FAIL: Der LimitRange 'mem-defaults' fehlt.",
+    "en": "FAIL: the LimitRange 'mem-defaults' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: 파드 'defaulted' 가 없습니다. LimitRange 를 만든 뒤 limits 없이 파드를 생성하세요.",
+    "ja": "FAIL: Pod 'defaulted' がありません。LimitRange を作ってから limits なしで Pod を作成してください。",
+    "zh-CN": "FAIL: 没有 Pod 'defaulted'。请先创建 LimitRange，再创建不带 limits 的 Pod。",
+    "zh-TW": "FAIL: 沒有 Pod 'defaulted'。請先建立 LimitRange，再建立不帶 limits 的 Pod。",
+    "es": "FAIL: no existe el Pod 'defaulted'. Crea primero el LimitRange y luego el Pod sin limits.",
+    "de": "FAIL: Der Pod 'defaulted' fehlt. Lege erst den LimitRange an und dann den Pod ohne limits.",
+    "en": "FAIL: the Pod 'defaulted' does not exist. Create the LimitRange first, then a Pod without limits."
+  },
+  "step3m3": {
+    "ko": "FAIL: 파드 defaulted 에 memory limit 이 채워지지 않았습니다. LimitRange 가 파드 생성 '전에' 있어야 기본값이 주입됩니다.",
+    "ja": "FAIL: Pod defaulted に memory limit が入っていません。既定値が注入されるには LimitRange が Pod 作成の『前』に存在する必要があります。",
+    "zh-CN": "FAIL: Pod defaulted 没有被填入 memory limit。要注入默认值，LimitRange 必须在创建 Pod 『之前』就存在。",
+    "zh-TW": "FAIL: Pod defaulted 沒有被填入 memory limit。要注入預設值，LimitRange 必須在建立 Pod 『之前』就存在。",
+    "es": "FAIL: el Pod defaulted no tiene límite de memoria. Para que se inyecte el valor por defecto, el LimitRange debe existir ANTES de crear el Pod.",
+    "de": "FAIL: Der Pod defaulted hat kein Speicher-Limit. Damit Standardwerte greifen, muss der LimitRange VOR dem Pod existieren.",
+    "en": "FAIL: the Pod defaulted has no memory limit. For defaults to be injected, the LimitRange must exist BEFORE the Pod is created."
+  },
+  "step3m4": {
+    "ko": "PASS: LimitRange 가 파드 defaulted 에 기본 memory limit({0})을 주입했습니다.",
+    "ja": "PASS: LimitRange が Pod defaulted に既定の memory limit（{0}）を注入しました。",
+    "zh-CN": "PASS: LimitRange 已为 Pod defaulted 注入默认 memory limit（{0}）。",
+    "zh-TW": "PASS: LimitRange 已為 Pod defaulted 注入預設 memory limit（{0}）。",
+    "es": "PASS: el LimitRange ha inyectado el límite de memoria por defecto ({0}) en el Pod defaulted.",
+    "de": "PASS: Der LimitRange hat dem Pod defaulted das Standard-Speicherlimit ({0}) zugewiesen.",
+    "en": "PASS: the LimitRange injected the default memory limit ({0}) into the Pod defaulted."
+  }
+}

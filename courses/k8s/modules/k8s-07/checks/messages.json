@@ -1,0 +1,110 @@
+{
+  "step1m1": {
+    "ko": "FAIL: PVC 'data' 가 없습니다.",
+    "ja": "FAIL: PVC 'data' がありません。",
+    "zh-CN": "FAIL: 没有 PVC 'data'。",
+    "zh-TW": "FAIL: 沒有 PVC 'data'。",
+    "es": "FAIL: no existe el PVC 'data'.",
+    "de": "FAIL: Der PVC 'data' fehlt.",
+    "en": "FAIL: the PVC 'data' does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: PVC data 가 스토리지 용량을 요청하지 않습니다.",
+    "ja": "FAIL: PVC data がストレージ容量を要求していません。",
+    "zh-CN": "FAIL: PVC data 没有请求存储容量。",
+    "zh-TW": "FAIL: PVC data 沒有請求儲存容量。",
+    "es": "FAIL: el PVC data no solicita capacidad de almacenamiento.",
+    "de": "FAIL: Der PVC data fordert keine Speicherkapazität an.",
+    "en": "FAIL: the PVC data requests no storage capacity."
+  },
+  "step1m3": {
+    "ko": "PASS: PVC data(요청 {0}) 생성됨 — 현재 상태 {1}. (local-path 는 파드가 소비할 때 바인딩됩니다.)",
+    "ja": "PASS: PVC data（要求 {0}）を作成しました — 現在の状態は {1} です。（local-path は Pod が使うときにバインドされます）",
+    "zh-CN": "PASS: 已创建 PVC data（请求 {0}）—— 当前状态为 {1}。（local-path 在 Pod 消费时才绑定）",
+    "zh-TW": "PASS: 已建立 PVC data（請求 {0}）—— 目前狀態為 {1}。（local-path 在 Pod 取用時才繫結）",
+    "es": "PASS: PVC data creado (solicita {0}); estado actual {1}. (local-path se enlaza cuando un Pod lo consume.)",
+    "de": "PASS: PVC data angelegt (fordert {0}) – aktueller Status {1}. (local-path bindet erst, wenn ein Pod ihn nutzt.)",
+    "en": "PASS: PVC data created (requests {0}) — current phase {1}. (local-path binds when a Pod consumes it.)"
+  },
+  "step2m1": {
+    "ko": "FAIL: 파드 'writer' 가 없습니다.",
+    "ja": "FAIL: Pod 'writer' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'writer'。",
+    "zh-TW": "FAIL: 沒有 Pod 'writer'。",
+    "es": "FAIL: no existe el Pod 'writer'.",
+    "de": "FAIL: Der Pod 'writer' fehlt.",
+    "en": "FAIL: the Pod 'writer' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: PVC data 가 아직 Bound 가 아닙니다 (현재 {0}). writer 파드가 Running 인지 확인하세요.",
+    "ja": "FAIL: PVC data がまだ Bound ではありません（現在 {0}）。writer Pod が Running か確認してください。",
+    "zh-CN": "FAIL: PVC data 尚未 Bound（当前 {0}）。请确认 writer Pod 是否 Running。",
+    "zh-TW": "FAIL: PVC data 尚未 Bound（目前 {0}）。請確認 writer Pod 是否 Running。",
+    "es": "FAIL: el PVC data aún no está Bound (actualmente {0}). Comprueba que el Pod writer esté en Running.",
+    "de": "FAIL: Der PVC data ist noch nicht Bound (aktuell {0}). Prüfe, ob der Pod writer Running ist.",
+    "en": "FAIL: the PVC data is not Bound yet (currently {0}). Check that the writer Pod is Running."
+  },
+  "step2m3": {
+    "ko": "FAIL: 파드 writer 가 Running 이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: Pod writer が Running ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: Pod writer 不是 Running（当前 {0}）。",
+    "zh-TW": "FAIL: Pod writer 不是 Running（目前 {0}）。",
+    "es": "FAIL: el Pod writer no está en Running (actualmente {0}).",
+    "de": "FAIL: Der Pod writer ist nicht Running (aktuell {0}).",
+    "en": "FAIL: the Pod writer is not Running (currently {0})."
+  },
+  "step2m4": {
+    "ko": "FAIL: /data/marker.txt 가 비었거나 없습니다. 볼륨(/data)에 파일을 기록했나요?",
+    "ja": "FAIL: /data/marker.txt が空か存在しません。ボリューム（/data）にファイルを書きましたか？",
+    "zh-CN": "FAIL: /data/marker.txt 为空或不存在。是否向卷（/data）写入了文件？",
+    "zh-TW": "FAIL: /data/marker.txt 為空或不存在。是否向卷（/data）寫入了檔案？",
+    "es": "FAIL: /data/marker.txt está vacío o no existe. ¿Escribiste el archivo en el volumen (/data)?",
+    "de": "FAIL: /data/marker.txt ist leer oder fehlt. Hast du in das Volume (/data) geschrieben?",
+    "en": "FAIL: /data/marker.txt is empty or missing. Did you write a file to the volume (/data)?"
+  },
+  "step2m5": {
+    "ko": "PASS: writer 가 PVC(Bound)를 /data 로 마운트하고 marker.txt 를 기록했습니다: '{0}'",
+    "ja": "PASS: writer が PVC（Bound）を /data にマウントし marker.txt を書き込みました: '{0}'",
+    "zh-CN": "PASS: writer 已把 PVC（Bound）挂载到 /data 并写入 marker.txt：'{0}'",
+    "zh-TW": "PASS: writer 已把 PVC（Bound）掛載到 /data 並寫入 marker.txt：'{0}'",
+    "es": "PASS: writer ha montado el PVC (Bound) en /data y ha escrito marker.txt: '{0}'",
+    "de": "PASS: writer hat den PVC (Bound) unter /data eingehängt und marker.txt geschrieben: '{0}'",
+    "en": "PASS: writer mounted the PVC (Bound) at /data and wrote marker.txt: '{0}'"
+  },
+  "step3m1": {
+    "ko": "FAIL: StatefulSet 'web' 가 없습니다.",
+    "ja": "FAIL: StatefulSet 'web' がありません。",
+    "zh-CN": "FAIL: 没有 StatefulSet 'web'。",
+    "zh-TW": "FAIL: 沒有 StatefulSet 'web'。",
+    "es": "FAIL: no existe el StatefulSet 'web'.",
+    "de": "FAIL: Das StatefulSet 'web' fehlt.",
+    "en": "FAIL: the StatefulSet 'web' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: StatefulSet web 의 Ready 레플리카가 없습니다 (현재 {0}).",
+    "ja": "FAIL: StatefulSet web に Ready なレプリカがありません（現在 {0}）。",
+    "zh-CN": "FAIL: StatefulSet web 没有 Ready 的副本（当前 {0}）。",
+    "zh-TW": "FAIL: StatefulSet web 沒有 Ready 的副本（目前 {0}）。",
+    "es": "FAIL: el StatefulSet web no tiene réplicas Ready (actualmente {0}).",
+    "de": "FAIL: Das StatefulSet web hat keine Ready-Replicas (aktuell {0}).",
+    "en": "FAIL: the StatefulSet web has no Ready replicas (currently {0})."
+  },
+  "step3m3": {
+    "ko": "FAIL: volumeClaimTemplates 로 생긴 PVC 'www-web-0' 가 Bound 가 아닙니다 (현재 {0}). 템플릿 이름이 'www' 인지 확인하세요.",
+    "ja": "FAIL: volumeClaimTemplates で作られる PVC 'www-web-0' が Bound ではありません（現在 {0}）。テンプレート名が 'www' か確認してください。",
+    "zh-CN": "FAIL: 由 volumeClaimTemplates 生成的 PVC 'www-web-0' 不是 Bound（当前 {0}）。请确认模板名是否为 'www'。",
+    "zh-TW": "FAIL: 由 volumeClaimTemplates 產生的 PVC 'www-web-0' 不是 Bound（目前 {0}）。請確認範本名稱是否為 'www'。",
+    "es": "FAIL: el PVC 'www-web-0' creado por volumeClaimTemplates no está Bound (actualmente {0}). Comprueba que la plantilla se llame 'www'.",
+    "de": "FAIL: Der von volumeClaimTemplates erzeugte PVC 'www-web-0' ist nicht Bound (aktuell {0}). Prüfe, ob die Vorlage 'www' heißt.",
+    "en": "FAIL: the PVC 'www-web-0' created by volumeClaimTemplates is not Bound (currently {0}). Check that the template is named 'www'."
+  },
+  "step3m4": {
+    "ko": "PASS: StatefulSet web 이 자동 생성한 PVC www-web-0 이 Bound 이고 파드가 Ready 입니다.",
+    "ja": "PASS: StatefulSet web が自動生成した PVC www-web-0 が Bound で、Pod も Ready です。",
+    "zh-CN": "PASS: StatefulSet web 自动生成的 PVC www-web-0 已 Bound，Pod 也已 Ready。",
+    "zh-TW": "PASS: StatefulSet web 自動產生的 PVC www-web-0 已 Bound，Pod 也已 Ready。",
+    "es": "PASS: el PVC www-web-0 creado automáticamente por el StatefulSet web está Bound y el Pod está Ready.",
+    "de": "PASS: Der vom StatefulSet web automatisch erzeugte PVC www-web-0 ist Bound und der Pod ist Ready.",
+    "en": "PASS: the PVC www-web-0 created automatically by the StatefulSet web is Bound and the Pod is Ready."
+  }
+}

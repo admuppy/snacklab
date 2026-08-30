@@ -1,0 +1,57 @@
+{
+  "id": "k8s-03",
+  "title": {
+    "ko": "ConfigMap 과 Secret",
+    "en": "ConfigMaps and Secrets",
+    "ja": "ConfigMap と Secret",
+    "zh-CN": "ConfigMap 与 Secret",
+    "zh-TW": "ConfigMap 與 Secret",
+    "es": "ConfigMaps y Secrets",
+    "de": "ConfigMaps und Secrets"
+  },
+  "desc": {
+    "ko": "설정과 비밀값을 이미지에서 분리해 환경변수·볼륨으로 주입하고 갱신 반영 방식까지 확인",
+    "en": "Separate config and secrets from the image, inject them as env vars and volumes, and see how updates propagate"
+  },
+  "duration": 30,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "ConfigMap 생성",
+        "en": "Create a ConfigMap",
+        "ja": "ConfigMap の作成",
+        "zh-CN": "创建 ConfigMap",
+        "zh-TW": "建立 ConfigMap",
+        "es": "Crear un ConfigMap",
+        "de": "Ein ConfigMap anlegen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "Secret 생성",
+        "en": "Create a Secret",
+        "ja": "Secret の作成",
+        "zh-CN": "创建 Secret",
+        "zh-TW": "建立 Secret",
+        "es": "Crear un Secret",
+        "de": "Ein Secret anlegen"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "파드에서 주입 소비",
+        "en": "Consume them in a Pod",
+        "ja": "Pod での取り込み",
+        "zh-CN": "在 Pod 中消费",
+        "zh-TW": "在 Pod 中取用",
+        "es": "Consumirlos en un Pod",
+        "de": "In einem Pod verwenden"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

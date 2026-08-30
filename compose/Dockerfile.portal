@@ -1,0 +1,26 @@
+# SnackLab portal image for the docker-compose deployment.
+# Same as portal/Dockerfile but ships the docker CLI instead of kubectl —
+# the docker driver spawns sibling learner containers via /var/run/docker.sock.
+# Build context = repository root: docker compose -f compose/docker-compose.yml build
+FROM node:22-bookworm-slim
+
+ARG DOCKER_CLI_VERSION=27.5.1
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates curl python3 \
+ && curl -fsSL "https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_CLI_VERSION}.tgz" \
+    | tar xz --strip-components=1 -C /usr/local/bin docker/docker \
+ && apt-get purge -y curl && apt-get autoremove -y \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app/prototype
+
+# Dependency layer before sources for build caching
+COPY prototype/package.json prototype/package-lock.json ./
+RUN npm ci --omit=dev
+
+COPY prototype/ ./
+
+# Session state volume mount point (progress, users.json, warm pool config)
+RUN mkdir -p /app/prototype/sessions
+
+CMD ["node", "server.js"]

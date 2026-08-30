@@ -1,0 +1,54 @@
+{
+  "step1m1": {
+    "ko": "FAIL: 네트워크 'net1' 이 없습니다. 'openstack network create net1' 으로 만드세요.",
+    "en": "FAIL: the network 'net1' does not exist. Create it with 'openstack network create net1'."
+  },
+  "step1m2": {
+    "ko": "FAIL: 서브넷 'subnet1' 이 없습니다. 'openstack subnet create --network net1 ...' 으로 만드세요.",
+    "en": "FAIL: the subnet 'subnet1' does not exist. Create it with 'openstack subnet create --network net1 ...'."
+  },
+  "step1m3": {
+    "ko": "FAIL: subnet1 의 대역이 192.168.100.0/24 가 아닙니다 (현재 {0}).",
+    "en": "FAIL: subnet1's range is not 192.168.100.0/24 (currently {0})."
+  },
+  "step1m4": {
+    "ko": "FAIL: subnet1 이 net1 에 속해 있지 않습니다. --network net1 옵션을 확인하세요.",
+    "en": "FAIL: subnet1 does not belong to net1. Check the --network net1 option."
+  },
+  "step1m5": {
+    "ko": "PASS: net1 과 subnet1(192.168.100.0/24) 이 준비되었습니다.",
+    "en": "PASS: net1 and subnet1 (192.168.100.0/24) are ready."
+  },
+  "step2m1": {
+    "ko": "FAIL: 인스턴스 'vm1' 이 없습니다. 'openstack server create ... vm1' 으로 기동하세요.",
+    "en": "FAIL: the instance 'vm1' does not exist. Boot it with 'openstack server create ... vm1'."
+  },
+  "step2m2": {
+    "ko": "FAIL: vm1 의 상태가 ACTIVE 가 아닙니다 (현재 {0}). 잠시 후 다시 확인하거나 'openstack server show vm1' 으로 원인을 보세요.",
+    "en": "FAIL: vm1 is not ACTIVE (currently {0}). Wait a moment, or inspect it with 'openstack server show vm1'."
+  },
+  "step2m3": {
+    "ko": "FAIL: vm1 의 플레이버가 m1.tiny 가 아닙니다 (현재 {0}).",
+    "en": "FAIL: vm1's flavor is not m1.tiny (currently {0})."
+  },
+  "step2m4": {
+    "ko": "FAIL: vm1 이 net1 네트워크에 연결되어 있지 않습니다. --network net1 옵션을 확인하세요.",
+    "en": "FAIL: vm1 is not attached to the net1 network. Check the --network net1 option."
+  },
+  "step2m5": {
+    "ko": "PASS: vm1 이 net1 위에서 ACTIVE 입니다.",
+    "en": "PASS: vm1 is ACTIVE on net1."
+  },
+  "step3m1": {
+    "ko": "FAIL: 인스턴스 'vm1' 이 없습니다.",
+    "en": "FAIL: the instance 'vm1' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: vm1 의 상태가 SHUTOFF 가 아닙니다 (현재 {0}). 'openstack server stop vm1' 으로 정지하세요.",
+    "en": "FAIL: vm1 is not SHUTOFF (currently {0}). Stop it with 'openstack server stop vm1'."
+  },
+  "step3m3": {
+    "ko": "PASS: vm1 이 SHUTOFF 상태입니다.",
+    "en": "PASS: vm1 is SHUTOFF."
+  }
+}

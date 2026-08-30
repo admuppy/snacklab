@@ -1,0 +1,173 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work 디렉터리가 없습니다.",
+    "ja": "FAIL: ~/work ディレクトリがありません。",
+    "zh-CN": "FAIL: 没有 ~/work 目录。",
+    "zh-TW": "FAIL: 沒有 ~/work 目錄。",
+    "es": "FAIL: no existe el directorio ~/work.",
+    "de": "FAIL: Das Verzeichnis ~/work fehlt.",
+    "en": "FAIL: the ~/work directory does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: ~/work 권한이 700이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: ~/work の権限が 700 ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: ~/work 权限不是 700（当前 {0}）。",
+    "zh-TW": "FAIL: ~/work 權限不是 700（目前 {0}）。",
+    "es": "FAIL: los permisos de ~/work no son 700 (actualmente {0}).",
+    "de": "FAIL: Die Rechte von ~/work sind nicht 700 (aktuell {0}).",
+    "en": "FAIL: ~/work is not mode 700 (currently {0})."
+  },
+  "step1m3": {
+    "ko": "FAIL: ~/work의 group 권한이 남아 있습니다 (getfacl group:: 확인).",
+    "ja": "FAIL: ~/work にグループ権限が残っています（getfacl の group:: を確認）。",
+    "zh-CN": "FAIL: ~/work 仍保留组权限（请检查 getfacl 的 group::）。",
+    "zh-TW": "FAIL: ~/work 仍保留群組權限（請檢查 getfacl 的 group::）。",
+    "es": "FAIL: ~/work aún conserva permisos de grupo (revisa group:: en getfacl).",
+    "de": "FAIL: ~/work hat noch Gruppenrechte (siehe group:: in getfacl).",
+    "en": "FAIL: ~/work still grants group permissions (check group:: in getfacl)."
+  },
+  "step1m4": {
+    "ko": "FAIL: ~/work/secret.txt 파일이 없습니다.",
+    "ja": "FAIL: ~/work/secret.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/secret.txt 文件。",
+    "zh-TW": "FAIL: 沒有 ~/work/secret.txt 檔案。",
+    "es": "FAIL: no existe el archivo ~/work/secret.txt.",
+    "de": "FAIL: Die Datei ~/work/secret.txt fehlt.",
+    "en": "FAIL: the file ~/work/secret.txt does not exist."
+  },
+  "step1m5": {
+    "ko": "FAIL: secret.txt 권한이 600이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: secret.txt の権限が 600 ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: secret.txt 权限不是 600（当前 {0}）。",
+    "zh-TW": "FAIL: secret.txt 權限不是 600（目前 {0}）。",
+    "es": "FAIL: los permisos de secret.txt no son 600 (actualmente {0}).",
+    "de": "FAIL: Die Rechte von secret.txt sind nicht 600 (aktuell {0}).",
+    "en": "FAIL: secret.txt is not mode 600 (currently {0})."
+  },
+  "step1m6": {
+    "ko": "FAIL: secret.txt의 group 권한이 남아 있습니다.",
+    "ja": "FAIL: secret.txt にグループ権限が残っています。",
+    "zh-CN": "FAIL: secret.txt 仍保留组权限。",
+    "zh-TW": "FAIL: secret.txt 仍保留群組權限。",
+    "es": "FAIL: secret.txt aún conserva permisos de grupo.",
+    "de": "FAIL: secret.txt hat noch Gruppenrechte.",
+    "en": "FAIL: secret.txt still grants group permissions."
+  },
+  "step1m7": {
+    "ko": "PASS: 소유자 전용 디렉터리(700)와 파일(600)이 올바르게 설정되었습니다.",
+    "ja": "PASS: 所有者専用のディレクトリ（700）とファイル（600）が正しく設定されています。",
+    "zh-CN": "PASS: 属主专用目录（700）与文件（600）设置正确。",
+    "zh-TW": "PASS: 擁有者專用目錄（700）與檔案（600）設定正確。",
+    "es": "PASS: el directorio (700) y el archivo (600) solo para el propietario están bien configurados.",
+    "de": "PASS: Verzeichnis (700) und Datei (600) sind korrekt nur für den Eigentümer gesetzt.",
+    "en": "PASS: the owner-only directory (700) and file (600) are set correctly."
+  },
+  "step2m1": {
+    "ko": "FAIL: /srv/share 디렉터리가 없습니다.",
+    "ja": "FAIL: /srv/share ディレクトリがありません。",
+    "zh-CN": "FAIL: 没有 /srv/share 目录。",
+    "zh-TW": "FAIL: 沒有 /srv/share 目錄。",
+    "es": "FAIL: no existe el directorio /srv/share.",
+    "de": "FAIL: Das Verzeichnis /srv/share fehlt.",
+    "en": "FAIL: the /srv/share directory does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: /srv/share 권한이 3775(setgid+sticky+775)가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: /srv/share の権限が 3775（setgid+sticky+775）ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: /srv/share 权限不是 3775（setgid+sticky+775）（当前 {0}）。",
+    "zh-TW": "FAIL: /srv/share 權限不是 3775（setgid+sticky+775）（目前 {0}）。",
+    "es": "FAIL: los permisos de /srv/share no son 3775 (setgid+sticky+775) (actualmente {0}).",
+    "de": "FAIL: Die Rechte von /srv/share sind nicht 3775 (setgid+sticky+775) (aktuell {0}).",
+    "en": "FAIL: /srv/share is not mode 3775 (setgid+sticky+775) (currently {0})."
+  },
+  "step2m3": {
+    "ko": "FAIL: /srv/share 소유 그룹이 share가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: /srv/share の所有グループが share ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: /srv/share 的属组不是 share（当前 {0}）。",
+    "zh-TW": "FAIL: /srv/share 的群組不是 share（目前 {0}）。",
+    "es": "FAIL: el grupo propietario de /srv/share no es share (actualmente {0}).",
+    "de": "FAIL: Die Eigentümergruppe von /srv/share ist nicht share (aktuell {0}).",
+    "en": "FAIL: the owning group of /srv/share is not share (currently {0})."
+  },
+  "step2m4": {
+    "ko": "PASS: setgid+sticky 공유 디렉터리가 올바르게 구성되었습니다.",
+    "ja": "PASS: setgid+sticky の共有ディレクトリが正しく構成されました。",
+    "zh-CN": "PASS: setgid+sticky 共享目录配置正确。",
+    "zh-TW": "PASS: setgid+sticky 共享目錄設定正確。",
+    "es": "PASS: el directorio compartido con setgid+sticky está bien configurado.",
+    "de": "PASS: Das gemeinsame Verzeichnis mit setgid+sticky ist korrekt eingerichtet.",
+    "en": "PASS: the setgid+sticky shared directory is configured correctly."
+  },
+  "step3m1": {
+    "ko": "FAIL: secret.txt에 audit 사용자의 읽기(r--) ACL이 없습니다.",
+    "ja": "FAIL: secret.txt に audit ユーザーの読み取り（r--）ACL がありません。",
+    "zh-CN": "FAIL: secret.txt 上没有 audit 用户的读取（r--）ACL。",
+    "zh-TW": "FAIL: secret.txt 上沒有 audit 使用者的讀取（r--）ACL。",
+    "es": "FAIL: secret.txt no tiene una ACL de lectura (r--) para el usuario audit.",
+    "de": "FAIL: secret.txt hat keine Lese-ACL (r--) für den Benutzer audit.",
+    "en": "FAIL: secret.txt has no read (r--) ACL for the audit user."
+  },
+  "step3m2": {
+    "ko": "FAIL: audit 사용자가 실제로 읽지 못합니다. 디렉터리 접근(ACL 또는 실행권한)도 확인하세요.",
+    "ja": "FAIL: audit ユーザーが実際には読み取れません。ディレクトリへのアクセス（ACL または実行権限）も確認してください。",
+    "zh-CN": "FAIL: audit 用户实际读不到。请一并检查目录的访问权限（ACL 或执行位）。",
+    "zh-TW": "FAIL: audit 使用者實際讀不到。請一併檢查目錄的存取權限（ACL 或執行位元）。",
+    "es": "FAIL: el usuario audit no puede leer realmente. Revisa también el acceso al directorio (ACL o permiso de ejecución).",
+    "de": "FAIL: Der Benutzer audit kann tatsächlich nicht lesen. Prüfe auch den Zugriff auf das Verzeichnis (ACL oder Ausführungsrecht).",
+    "en": "FAIL: the audit user still cannot read it. Check directory access too (ACL or execute bit)."
+  },
+  "step3m3": {
+    "ko": "FAIL: audit에게 쓰기 권한까지 열려 있습니다. 읽기만 허용해야 합니다.",
+    "ja": "FAIL: audit に書き込み権限まで与えられています。読み取りのみ許可してください。",
+    "zh-CN": "FAIL: 连写权限也开放给了 audit。应只允许读取。",
+    "zh-TW": "FAIL: 連寫入權限也開放給了 audit。應只允許讀取。",
+    "es": "FAIL: audit también tiene permiso de escritura. Solo debe permitirse la lectura.",
+    "de": "FAIL: audit hat auch Schreibrechte. Es darf nur gelesen werden.",
+    "en": "FAIL: audit also has write permission. Only read should be allowed."
+  },
+  "step3m4": {
+    "ko": "PASS: audit 사용자에게 읽기 전용 ACL이 적용되었습니다.",
+    "ja": "PASS: audit ユーザーに読み取り専用の ACL が適用されました。",
+    "zh-CN": "PASS: 已为 audit 用户配置只读 ACL。",
+    "zh-TW": "PASS: 已為 audit 使用者設定唯讀 ACL。",
+    "es": "PASS: se ha aplicado una ACL de solo lectura para el usuario audit.",
+    "de": "PASS: Für den Benutzer audit wurde eine Nur-Lese-ACL gesetzt.",
+    "en": "PASS: a read-only ACL is in place for the audit user."
+  },
+  "step4m1": {
+    "ko": "FAIL: ~/work/suid.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/suid.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/suid.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/suid.txt。",
+    "es": "FAIL: no existe ~/work/suid.txt.",
+    "de": "FAIL: ~/work/suid.txt fehlt.",
+    "en": "FAIL: ~/work/suid.txt does not exist."
+  },
+  "step4m2": {
+    "ko": "FAIL: suid.txt에 /usr/bin/passwd 가 없습니다. find / -perm -4000 결과를 저장했는지 확인하세요.",
+    "ja": "FAIL: suid.txt に /usr/bin/passwd がありません。find / -perm -4000 の結果を保存したか確認してください。",
+    "zh-CN": "FAIL: suid.txt 中没有 /usr/bin/passwd。请确认是否保存了 find / -perm -4000 的结果。",
+    "zh-TW": "FAIL: suid.txt 中沒有 /usr/bin/passwd。請確認是否儲存了 find / -perm -4000 的結果。",
+    "es": "FAIL: suid.txt no contiene /usr/bin/passwd. Comprueba que guardaste la salida de find / -perm -4000.",
+    "de": "FAIL: In suid.txt fehlt /usr/bin/passwd. Prüfe, ob du die Ausgabe von find / -perm -4000 gespeichert hast.",
+    "en": "FAIL: suid.txt does not contain /usr/bin/passwd. Check that you saved the output of find / -perm -4000."
+  },
+  "step4m3": {
+    "ko": "FAIL: danger.conf 권한이 640이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: danger.conf の権限が 640 ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: danger.conf 权限不是 640（当前 {0}）。",
+    "zh-TW": "FAIL: danger.conf 權限不是 640（目前 {0}）。",
+    "es": "FAIL: los permisos de danger.conf no son 640 (actualmente {0}).",
+    "de": "FAIL: Die Rechte von danger.conf sind nicht 640 (aktuell {0}).",
+    "en": "FAIL: danger.conf is not mode 640 (currently {0})."
+  },
+  "step4m4": {
+    "ko": "PASS: SUID 감사 결과 저장 + 위험 파일 권한 수리 완료.",
+    "ja": "PASS: SUID 監査結果の保存と危険なファイルの権限修復が完了しました。",
+    "zh-CN": "PASS: 已保存 SUID 审计结果并修复危险文件权限。",
+    "zh-TW": "PASS: 已儲存 SUID 稽核結果並修復危險檔案權限。",
+    "es": "PASS: auditoría SUID guardada y permisos del archivo peligroso reparados.",
+    "de": "PASS: SUID-Audit gespeichert und Rechte der riskanten Datei repariert.",
+    "en": "PASS: SUID audit saved and the risky file permissions repaired."
+  }
+}

@@ -1,0 +1,17 @@
+{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "snacklab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+spec:
+  accessModes: {{ .Values.persistence.accessModes | default (list "ReadWriteOnce") | toJson }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+  {{- with .Values.persistence.storageClass }}
+  storageClassName: {{ . }}
+  {{- end }}
+{{- end }}

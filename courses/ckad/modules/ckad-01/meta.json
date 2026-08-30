@@ -1,0 +1,189 @@
+{
+  "id": "ckad-01",
+  "title": {
+    "ko": "CKAD 모의고사 1회 (120분 · 16문항)",
+    "en": "CKAD Practice Exam #1 (120 min · 16 tasks)",
+    "ja": "CKAD 模擬試験 1回目 (120分 · 16問)",
+    "zh-CN": "CKAD 模拟考试 第 1 套（120 分钟 · 16 题）"
+  },
+  "desc": {
+    "ko": "실제 CKAD와 같은 도메인 배점의 16문항을 120분 안에. 다 푼 뒤 [제출]하면 전 문항이 부분 점수로 한꺼번에 채점되고, 66점을 넘기면 이수 뱃지를 받는다. 틀린 문항은 해설이 붙는다.",
+    "en": "Sixteen tasks weighted like the real CKAD, in 120 minutes. Submit once when you are done: every task is graded with partial credit, 66 points earns the badge, and missed tasks come with explanations.",
+    "ja": "本番の CKAD と同じドメイン配点の 16 問を 120 分で。解き終えたら [提出] を押すと全問が部分点付きで一括採点され、66 点を超えれば修了バッジがもらえます。間違えた問題には解説が付きます。",
+    "zh-CN": "在 120 分钟内完成 16 道题，权重与真实 CKAD 各领域一致。答完后点击 [提交]，全部题目按部分给分一次性评分；超过 66 分即可获得结业徽章，答错的题目会附上解析。"
+  },
+  "duration": 120,
+  "available": true,
+  "exam": {
+    "name": "CKAD",
+    "passPercent": 66,
+    "languages": [
+      "en",
+      "ja",
+      "zh-CN"
+    ]
+  },
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "Q1 (7점) 사이드카 컨테이너 — 로그 스트리밍",
+        "en": "Q1 (7 pts) Sidecar container — log streaming",
+        "ja": "Q1 (7点) サイドカーコンテナ — ログストリーミング",
+        "zh-CN": "Q1（7 分）Sidecar 容器 —— 日志流式输出"
+      },
+      "points": 7,
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "Q2 (7점) Job 과 CronJob",
+        "en": "Q2 (7 pts) Job and CronJob",
+        "ja": "Q2 (7点) Job と CronJob",
+        "zh-CN": "Q2（7 分）Job 与 CronJob"
+      },
+      "points": 7,
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "Q3 (6점) init 컨테이너로 콘텐츠 준비",
+        "en": "Q3 (6 pts) Prepare content with an init container",
+        "ja": "Q3 (6点) init コンテナによるコンテンツ準備",
+        "zh-CN": "Q3（6 分）用 init 容器准备内容"
+      },
+      "points": 6,
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "Q4 (7점) 롤링 업데이트 — 무중단 배포 전략",
+        "en": "Q4 (7 pts) Rolling update — zero-downtime strategy",
+        "ja": "Q4 (7点) ローリングアップデート — 無停止戦略",
+        "zh-CN": "Q4（7 分）滚动更新 —— 零停机策略"
+      },
+      "points": 7,
+      "check": "step4.sh"
+    },
+    {
+      "title": {
+        "ko": "Q5 (6점) 카나리 배포 — 트래픽 25%",
+        "en": "Q5 (6 pts) Canary deployment — 25% of traffic",
+        "ja": "Q5 (6点) カナリアデプロイ — トラフィックの 25%",
+        "zh-CN": "Q5（6 分）金丝雀发布 —— 25% 流量"
+      },
+      "points": 6,
+      "check": "step5.sh"
+    },
+    {
+      "title": {
+        "ko": "Q6 (7점) Kustomize 오버레이",
+        "en": "Q6 (7 pts) Kustomize overlay",
+        "ja": "Q6 (7点) Kustomize オーバーレイ",
+        "zh-CN": "Q6（7 分）Kustomize overlay"
+      },
+      "points": 7,
+      "check": "step6.sh"
+    },
+    {
+      "title": {
+        "ko": "Q7 (5점) 프로브 — 자가 치유와 트래픽 게이팅",
+        "en": "Q7 (5 pts) Probes — self-healing and traffic gating",
+        "ja": "Q7 (5点) プローブ — 自己修復とトラフィックゲーティング",
+        "zh-CN": "Q7（5 分）探针 —— 自愈与流量门控"
+      },
+      "points": 5,
+      "check": "step7.sh"
+    },
+    {
+      "title": {
+        "ko": "Q8 (5점) 장애 진단 — CrashLoopBackOff",
+        "en": "Q8 (5 pts) Troubleshoot — CrashLoopBackOff",
+        "ja": "Q8 (5点) 障害診断 — CrashLoopBackOff",
+        "zh-CN": "Q8（5 分）故障排查 —— CrashLoopBackOff"
+      },
+      "points": 5,
+      "check": "step8.sh"
+    },
+    {
+      "title": {
+        "ko": "Q9 (5점) 폐기된 API 버전 수정",
+        "en": "Q9 (5 pts) Fix removed API versions",
+        "ja": "Q9 (5点) 廃止された API バージョンの修正",
+        "zh-CN": "Q9（5 分）修复已移除的 API 版本"
+      },
+      "points": 5,
+      "check": "step9.sh"
+    },
+    {
+      "title": {
+        "ko": "Q10 (7점) ConfigMap 과 Secret 소비",
+        "en": "Q10 (7 pts) Consume a ConfigMap and a Secret",
+        "ja": "Q10 (7点) ConfigMap と Secret の利用",
+        "zh-CN": "Q10（7 分）使用 ConfigMap 与 Secret"
+      },
+      "points": 7,
+      "check": "step10.sh"
+    },
+    {
+      "title": {
+        "ko": "Q11 (6점) SecurityContext — 비루트·읽기 전용",
+        "en": "Q11 (6 pts) SecurityContext — non-root, read-only",
+        "ja": "Q11 (6点) SecurityContext — 非 root・読み取り専用",
+        "zh-CN": "Q11（6 分）SecurityContext —— 非 root、只读"
+      },
+      "points": 6,
+      "check": "step11.sh"
+    },
+    {
+      "title": {
+        "ko": "Q12 (6점) ServiceAccount 와 토큰 자동 마운트",
+        "en": "Q12 (6 pts) ServiceAccount and token automount",
+        "ja": "Q12 (6点) ServiceAccount とトークン自動マウント",
+        "zh-CN": "Q12（6 分）ServiceAccount 与令牌自动挂载"
+      },
+      "points": 6,
+      "check": "step12.sh"
+    },
+    {
+      "title": {
+        "ko": "Q13 (6점) 리소스 요청·상한 — Quota 안에서",
+        "en": "Q13 (6 pts) Requests and limits — inside a quota",
+        "ja": "Q13 (6点) リソース要求・上限 — Quota の範囲内で",
+        "zh-CN": "Q13（6 分）资源请求与上限 —— 在配额之内"
+      },
+      "points": 6,
+      "check": "step13.sh"
+    },
+    {
+      "title": {
+        "ko": "Q14 (7점) Service — ClusterIP 와 NodePort",
+        "en": "Q14 (7 pts) Services — ClusterIP and NodePort",
+        "ja": "Q14 (7点) Service — ClusterIP と NodePort",
+        "zh-CN": "Q14（7 分）Service —— ClusterIP 与 NodePort"
+      },
+      "points": 7,
+      "check": "step14.sh"
+    },
+    {
+      "title": {
+        "ko": "Q15 (6점) Ingress 리소스 작성",
+        "en": "Q15 (6 pts) Author an Ingress resource",
+        "ja": "Q15 (6点) Ingress リソースの作成",
+        "zh-CN": "Q15（6 分）编写 Ingress 资源"
+      },
+      "points": 6,
+      "check": "step15.sh"
+    },
+    {
+      "title": {
+        "ko": "Q16 (7점) NetworkPolicy — 지정 클라이언트만 허용",
+        "en": "Q16 (7 pts) NetworkPolicy — admit named clients only",
+        "ja": "Q16 (7点) NetworkPolicy — 指定クライアントのみ許可",
+        "zh-CN": "Q16（7 分）NetworkPolicy —— 仅放行指定客户端"
+      },
+      "points": 7,
+      "check": "step16.sh"
+    }
+  ]
+}

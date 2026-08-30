@@ -1,0 +1,128 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work/err5xx.count 가 없습니다.",
+    "ja": "FAIL: ~/work/err5xx.count がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/err5xx.count。",
+    "zh-TW": "FAIL: 沒有 ~/work/err5xx.count。",
+    "es": "FAIL: no existe ~/work/err5xx.count.",
+    "de": "FAIL: ~/work/err5xx.count fehlt.",
+    "en": "FAIL: ~/work/err5xx.count does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: 5xx 라인 수가 틀립니다 (제출 {0} / 실제 {1}). 상태 코드 필드만 정확히 매칭했는지 확인하세요.",
+    "ja": "FAIL: 5xx の行数が違います（提出 {0} / 実際 {1}）。ステータスコードのフィールドだけを正確にマッチさせたか確認してください。",
+    "zh-CN": "FAIL: 5xx 行数不对（提交 {0} / 实际 {1}）。请确认是否只精确匹配了状态码字段。",
+    "zh-TW": "FAIL: 5xx 行數不對（提交 {0} / 實際 {1}）。請確認是否只精確比對了狀態碼欄位。",
+    "es": "FAIL: el número de líneas 5xx no coincide (enviado {0} / real {1}). Asegúrate de haber filtrado solo por el campo de código de estado.",
+    "de": "FAIL: Falsche Anzahl 5xx-Zeilen (eingereicht {0} / tatsächlich {1}). Prüfe, ob du genau auf das Statuscode-Feld gematcht hast.",
+    "en": "FAIL: the 5xx line count is wrong (submitted {0} / actual {1}). Make sure you matched only the status-code field."
+  },
+  "step1m3": {
+    "ko": "PASS: 5xx 오류 라인 수를 정확히 셌습니다 ({0}건).",
+    "ja": "PASS: 5xx エラー行数を正確に数えました（{0} 件）。",
+    "zh-CN": "PASS: 准确统计出 5xx 错误行数（{0} 条）。",
+    "zh-TW": "PASS: 準確統計出 5xx 錯誤行數（{0} 筆）。",
+    "es": "PASS: has contado correctamente las líneas con errores 5xx ({0}).",
+    "de": "PASS: Die Anzahl der 5xx-Fehlerzeilen stimmt ({0}).",
+    "en": "PASS: you counted the 5xx error lines correctly ({0})."
+  },
+  "step2m1": {
+    "ko": "FAIL: ~/work/top-ip.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/top-ip.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/top-ip.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/top-ip.txt。",
+    "es": "FAIL: no existe ~/work/top-ip.txt.",
+    "de": "FAIL: ~/work/top-ip.txt fehlt.",
+    "en": "FAIL: ~/work/top-ip.txt does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: 최다 요청 IP가 틀립니다 (제출 {0} / 실제 {1}).",
+    "ja": "FAIL: 最多リクエストの IP が違います（提出 {0} / 実際 {1}）。",
+    "zh-CN": "FAIL: 请求最多的 IP 不对（提交 {0} / 实际 {1}）。",
+    "zh-TW": "FAIL: 請求最多的 IP 不對（提交 {0} / 實際 {1}）。",
+    "es": "FAIL: la IP con más peticiones no coincide (enviada {0} / real {1}).",
+    "de": "FAIL: Die IP mit den meisten Anfragen stimmt nicht (eingereicht {0} / tatsächlich {1}).",
+    "en": "FAIL: the top requesting IP is wrong (submitted {0} / actual {1})."
+  },
+  "step2m3": {
+    "ko": "PASS: 최다 요청 IP({0})를 정확히 찾았습니다.",
+    "ja": "PASS: 最多リクエストの IP（{0}）を正しく特定しました。",
+    "zh-CN": "PASS: 正确找出了请求最多的 IP（{0}）。",
+    "zh-TW": "PASS: 正確找出了請求最多的 IP（{0}）。",
+    "es": "PASS: has identificado correctamente la IP con más peticiones ({0}).",
+    "de": "PASS: Die IP mit den meisten Anfragen ({0}) wurde korrekt gefunden.",
+    "en": "PASS: you found the top requesting IP ({0}) correctly."
+  },
+  "step3m1": {
+    "ko": "FAIL: ~/work/access-redacted.log 가 없습니다.",
+    "ja": "FAIL: ~/work/access-redacted.log がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/access-redacted.log。",
+    "zh-TW": "FAIL: 沒有 ~/work/access-redacted.log。",
+    "es": "FAIL: no existe ~/work/access-redacted.log.",
+    "de": "FAIL: ~/work/access-redacted.log fehlt.",
+    "en": "FAIL: ~/work/access-redacted.log does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: 라인 수가 원본({0})과 다릅니다({1}). 삭제가 아니라 치환이어야 합니다.",
+    "ja": "FAIL: 行数が元ファイル（{0}）と違います（{1}）。削除ではなく置換にしてください。",
+    "zh-CN": "FAIL: 行数与原文件（{0}）不同（{1}）。应当是替换而不是删除。",
+    "zh-TW": "FAIL: 行數與原檔案（{0}）不同（{1}）。應當是取代而不是刪除。",
+    "es": "FAIL: el número de líneas difiere del original ({0} frente a {1}). Debe ser una sustitución, no un borrado.",
+    "de": "FAIL: Die Zeilenzahl weicht vom Original ab ({0} statt {1}). Es muss ersetzt und nicht gelöscht werden.",
+    "en": "FAIL: the line count differs from the original ({0} vs {1}). This must be a substitution, not a deletion."
+  },
+  "step3m3": {
+    "ko": "FAIL: 아직 라인 첫머리에 IP가 남아 있습니다.",
+    "ja": "FAIL: まだ行頭に IP が残っています。",
+    "zh-CN": "FAIL: 行首仍然残留 IP。",
+    "zh-TW": "FAIL: 行首仍然殘留 IP。",
+    "es": "FAIL: todavía queda la IP al principio de las líneas.",
+    "de": "FAIL: Am Zeilenanfang steht noch die IP.",
+    "en": "FAIL: IP addresses are still present at the start of lines."
+  },
+  "step3m4": {
+    "ko": "FAIL: IP 자리가 REDACTED 로 치환되어 있지 않습니다.",
+    "ja": "FAIL: IP の位置が REDACTED に置換されていません。",
+    "zh-CN": "FAIL: IP 位置没有被替换成 REDACTED。",
+    "zh-TW": "FAIL: IP 位置沒有被取代成 REDACTED。",
+    "es": "FAIL: la posición de la IP no se ha sustituido por REDACTED.",
+    "de": "FAIL: Die IP-Stelle wurde nicht durch REDACTED ersetzt.",
+    "en": "FAIL: the IP position has not been replaced with REDACTED."
+  },
+  "step3m5": {
+    "ko": "PASS: 모든 클라이언트 IP가 REDACTED 로 마스킹되었습니다.",
+    "ja": "PASS: すべてのクライアント IP が REDACTED にマスクされました。",
+    "zh-CN": "PASS: 所有客户端 IP 都已脱敏为 REDACTED。",
+    "zh-TW": "PASS: 所有用戶端 IP 都已遮罩為 REDACTED。",
+    "es": "PASS: todas las IP de cliente están enmascaradas como REDACTED.",
+    "de": "PASS: Alle Client-IPs sind als REDACTED maskiert.",
+    "en": "PASS: every client IP is masked as REDACTED."
+  },
+  "step4m1": {
+    "ko": "FAIL: ~/work/api-bytes.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/api-bytes.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/api-bytes.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/api-bytes.txt。",
+    "es": "FAIL: no existe ~/work/api-bytes.txt.",
+    "de": "FAIL: ~/work/api-bytes.txt fehlt.",
+    "en": "FAIL: ~/work/api-bytes.txt does not exist."
+  },
+  "step4m2": {
+    "ko": "FAIL: /api 200 응답 바이트 합계가 틀립니다 (제출 {0} / 실제 {1}). 경로가 /api로 시작하고 상태가 200인 라인만 합산해야 합니다.",
+    "ja": "FAIL: /api の 200 応答バイト合計が違います（提出 {0} / 実際 {1}）。パスが /api で始まり、ステータスが 200 の行だけを合計してください。",
+    "zh-CN": "FAIL: /api 的 200 响应字节总和不对（提交 {0} / 实际 {1}）。只应累加路径以 /api 开头且状态为 200 的行。",
+    "zh-TW": "FAIL: /api 的 200 回應位元組總和不對（提交 {0} / 實際 {1}）。只應累加路徑以 /api 開頭且狀態為 200 的行。",
+    "es": "FAIL: la suma de bytes de las respuestas 200 de /api no coincide (enviado {0} / real {1}). Suma solo las líneas cuya ruta empieza por /api y cuyo estado es 200.",
+    "de": "FAIL: Die Byte-Summe der 200-Antworten von /api stimmt nicht (eingereicht {0} / tatsächlich {1}). Summiere nur Zeilen, deren Pfad mit /api beginnt und deren Status 200 ist.",
+    "en": "FAIL: the byte total for /api 200 responses is wrong (submitted {0} / actual {1}). Sum only lines whose path starts with /api and whose status is 200."
+  },
+  "step4m3": {
+    "ko": "PASS: 조건 필터 + 합계 집계가 정확합니다 ({0} bytes).",
+    "ja": "PASS: 条件フィルタと合計集計が正確です（{0} bytes）。",
+    "zh-CN": "PASS: 条件过滤与求和统计准确（{0} bytes）。",
+    "zh-TW": "PASS: 條件過濾與加總統計正確（{0} bytes）。",
+    "es": "PASS: el filtrado por condición y la suma son correctos ({0} bytes).",
+    "de": "PASS: Filter und Summenbildung sind korrekt ({0} Bytes).",
+    "en": "PASS: the conditional filter and the sum are both correct ({0} bytes)."
+  }
+}

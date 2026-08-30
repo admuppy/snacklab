@@ -1,0 +1,57 @@
+{
+  "id": "k8s-08",
+  "title": {
+    "ko": "RBAC — 최소권한 접근제어",
+    "en": "RBAC — Least-Privilege Access Control",
+    "ja": "RBAC — 最小権限のアクセス制御",
+    "zh-CN": "RBAC —— 最小权限访问控制",
+    "zh-TW": "RBAC —— 最小權限存取控制",
+    "es": "RBAC: control de acceso con mínimo privilegio",
+    "de": "RBAC – Zugriffssteuerung mit minimalen Rechten"
+  },
+  "desc": {
+    "ko": "Role·ClusterRole 과 바인딩으로 ServiceAccount 에 최소권한을 부여하고 auth can-i 로 검증",
+    "en": "Grant least-privilege to ServiceAccounts with Roles, ClusterRoles and bindings, verified via auth can-i"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "ServiceAccount 생성",
+        "en": "Create a ServiceAccount",
+        "ja": "ServiceAccount の作成",
+        "zh-CN": "创建 ServiceAccount",
+        "zh-TW": "建立 ServiceAccount",
+        "es": "Crear una ServiceAccount",
+        "de": "Einen ServiceAccount anlegen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "Role 과 RoleBinding",
+        "en": "Role and RoleBinding",
+        "ja": "Role と RoleBinding",
+        "zh-CN": "Role 与 RoleBinding",
+        "zh-TW": "Role 與 RoleBinding",
+        "es": "Role y RoleBinding",
+        "de": "Role und RoleBinding"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "auth can-i 로 검증",
+        "en": "Verify with auth can-i",
+        "ja": "auth can-i で検証",
+        "zh-CN": "用 auth can-i 验证",
+        "zh-TW": "用 auth can-i 驗證",
+        "es": "Verificar con auth can-i",
+        "de": "Mit auth can-i prüfen"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

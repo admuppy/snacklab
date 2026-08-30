@@ -1,0 +1,110 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work/snapshot.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/snapshot.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/snapshot.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/snapshot.txt。",
+    "es": "FAIL: no existe ~/work/snapshot.txt.",
+    "de": "FAIL: ~/work/snapshot.txt fehlt.",
+    "en": "FAIL: ~/work/snapshot.txt does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: snapshot.txt 에 현재 MemTotal({0} kB) 값이 없습니다.",
+    "ja": "FAIL: snapshot.txt に現在の MemTotal（{0} kB）の値がありません。",
+    "zh-CN": "FAIL: snapshot.txt 中没有当前 MemTotal（{0} kB）的值。",
+    "zh-TW": "FAIL: snapshot.txt 中沒有目前 MemTotal（{0} kB）的值。",
+    "es": "FAIL: snapshot.txt no contiene el valor actual de MemTotal ({0} kB).",
+    "de": "FAIL: In snapshot.txt fehlt der aktuelle MemTotal-Wert ({0} kB).",
+    "en": "FAIL: snapshot.txt does not contain the current MemTotal value ({0} kB)."
+  },
+  "step1m3": {
+    "ko": "FAIL: snapshot.txt 에 'cpus={0}' 줄이 없습니다.",
+    "ja": "FAIL: snapshot.txt に 'cpus={0}' の行がありません。",
+    "zh-CN": "FAIL: snapshot.txt 中没有 'cpus={0}' 这一行。",
+    "zh-TW": "FAIL: snapshot.txt 中沒有 'cpus={0}' 這一行。",
+    "es": "FAIL: snapshot.txt no contiene la línea 'cpus={0}'.",
+    "de": "FAIL: In snapshot.txt fehlt die Zeile 'cpus={0}'.",
+    "en": "FAIL: snapshot.txt has no 'cpus={0}' line."
+  },
+  "step1m4": {
+    "ko": "PASS: 자원 스냅샷(MemTotal, CPU 수)을 기록했습니다.",
+    "ja": "PASS: 資源のスナップショット（MemTotal・CPU 数）を記録しました。",
+    "zh-CN": "PASS: 已记录资源快照（MemTotal、CPU 数）。",
+    "zh-TW": "PASS: 已記錄資源快照（MemTotal、CPU 數）。",
+    "es": "PASS: has registrado la instantánea de recursos (MemTotal y número de CPU).",
+    "de": "PASS: Ressourcen-Snapshot (MemTotal, CPU-Anzahl) wurde erfasst.",
+    "en": "PASS: you recorded the resource snapshot (MemTotal and CPU count)."
+  },
+  "step2m1": {
+    "ko": "FAIL: 실행 중인 stress-ng 프로세스가 없습니다. taskset+nice 로 부하를 띄웠나요?",
+    "ja": "FAIL: 動作中の stress-ng プロセスがありません。taskset と nice で負荷を起動しましたか？",
+    "zh-CN": "FAIL: 没有正在运行的 stress-ng 进程。是否用 taskset+nice 启动了负载？",
+    "zh-TW": "FAIL: 沒有正在執行的 stress-ng 行程。是否用 taskset+nice 啟動了負載？",
+    "es": "FAIL: no hay ningún proceso stress-ng en ejecución. ¿Lanzaste la carga con taskset y nice?",
+    "de": "FAIL: Es läuft kein stress-ng-Prozess. Hast du die Last mit taskset und nice gestartet?",
+    "en": "FAIL: no stress-ng process is running. Did you start the load with taskset and nice?"
+  },
+  "step2m2": {
+    "ko": "FAIL: 프로세스 nice 값이 19가 아닙니다 (현재: {0}). 'nice -n 19' 로 실행했나요?",
+    "ja": "FAIL: プロセスの nice 値が 19 ではありません（現在: {0}）。'nice -n 19' で実行しましたか？",
+    "zh-CN": "FAIL: 进程的 nice 值不是 19（当前：{0}）。是否用 'nice -n 19' 运行？",
+    "zh-TW": "FAIL: 行程的 nice 值不是 19（目前：{0}）。是否用 'nice -n 19' 執行？",
+    "es": "FAIL: el valor nice del proceso no es 19 (actualmente: {0}). ¿Lo ejecutaste con 'nice -n 19'?",
+    "de": "FAIL: Der nice-Wert des Prozesses ist nicht 19 (aktuell: {0}). Hast du ihn mit 'nice -n 19' gestartet?",
+    "en": "FAIL: the nice value of the process is not 19 (currently: {0}). Did you run it with 'nice -n 19'?"
+  },
+  "step2m3": {
+    "ko": "FAIL: CPU 친화도가 단일 코어로 고정되지 않았습니다 (현재: {0}). 'taskset -c 0' 으로 실행했나요?",
+    "ja": "FAIL: CPU アフィニティが単一コアに固定されていません（現在: {0}）。'taskset -c 0' で実行しましたか？",
+    "zh-CN": "FAIL: CPU 亲和性没有固定到单个核心（当前：{0}）。是否用 'taskset -c 0' 运行？",
+    "zh-TW": "FAIL: CPU 親和性沒有固定到單一核心（目前：{0}）。是否用 'taskset -c 0' 執行？",
+    "es": "FAIL: la afinidad de CPU no está fijada a un solo núcleo (actualmente: {0}). ¿Lo ejecutaste con 'taskset -c 0'?",
+    "de": "FAIL: Die CPU-Affinität ist nicht auf einen Kern festgelegt (aktuell: {0}). Hast du 'taskset -c 0' verwendet?",
+    "en": "FAIL: the CPU affinity is not pinned to a single core (currently: {0}). Did you run it with 'taskset -c 0'?"
+  },
+  "step2m4": {
+    "ko": "PASS: nice 19 + CPU {0} 고정으로 부하 프로세스를 실행했습니다.",
+    "ja": "PASS: nice 19 と CPU {0} への固定で負荷プロセスを実行しました。",
+    "zh-CN": "PASS: 已用 nice 19 并固定到 CPU {0} 运行负载进程。",
+    "zh-TW": "PASS: 已用 nice 19 並固定到 CPU {0} 執行負載行程。",
+    "es": "PASS: has ejecutado la carga con nice 19 y fijada a la CPU {0}.",
+    "de": "PASS: Der Lastprozess läuft mit nice 19 und ist an CPU {0} gebunden.",
+    "en": "PASS: the load process runs with nice 19 pinned to CPU {0}."
+  },
+  "step3m1": {
+    "ko": "FAIL: lab.slice 메모리 cgroup 이 없습니다. 'systemctl set-property'/'systemd-run' 으로 만들었나요?",
+    "ja": "FAIL: lab.slice のメモリ cgroup がありません。'systemctl set-property' や 'systemd-run' で作成しましたか？",
+    "zh-CN": "FAIL: 没有 lab.slice 的内存 cgroup。是否用 'systemctl set-property'/'systemd-run' 创建？",
+    "zh-TW": "FAIL: 沒有 lab.slice 的記憶體 cgroup。是否用 'systemctl set-property'/'systemd-run' 建立？",
+    "es": "FAIL: no existe el cgroup de memoria lab.slice. ¿Lo creaste con 'systemctl set-property' o 'systemd-run'?",
+    "de": "FAIL: Der Speicher-cgroup lab.slice fehlt. Hast du ihn mit 'systemctl set-property' bzw. 'systemd-run' erzeugt?",
+    "en": "FAIL: there is no lab.slice memory cgroup. Did you create it with 'systemctl set-property' / 'systemd-run'?"
+  },
+  "step3m2": {
+    "ko": "FAIL: lab.slice 에 MemoryMax 상한이 설정되지 않았습니다 (현재: {0}).",
+    "ja": "FAIL: lab.slice に MemoryMax の上限が設定されていません（現在: {0}）。",
+    "zh-CN": "FAIL: lab.slice 没有设置 MemoryMax 上限（当前：{0}）。",
+    "zh-TW": "FAIL: lab.slice 沒有設定 MemoryMax 上限（目前：{0}）。",
+    "es": "FAIL: lab.slice no tiene un límite MemoryMax (actualmente: {0}).",
+    "de": "FAIL: Für lab.slice ist kein MemoryMax gesetzt (aktuell: {0}).",
+    "en": "FAIL: no MemoryMax limit is set on lab.slice (currently: {0})."
+  },
+  "step3m3": {
+    "ko": "FAIL: lab.slice 에서 OOM 기록(oom_kill)이 없습니다. 상한을 넘는 메모리를 할당해 보세요.",
+    "ja": "FAIL: lab.slice に OOM の記録（oom_kill）がありません。上限を超えるメモリを確保してみてください。",
+    "zh-CN": "FAIL: lab.slice 中没有 OOM 记录（oom_kill）。请尝试分配超过上限的内存。",
+    "zh-TW": "FAIL: lab.slice 中沒有 OOM 紀錄（oom_kill）。請嘗試配置超過上限的記憶體。",
+    "es": "FAIL: lab.slice no registra ningún OOM (oom_kill). Prueba a reservar más memoria que el límite.",
+    "de": "FAIL: In lab.slice gibt es keinen OOM-Eintrag (oom_kill). Fordere mehr Speicher an als das Limit erlaubt.",
+    "en": "FAIL: lab.slice records no OOM (oom_kill). Try allocating more memory than the limit."
+  },
+  "step3m4": {
+    "ko": "PASS: 메모리 상한 cgroup({0} bytes)에서 OOM 을 {1}회 유도하고 memory.events 로 확인했습니다.",
+    "ja": "PASS: メモリ上限つき cgroup（{0} bytes）で OOM を {1} 回起こし、memory.events で確認しました。",
+    "zh-CN": "PASS: 在带内存上限的 cgroup（{0} bytes）中触发了 {1} 次 OOM，并通过 memory.events 确认。",
+    "zh-TW": "PASS: 在帶記憶體上限的 cgroup（{0} bytes）中觸發了 {1} 次 OOM，並透過 memory.events 確認。",
+    "es": "PASS: has provocado {1} OOM en un cgroup con límite de memoria ({0} bytes) y lo has confirmado con memory.events.",
+    "de": "PASS: In einem cgroup mit Speicherlimit ({0} Bytes) wurden {1} OOM ausgelöst und per memory.events bestätigt.",
+    "en": "PASS: you triggered OOM {1} time(s) in a memory-limited cgroup ({0} bytes) and confirmed it via memory.events."
+  }
+}

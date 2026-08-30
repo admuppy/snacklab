@@ -1,0 +1,57 @@
+{
+  "id": "k8s-04",
+  "title": {
+    "ko": "프로브와 자가치유",
+    "en": "Probes and Self-Healing",
+    "ja": "プローブと自己修復",
+    "zh-CN": "探针与自愈",
+    "zh-TW": "探測器與自我修復",
+    "es": "Sondas y autorreparación",
+    "de": "Probes und Selbstheilung"
+  },
+  "desc": {
+    "ko": "liveness·readiness·startup 프로브로 고장난 컨테이너를 자동 재시작·트래픽 차단시키기",
+    "en": "Use liveness, readiness and startup probes to restart broken containers and pull them out of service"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "livenessProbe 정의",
+        "en": "Define a livenessProbe",
+        "ja": "livenessProbe の定義",
+        "zh-CN": "定义 livenessProbe",
+        "zh-TW": "定義 livenessProbe",
+        "es": "Definir un livenessProbe",
+        "de": "livenessProbe definieren"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "readinessProbe 정의",
+        "en": "Define a readinessProbe",
+        "ja": "readinessProbe の定義",
+        "zh-CN": "定义 readinessProbe",
+        "zh-TW": "定義 readinessProbe",
+        "es": "Definir un readinessProbe",
+        "de": "readinessProbe definieren"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "장애 유발 → 자동 재시작",
+        "en": "Induce failure → auto restart",
+        "ja": "障害を起こして自動再起動",
+        "zh-CN": "制造故障 → 自动重启",
+        "zh-TW": "製造故障 → 自動重啟",
+        "es": "Provocar un fallo → reinicio automático",
+        "de": "Fehler auslösen → automatischer Neustart"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

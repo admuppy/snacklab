@@ -1,0 +1,64 @@
+{
+  "id": "linux-08",
+  "title": {
+    "ko": "종합 — 죽은 서비스 살리기",
+    "en": "Capstone — Reviving a Dead Service",
+    "ja": "総合 — 停止したサービスを復旧する",
+    "zh-CN": "综合 —— 救活挂掉的服务",
+    "zh-TW": "綜合 —— 救活掛掉的服務",
+    "es": "Proyecto final: revivir un servicio caído",
+    "de": "Abschluss – einen toten Dienst wiederbeleben"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "기동 실패 진단 — 203/EXEC",
+        "en": "Diagnosing startup failure — 203/EXEC",
+        "ja": "起動失敗の診断 — 203/EXEC",
+        "zh-CN": "诊断启动失败 —— 203/EXEC",
+        "zh-TW": "診斷啟動失敗 —— 203/EXEC",
+        "es": "Diagnosticar el fallo de arranque: 203/EXEC",
+        "de": "Startfehler diagnostizieren – 203/EXEC"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "포트 충돌 해결",
+        "en": "Resolving a port conflict",
+        "ja": "ポート衝突の解消",
+        "zh-CN": "解决端口冲突",
+        "zh-TW": "解決連接埠衝突",
+        "es": "Resolver el conflicto de puerto",
+        "de": "Portkonflikt lösen"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "권한 문제 해결",
+        "en": "Resolving a permission problem",
+        "ja": "権限問題の解消",
+        "zh-CN": "解决权限问题",
+        "zh-TW": "解決權限問題",
+        "es": "Resolver el problema de permisos",
+        "de": "Rechteproblem lösen"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "재발 방지와 마무리",
+        "en": "Preventing recurrence and wrap-up",
+        "ja": "再発防止と仕上げ",
+        "zh-CN": "防止复发与收尾",
+        "zh-TW": "防止復發與收尾",
+        "es": "Evitar la recurrencia y cerrar",
+        "de": "Wiederholung verhindern und abschließen"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

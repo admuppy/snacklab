@@ -1,0 +1,64 @@
+{
+  "id": "linux-02",
+  "title": {
+    "ko": "프로세스와 시그널",
+    "en": "Processes and Signals",
+    "ja": "プロセスとシグナル",
+    "zh-CN": "进程与信号",
+    "zh-TW": "行程與訊號",
+    "es": "Procesos y señales",
+    "de": "Prozesse und Signale"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "프로세스 탐색 — ps와 /proc",
+        "en": "Exploring processes — ps and /proc",
+        "ja": "プロセスの探索 — ps と /proc",
+        "zh-CN": "探索进程 —— ps 与 /proc",
+        "zh-TW": "探索行程 —— ps 與 /proc",
+        "es": "Explorar procesos — ps y /proc",
+        "de": "Prozesse erkunden – ps und /proc"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "시그널로 프로세스 제어",
+        "en": "Controlling processes with signals",
+        "ja": "シグナルでプロセスを制御",
+        "zh-CN": "用信号控制进程",
+        "zh-TW": "用訊號控制行程",
+        "es": "Controlar procesos con señales",
+        "de": "Prozesse mit Signalen steuern"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "세션과 분리된 백그라운드 실행",
+        "en": "Detached background execution",
+        "ja": "セッションから切り離したバックグラウンド実行",
+        "zh-CN": "脱离会话的后台运行",
+        "zh-TW": "脫離工作階段的背景執行",
+        "es": "Ejecución en segundo plano desacoplada",
+        "de": "Losgelöste Hintergrundausführung"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "포트 점유 프로세스 추적",
+        "en": "Tracking the process holding a port",
+        "ja": "ポートを占有するプロセスの追跡",
+        "zh-CN": "追踪占用端口的进程",
+        "zh-TW": "追蹤占用連接埠的行程",
+        "es": "Rastrear el proceso que ocupa un puerto",
+        "de": "Den Prozess hinter einem Port finden"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "linux-06",
+  "title": {
+    "ko": "systemd 서비스와 journald",
+    "en": "systemd Services and journald",
+    "ja": "systemd サービスと journald",
+    "zh-CN": "systemd 服务与 journald",
+    "zh-TW": "systemd 服務與 journald",
+    "es": "Servicios de systemd y journald",
+    "de": "systemd-Dienste und journald"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "서비스 유닛 작성",
+        "en": "Writing a service unit",
+        "ja": "サービスユニットの作成",
+        "zh-CN": "编写服务单元",
+        "zh-TW": "撰寫服務單元",
+        "es": "Escribir un unit de servicio",
+        "de": "Eine Service-Unit schreiben"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "journald로 고장 유닛 수리",
+        "en": "Fixing a broken unit with journald",
+        "ja": "journald で故障ユニットを修復",
+        "zh-CN": "用 journald 修复故障单元",
+        "zh-TW": "用 journald 修復故障單元",
+        "es": "Reparar un unit roto con journald",
+        "de": "Defekte Unit mit journald reparieren"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "Restart 정책으로 자가 복구",
+        "en": "Self-healing with Restart policy",
+        "ja": "Restart ポリシーで自己復旧",
+        "zh-CN": "用 Restart 策略实现自愈",
+        "zh-TW": "用 Restart 原則實現自我修復",
+        "es": "Autorreparación con la política Restart",
+        "de": "Selbstheilung mit Restart-Richtlinie"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "타이머로 주기 작업",
+        "en": "Periodic jobs with timers",
+        "ja": "タイマーで定期実行",
+        "zh-CN": "用定时器执行周期任务",
+        "zh-TW": "用計時器執行週期任務",
+        "es": "Tareas periódicas con timers",
+        "de": "Periodische Jobs mit Timern"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

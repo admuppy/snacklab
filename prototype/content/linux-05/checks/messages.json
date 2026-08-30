@@ -1,0 +1,146 @@
+{
+  "step1m1": {
+    "ko": "FAIL: deploy 사용자가 없습니다.",
+    "ja": "FAIL: deploy ユーザーがありません。",
+    "zh-CN": "FAIL: 没有 deploy 用户。",
+    "zh-TW": "FAIL: 沒有 deploy 使用者。",
+    "es": "FAIL: no existe el usuario deploy.",
+    "de": "FAIL: Der Benutzer deploy existiert nicht.",
+    "en": "FAIL: the deploy user does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: deploy의 로그인 셸이 /bin/bash가 아닙니다.",
+    "ja": "FAIL: deploy のログインシェルが /bin/bash ではありません。",
+    "zh-CN": "FAIL: deploy 的登录 shell 不是 /bin/bash。",
+    "zh-TW": "FAIL: deploy 的登入 shell 不是 /bin/bash。",
+    "es": "FAIL: el shell de inicio de sesión de deploy no es /bin/bash.",
+    "de": "FAIL: Die Login-Shell von deploy ist nicht /bin/bash.",
+    "en": "FAIL: the login shell of deploy is not /bin/bash."
+  },
+  "step1m3": {
+    "ko": "FAIL: 홈 디렉터리({0})가 실제로 없습니다. useradd에 -m 을 줬는지 확인하세요.",
+    "ja": "FAIL: ホームディレクトリ（{0}）が実在しません。useradd に -m を付けたか確認してください。",
+    "zh-CN": "FAIL: 家目录（{0}）实际不存在。请确认 useradd 是否带了 -m。",
+    "zh-TW": "FAIL: 家目錄（{0}）實際不存在。請確認 useradd 是否帶了 -m。",
+    "es": "FAIL: el directorio home ({0}) no existe realmente. Comprueba que usaste -m en useradd.",
+    "de": "FAIL: Das Home-Verzeichnis ({0}) existiert nicht. Prüfe, ob du useradd mit -m aufgerufen hast.",
+    "en": "FAIL: the home directory ({0}) does not actually exist. Check that you passed -m to useradd."
+  },
+  "step1m4": {
+    "ko": "PASS: deploy 사용자가 홈·셸과 함께 생성되었습니다.",
+    "ja": "PASS: deploy ユーザーがホームとシェル付きで作成されました。",
+    "zh-CN": "PASS: deploy 用户已连同家目录与 shell 创建完成。",
+    "zh-TW": "PASS: deploy 使用者已連同家目錄與 shell 建立完成。",
+    "es": "PASS: el usuario deploy se ha creado con home y shell.",
+    "de": "PASS: Der Benutzer deploy wurde mit Home und Shell angelegt.",
+    "en": "PASS: the deploy user was created with a home directory and shell."
+  },
+  "step2m1": {
+    "ko": "FAIL: ops 그룹이 없습니다.",
+    "ja": "FAIL: ops グループがありません。",
+    "zh-CN": "FAIL: 没有 ops 组。",
+    "zh-TW": "FAIL: 沒有 ops 群組。",
+    "es": "FAIL: no existe el grupo ops.",
+    "de": "FAIL: Die Gruppe ops existiert nicht.",
+    "en": "FAIL: the ops group does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: deploy가 ops 그룹에 속해 있지 않습니다.",
+    "ja": "FAIL: deploy が ops グループに属していません。",
+    "zh-CN": "FAIL: deploy 不属于 ops 组。",
+    "zh-TW": "FAIL: deploy 不屬於 ops 群組。",
+    "es": "FAIL: deploy no pertenece al grupo ops.",
+    "de": "FAIL: deploy gehört nicht zur Gruppe ops.",
+    "en": "FAIL: deploy is not a member of the ops group."
+  },
+  "step2m3": {
+    "ko": "FAIL: ops가 deploy의 1차(primary) 그룹이 되어 버렸습니다. 보조(-aG) 그룹이어야 합니다.",
+    "ja": "FAIL: ops が deploy の主グループになっています。補助グループ（-aG）にしてください。",
+    "zh-CN": "FAIL: ops 变成了 deploy 的主组。应该是附加组（-aG）。",
+    "zh-TW": "FAIL: ops 變成了 deploy 的主要群組。應該是附加群組（-aG）。",
+    "es": "FAIL: ops se ha convertido en el grupo principal de deploy. Debe ser un grupo secundario (-aG).",
+    "de": "FAIL: ops ist die primäre Gruppe von deploy geworden. Es muss eine Zusatzgruppe sein (-aG).",
+    "en": "FAIL: ops became the primary group of deploy. It should be a secondary group (-aG)."
+  },
+  "step2m4": {
+    "ko": "PASS: deploy가 ops 보조 그룹에 올바르게 추가되었습니다.",
+    "ja": "PASS: deploy が ops の補助グループに正しく追加されました。",
+    "zh-CN": "PASS: deploy 已正确加入 ops 附加组。",
+    "zh-TW": "PASS: deploy 已正確加入 ops 附加群組。",
+    "es": "PASS: deploy se ha añadido correctamente al grupo secundario ops.",
+    "de": "PASS: deploy wurde korrekt zur Zusatzgruppe ops hinzugefügt.",
+    "en": "PASS: deploy was added to the ops secondary group correctly."
+  },
+  "step3m1": {
+    "ko": "FAIL: /etc/sudoers.d/deploy 파일이 없습니다.",
+    "ja": "FAIL: /etc/sudoers.d/deploy ファイルがありません。",
+    "zh-CN": "FAIL: 没有 /etc/sudoers.d/deploy 文件。",
+    "zh-TW": "FAIL: 沒有 /etc/sudoers.d/deploy 檔案。",
+    "es": "FAIL: no existe el archivo /etc/sudoers.d/deploy.",
+    "de": "FAIL: Die Datei /etc/sudoers.d/deploy fehlt.",
+    "en": "FAIL: the file /etc/sudoers.d/deploy does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: sudoers 문법 오류입니다 (visudo -cf 실패). 이 상태로 방치하면 sudo 전체가 망가질 수 있습니다.",
+    "ja": "FAIL: sudoers の構文エラーです（visudo -cf が失敗）。このまま放置すると sudo 全体が壊れかねません。",
+    "zh-CN": "FAIL: sudoers 语法错误（visudo -cf 失败）。放着不管可能导致整个 sudo 不可用。",
+    "zh-TW": "FAIL: sudoers 語法錯誤（visudo -cf 失敗）。放著不管可能導致整個 sudo 不可用。",
+    "es": "FAIL: error de sintaxis en sudoers (visudo -cf ha fallado). Si lo dejas así, sudo puede quedar inutilizable.",
+    "de": "FAIL: Syntaxfehler in sudoers (visudo -cf schlägt fehl). Bleibt das so, kann sudo insgesamt unbrauchbar werden.",
+    "en": "FAIL: sudoers syntax error (visudo -cf failed). Left as is, this can break sudo entirely."
+  },
+  "step3m3": {
+    "ko": "FAIL: deploy에게 systemctl status 권한이 보이지 않습니다 (sudo -l -U deploy).",
+    "ja": "FAIL: deploy に systemctl status の権限が見えません（sudo -l -U deploy）。",
+    "zh-CN": "FAIL: 看不到 deploy 拥有 systemctl status 权限（sudo -l -U deploy）。",
+    "zh-TW": "FAIL: 看不到 deploy 擁有 systemctl status 權限（sudo -l -U deploy）。",
+    "es": "FAIL: deploy no aparece con permiso para systemctl status (sudo -l -U deploy).",
+    "de": "FAIL: Für deploy ist keine Berechtigung für systemctl status sichtbar (sudo -l -U deploy).",
+    "en": "FAIL: deploy does not appear to have permission for systemctl status (sudo -l -U deploy)."
+  },
+  "step3m4": {
+    "ko": "FAIL: deploy에게 전체 권한(ALL)이 열려 있습니다. systemctl status 만 허용해야 합니다.",
+    "ja": "FAIL: deploy に全権限（ALL）が与えられています。systemctl status だけを許可してください。",
+    "zh-CN": "FAIL: 给 deploy 开放了全部权限（ALL）。应只允许 systemctl status。",
+    "zh-TW": "FAIL: 給 deploy 開放了全部權限（ALL）。應只允許 systemctl status。",
+    "es": "FAIL: deploy tiene todos los privilegios (ALL). Solo debe permitirse systemctl status.",
+    "de": "FAIL: deploy hat alle Rechte (ALL). Erlaubt sein darf nur systemctl status.",
+    "en": "FAIL: deploy has full privileges (ALL). Only systemctl status should be allowed."
+  },
+  "step3m5": {
+    "ko": "PASS: deploy에게 systemctl status 만 허용하는 최소권한 sudoers가 적용되었습니다.",
+    "ja": "PASS: deploy に systemctl status のみを許可する最小権限の sudoers が適用されました。",
+    "zh-CN": "PASS: 已为 deploy 应用只允许 systemctl status 的最小权限 sudoers。",
+    "zh-TW": "PASS: 已為 deploy 套用只允許 systemctl status 的最小權限 sudoers。",
+    "es": "PASS: se ha aplicado un sudoers de mínimo privilegio que solo permite systemctl status a deploy.",
+    "de": "PASS: Für deploy gilt eine sudoers-Regel mit minimalen Rechten, die nur systemctl status erlaubt.",
+    "en": "PASS: a least-privilege sudoers entry allowing only systemctl status is in place for deploy."
+  },
+  "step4m1": {
+    "ko": "FAIL: olduser 계정이 잠기지 않았습니다 (passwd -S 상태: {0}). usermod -L 또는 passwd -l 을 쓰세요.",
+    "ja": "FAIL: olduser アカウントがロックされていません（passwd -S の状態: {0}）。usermod -L または passwd -l を使ってください。",
+    "zh-CN": "FAIL: olduser 账号未被锁定（passwd -S 状态：{0}）。请使用 usermod -L 或 passwd -l。",
+    "zh-TW": "FAIL: olduser 帳號未被鎖定（passwd -S 狀態：{0}）。請使用 usermod -L 或 passwd -l。",
+    "es": "FAIL: la cuenta olduser no está bloqueada (estado de passwd -S: {0}). Usa usermod -L o passwd -l.",
+    "de": "FAIL: Das Konto olduser ist nicht gesperrt (passwd -S: {0}). Nutze usermod -L oder passwd -l.",
+    "en": "FAIL: the olduser account is not locked (passwd -S state: {0}). Use usermod -L or passwd -l."
+  },
+  "step4m2": {
+    "ko": "FAIL: deploy의 비밀번호 최대 사용 기간이 90일이 아닙니다 (현재: {0}).",
+    "ja": "FAIL: deploy のパスワード最大使用期間が 90 日ではありません（現在: {0}）。",
+    "zh-CN": "FAIL: deploy 的密码最长有效期不是 90 天（当前：{0}）。",
+    "zh-TW": "FAIL: deploy 的密碼最長有效期不是 90 天（目前：{0}）。",
+    "es": "FAIL: la caducidad máxima de la contraseña de deploy no es 90 días (actualmente: {0}).",
+    "de": "FAIL: Die maximale Passwortgültigkeit von deploy beträgt nicht 90 Tage (aktuell: {0}).",
+    "en": "FAIL: the maximum password age for deploy is not 90 days (currently: {0})."
+  },
+  "step4m3": {
+    "ko": "PASS: 퇴사자 계정 잠금 + 비밀번호 정책이 적용되었습니다.",
+    "ja": "PASS: 退職者アカウントのロックとパスワードポリシーが適用されました。",
+    "zh-CN": "PASS: 已锁定离职账号并应用密码策略。",
+    "zh-TW": "PASS: 已鎖定離職帳號並套用密碼原則。",
+    "es": "PASS: cuenta de la persona saliente bloqueada y política de contraseñas aplicada.",
+    "de": "PASS: Konto der ausgeschiedenen Person gesperrt und Passwortrichtlinie gesetzt.",
+    "en": "PASS: the departing user account is locked and the password policy is applied."
+  }
+}

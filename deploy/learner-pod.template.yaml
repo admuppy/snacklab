@@ -1,0 +1,57 @@
+# 리눅스 랩 학습자 환경 — systemd가 PID 1로 도는 privileged pod
+# server.js pod 드라이버가 __NAME__/__KIND__ 치환 후 apply.
+#   __KIND__ = warm-pod(웜풀 대기) | learner-pod(세션 귀속)
+# privileged: systemd 부팅(cgroup/proc 접근)과 mount·strace 등 중급 실습에 필요.
+# 신뢰된 수강생 대상 전제 — 외부 공개 시 전용 노드풀+NetworkPolicy 격리 필요.
+#
+# __EXTRA_MOUNTS__/__EXTRA_VOLUMES__ 는 course.json 의 `hostModules: true` 일 때만 server.js 가
+# 고정 스니펫(호스트 /lib/modules read-only)으로 치환한다 — k8s 코스의 파드 안 k3s 는 kube-router 가
+# iptables(xtables-nft) 를 쓸 때 ip_tables·br_netfilter 를 modprobe 해야 하는데, /lib/modules 가
+# 없으면 modprobe 가 실패해 k3s 가 패닉·재기동 루프에 빠진다. 리눅스 트랙 파드에는 붙지 않는다
+# (호스트 커널 모듈을 임의 적재할 수 있는 범위를 필요한 과목으로만 한정).
+apiVersion: v1
+kind: Pod
+metadata:
+  name: __NAME__
+  namespace: __NS__
+  labels:
+    app: snacklab-linux
+    snacklab/kind: __KIND__
+spec:
+  automountServiceAccountToken: false
+  terminationGracePeriodSeconds: 5
+  hostname: lab
+  containers:
+    - name: lab
+      image: __IMAGE__
+      # Always, so re-pushing the same tag never leaves node caches on a stale version
+      # (with a nearby registry the cost is just a digest check)
+      imagePullPolicy: Always
+      securityContext:
+        privileged: true
+      # __CLUSTER_INIT__ comes from course.json `clusterInit` (server.js whitelist).
+      # lab-init reads it before systemd boots and flips k3s to embedded etcd.
+      env:
+        - { name: K3S_CLUSTER_INIT, value: "__CLUSTER_INIT__" }
+      # ephemeral-storage: 노드 디스크(여유 ~14GiB)를 한 파드가 채워 DiskPressure 로 다른 파드를
+      # 밀어내지 못하게. 실측(CKA 전 문항 완주) 756MiB 이므로 한도 8Gi 는 정상 사용을 건드리지 않는다.
+      resources:
+        requests: { cpu: __CPU_REQ__, memory: __MEM_REQ__, ephemeral-storage: __EPH_REQ__ }
+        limits: { cpu: "__CPU_LIM__", memory: __MEM_LIM__, ephemeral-storage: __EPH_LIM__ }
+      # systemd 기동 완료(degraded 허용 — 컨테이너에선 일부 유닛 실패가 정상)
+      readinessProbe:
+        exec:
+          command: ["/bin/sh", "-c", "systemctl is-system-running 2>/dev/null | grep -qE 'running|degraded'"]
+        initialDelaySeconds: 2
+        periodSeconds: 3
+        failureThreshold: 40
+      volumeMounts:
+        - { name: run, mountPath: /run }
+        - { name: run-lock, mountPath: /run/lock }
+        - { name: tmp, mountPath: /tmp }
+__EXTRA_MOUNTS__
+  volumes:
+    - { name: run, emptyDir: { medium: Memory } }
+    - { name: run-lock, emptyDir: { medium: Memory } }
+    - { name: tmp, emptyDir: {} }
+__EXTRA_VOLUMES__

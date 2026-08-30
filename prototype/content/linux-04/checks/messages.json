@@ -1,0 +1,209 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work/sysinfo.sh 가 없습니다.",
+    "ja": "FAIL: ~/work/sysinfo.sh がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/sysinfo.sh。",
+    "zh-TW": "FAIL: 沒有 ~/work/sysinfo.sh。",
+    "es": "FAIL: no existe ~/work/sysinfo.sh.",
+    "de": "FAIL: ~/work/sysinfo.sh fehlt.",
+    "en": "FAIL: ~/work/sysinfo.sh does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: sysinfo.sh에 실행 권한이 없습니다 (chmod +x).",
+    "ja": "FAIL: sysinfo.sh に実行権限がありません（chmod +x）。",
+    "zh-CN": "FAIL: sysinfo.sh 没有执行权限（chmod +x）。",
+    "zh-TW": "FAIL: sysinfo.sh 沒有執行權限（chmod +x）。",
+    "es": "FAIL: sysinfo.sh no tiene permiso de ejecución (chmod +x).",
+    "de": "FAIL: sysinfo.sh ist nicht ausführbar (chmod +x).",
+    "en": "FAIL: sysinfo.sh is not executable (chmod +x)."
+  },
+  "step1m3": {
+    "ko": "FAIL: 첫 줄이 bash 셔뱅(#!/bin/bash 또는 #!/usr/bin/env bash)이 아닙니다.",
+    "ja": "FAIL: 1 行目が bash のシバン（#!/bin/bash または #!/usr/bin/env bash）ではありません。",
+    "zh-CN": "FAIL: 第一行不是 bash 的 shebang（#!/bin/bash 或 #!/usr/bin/env bash）。",
+    "zh-TW": "FAIL: 第一行不是 bash 的 shebang（#!/bin/bash 或 #!/usr/bin/env bash）。",
+    "es": "FAIL: la primera línea no es un shebang de bash (#!/bin/bash o #!/usr/bin/env bash).",
+    "de": "FAIL: Die erste Zeile ist kein Bash-Shebang (#!/bin/bash oder #!/usr/bin/env bash).",
+    "en": "FAIL: the first line is not a bash shebang (#!/bin/bash or #!/usr/bin/env bash)."
+  },
+  "step1m4": {
+    "ko": "FAIL: set -euo pipefail 이 없습니다.",
+    "ja": "FAIL: set -euo pipefail がありません。",
+    "zh-CN": "FAIL: 缺少 set -euo pipefail。",
+    "zh-TW": "FAIL: 缺少 set -euo pipefail。",
+    "es": "FAIL: falta set -euo pipefail.",
+    "de": "FAIL: set -euo pipefail fehlt.",
+    "en": "FAIL: set -euo pipefail is missing."
+  },
+  "step1m5": {
+    "ko": "FAIL: sysinfo.sh 실행이 실패했습니다.",
+    "ja": "FAIL: sysinfo.sh の実行が失敗しました。",
+    "zh-CN": "FAIL: sysinfo.sh 执行失败。",
+    "zh-TW": "FAIL: sysinfo.sh 執行失敗。",
+    "es": "FAIL: la ejecución de sysinfo.sh ha fallado.",
+    "de": "FAIL: Die Ausführung von sysinfo.sh ist fehlgeschlagen.",
+    "en": "FAIL: running sysinfo.sh failed."
+  },
+  "step1m6": {
+    "ko": "FAIL: 출력에 host= 줄이 없습니다.",
+    "ja": "FAIL: 出力に host= の行がありません。",
+    "zh-CN": "FAIL: 输出中没有 host= 这一行。",
+    "zh-TW": "FAIL: 輸出中沒有 host= 這一行。",
+    "es": "FAIL: la salida no contiene una línea host=.",
+    "de": "FAIL: In der Ausgabe fehlt die Zeile host=.",
+    "en": "FAIL: the output has no host= line."
+  },
+  "step1m7": {
+    "ko": "FAIL: 출력에 uptime= 줄이 없습니다.",
+    "ja": "FAIL: 出力に uptime= の行がありません。",
+    "zh-CN": "FAIL: 输出中没有 uptime= 这一行。",
+    "zh-TW": "FAIL: 輸出中沒有 uptime= 這一行。",
+    "es": "FAIL: la salida no contiene una línea uptime=.",
+    "de": "FAIL: In der Ausgabe fehlt die Zeile uptime=.",
+    "en": "FAIL: the output has no uptime= line."
+  },
+  "step1m8": {
+    "ko": "PASS: 안전 옵션을 갖춘 실행 가능한 스크립트입니다.",
+    "ja": "PASS: 安全オプション付きの実行可能なスクリプトです。",
+    "zh-CN": "PASS: 这是带安全选项的可执行脚本。",
+    "zh-TW": "PASS: 這是帶安全選項的可執行指令碼。",
+    "es": "PASS: es un script ejecutable con las opciones seguras.",
+    "de": "PASS: Ein ausführbares Skript mit den sicheren Optionen.",
+    "en": "PASS: an executable script with the safe options is in place."
+  },
+  "step2m1": {
+    "ko": "FAIL: 실행 가능한 ~/work/logcut.sh 가 없습니다.",
+    "ja": "FAIL: 実行可能な ~/work/logcut.sh がありません。",
+    "zh-CN": "FAIL: 没有可执行的 ~/work/logcut.sh。",
+    "zh-TW": "FAIL: 沒有可執行的 ~/work/logcut.sh。",
+    "es": "FAIL: no existe un ~/work/logcut.sh ejecutable.",
+    "de": "FAIL: Es gibt kein ausführbares ~/work/logcut.sh.",
+    "en": "FAIL: there is no executable ~/work/logcut.sh."
+  },
+  "step2m2": {
+    "ko": "FAIL: logcut.sh /opt/lab/data/app.log 500 결과가 틀립니다 (출력 '{0}' / 기대 {1}).",
+    "ja": "FAIL: logcut.sh /opt/lab/data/app.log 500 の結果が違います（出力 '{0}' / 期待 {1}）。",
+    "zh-CN": "FAIL: logcut.sh /opt/lab/data/app.log 500 的结果不对（输出 '{0}' / 期望 {1}）。",
+    "zh-TW": "FAIL: logcut.sh /opt/lab/data/app.log 500 的結果不對（輸出 '{0}' / 預期 {1}）。",
+    "es": "FAIL: el resultado de logcut.sh /opt/lab/data/app.log 500 no coincide (salida '{0}' / esperado {1}).",
+    "de": "FAIL: Falsches Ergebnis von logcut.sh /opt/lab/data/app.log 500 (Ausgabe '{0}' / erwartet {1}).",
+    "en": "FAIL: logcut.sh /opt/lab/data/app.log 500 returned the wrong result (output '{0}' / expected {1})."
+  },
+  "step2m3": {
+    "ko": "FAIL: 상태 코드 인자가 하드코딩된 것 같습니다 (404 결과 '{0}' / 기대 {1}).",
+    "ja": "FAIL: ステータスコードの引数がハードコードされているようです（404 の結果 '{0}' / 期待 {1}）。",
+    "zh-CN": "FAIL: 状态码参数似乎被写死了（404 结果 '{0}' / 期望 {1}）。",
+    "zh-TW": "FAIL: 狀態碼參數似乎被寫死了（404 結果 '{0}' / 預期 {1}）。",
+    "es": "FAIL: parece que el código de estado está fijo en el código (resultado de 404 '{0}' / esperado {1}).",
+    "de": "FAIL: Der Statuscode scheint fest verdrahtet zu sein (Ergebnis für 404 '{0}' / erwartet {1}).",
+    "en": "FAIL: the status-code argument looks hard-coded (result for 404 '{0}' / expected {1})."
+  },
+  "step2m4": {
+    "ko": "FAIL: 인자 없이 실행하면 0이 아닌 코드로 종료(usage 오류)해야 합니다.",
+    "ja": "FAIL: 引数なしで実行したときは 0 以外の終了コード（usage エラー）で終わる必要があります。",
+    "zh-CN": "FAIL: 不带参数运行时应以非 0 退出码（usage 错误）结束。",
+    "zh-TW": "FAIL: 不帶參數執行時應以非 0 結束碼（usage 錯誤）結束。",
+    "es": "FAIL: sin argumentos debe terminar con un código de salida distinto de 0 (error de uso).",
+    "de": "FAIL: Ohne Argumente muss das Skript mit einem Exit-Code ungleich 0 enden (Usage-Fehler).",
+    "en": "FAIL: running it without arguments must exit with a non-zero code (usage error)."
+  },
+  "step2m5": {
+    "ko": "PASS: 인자 검증과 카운트가 모두 정확합니다.",
+    "ja": "PASS: 引数の検証とカウントがどちらも正確です。",
+    "zh-CN": "PASS: 参数校验与计数都正确。",
+    "zh-TW": "PASS: 參數驗證與計數都正確。",
+    "es": "PASS: la validación de argumentos y el recuento son correctos.",
+    "de": "PASS: Argumentprüfung und Zählung sind korrekt.",
+    "en": "PASS: argument validation and counting are both correct."
+  },
+  "step3m1": {
+    "ko": "FAIL: 실행 가능한 ~/work/withtmp.sh 가 없습니다.",
+    "ja": "FAIL: 実行可能な ~/work/withtmp.sh がありません。",
+    "zh-CN": "FAIL: 没有可执行的 ~/work/withtmp.sh。",
+    "zh-TW": "FAIL: 沒有可執行的 ~/work/withtmp.sh。",
+    "es": "FAIL: no existe un ~/work/withtmp.sh ejecutable.",
+    "de": "FAIL: Es gibt kein ausführbares ~/work/withtmp.sh.",
+    "en": "FAIL: there is no executable ~/work/withtmp.sh."
+  },
+  "step3m2": {
+    "ko": "FAIL: 스크립트에 trap이 없습니다. EXIT에서 임시 디렉터리를 지워야 합니다.",
+    "ja": "FAIL: スクリプトに trap がありません。EXIT で一時ディレクトリを削除してください。",
+    "zh-CN": "FAIL: 脚本中没有 trap。应在 EXIT 时删除临时目录。",
+    "zh-TW": "FAIL: 指令碼中沒有 trap。應在 EXIT 時刪除暫存目錄。",
+    "es": "FAIL: el script no tiene trap. Debe borrar el directorio temporal al salir (EXIT).",
+    "de": "FAIL: Im Skript fehlt trap. Das temporäre Verzeichnis muss bei EXIT gelöscht werden.",
+    "en": "FAIL: the script has no trap. It must remove the temporary directory on EXIT."
+  },
+  "step3m3": {
+    "ko": "FAIL: 마지막 출력 줄이 임시 디렉터리 경로(/tmp/…)가 아닙니다: '{0}'",
+    "ja": "FAIL: 最後の出力行が一時ディレクトリのパス（/tmp/…）ではありません: '{0}'",
+    "zh-CN": "FAIL: 最后一行输出不是临时目录路径（/tmp/…）：'{0}'",
+    "zh-TW": "FAIL: 最後一行輸出不是暫存目錄路徑（/tmp/…）：'{0}'",
+    "es": "FAIL: la última línea de salida no es la ruta del directorio temporal (/tmp/…): '{0}'",
+    "de": "FAIL: Die letzte Ausgabezeile ist kein Pfad zum temporären Verzeichnis (/tmp/…): '{0}'",
+    "en": "FAIL: the last output line is not a temporary directory path (/tmp/…): '{0}'"
+  },
+  "step3m4": {
+    "ko": "FAIL: 종료 후에도 임시 디렉터리({0})가 남아 있습니다. trap이 동작하지 않습니다.",
+    "ja": "FAIL: 終了後も一時ディレクトリ（{0}）が残っています。trap が効いていません。",
+    "zh-CN": "FAIL: 退出后临时目录（{0}）仍然残留。trap 没有生效。",
+    "zh-TW": "FAIL: 結束後暫存目錄（{0}）仍然殘留。trap 沒有生效。",
+    "es": "FAIL: el directorio temporal ({0}) sigue existiendo tras la salida. El trap no funciona.",
+    "de": "FAIL: Das temporäre Verzeichnis ({0}) existiert nach dem Ende noch. Der trap greift nicht.",
+    "en": "FAIL: the temporary directory ({0}) still exists after exit. The trap is not working."
+  },
+  "step3m5": {
+    "ko": "PASS: 임시 디렉터리가 trap으로 정리되었습니다.",
+    "ja": "PASS: 一時ディレクトリが trap で片付けられました。",
+    "zh-CN": "PASS: 临时目录已由 trap 清理。",
+    "zh-TW": "PASS: 暫存目錄已由 trap 清理。",
+    "es": "PASS: el directorio temporal se ha limpiado con trap.",
+    "de": "PASS: Das temporäre Verzeichnis wurde per trap aufgeräumt.",
+    "en": "PASS: the temporary directory was cleaned up by the trap."
+  },
+  "step4m1": {
+    "ko": "FAIL: 실행 가능한 ~/work/backup-fixed.sh 가 없습니다.",
+    "ja": "FAIL: 実行可能な ~/work/backup-fixed.sh がありません。",
+    "zh-CN": "FAIL: 没有可执行的 ~/work/backup-fixed.sh。",
+    "zh-TW": "FAIL: 沒有可執行的 ~/work/backup-fixed.sh。",
+    "es": "FAIL: no existe un ~/work/backup-fixed.sh ejecutable.",
+    "de": "FAIL: Es gibt kein ausführbares ~/work/backup-fixed.sh.",
+    "en": "FAIL: there is no executable ~/work/backup-fixed.sh."
+  },
+  "step4m2": {
+    "ko": "FAIL: 공백이 든 경로에서 실행이 실패했습니다(rc={0}). 변수 인용(quoting)을 확인하세요.",
+    "ja": "FAIL: 空白を含むパスで実行が失敗しました（rc={0}）。変数のクォートを確認してください。",
+    "zh-CN": "FAIL: 在含空格的路径下执行失败（rc={0}）。请检查变量引号。",
+    "zh-TW": "FAIL: 在含空格的路徑下執行失敗（rc={0}）。請檢查變數引號。",
+    "es": "FAIL: la ejecución falla con rutas que contienen espacios (rc={0}). Revisa el entrecomillado de las variables.",
+    "de": "FAIL: Die Ausführung mit Pfaden mit Leerzeichen ist fehlgeschlagen (rc={0}). Prüfe das Quoting der Variablen.",
+    "en": "FAIL: it failed on a path containing spaces (rc={0}). Check your variable quoting."
+  },
+  "step4m3": {
+    "ko": "FAIL: 완료 메시지(complete)가 출력되지 않았습니다.",
+    "ja": "FAIL: 完了メッセージ（complete）が出力されていません。",
+    "zh-CN": "FAIL: 没有输出完成消息（complete）。",
+    "zh-TW": "FAIL: 沒有輸出完成訊息（complete）。",
+    "es": "FAIL: no se ha mostrado el mensaje de finalización (complete).",
+    "de": "FAIL: Die Abschlussmeldung (complete) fehlt in der Ausgabe.",
+    "en": "FAIL: the completion message (complete) was not printed."
+  },
+  "step4m4": {
+    "ko": "FAIL: 백업 대상 파일이 목적지에 복사되지 않았습니다.",
+    "ja": "FAIL: バックアップ対象のファイルが宛先にコピーされていません。",
+    "zh-CN": "FAIL: 备份目标文件没有被复制到目的地。",
+    "zh-TW": "FAIL: 備份目標檔案沒有被複製到目的地。",
+    "es": "FAIL: el archivo de origen no se ha copiado al destino.",
+    "de": "FAIL: Die zu sichernde Datei wurde nicht ins Ziel kopiert.",
+    "en": "FAIL: the source file was not copied to the destination."
+  },
+  "step4m5": {
+    "ko": "PASS: 공백 경로에서도 동작하는 안전한 백업 스크립트입니다.",
+    "ja": "PASS: 空白を含むパスでも動く安全なバックアップスクリプトです。",
+    "zh-CN": "PASS: 这是在含空格路径下也能正常工作的安全备份脚本。",
+    "zh-TW": "PASS: 這是在含空格路徑下也能正常運作的安全備份指令碼。",
+    "es": "PASS: es un script de copia de seguridad seguro que también funciona con rutas con espacios.",
+    "de": "PASS: Ein robustes Backup-Skript, das auch mit Pfaden mit Leerzeichen funktioniert.",
+    "en": "PASS: a robust backup script that also works with paths containing spaces."
+  }
+}

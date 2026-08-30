@@ -1,0 +1,128 @@
+{
+  "step1m1": {
+    "ko": "FAIL: Service 'web' 가 없습니다.",
+    "ja": "FAIL: Service 'web' がありません。",
+    "zh-CN": "FAIL: 没有 Service 'web'。",
+    "zh-TW": "FAIL: 沒有 Service 'web'。",
+    "es": "FAIL: no existe el Service 'web'.",
+    "de": "FAIL: Der Service 'web' fehlt.",
+    "en": "FAIL: the Service 'web' does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: web 의 type 이 ClusterIP 가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: web の type が ClusterIP ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: web 的 type 不是 ClusterIP（当前 {0}）。",
+    "zh-TW": "FAIL: web 的 type 不是 ClusterIP（目前 {0}）。",
+    "es": "FAIL: el type de web no es ClusterIP (actualmente {0}).",
+    "de": "FAIL: Der type von web ist nicht ClusterIP (aktuell {0}).",
+    "en": "FAIL: the type of web is not ClusterIP (currently {0})."
+  },
+  "step1m3": {
+    "ko": "FAIL: web 의 selector 가 app=web 이 아닙니다 (현재 app={0}).",
+    "ja": "FAIL: web の selector が app=web ではありません（現在 app={0}）。",
+    "zh-CN": "FAIL: web 的 selector 不是 app=web（当前 app={0}）。",
+    "zh-TW": "FAIL: web 的 selector 不是 app=web（目前 app={0}）。",
+    "es": "FAIL: el selector de web no es app=web (actualmente app={0}).",
+    "de": "FAIL: Der Selector von web ist nicht app=web (aktuell app={0}).",
+    "en": "FAIL: the selector of web is not app=web (currently app={0})."
+  },
+  "step1m4": {
+    "ko": "FAIL: web 의 엔드포인트가 비어 있습니다. 셀렉터가 실제 파드 라벨과 맞는지 확인하세요.",
+    "ja": "FAIL: web のエンドポイントが空です。セレクターが実際の Pod ラベルと一致するか確認してください。",
+    "zh-CN": "FAIL: web 的端点为空。请确认选择器与实际 Pod 标签是否匹配。",
+    "zh-TW": "FAIL: web 的端點為空。請確認選擇器與實際 Pod 標籤是否相符。",
+    "es": "FAIL: los endpoints de web están vacíos. Comprueba que el selector coincide con las etiquetas reales de los Pods.",
+    "de": "FAIL: Die Endpoints von web sind leer. Prüfe, ob der Selector zu den tatsächlichen Pod-Labels passt.",
+    "en": "FAIL: web has no endpoints. Check that the selector matches the actual Pod labels."
+  },
+  "step1m5": {
+    "ko": "PASS: ClusterIP Service web 이 파드로 라우팅됩니다 (endpoints: {0}).",
+    "ja": "PASS: ClusterIP Service web が Pod にルーティングされています（endpoints: {0}）。",
+    "zh-CN": "PASS: ClusterIP Service web 已路由到 Pod（endpoints: {0}）。",
+    "zh-TW": "PASS: ClusterIP Service web 已路由到 Pod（endpoints: {0}）。",
+    "es": "PASS: el Service ClusterIP web enruta a los Pods (endpoints: {0}).",
+    "de": "PASS: Der ClusterIP-Service web leitet an die Pods weiter (Endpoints: {0}).",
+    "en": "PASS: the ClusterIP Service web routes to the Pods (endpoints: {0})."
+  },
+  "step2m1": {
+    "ko": "FAIL: Service 'web-np' 가 없습니다.",
+    "ja": "FAIL: Service 'web-np' がありません。",
+    "zh-CN": "FAIL: 没有 Service 'web-np'。",
+    "zh-TW": "FAIL: 沒有 Service 'web-np'。",
+    "es": "FAIL: no existe el Service 'web-np'.",
+    "de": "FAIL: Der Service 'web-np' fehlt.",
+    "en": "FAIL: the Service 'web-np' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: web-np 의 type 이 NodePort 가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: web-np の type が NodePort ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: web-np 的 type 不是 NodePort（当前 {0}）。",
+    "zh-TW": "FAIL: web-np 的 type 不是 NodePort（目前 {0}）。",
+    "es": "FAIL: el type de web-np no es NodePort (actualmente {0}).",
+    "de": "FAIL: Der type von web-np ist nicht NodePort (aktuell {0}).",
+    "en": "FAIL: the type of web-np is not NodePort (currently {0})."
+  },
+  "step2m3": {
+    "ko": "FAIL: web-np 에 nodePort 가 할당되지 않았습니다.",
+    "ja": "FAIL: web-np に nodePort が割り当てられていません。",
+    "zh-CN": "FAIL: web-np 没有分配到 nodePort。",
+    "zh-TW": "FAIL: web-np 沒有分配到 nodePort。",
+    "es": "FAIL: a web-np no se le ha asignado un nodePort.",
+    "de": "FAIL: web-np hat keinen nodePort zugewiesen bekommen.",
+    "en": "FAIL: no nodePort was assigned to web-np."
+  },
+  "step2m4": {
+    "ko": "FAIL: web-np 의 엔드포인트가 비어 있습니다 (셀렉터 확인).",
+    "ja": "FAIL: web-np のエンドポイントが空です（セレクターを確認）。",
+    "zh-CN": "FAIL: web-np 的端点为空（请检查选择器）。",
+    "zh-TW": "FAIL: web-np 的端點為空（請檢查選擇器）。",
+    "es": "FAIL: los endpoints de web-np están vacíos (revisa el selector).",
+    "de": "FAIL: Die Endpoints von web-np sind leer (Selector prüfen).",
+    "en": "FAIL: web-np has no endpoints (check the selector)."
+  },
+  "step2m5": {
+    "ko": "PASS: NodePort Service web-np 이 노드 포트 {0} 로 노출됩니다.",
+    "ja": "PASS: NodePort Service web-np がノードポート {0} で公開されています。",
+    "zh-CN": "PASS: NodePort Service web-np 已通过节点端口 {0} 暴露。",
+    "zh-TW": "PASS: NodePort Service web-np 已透過節點連接埠 {0} 公開。",
+    "es": "PASS: el Service NodePort web-np está expuesto en el puerto de nodo {0}.",
+    "de": "PASS: Der NodePort-Service web-np ist über Node-Port {0} erreichbar.",
+    "en": "PASS: the NodePort Service web-np is exposed on node port {0}."
+  },
+  "step3m1": {
+    "ko": "FAIL: Service 'web-h' 가 없습니다.",
+    "ja": "FAIL: Service 'web-h' がありません。",
+    "zh-CN": "FAIL: 没有 Service 'web-h'。",
+    "zh-TW": "FAIL: 沒有 Service 'web-h'。",
+    "es": "FAIL: no existe el Service 'web-h'.",
+    "de": "FAIL: Der Service 'web-h' fehlt.",
+    "en": "FAIL: the Service 'web-h' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: web-h 가 headless(clusterIP: None) 가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: web-h が headless（clusterIP: None）ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: web-h 不是 headless（clusterIP: None）（当前 {0}）。",
+    "zh-TW": "FAIL: web-h 不是 headless（clusterIP: None）（目前 {0}）。",
+    "es": "FAIL: web-h no es headless (clusterIP: None) (actualmente {0}).",
+    "de": "FAIL: web-h ist nicht headless (clusterIP: None) (aktuell {0}).",
+    "en": "FAIL: web-h is not headless (clusterIP: None) (currently {0})."
+  },
+  "step3m3": {
+    "ko": "FAIL: web-h 의 엔드포인트가 비어 있습니다 (셀렉터 확인).",
+    "ja": "FAIL: web-h のエンドポイントが空です（セレクターを確認）。",
+    "zh-CN": "FAIL: web-h 的端点为空（请检查选择器）。",
+    "zh-TW": "FAIL: web-h 的端點為空（請檢查選擇器）。",
+    "es": "FAIL: los endpoints de web-h están vacíos (revisa el selector).",
+    "de": "FAIL: Die Endpoints von web-h sind leer (Selector prüfen).",
+    "en": "FAIL: web-h has no endpoints (check the selector)."
+  },
+  "step3m4": {
+    "ko": "PASS: Headless Service web-h 이 파드 IP {0}개를 직접 노출합니다 ({1}). DNS 로 각 파드 A 레코드가 반환됩니다.",
+    "ja": "PASS: Headless Service web-h が {0} 個の Pod IP を直接公開しています（{1}）。DNS では各 Pod の A レコードが返ります。",
+    "zh-CN": "PASS: Headless Service web-h 直接暴露了 {0} 个 Pod IP（{1}）。DNS 会返回每个 Pod 的 A 记录。",
+    "zh-TW": "PASS: Headless Service web-h 直接公開了 {0} 個 Pod IP（{1}）。DNS 會回傳每個 Pod 的 A 紀錄。",
+    "es": "PASS: el Service headless web-h expone directamente {0} IP de Pod ({1}). El DNS devuelve un registro A por Pod.",
+    "de": "PASS: Der Headless-Service web-h veröffentlicht {0} Pod-IPs direkt ({1}). DNS liefert je Pod einen A-Record.",
+    "en": "PASS: the headless Service web-h exposes {0} Pod IPs directly ({1}). DNS returns an A record per Pod."
+  }
+}

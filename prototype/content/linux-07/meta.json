@@ -1,0 +1,64 @@
+{
+  "id": "linux-07",
+  "title": {
+    "ko": "네트워킹 진단",
+    "en": "Network Diagnostics",
+    "ja": "ネットワーク診断",
+    "zh-CN": "网络诊断",
+    "zh-TW": "網路診斷",
+    "es": "Diagnóstico de red",
+    "de": "Netzwerkdiagnose"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "인터페이스와 IP 조사",
+        "en": "Inspecting interfaces and IPs",
+        "ja": "インターフェースと IP の調査",
+        "zh-CN": "查看网卡与 IP",
+        "zh-TW": "查看網卡與 IP",
+        "es": "Inspeccionar interfaces e IP",
+        "de": "Interfaces und IPs untersuchen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "리스닝 소켓 추적",
+        "en": "Tracking listening sockets",
+        "ja": "リッスンソケットの追跡",
+        "zh-CN": "追踪监听套接字",
+        "zh-TW": "追蹤監聽通訊端",
+        "es": "Rastrear sockets en escucha",
+        "de": "Lauschende Sockets aufspüren"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "바인딩 문제 진단과 수리",
+        "en": "Diagnosing and fixing a binding issue",
+        "ja": "バインド問題の診断と修復",
+        "zh-CN": "诊断并修复绑定问题",
+        "zh-TW": "診斷並修復繫結問題",
+        "es": "Diagnosticar y arreglar un problema de binding",
+        "de": "Bind-Problem diagnostizieren und beheben"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "이름 해석 — hosts와 DNS",
+        "en": "Name resolution — hosts and DNS",
+        "ja": "名前解決 — hosts と DNS",
+        "zh-CN": "名称解析 —— hosts 与 DNS",
+        "zh-TW": "名稱解析 —— hosts 與 DNS",
+        "es": "Resolución de nombres: hosts y DNS",
+        "de": "Namensauflösung – hosts und DNS"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

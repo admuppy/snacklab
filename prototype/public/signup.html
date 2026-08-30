@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SnackLab</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  .wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px 0; }
+  .box {
+    width: 340px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .box h1 { margin: 0 0 4px; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .box label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .box input {
+    width: 100%; box-sizing: border-box; padding: 8px 10px; font-size: 14px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink);
+  }
+  .box input:focus { outline: none; border-color: var(--accent); }
+  .err { color: var(--danger); font-size: 12.5px; min-height: 16px; }
+  .notice { font-size: 12.5px; color: var(--warn); }
+  .alt { font-size: 12.5px; text-align: center; }
+  .alt a { color: var(--accent); }
+  .ok { font-size: 13.5px; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><b>SnackLab</b></span>
+  <span class="spacer"></span>
+</div>
+<div class="wrap">
+  <form class="box" id="f">
+    <h1 data-i18n="signupTitle">회원가입</h1>
+    <div>
+      <label for="team" data-i18n="signupTeam">팀</label>
+      <input id="team" name="team" autocomplete="organization" autofocus>
+    </div>
+    <div>
+      <label for="name" data-i18n="signupName">이름</label>
+      <input id="name" name="name" autocomplete="name">
+    </div>
+    <div>
+      <label for="u" data-i18n="signupUser">계정명</label>
+      <input id="u" name="user" autocomplete="username">
+    </div>
+    <div>
+      <label for="p" data-i18n="signupPass">비밀번호</label>
+      <input id="p" name="pass" type="password" autocomplete="new-password">
+    </div>
+    <div>
+      <label for="email" data-i18n="signupEmail">이메일</label>
+      <input id="email" name="email" type="email" autocomplete="email">
+    </div>
+    <div class="err" id="err"></div>
+    <button class="btn primary" type="submit" data-i18n="signupBtn">가입하기</button>
+    <div class="notice" data-i18n="signupNotice">가입 후 관리자의 승인이 필요합니다.</div>
+    <div class="alt"><a href="/auth/login" data-i18n="signupGoLogin">로그인으로 돌아가기</a></div>
+  </form>
+</div>
+<script src="/i18n.js"></script>
+<script>
+document.getElementById('f').onsubmit = async e => {
+  e.preventDefault();
+  const err = document.getElementById('err');
+  err.textContent = '';
+  const res = await fetch('/auth/signup', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      team: document.getElementById('team').value.trim(),
+      name: document.getElementById('name').value.trim(),
+      user: document.getElementById('u').value.trim(),
+      pass: document.getElementById('p').value,
+      email: document.getElementById('email').value.trim(),
+    }),
+  });
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) { err.textContent = j.error || t('signupFailed'); return; }
+  document.getElementById('f').innerHTML =
+    `<h1>${t('signupTitle')}</h1><div class="ok">${t('signupDone')}</div>` +
+    `<a class="btn primary" href="/auth/login">${t('loginBtn')}</a>`;
+};
+</script>
+</body>
+</html>

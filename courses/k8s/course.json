@@ -1,0 +1,45 @@
+{
+  "id": "k8s",
+  "title": {
+    "ko": "쿠버네티스 심화",
+    "en": "Kubernetes Deep Dive",
+    "ja": "Kubernetes 実践",
+    "zh-CN": "Kubernetes 进阶",
+    "zh-TW": "Kubernetes 進階",
+    "es": "Kubernetes en profundidad",
+    "de": "Kubernetes im Detail"
+  },
+  "desc": {
+    "ko": "파드 안 전용 k3s 단일노드 클러스터에서 워크로드·네트워킹·스케줄링·스토리지·RBAC·NetworkPolicy를 손으로 익히는 10개 심화 랩. 매 랩 k8s.io 공식 문서 링크 포함.",
+    "en": "Ten hands-on deep-dive labs on a private in-pod single-node k3s cluster — workloads, networking, scheduling, storage, RBAC, and NetworkPolicy. Each lab links the official k8s.io docs.",
+    "ja": "Pod 内の専用 k3s シングルノードクラスターで、ワークロード・ネットワーク・スケジューリング・ストレージ・RBAC・NetworkPolicy を手を動かして学ぶ 10 本の実践ラボ。各ラボに k8s.io 公式ドキュメントへのリンク付き。",
+    "zh-CN": "在 Pod 内的专属 k3s 单节点集群上，动手掌握工作负载、网络、调度、存储、RBAC 与 NetworkPolicy 的 10 个进阶实验。每个实验都附带 k8s.io 官方文档链接。",
+    "zh-TW": "在 Pod 內的專屬 k3s 單節點叢集上，動手掌握工作負載、網路、排程、儲存、RBAC 與 NetworkPolicy 的 10 個進階實驗。每個實驗都附上 k8s.io 官方文件連結。",
+    "es": "Diez laboratorios prácticos sobre un clúster k3s de un solo nodo dentro de tu Pod: cargas de trabajo, redes, planificación, almacenamiento, RBAC y NetworkPolicy. Cada laboratorio enlaza la documentación oficial de k8s.io.",
+    "de": "Zehn Praxis-Labs auf einem privaten k3s-Single-Node-Cluster im Pod: Workloads, Netzwerk, Scheduling, Storage, RBAC und NetworkPolicy. Jedes Lab verlinkt die offizielle k8s.io-Dokumentation."
+  },
+  "image": "snacklab-k8s:v5",
+  "hostModules": true,
+  "resources": {
+    "requests": {
+      "cpu": "500m",
+      "memory": "1Gi"
+    },
+    "limits": {
+      "cpu": "2",
+      "memory": "4Gi"
+    }
+  },
+  "modules": [
+    "k8s-01",
+    "k8s-02",
+    "k8s-03",
+    "k8s-04",
+    "k8s-05",
+    "k8s-06",
+    "k8s-07",
+    "k8s-08",
+    "k8s-09",
+    "k8s-10"
+  ]
+}

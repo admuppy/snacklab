@@ -1,0 +1,119 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work/myip.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/myip.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/myip.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/myip.txt。",
+    "es": "FAIL: no existe ~/work/myip.txt.",
+    "de": "FAIL: ~/work/myip.txt fehlt.",
+    "en": "FAIL: ~/work/myip.txt does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: eth0 IPv4가 틀립니다 (제출 {0} / 실제 {1}). CIDR(/24 등) 없이 주소만 저장하세요.",
+    "ja": "FAIL: eth0 の IPv4 が違います（提出 {0} / 実際 {1}）。CIDR（/24 など）を付けずアドレスだけを保存してください。",
+    "zh-CN": "FAIL: eth0 的 IPv4 不对（提交 {0} / 实际 {1}）。请只保存地址，不要带 CIDR（如 /24）。",
+    "zh-TW": "FAIL: eth0 的 IPv4 不對（提交 {0} / 實際 {1}）。請只儲存位址，不要帶 CIDR（如 /24）。",
+    "es": "FAIL: la IPv4 de eth0 no coincide (enviada {0} / real {1}). Guarda solo la dirección, sin el CIDR (/24, etc.).",
+    "de": "FAIL: Die IPv4 von eth0 stimmt nicht (eingereicht {0} / tatsächlich {1}). Speichere nur die Adresse ohne CIDR (z. B. /24).",
+    "en": "FAIL: the eth0 IPv4 address is wrong (submitted {0} / actual {1}). Save only the address, without the CIDR suffix (/24 etc.)."
+  },
+  "step1m3": {
+    "ko": "PASS: 컨테이너의 IP({0})를 정확히 찾았습니다.",
+    "ja": "PASS: コンテナの IP（{0}）を正しく見つけました。",
+    "zh-CN": "PASS: 正确找到了容器的 IP（{0}）。",
+    "zh-TW": "PASS: 正確找到了容器的 IP（{0}）。",
+    "es": "PASS: has encontrado correctamente la IP del contenedor ({0}).",
+    "de": "PASS: Die IP des Containers ({0}) wurde korrekt gefunden.",
+    "en": "PASS: you found the container IP ({0}) correctly."
+  },
+  "step2m1": {
+    "ko": "FAIL: ~/work/api-port.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/api-port.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/api-port.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/api-port.txt。",
+    "es": "FAIL: no existe ~/work/api-port.txt.",
+    "de": "FAIL: ~/work/api-port.txt fehlt.",
+    "en": "FAIL: ~/work/api-port.txt does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: lab-api가 리스닝하는 포트가 아닙니다 (제출: {0}). ss -ltnp 로 python3 프로세스를 찾아보세요.",
+    "ja": "FAIL: lab-api がリッスンしているポートではありません（提出: {0}）。ss -ltnp で python3 のプロセスを探してみてください。",
+    "zh-CN": "FAIL: 不是 lab-api 正在监听的端口（提交：{0}）。请用 ss -ltnp 找到 python3 进程。",
+    "zh-TW": "FAIL: 不是 lab-api 正在監聽的連接埠（提交：{0}）。請用 ss -ltnp 找到 python3 行程。",
+    "es": "FAIL: no es el puerto en el que escucha lab-api (enviado: {0}). Busca el proceso python3 con ss -ltnp.",
+    "de": "FAIL: Das ist nicht der Port, auf dem lab-api lauscht (eingereicht: {0}). Suche den python3-Prozess mit ss -ltnp.",
+    "en": "FAIL: that is not the port lab-api listens on (submitted: {0}). Look for the python3 process with ss -ltnp."
+  },
+  "step2m3": {
+    "ko": "PASS: lab-api의 리스닝 포트(9090)를 추적했습니다.",
+    "ja": "PASS: lab-api のリッスンポート（9090）を突き止めました。",
+    "zh-CN": "PASS: 已追踪到 lab-api 的监听端口（9090）。",
+    "zh-TW": "PASS: 已追蹤到 lab-api 的監聽連接埠（9090）。",
+    "es": "PASS: has localizado el puerto de escucha de lab-api (9090).",
+    "de": "PASS: Der Lausch-Port von lab-api (9090) wurde ermittelt.",
+    "en": "PASS: you tracked down the listening port of lab-api (9090)."
+  },
+  "step3m1": {
+    "ko": "FAIL: lab-api.service가 active가 아닙니다.",
+    "ja": "FAIL: lab-api.service が active ではありません。",
+    "zh-CN": "FAIL: lab-api.service 不是 active 状态。",
+    "zh-TW": "FAIL: lab-api.service 不是 active 狀態。",
+    "es": "FAIL: lab-api.service no está activo.",
+    "de": "FAIL: lab-api.service ist nicht aktiv.",
+    "en": "FAIL: lab-api.service is not active."
+  },
+  "step3m2": {
+    "ko": "FAIL: 9090이 여전히 127.0.0.1에만 바인딩되어 있습니다. 유닛의 --bind 를 고치고 daemon-reload + restart 하세요.",
+    "ja": "FAIL: 9090 がまだ 127.0.0.1 にしかバインドされていません。ユニットの --bind を直して daemon-reload と restart をしてください。",
+    "zh-CN": "FAIL: 9090 仍然只绑定在 127.0.0.1。请修改单元的 --bind，然后 daemon-reload 并 restart。",
+    "zh-TW": "FAIL: 9090 仍然只繫結在 127.0.0.1。請修改單元的 --bind，然後 daemon-reload 並 restart。",
+    "es": "FAIL: el puerto 9090 sigue enlazado solo a 127.0.0.1. Corrige --bind en el unit y haz daemon-reload y restart.",
+    "de": "FAIL: Port 9090 ist weiterhin nur an 127.0.0.1 gebunden. Korrigiere --bind in der Unit und führe daemon-reload und restart aus.",
+    "en": "FAIL: 9090 is still bound to 127.0.0.1 only. Fix --bind in the unit, then daemon-reload and restart."
+  },
+  "step3m3": {
+    "ko": "FAIL: 컨테이너 IP({0})로 접속이 안 됩니다.",
+    "ja": "FAIL: コンテナ IP（{0}）に接続できません。",
+    "zh-CN": "FAIL: 无法通过容器 IP（{0}）访问。",
+    "zh-TW": "FAIL: 無法透過容器 IP（{0}）存取。",
+    "es": "FAIL: no se puede conectar a la IP del contenedor ({0}).",
+    "de": "FAIL: Verbindung zur Container-IP ({0}) nicht möglich.",
+    "en": "FAIL: the container IP ({0}) is not reachable."
+  },
+  "step3m4": {
+    "ko": "PASS: lab-api가 모든 인터페이스(0.0.0.0)에서 서비스 중입니다.",
+    "ja": "PASS: lab-api がすべてのインターフェース（0.0.0.0）でサービスしています。",
+    "zh-CN": "PASS: lab-api 正在所有网卡（0.0.0.0）上提供服务。",
+    "zh-TW": "PASS: lab-api 正在所有網卡（0.0.0.0）上提供服務。",
+    "es": "PASS: lab-api sirve en todas las interfaces (0.0.0.0).",
+    "de": "PASS: lab-api ist auf allen Interfaces (0.0.0.0) erreichbar.",
+    "en": "PASS: lab-api is serving on all interfaces (0.0.0.0)."
+  },
+  "step4m1": {
+    "ko": "FAIL: api.lab.local 이 해석되지 않습니다. /etc/hosts에 등록하세요.",
+    "ja": "FAIL: api.lab.local が解決できません。/etc/hosts に登録してください。",
+    "zh-CN": "FAIL: 无法解析 api.lab.local。请在 /etc/hosts 中登记。",
+    "zh-TW": "FAIL: 無法解析 api.lab.local。請在 /etc/hosts 中登錄。",
+    "es": "FAIL: api.lab.local no se resuelve. Añádelo a /etc/hosts.",
+    "de": "FAIL: api.lab.local lässt sich nicht auflösen. Trage es in /etc/hosts ein.",
+    "en": "FAIL: api.lab.local does not resolve. Add it to /etc/hosts."
+  },
+  "step4m2": {
+    "ko": "FAIL: http://api.lab.local:9090/status.json 응답이 200이 아닙니다 (HTTP {0}).",
+    "ja": "FAIL: http://api.lab.local:9090/status.json の応答が 200 ではありません（HTTP {0}）。",
+    "zh-CN": "FAIL: http://api.lab.local:9090/status.json 的响应不是 200（HTTP {0}）。",
+    "zh-TW": "FAIL: http://api.lab.local:9090/status.json 的回應不是 200（HTTP {0}）。",
+    "es": "FAIL: la respuesta de http://api.lab.local:9090/status.json no es 200 (HTTP {0}).",
+    "de": "FAIL: Die Antwort von http://api.lab.local:9090/status.json ist nicht 200 (HTTP {0}).",
+    "en": "FAIL: http://api.lab.local:9090/status.json did not return 200 (HTTP {0})."
+  },
+  "step4m3": {
+    "ko": "PASS: hosts 기반 이름 해석으로 API에 접근했습니다.",
+    "ja": "PASS: hosts による名前解決で API にアクセスできました。",
+    "zh-CN": "PASS: 通过 hosts 名称解析成功访问了 API。",
+    "zh-TW": "PASS: 透過 hosts 名稱解析成功存取了 API。",
+    "es": "PASS: has accedido a la API mediante la resolución de nombres de hosts.",
+    "de": "PASS: Zugriff auf die API über die Namensauflösung per hosts erfolgreich.",
+    "en": "PASS: you reached the API through hosts-based name resolution."
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "id": "linux-03",
+  "title": {
+    "ko": "텍스트 처리 파이프라인",
+    "en": "Text Processing Pipelines",
+    "ja": "テキスト処理パイプライン",
+    "zh-CN": "文本处理管道",
+    "zh-TW": "文字處理管線",
+    "es": "Cadenas de procesamiento de texto",
+    "de": "Textverarbeitungs-Pipelines"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "grep으로 오류 찾기",
+        "en": "Finding errors with grep",
+        "ja": "grep でエラーを見つける",
+        "zh-CN": "用 grep 查找错误",
+        "zh-TW": "用 grep 尋找錯誤",
+        "es": "Encontrar errores con grep",
+        "de": "Fehler mit grep finden"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "awk로 필드 추출과 집계",
+        "en": "Field extraction and aggregation with awk",
+        "ja": "awk でフィールド抽出と集計",
+        "zh-CN": "用 awk 提取字段并聚合",
+        "zh-TW": "用 awk 擷取欄位並彙總",
+        "es": "Extraer y agregar campos con awk",
+        "de": "Felder extrahieren und aggregieren mit awk"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "sed로 스트림 편집",
+        "en": "Stream editing with sed",
+        "ja": "sed でストリーム編集",
+        "zh-CN": "用 sed 做流式编辑",
+        "zh-TW": "用 sed 做串流編輯",
+        "es": "Edición de flujo con sed",
+        "de": "Stream-Bearbeitung mit sed"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "파이프라인 종합",
+        "en": "Putting the pipeline together",
+        "ja": "パイプラインの総合",
+        "zh-CN": "管道综合运用",
+        "zh-TW": "管線綜合運用",
+        "es": "Integrar toda la cadena",
+        "de": "Die Pipeline zusammensetzen"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

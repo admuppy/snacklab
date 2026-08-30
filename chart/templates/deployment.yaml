@@ -1,0 +1,161 @@
+{{- if and (eq .Values.driver "pod") (not .Values.learner.image) }}
+{{- fail "driver=pod requires learner.image (systemd PID1 learner image)" }}
+{{- end }}
+{{- if not (has .Values.auth.mode (list "auto" "off" "local" "oidc")) }}
+{{- fail "auth.mode must be one of: auto, off, local, oidc" }}
+{{- end }}
+{{- if and (eq .Values.auth.mode "oidc") (not .Values.auth.oidc.issuer) }}
+{{- fail "auth.mode=oidc requires auth.oidc.issuer" }}
+{{- end }}
+{{- if and (eq .Values.auth.mode "local") (not .Values.auth.usersExistingSecret) }}
+{{- fail "auth.mode=local requires auth.usersExistingSecret (users.json made by userctl.js)" }}
+{{- end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "snacklab.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+spec:
+  replicas: 1               # 세션 상태 = 메모리 + 로컬 디스크 — 단일 replica 전제
+  strategy: { type: Recreate }
+  selector:
+    matchLabels:
+      {{- include "snacklab.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "snacklab.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "snacklab.serviceAccountName" . }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.courses }}
+      # 과목 주입: 콘텐츠 이미지가 /dst(공유 볼륨)로 번들을 복사 → CONTENT_DIRS 병합
+      initContainers:
+        {{- range .Values.courses }}
+        - name: course-{{ .name }}
+          image: {{ .image }}
+          args: ["sh", "-c", "mkdir -p /dst/{{ .name }} && cp -r /course/* /dst/{{ .name }}/"]
+          volumeMounts:
+            - { name: courses, mountPath: /dst }
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: portal
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+          env:
+            - { name: DRIVER, value: {{ .Values.driver | quote }} }
+            {{- if .Values.imageRegistry }}
+            - { name: IMAGE_REGISTRY, value: {{ .Values.imageRegistry | quote }} }
+            {{- end }}
+            - { name: LAB_NAMESPACE, value: {{ .Release.Namespace | quote }} }
+            - name: PUBLIC_URL
+              value: {{ .Values.publicUrl | default (printf "http://%s.%s.svc:%d" (include "snacklab.fullname" .) .Release.Namespace (int .Values.service.port)) | quote }}
+            - { name: ADMIN_USERS, value: {{ join "," .Values.adminUsers | quote }} }
+            - { name: DEFAULT_LOCALE, value: {{ .Values.defaultLocale | quote }} }
+            - { name: TTL_MINUTES, value: {{ .Values.session.ttlMinutes | quote }} }
+            - { name: EXTEND_MINUTES, value: {{ .Values.session.extendMinutes | quote }} }
+            - { name: MAX_SESSIONS, value: {{ .Values.session.max | quote }} }
+            - { name: MAX_SESSIONS_PER_USER, value: {{ .Values.session.maxPerUser | quote }} }
+            - { name: IDLE_MINUTES, value: {{ .Values.session.idleMinutes | quote }} }
+            - { name: IDLE_GRACE_MINUTES, value: {{ .Values.session.idleGraceMinutes | quote }} }
+            - { name: WARM_POOL_SIZE, value: {{ .Values.warmPool.size | quote }} }
+            - { name: WARM_POOL_MIN, value: {{ .Values.warmPool.min | quote }} }
+            - { name: WARM_POOL_MAX, value: {{ .Values.warmPool.max | default .Values.warmPool.size | quote }} }
+            {{- if .Values.learner.image }}
+            - { name: LEARNER_IMAGE, value: {{ .Values.learner.image | quote }} }
+            {{- end }}
+            - { name: LEARNER_CPU_REQUEST, value: {{ .Values.learner.resources.requests.cpu | quote }} }
+            - { name: LEARNER_MEM_REQUEST, value: {{ .Values.learner.resources.requests.memory | quote }} }
+            - { name: LEARNER_CPU_LIMIT, value: {{ .Values.learner.resources.limits.cpu | quote }} }
+            - { name: LEARNER_MEM_LIMIT, value: {{ .Values.learner.resources.limits.memory | quote }} }
+            - { name: LEARNER_EPH_REQUEST, value: {{ index .Values.learner.resources.requests "ephemeral-storage" | quote }} }
+            - { name: LEARNER_EPH_LIMIT, value: {{ index .Values.learner.resources.limits "ephemeral-storage" | quote }} }
+            {{- if .Values.courses }}
+            - { name: CONTENT_DIRS, value: "/app/prototype/content:/courses" }
+            {{- end }}
+            {{- if .Values.persistence.enabled }}
+            - { name: PROGRESS_FILE, value: "/app/prototype/sessions/progress.json" }
+            {{- end }}
+            {{- if ne .Values.auth.mode "auto" }}
+            - { name: AUTH_MODE, value: {{ .Values.auth.mode | quote }} }
+            {{- end }}
+            {{- if and .Values.auth.oidc.issuer (not (has .Values.auth.mode (list "off" "local"))) }}
+            - { name: OIDC_ISSUER, value: {{ .Values.auth.oidc.issuer | quote }} }
+            - { name: OIDC_CLIENT_ID, value: {{ .Values.auth.oidc.clientId | quote }} }
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "auth.oidc.existingSecret is required when oidc.issuer is set" .Values.auth.oidc.existingSecret }}
+                  key: clientSecret
+            {{- end }}
+            {{- if .Values.auth.cookieSecretExistingSecret }}
+            - name: COOKIE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.auth.cookieSecretExistingSecret }}
+                  key: cookieSecret
+            {{- end }}
+            {{- if .Values.auth.usersExistingSecret }}
+            # Secret은 최초 시드만 — 가입/승인이 파일을 수정하므로 원본은 sessions 볼륨(쓰기 가능)
+            - { name: USERS_SEED_FILE, value: "/auth/users.json" }
+            - { name: USERS_FILE, value: "/app/prototype/sessions/users.json" }
+            {{- end }}
+            {{- if not .Values.auth.signup }}
+            - { name: SIGNUP_ENABLED, value: "0" }
+            {{- end }}
+            {{- with .Values.extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          volumeMounts:
+            - { name: state, mountPath: /app/prototype/sessions }
+            {{- if .Values.courses }}
+            - { name: courses, mountPath: /courses, readOnly: true }
+            {{- end }}
+            {{- if .Values.auth.usersExistingSecret }}
+            - { name: users, mountPath: /auth, readOnly: true }
+            {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          readinessProbe:
+            httpGet: { path: /, port: 3000 }
+            initialDelaySeconds: 3
+            periodSeconds: 5
+      volumes:
+        - name: state
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "snacklab.fullname" .) }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        {{- if .Values.courses }}
+        - name: courses
+          emptyDir: {}
+        {{- end }}
+        {{- if .Values.auth.usersExistingSecret }}
+        - name: users
+          secret:
+            secretName: {{ .Values.auth.usersExistingSecret }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

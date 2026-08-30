@@ -1,0 +1,113 @@
+adminUsers:
+- admin
+affinity: {}
+auth:
+  cookieSecretExistingSecret: ''
+  mode: auto
+  oidc:
+    clientId: snacklab
+    existingSecret: ''
+    issuer: ''
+  signup: true
+  usersExistingSecret: ''
+courses: []
+defaultLocale: ko
+driver: pod
+extraEnv: []
+image:
+  pullPolicy: IfNotPresent
+  repository: ghcr.io/admuppy/snacklab-portal
+  tag: ''
+# Registry prefix for image refs without a registry of their own (course.json images,
+# short learner.image refs). Point this at your own registry for air-gapped installs.
+imageRegistry: ghcr.io/admuppy
+imagePullSecrets: []
+ingress:
+  annotations: {}
+  className: ''
+  enabled: false
+  host: lab.example.com
+  tls: []
+learner:
+  # systemd PID1 learner image for the Linux track; refs without "/" get imageRegistry prepended
+  image: snacklab-linux:v2
+  # 학습자 파드는 privileged 라 노드 자격증명 탈취가 원리적으로 가능하다. 그 자격증명을 쓸 네트워크
+  # 경로를 끊는 격리 정책 — 상세는 templates/networkpolicy-learner.yaml 주석 참고.
+  # NetworkPolicy 를 강제하지 않는 CNI(flannel 등)에서는 아무 효과가 없으니 enabled 여부와 무관하게
+  # 그런 클러스터에 배포할 땐 전용 노드풀 격리를 따로 검토할 것.
+  networkPolicy:
+    enabled: true
+    dnsNamespace: kube-system
+    dnsSelector:
+      k8s-app: kube-dns
+    # 학습자 파드에서 나가지 못하게 막을 대역 (기본 RFC1918 전체 + 링크로컬/메타데이터).
+    # 클러스터의 노드·파드·서비스 CIDR 이 이 안에 들어오는지 반드시 확인하고 배포할 것.
+    blockedCidrs:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 169.254.0.0/16
+    # 인터넷으로 허용할 포트 — 컨테이너 이미지 pull(HTTPS) 용. 넓힐 이유가 없다.
+    egressPorts: [443, 80]
+  resources:
+    limits:
+      cpu: '2'
+      memory: 4Gi
+      # 노드 디스크 고갈 방지 상한. 실측: CKA 전 문항 완주 시 756MiB.
+      ephemeral-storage: 8Gi
+    requests:
+      cpu: 250m
+      memory: 1Gi
+      # 스케줄러가 랩 파드를 한 노드에 몰아넣지 않도록 하는 몫(노드 여유가 작을수록 중요)
+      ephemeral-storage: 2Gi
+limitRange:
+  default:
+    cpu: '2'
+    memory: 4Gi
+  defaultRequest:
+    cpu: 250m
+    memory: 1Gi
+  enabled: true
+nodeSelector: {}
+# Progress/badge persistence. Compatible with any StorageClass (local-path, longhorn,
+# rook-ceph, nfs-client, ...). '' storageClass = cluster default. The portal runs a
+# single replica, so ReadWriteOnce suffices; override accessModes (e.g. [ReadWriteMany])
+# for NFS-style provisioners that only offer RWX.
+persistence:
+  accessModes: [ReadWriteOnce]
+  enabled: false
+  existingClaim: ''
+  size: 1Gi
+  storageClass: ''
+publicUrl: ''
+quota:
+  enabled: true
+  pods: 24
+  requestsCpu: '6'
+  requestsMemory: 24Gi
+rbac:
+  create: true
+resources:
+  limits:
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+service:
+  port: 3000
+  type: ClusterIP
+serviceAccount:
+  create: true
+  name: ''
+session:
+  extendMinutes: 30
+  idleGraceMinutes: 5
+  idleMinutes: 15
+  max: 16
+  maxPerUser: 1
+  ttlMinutes: 40
+tolerations: []
+warmPool:
+  max: ''
+  min: 1
+  size: 2

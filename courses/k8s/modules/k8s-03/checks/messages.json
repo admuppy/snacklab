@@ -1,0 +1,119 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ConfigMap 'app-config' 가 없습니다.",
+    "ja": "FAIL: ConfigMap 'app-config' がありません。",
+    "zh-CN": "FAIL: 没有 ConfigMap 'app-config'。",
+    "zh-TW": "FAIL: 沒有 ConfigMap 'app-config'。",
+    "es": "FAIL: no existe el ConfigMap 'app-config'.",
+    "de": "FAIL: Das ConfigMap 'app-config' fehlt.",
+    "en": "FAIL: the ConfigMap 'app-config' does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: ConfigMap app-config 에 키 '{0}' 가 없습니다.",
+    "ja": "FAIL: ConfigMap app-config にキー '{0}' がありません。",
+    "zh-CN": "FAIL: ConfigMap app-config 中没有键 '{0}'。",
+    "zh-TW": "FAIL: ConfigMap app-config 中沒有鍵 '{0}'。",
+    "es": "FAIL: el ConfigMap app-config no tiene la clave '{0}'.",
+    "de": "FAIL: Im ConfigMap app-config fehlt der Schlüssel '{0}'.",
+    "en": "FAIL: the ConfigMap app-config has no key '{0}'."
+  },
+  "step1m3": {
+    "ko": "PASS: ConfigMap app-config 에 APP_MODE, APP_GREETING 키가 있습니다.",
+    "ja": "PASS: ConfigMap app-config に APP_MODE と APP_GREETING のキーがあります。",
+    "zh-CN": "PASS: ConfigMap app-config 中包含 APP_MODE、APP_GREETING 键。",
+    "zh-TW": "PASS: ConfigMap app-config 中包含 APP_MODE、APP_GREETING 鍵。",
+    "es": "PASS: el ConfigMap app-config contiene las claves APP_MODE y APP_GREETING.",
+    "de": "PASS: Das ConfigMap app-config enthält die Schlüssel APP_MODE und APP_GREETING.",
+    "en": "PASS: the ConfigMap app-config has the APP_MODE and APP_GREETING keys."
+  },
+  "step2m1": {
+    "ko": "FAIL: Secret 'app-secret' 가 없습니다.",
+    "ja": "FAIL: Secret 'app-secret' がありません。",
+    "zh-CN": "FAIL: 没有 Secret 'app-secret'。",
+    "zh-TW": "FAIL: 沒有 Secret 'app-secret'。",
+    "es": "FAIL: no existe el Secret 'app-secret'.",
+    "de": "FAIL: Das Secret 'app-secret' fehlt.",
+    "en": "FAIL: the Secret 'app-secret' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: app-secret 의 type 이 Opaque 가 아닙니다 (현재 {0}).",
+    "ja": "FAIL: app-secret の type が Opaque ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: app-secret 的 type 不是 Opaque（当前 {0}）。",
+    "zh-TW": "FAIL: app-secret 的 type 不是 Opaque（目前 {0}）。",
+    "es": "FAIL: el type de app-secret no es Opaque (actualmente {0}).",
+    "de": "FAIL: Der type von app-secret ist nicht Opaque (aktuell {0}).",
+    "en": "FAIL: the type of app-secret is not Opaque (currently {0})."
+  },
+  "step2m3": {
+    "ko": "FAIL: app-secret 에 키 'DB_PASSWORD' 가 없습니다.",
+    "ja": "FAIL: app-secret にキー 'DB_PASSWORD' がありません。",
+    "zh-CN": "FAIL: app-secret 中没有键 'DB_PASSWORD'。",
+    "zh-TW": "FAIL: app-secret 中沒有鍵 'DB_PASSWORD'。",
+    "es": "FAIL: app-secret no tiene la clave 'DB_PASSWORD'.",
+    "de": "FAIL: In app-secret fehlt der Schlüssel 'DB_PASSWORD'.",
+    "en": "FAIL: app-secret has no key 'DB_PASSWORD'."
+  },
+  "step2m4": {
+    "ko": "PASS: Secret app-secret(Opaque) 에 DB_PASSWORD 가 있습니다.",
+    "ja": "PASS: Secret app-secret（Opaque）に DB_PASSWORD があります。",
+    "zh-CN": "PASS: Secret app-secret（Opaque）中包含 DB_PASSWORD。",
+    "zh-TW": "PASS: Secret app-secret（Opaque）中包含 DB_PASSWORD。",
+    "es": "PASS: el Secret app-secret (Opaque) contiene DB_PASSWORD.",
+    "de": "PASS: Das Secret app-secret (Opaque) enthält DB_PASSWORD.",
+    "en": "PASS: the Secret app-secret (Opaque) contains DB_PASSWORD."
+  },
+  "step3m1": {
+    "ko": "FAIL: 파드 'app' 이 없습니다.",
+    "ja": "FAIL: Pod 'app' がありません。",
+    "zh-CN": "FAIL: 没有 Pod 'app'。",
+    "zh-TW": "FAIL: 沒有 Pod 'app'。",
+    "es": "FAIL: no existe el Pod 'app'.",
+    "de": "FAIL: Der Pod 'app' fehlt.",
+    "en": "FAIL: the Pod 'app' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: 파드 app 이 Running 이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: Pod app が Running ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: Pod app 不是 Running（当前 {0}）。",
+    "zh-TW": "FAIL: Pod app 不是 Running（目前 {0}）。",
+    "es": "FAIL: el Pod app no está en Running (actualmente {0}).",
+    "de": "FAIL: Der Pod app ist nicht Running (aktuell {0}).",
+    "en": "FAIL: the Pod app is not Running (currently {0})."
+  },
+  "step3m3": {
+    "ko": "FAIL: 컨테이너가 ConfigMap app-config 를 환경변수로 주입받지 않습니다 (envFrom/configMapKeyRef).",
+    "ja": "FAIL: コンテナが ConfigMap app-config を環境変数として取り込んでいません（envFrom / configMapKeyRef）。",
+    "zh-CN": "FAIL: 容器没有把 ConfigMap app-config 注入为环境变量（envFrom / configMapKeyRef）。",
+    "zh-TW": "FAIL: 容器沒有把 ConfigMap app-config 注入為環境變數（envFrom / configMapKeyRef）。",
+    "es": "FAIL: el contenedor no consume el ConfigMap app-config como variables de entorno (envFrom / configMapKeyRef).",
+    "de": "FAIL: Der Container übernimmt das ConfigMap app-config nicht als Umgebungsvariablen (envFrom / configMapKeyRef).",
+    "en": "FAIL: the container does not consume the ConfigMap app-config as environment variables (envFrom / configMapKeyRef)."
+  },
+  "step3m4": {
+    "ko": "FAIL: 파드에 Secret app-secret 볼륨이 없습니다.",
+    "ja": "FAIL: Pod に Secret app-secret のボリュームがありません。",
+    "zh-CN": "FAIL: Pod 中没有 Secret app-secret 卷。",
+    "zh-TW": "FAIL: Pod 中沒有 Secret app-secret 卷。",
+    "es": "FAIL: el Pod no tiene un volumen con el Secret app-secret.",
+    "de": "FAIL: Der Pod hat kein Volume mit dem Secret app-secret.",
+    "en": "FAIL: the Pod has no volume for the Secret app-secret."
+  },
+  "step3m5": {
+    "ko": "FAIL: 컨테이너에 volumeMount 가 없습니다. Secret 볼륨을 마운트했나요?",
+    "ja": "FAIL: コンテナに volumeMount がありません。Secret のボリュームをマウントしましたか？",
+    "zh-CN": "FAIL: 容器没有 volumeMount。是否挂载了 Secret 卷？",
+    "zh-TW": "FAIL: 容器沒有 volumeMount。是否掛載了 Secret 卷？",
+    "es": "FAIL: el contenedor no tiene volumeMount. ¿Montaste el volumen del Secret?",
+    "de": "FAIL: Dem Container fehlt ein volumeMount. Hast du das Secret-Volume eingehängt?",
+    "en": "FAIL: the container has no volumeMount. Did you mount the Secret volume?"
+  },
+  "step3m6": {
+    "ko": "PASS: 파드 app 이 ConfigMap 을 env 로, Secret 을 볼륨으로 소비하며 Running 입니다.",
+    "ja": "PASS: Pod app が ConfigMap を env として、Secret をボリュームとして使い Running です。",
+    "zh-CN": "PASS: Pod app 以 env 使用 ConfigMap、以卷使用 Secret，并处于 Running。",
+    "zh-TW": "PASS: Pod app 以 env 使用 ConfigMap、以卷使用 Secret，並處於 Running。",
+    "es": "PASS: el Pod app consume el ConfigMap como env y el Secret como volumen, y está en Running.",
+    "de": "PASS: Der Pod app nutzt das ConfigMap als env und das Secret als Volume und ist Running.",
+    "en": "PASS: the Pod app consumes the ConfigMap as env and the Secret as a volume, and is Running."
+  }
+}

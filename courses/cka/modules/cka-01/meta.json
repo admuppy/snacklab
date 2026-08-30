@@ -1,0 +1,199 @@
+{
+  "id": "cka-01",
+  "title": {
+    "ko": "CKA 모의고사 1회 (120분 · 17문항)",
+    "en": "CKA Practice Exam #1 (120 min · 17 tasks)",
+    "ja": "CKA 模擬試験 1回目 (120分 · 17問)",
+    "zh-CN": "CKA 模拟考试 第 1 套（120 分钟 · 17 题）"
+  },
+  "desc": {
+    "ko": "실제 CKA와 같은 도메인 배점의 17문항(etcd 백업/복구·노드 drain 포함)을 120분 안에. 다 푼 뒤 [제출]하면 전 문항이 부분 점수로 한꺼번에 채점되고, 66점을 넘기면 이수 뱃지를 받는다. 틀린 문항은 해설이 붙는다.",
+    "en": "Seventeen tasks weighted like the real CKA — including etcd backup/restore and node drain — in 120 minutes. Submit once when you are done: every task is graded with partial credit, 66 points earns the badge, and missed tasks come with explanations.",
+    "ja": "本番の CKA と同じドメイン配点の 17 問(etcd バックアップ/リストア・ノード drain を含む)を 120 分で。解き終えたら [提出] を押すと全問が部分点付きで一括採点され、66 点を超えれば修了バッジがもらえます。間違えた問題には解説が付きます。",
+    "zh-CN": "在 120 分钟内完成 17 道题（含 etcd 备份/恢复与节点 drain），权重与真实 CKA 各领域一致。答完后点击 [提交]，全部题目按部分给分一次性评分；超过 66 分即可获得结业徽章，答错的题目会附上解析。"
+  },
+  "duration": 120,
+  "available": true,
+  "exam": {
+    "name": "CKA",
+    "passPercent": 66,
+    "languages": [
+      "en",
+      "ja",
+      "zh-CN"
+    ]
+  },
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "Q1 (5점) RBAC — ServiceAccount·Role·RoleBinding",
+        "en": "Q1 (5 pts) RBAC — ServiceAccount, Role, RoleBinding",
+        "ja": "Q1 (5点) RBAC — ServiceAccount・Role・RoleBinding",
+        "zh-CN": "Q1（5 分）RBAC —— ServiceAccount、Role、RoleBinding"
+      },
+      "points": 5,
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "Q2 (4점) CSR 승인과 사용자 권한 부여",
+        "en": "Q2 (4 pts) Approve a CSR and grant user access",
+        "ja": "Q2 (4点) CSR の承認とユーザー権限の付与",
+        "zh-CN": "Q2（4 分）批准 CSR 并授予用户权限"
+      },
+      "points": 4,
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "Q3 (4점) 정적 파드(static pod) 생성",
+        "en": "Q3 (4 pts) Create a static pod",
+        "ja": "Q3 (4点) 静的 Pod の作成",
+        "zh-CN": "Q3（4 分）创建静态 Pod"
+      },
+      "points": 4,
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "Q4 (3점) ResourceQuota·LimitRange",
+        "en": "Q4 (3 pts) ResourceQuota and LimitRange",
+        "ja": "Q4 (3点) ResourceQuota・LimitRange",
+        "zh-CN": "Q4（3 分）ResourceQuota 与 LimitRange"
+      },
+      "points": 3,
+      "check": "step4.sh"
+    },
+    {
+      "title": {
+        "ko": "Q5 (6점) Deployment 와 롤아웃 전략",
+        "en": "Q5 (6 pts) Deployment and rollout strategy",
+        "ja": "Q5 (6点) Deployment とロールアウト戦略",
+        "zh-CN": "Q5（6 分）Deployment 与滚动更新策略"
+      },
+      "points": 6,
+      "check": "step5.sh"
+    },
+    {
+      "title": {
+        "ko": "Q6 (4점) DaemonSet 배포",
+        "en": "Q6 (4 pts) Deploy a DaemonSet",
+        "ja": "Q6 (4点) DaemonSet のデプロイ",
+        "zh-CN": "Q6（4 分）部署 DaemonSet"
+      },
+      "points": 4,
+      "check": "step6.sh"
+    },
+    {
+      "title": {
+        "ko": "Q7 (5점) 사이드카 컨테이너와 공유 볼륨",
+        "en": "Q7 (5 pts) Sidecar container with a shared volume",
+        "ja": "Q7 (5点) サイドカーコンテナと共有ボリューム",
+        "zh-CN": "Q7（5 分）Sidecar 容器与共享卷"
+      },
+      "points": 5,
+      "check": "step7.sh"
+    },
+    {
+      "title": {
+        "ko": "Q8 (7점) Service — ClusterIP 와 NodePort",
+        "en": "Q8 (7 pts) Services — ClusterIP and NodePort",
+        "ja": "Q8 (7点) Service — ClusterIP と NodePort",
+        "zh-CN": "Q8（7 分）Service —— ClusterIP 与 NodePort"
+      },
+      "points": 7,
+      "check": "step8.sh"
+    },
+    {
+      "title": {
+        "ko": "Q9 (7점) NetworkPolicy 로 트래픽 차단",
+        "en": "Q9 (7 pts) Restrict traffic with a NetworkPolicy",
+        "ja": "Q9 (7点) NetworkPolicy による通信制限",
+        "zh-CN": "Q9（7 分）用 NetworkPolicy 限制流量"
+      },
+      "points": 7,
+      "check": "step9.sh"
+    },
+    {
+      "title": {
+        "ko": "Q10 (6점) Ingress 리소스 작성",
+        "en": "Q10 (6 pts) Author an Ingress resource",
+        "ja": "Q10 (6点) Ingress リソースの作成",
+        "zh-CN": "Q10（6 分）编写 Ingress 资源"
+      },
+      "points": 6,
+      "check": "step10.sh"
+    },
+    {
+      "title": {
+        "ko": "Q11 (5점) PV·PVC 정적 바인딩",
+        "en": "Q11 (5 pts) Static PV/PVC binding",
+        "ja": "Q11 (5点) PV・PVC の静的バインド",
+        "zh-CN": "Q11（5 分）PV/PVC 静态绑定"
+      },
+      "points": 5,
+      "check": "step11.sh"
+    },
+    {
+      "title": {
+        "ko": "Q12 (5점) 동적 프로비저닝과 데이터 쓰기",
+        "en": "Q12 (5 pts) Dynamic provisioning and writing data",
+        "ja": "Q12 (5点) 動的プロビジョニングとデータ書き込み",
+        "zh-CN": "Q12（5 分）动态制备与写入数据"
+      },
+      "points": 5,
+      "check": "step12.sh"
+    },
+    {
+      "title": {
+        "ko": "Q13 (10점) 장애 조치 — 기동하지 않는 Deployment",
+        "en": "Q13 (10 pts) Troubleshoot — a Deployment that never starts",
+        "ja": "Q13 (10点) 障害対応 — 起動しない Deployment",
+        "zh-CN": "Q13（10 分）故障排查 —— 无法启动的 Deployment"
+      },
+      "points": 10,
+      "check": "step13.sh"
+    },
+    {
+      "title": {
+        "ko": "Q14 (10점) 장애 조치 — 엔드포인트가 비어 있는 Service",
+        "en": "Q14 (10 pts) Troubleshoot — a Service with no endpoints",
+        "ja": "Q14 (10点) 障害対応 — エンドポイントが空の Service",
+        "zh-CN": "Q14（10 分）故障排查 —— 没有 endpoint 的 Service"
+      },
+      "points": 10,
+      "check": "step14.sh"
+    },
+    {
+      "title": {
+        "ko": "Q15 (10점) 장애 조치 — CrashLoopBackOff 와 원인 보고",
+        "en": "Q15 (10 pts) Troubleshoot — CrashLoopBackOff and report the cause",
+        "ja": "Q15 (10点) 障害対応 — CrashLoopBackOff と原因報告",
+        "zh-CN": "Q15（10 分）故障排查 —— CrashLoopBackOff 与根因报告"
+      },
+      "points": 10,
+      "check": "step15.sh"
+    },
+    {
+      "title": {
+        "ko": "Q16 (6점) etcd 백업과 오프라인 복구",
+        "en": "Q16 (6 pts) etcd backup and offline restore",
+        "ja": "Q16 (6点) etcd のバックアップとオフラインリストア",
+        "zh-CN": "Q16（6 分）etcd 备份与离线恢复"
+      },
+      "points": 6,
+      "check": "step16.sh"
+    },
+    {
+      "title": {
+        "ko": "Q17 (3점) 노드 비우기(drain) — worker-1 유지보수",
+        "en": "Q17 (3 pts) Drain node worker-1 for maintenance",
+        "ja": "Q17 (3点) ノードの drain — worker-1 のメンテナンス",
+        "zh-CN": "Q17（3 分）排空节点 worker-1 以进行维护"
+      },
+      "points": 3,
+      "check": "step17.sh"
+    }
+  ]
+}

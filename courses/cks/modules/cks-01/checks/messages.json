@@ -1,0 +1,675 @@
+{
+  "step1m1": {
+    "ko": "FAIL: NetworkPolicy '{0}' 가 prod 에 없습니다.",
+    "en": "FAIL: NetworkPolicy '{0}' does not exist in prod.",
+    "ja": "FAIL: NetworkPolicy '{0}' が prod にありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 NetworkPolicy '{0}'。"
+  },
+  "step1m2": {
+    "ko": "FAIL: deny-all 의 podSelector 가 비어 있지 않습니다. 모든 파드를 대상으로 해야 합니다(podSelector: {}).",
+    "en": "FAIL: deny-all's podSelector is not empty. It must select every pod (podSelector: {}).",
+    "ja": "FAIL: deny-all の podSelector が空ではありません。すべての Pod を対象にする必要があります(podSelector: {})。",
+    "zh-CN": "FAIL: deny-all 的 podSelector 不为空。它必须选中所有 Pod（podSelector: {}）。"
+  },
+  "step1m3": {
+    "ko": "FAIL: deny-all 의 policyTypes 에 Ingress 가 없습니다.",
+    "en": "FAIL: deny-all's policyTypes does not include Ingress.",
+    "ja": "FAIL: deny-all の policyTypes に Ingress が含まれていません。",
+    "zh-CN": "FAIL: deny-all 的 policyTypes 未包含 Ingress。"
+  },
+  "step1m4": {
+    "ko": "FAIL: allow-frontend 의 podSelector 가 app=backend 파드를 가리키지 않습니다.",
+    "en": "FAIL: allow-frontend's podSelector does not target app=backend pods.",
+    "ja": "FAIL: allow-frontend の podSelector が app=backend の Pod を対象にしていません。",
+    "zh-CN": "FAIL: allow-frontend 的 podSelector 未指向 app=backend 的 Pod。"
+  },
+  "step1m5": {
+    "ko": "FAIL: allow-frontend 의 from 에 app=frontend podSelector 가 없습니다.",
+    "en": "FAIL: allow-frontend's from clause has no app=frontend podSelector.",
+    "ja": "FAIL: allow-frontend の from に app=frontend の podSelector がありません。",
+    "zh-CN": "FAIL: allow-frontend 的 from 中没有 app=frontend 的 podSelector。"
+  },
+  "step1m6": {
+    "ko": "FAIL: backend 파드가 없거나 IP 를 얻지 못해 통신 채점을 할 수 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: the backend pod is missing or has no IP, so traffic cannot be graded. If you deleted it, restart the lab.",
+    "ja": "FAIL: backend の Pod が存在しないか IP を取得できず、通信を採点できません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: backend 的 Pod 不存在或未获得 IP，无法对通信评分。如果已删除，请重新开始实验。"
+  },
+  "step1m7": {
+    "ko": "FAIL: 발신 파드 '{0}' 가 없어 통신 채점을 할 수 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: client pod '{0}' is missing, so traffic cannot be graded. If you deleted it, restart the lab.",
+    "ja": "FAIL: 送信元 Pod '{0}' が存在しないため、通信を採点できません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 发起端 Pod '{0}' 不存在，无法对通信评分。如果已删除，请重新开始实验。"
+  },
+  "step1m8": {
+    "ko": "FAIL: frontend → backend 통신이 막혀 있습니다. allow-frontend 가 TCP 80 을 허용하는지 확인하세요.",
+    "en": "FAIL: frontend → backend traffic is blocked. Check that allow-frontend permits TCP 80.",
+    "ja": "FAIL: frontend → backend の通信がブロックされています。allow-frontend が TCP 80 を許可しているか確認してください。",
+    "zh-CN": "FAIL: frontend → backend 的通信被阻断。请确认 allow-frontend 允许 TCP 80。"
+  },
+  "step1m9": {
+    "ko": "FAIL: other → backend 통신이 여전히 됩니다. 기본 차단이 동작하지 않습니다.",
+    "en": "FAIL: other → backend traffic still succeeds. The default deny is not effective.",
+    "ja": "FAIL: other → backend の通信がまだ成功します。デフォルト拒否が効いていません。",
+    "zh-CN": "FAIL: other → backend 的通信仍然成功。默认拒绝未生效。"
+  },
+  "q1c1": { "ko": "NetworkPolicy deny-all 존재", "en": "NetworkPolicy deny-all exists", "ja": "NetworkPolicy deny-all が存在", "zh-CN": "NetworkPolicy deny-all 存在" },
+  "q1c2": { "ko": "NetworkPolicy allow-frontend 존재", "en": "NetworkPolicy allow-frontend exists", "ja": "NetworkPolicy allow-frontend が存在", "zh-CN": "NetworkPolicy allow-frontend 存在" },
+  "q1c3": { "ko": "deny-all — 모든 파드 Ingress 차단 규격", "en": "deny-all — blocks Ingress for every pod", "ja": "deny-all — すべての Pod の Ingress を遮断", "zh-CN": "deny-all —— 阻断所有 Pod 的 Ingress" },
+  "q1c4": { "ko": "allow-frontend — backend 에 frontend 만 허용 규격", "en": "allow-frontend — backend admits frontend only", "ja": "allow-frontend — backend は frontend のみ許可", "zh-CN": "allow-frontend —— backend 仅允许 frontend" },
+  "q1c5": { "ko": "frontend → backend 통신 허용 확인", "en": "frontend → backend traffic allowed", "ja": "frontend → backend の通信を許可", "zh-CN": "frontend → backend 通信被允许" },
+  "q1c6": { "ko": "other → backend 차단 확인", "en": "other → backend traffic blocked", "ja": "other → backend の通信を遮断", "zh-CN": "other → backend 通信被阻断" },
+  "step1ok": {
+    "ko": "PASS: prod 가 기본 차단이고 frontend 만 backend 에 닿습니다. (7점)",
+    "en": "PASS: prod is default-deny and only frontend reaches backend. (7 pts)",
+    "ja": "PASS: prod はデフォルト拒否で、frontend のみが backend に到達します。(7点)",
+    "zh-CN": "PASS: prod 默认拒绝，只有 frontend 能到达 backend。(7 分)"
+  },
+
+  "step2m1": {
+    "ko": "FAIL: Secret 'web-cert' 가 prod 에 없습니다.",
+    "en": "FAIL: Secret 'web-cert' does not exist in prod.",
+    "ja": "FAIL: Secret 'web-cert' が prod にありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Secret 'web-cert'。"
+  },
+  "step2m2": {
+    "ko": "FAIL: web-cert 의 타입이 kubernetes.io/tls 가 아니라 '{0}' 입니다. 'kubectl create secret tls' 를 쓰세요.",
+    "en": "FAIL: web-cert's type is '{0}', not kubernetes.io/tls. Use 'kubectl create secret tls'.",
+    "ja": "FAIL: web-cert のタイプが kubernetes.io/tls ではなく '{0}' です。'kubectl create secret tls' を使ってください。",
+    "zh-CN": "FAIL: web-cert 的类型是 '{0}'，而不是 kubernetes.io/tls。请使用 'kubectl create secret tls'。"
+  },
+  "step2m3": {
+    "ko": "FAIL: 인증서의 CN 이 web.snacklab.local 이 아닙니다.",
+    "en": "FAIL: the certificate's CN is not web.snacklab.local.",
+    "ja": "FAIL: 証明書の CN が web.snacklab.local ではありません。",
+    "zh-CN": "FAIL: 证书的 CN 不是 web.snacklab.local。"
+  },
+  "step2m4": {
+    "ko": "FAIL: Ingress 'web-tls' 가 prod 에 없습니다.",
+    "en": "FAIL: Ingress 'web-tls' does not exist in prod.",
+    "ja": "FAIL: Ingress 'web-tls' が prod にありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Ingress 'web-tls'。"
+  },
+  "step2m5": {
+    "ko": "FAIL: Ingress 의 tls 섹션이 web-cert 를 참조하지 않습니다.",
+    "en": "FAIL: the Ingress tls section does not reference web-cert.",
+    "ja": "FAIL: Ingress の tls セクションが web-cert を参照していません。",
+    "zh-CN": "FAIL: Ingress 的 tls 部分未引用 web-cert。"
+  },
+  "step2m6": {
+    "ko": "FAIL: host web.snacklab.local / path '/' 가 web-svc:80 으로 향하는 규칙이 없습니다.",
+    "en": "FAIL: no rule routes host web.snacklab.local path '/' to web-svc:80.",
+    "ja": "FAIL: host web.snacklab.local / path '/' を web-svc:80 へ向けるルールがありません。",
+    "zh-CN": "FAIL: 没有将 host web.snacklab.local 的 path '/' 路由到 web-svc:80 的规则。"
+  },
+  "q2c1": { "ko": "TLS 타입 Secret web-cert 생성", "en": "TLS-type Secret web-cert created", "ja": "TLS タイプの Secret web-cert を作成", "zh-CN": "已创建 TLS 类型的 Secret web-cert" },
+  "q2c2": { "ko": "인증서 CN=web.snacklab.local", "en": "Certificate CN=web.snacklab.local", "ja": "証明書 CN=web.snacklab.local", "zh-CN": "证书 CN=web.snacklab.local" },
+  "q2c3": { "ko": "Ingress tls 섹션이 web-cert 참조", "en": "Ingress tls section references web-cert", "ja": "Ingress の tls セクションが web-cert を参照", "zh-CN": "Ingress 的 tls 部分引用 web-cert" },
+  "q2c4": { "ko": "host/path 규칙이 web-svc:80 으로 연결", "en": "host/path rule routes to web-svc:80", "ja": "host/path ルールが web-svc:80 へ接続", "zh-CN": "host/path 规则路由到 web-svc:80" },
+  "step2ok": {
+    "ko": "PASS: 자체 서명 인증서로 TLS Ingress 가 구성됐습니다. (4점)",
+    "en": "PASS: TLS Ingress configured with a self-signed certificate. (4 pts)",
+    "ja": "PASS: 自己署名証明書で TLS Ingress が構成されました。(4点)",
+    "zh-CN": "PASS: 已用自签名证书配置 TLS Ingress。(4 分)"
+  },
+
+  "step3m1": {
+    "ko": "FAIL: 답안 파일 ~/answers/q3.txt 가 없습니다.",
+    "en": "FAIL: answer file ~/answers/q3.txt is missing.",
+    "ja": "FAIL: 答案ファイル ~/answers/q3.txt がありません。",
+    "zh-CN": "FAIL: 答案文件 ~/answers/q3.txt 不存在。"
+  },
+  "step3m2": {
+    "ko": "FAIL: '{0}' 는 변조된 바이너리가 아닙니다. 'sha512sum -c checksums.txt' 로 다시 확인하세요.",
+    "en": "FAIL: '{0}' is not the tampered binary. Re-check with 'sha512sum -c checksums.txt'.",
+    "ja": "FAIL: '{0}' は改ざんされたバイナリではありません。'sha512sum -c checksums.txt' で再確認してください。",
+    "zh-CN": "FAIL: '{0}' 不是被篡改的二进制文件。请用 'sha512sum -c checksums.txt' 重新核对。"
+  },
+  "q3c1": { "ko": "답안 파일 제출", "en": "Answer file present", "ja": "答案ファイルを提出", "zh-CN": "已提交答案文件" },
+  "q3c2": { "ko": "변조 바이너리(kubelet) 식별", "en": "Tampered binary (kubelet) identified", "ja": "改ざんバイナリ(kubelet)を特定", "zh-CN": "已识别被篡改的二进制(kubelet)" },
+  "step3ok": {
+    "ko": "PASS: 체크섬 대조로 변조된 kubelet 을 찾았습니다. (4점)",
+    "en": "PASS: checksum verification found the tampered kubelet. (4 pts)",
+    "ja": "PASS: チェックサム照合で改ざんされた kubelet を発見しました。(4点)",
+    "zh-CN": "PASS: 通过校验和比对找到了被篡改的 kubelet。(4 分)"
+  },
+
+  "step4m1": {
+    "ko": "FAIL: Role 'ci-role' 이 apps 에 없습니다.",
+    "en": "FAIL: Role 'ci-role' does not exist in apps.",
+    "ja": "FAIL: Role 'ci-role' が apps にありません。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 Role 'ci-role'。"
+  },
+  "step4m2": {
+    "ko": "FAIL: RoleBinding 'ci-bot-rb' 가 apps 에 없습니다. 이름은 유지해야 합니다.",
+    "en": "FAIL: RoleBinding 'ci-bot-rb' does not exist in apps. The name must be kept.",
+    "ja": "FAIL: RoleBinding 'ci-bot-rb' が apps にありません。名前は維持する必要があります。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 RoleBinding 'ci-bot-rb'。名称必须保持不变。"
+  },
+  "step4m3": {
+    "ko": "FAIL: ci-bot-rb 가 Role/ci-role 이 아니라 '{0}' 를 참조합니다.",
+    "en": "FAIL: ci-bot-rb references '{0}' instead of Role/ci-role.",
+    "ja": "FAIL: ci-bot-rb が Role/ci-role ではなく '{0}' を参照しています。",
+    "zh-CN": "FAIL: ci-bot-rb 引用的是 '{0}' 而不是 Role/ci-role。"
+  },
+  "step4m4": {
+    "ko": "FAIL: ci-bot 이 apps 에서 '{0}' 를 하지 못합니다. Role 의 verbs/resources 를 확인하세요.",
+    "en": "FAIL: ci-bot cannot '{0}' in apps. Check the verbs/resources in the Role.",
+    "ja": "FAIL: ci-bot が apps で '{0}' を実行できません。Role の verbs/resources を確認してください。",
+    "zh-CN": "FAIL: ci-bot 在 apps 中无法执行 '{0}'。请检查 Role 的 verbs/resources。"
+  },
+  "step4m5": {
+    "ko": "FAIL: 권한이 과합니다 — ci-bot 이 여전히 '{0}' 를 할 수 있습니다.",
+    "en": "FAIL: too permissive — ci-bot can still '{0}'.",
+    "ja": "FAIL: 権限が過剰です — ci-bot がまだ '{0}' を実行できます。",
+    "zh-CN": "FAIL: 权限过大 —— ci-bot 仍能执行 '{0}'。"
+  },
+  "q4c1": { "ko": "Role ci-role 생성", "en": "Role ci-role created", "ja": "Role ci-role を作成", "zh-CN": "已创建 Role ci-role" },
+  "q4c2": { "ko": "ci-bot-rb 가 Role/ci-role 참조", "en": "ci-bot-rb references Role/ci-role", "ja": "ci-bot-rb が Role/ci-role を参照", "zh-CN": "ci-bot-rb 引用 Role/ci-role" },
+  "q4c3": { "ko": "필요 권한(get/list pods, get/list/update deployments) 동작", "en": "Required access (get/list pods, get/list/update deployments) works", "ja": "必要な権限(get/list pods、get/list/update deployments)が動作", "zh-CN": "所需权限(get/list pods、get/list/update deployments)可用" },
+  "q4c4": { "ko": "과잉 권한 제거 — Secret 조회·삭제 불가", "en": "Excess access removed — no secret reads, no deletes", "ja": "過剰な権限を除去 — Secret の参照・削除は不可", "zh-CN": "已移除多余权限 —— 无法读取 Secret、无法删除" },
+  "step4ok": {
+    "ko": "PASS: ci-bot 이 최소 권한만 갖습니다. (6점)",
+    "en": "PASS: ci-bot now has least privilege only. (6 pts)",
+    "ja": "PASS: ci-bot は最小権限のみを持ちます。(6点)",
+    "zh-CN": "PASS: ci-bot 现在仅拥有最小权限。(6 分)"
+  },
+
+  "step5m1": {
+    "ko": "FAIL: ServiceAccount 'web-sa' 가 apps 에 없습니다.",
+    "en": "FAIL: ServiceAccount 'web-sa' does not exist in apps.",
+    "ja": "FAIL: ServiceAccount 'web-sa' が apps にありません。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 ServiceAccount 'web-sa'。"
+  },
+  "step5m2": {
+    "ko": "FAIL: web-sa 의 automountServiceAccountToken 이 false 가 아닙니다.",
+    "en": "FAIL: web-sa's automountServiceAccountToken is not false.",
+    "ja": "FAIL: web-sa の automountServiceAccountToken が false ではありません。",
+    "zh-CN": "FAIL: web-sa 的 automountServiceAccountToken 不是 false。"
+  },
+  "step5m3": {
+    "ko": "FAIL: Deployment 'web' 이 apps 에 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: Deployment 'web' does not exist in apps. If you deleted it, restart the lab.",
+    "ja": "FAIL: Deployment 'web' が apps にありません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 Deployment 'web'。如果已删除，请重新开始实验。"
+  },
+  "step5m4": {
+    "ko": "FAIL: Deployment web 이 web-sa 를 쓰지 않습니다(serviceAccountName 확인).",
+    "en": "FAIL: Deployment web does not use web-sa (check serviceAccountName).",
+    "ja": "FAIL: Deployment web が web-sa を使っていません(serviceAccountName を確認)。",
+    "zh-CN": "FAIL: Deployment web 未使用 web-sa（请检查 serviceAccountName）。"
+  },
+  "step5m5": {
+    "ko": "FAIL: web 의 Running 파드가 없습니다. 롤아웃이 끝났는지 확인하세요.",
+    "en": "FAIL: no Running pod for web. Check that the rollout finished.",
+    "ja": "FAIL: web の Running な Pod がありません。ロールアウトが完了したか確認してください。",
+    "zh-CN": "FAIL: web 没有 Running 的 Pod。请确认滚动更新已完成。"
+  },
+  "step5m6": {
+    "ko": "FAIL: 파드 안에 SA 토큰이 여전히 마운트돼 있습니다(/var/run/secrets/kubernetes.io/serviceaccount).",
+    "en": "FAIL: the SA token is still mounted in the pod (/var/run/secrets/kubernetes.io/serviceaccount).",
+    "ja": "FAIL: Pod 内に SA トークンがまだマウントされています(/var/run/secrets/kubernetes.io/serviceaccount)。",
+    "zh-CN": "FAIL: Pod 内仍挂载着 SA 令牌(/var/run/secrets/kubernetes.io/serviceaccount)。"
+  },
+  "q5c1": { "ko": "ServiceAccount web-sa 생성", "en": "ServiceAccount web-sa created", "ja": "ServiceAccount web-sa を作成", "zh-CN": "已创建 ServiceAccount web-sa" },
+  "q5c2": { "ko": "automountServiceAccountToken: false", "en": "automountServiceAccountToken: false", "ja": "automountServiceAccountToken: false", "zh-CN": "automountServiceAccountToken: false" },
+  "q5c3": { "ko": "Deployment web 이 web-sa 사용", "en": "Deployment web uses web-sa", "ja": "Deployment web が web-sa を使用", "zh-CN": "Deployment web 使用 web-sa" },
+  "q5c4": { "ko": "파드에 토큰 마운트 없음 확인", "en": "No token mount in the pod", "ja": "Pod にトークンのマウントなし", "zh-CN": "Pod 中无令牌挂载" },
+  "step5ok": {
+    "ko": "PASS: web 파드에 더 이상 API 토큰이 실리지 않습니다. (5점)",
+    "en": "PASS: web pods no longer carry an API token. (5 pts)",
+    "ja": "PASS: web の Pod にもう API トークンが載りません。(5点)",
+    "zh-CN": "PASS: web 的 Pod 不再携带 API 令牌。(5 分)"
+  },
+
+  "step6m1": {
+    "ko": "FAIL: 답안 파일 ~/answers/q6.txt 가 없습니다.",
+    "en": "FAIL: answer file ~/answers/q6.txt is missing.",
+    "ja": "FAIL: 答案ファイル ~/answers/q6.txt がありません。",
+    "zh-CN": "FAIL: 答案文件 ~/answers/q6.txt 不存在。"
+  },
+  "step6m2": {
+    "ko": "FAIL: '{0}' 는 문제의 바인딩 이름이 아닙니다. system:authenticated 에 cluster-admin 을 주는 바인딩을 찾으세요.",
+    "en": "FAIL: '{0}' is not the offending binding. Look for the one granting cluster-admin to system:authenticated.",
+    "ja": "FAIL: '{0}' は問題のバインディングではありません。system:authenticated に cluster-admin を与えているものを探してください。",
+    "zh-CN": "FAIL: '{0}' 不是有问题的绑定。请找出把 cluster-admin 授予 system:authenticated 的那个。"
+  },
+  "step6m3": {
+    "ko": "FAIL: 위험한 ClusterRoleBinding 이 아직 남아 있습니다.",
+    "en": "FAIL: the dangerous ClusterRoleBinding still exists.",
+    "ja": "FAIL: 危険な ClusterRoleBinding がまだ残っています。",
+    "zh-CN": "FAIL: 危险的 ClusterRoleBinding 仍然存在。"
+  },
+  "step6m4": {
+    "ko": "FAIL: 기본 'cluster-admin' 바인딩(system:masters)까지 지웠습니다. 그것은 유지해야 합니다.",
+    "en": "FAIL: you also deleted the default 'cluster-admin' binding (system:masters). That one must stay.",
+    "ja": "FAIL: デフォルトの 'cluster-admin' バインディング(system:masters)まで削除しました。それは維持する必要があります。",
+    "zh-CN": "FAIL: 你把默认的 'cluster-admin' 绑定(system:masters)也删除了。那个必须保留。"
+  },
+  "q6c1": { "ko": "위험 바인딩 이름 식별(debug-admin-binding)", "en": "Offending binding identified (debug-admin-binding)", "ja": "問題のバインディング名を特定(debug-admin-binding)", "zh-CN": "已识别有问题的绑定(debug-admin-binding)" },
+  "q6c2": { "ko": "위험 바인딩 삭제", "en": "Dangerous binding deleted", "ja": "危険なバインディングを削除", "zh-CN": "已删除危险的绑定" },
+  "q6c3": { "ko": "기본 cluster-admin 바인딩 유지", "en": "Default cluster-admin binding kept", "ja": "デフォルトの cluster-admin バインディングを維持", "zh-CN": "保留默认的 cluster-admin 绑定" },
+  "step6ok": {
+    "ko": "PASS: 전체 사용자 cluster-admin 부여가 제거됐습니다. (4점)",
+    "en": "PASS: the blanket cluster-admin grant is gone. (4 pts)",
+    "ja": "PASS: 全ユーザーへの cluster-admin 付与が除去されました。(4点)",
+    "zh-CN": "PASS: 面向全体用户的 cluster-admin 授予已被移除。(4 分)"
+  },
+
+  "step7m1": {
+    "ko": "FAIL: Deployment 'runner' 가 sys-hard 에 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: Deployment 'runner' does not exist in sys-hard. If you deleted it, restart the lab.",
+    "ja": "FAIL: Deployment 'runner' が sys-hard にありません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 命名空间 sys-hard 中不存在 Deployment 'runner'。如果已删除，请重新开始实验。"
+  },
+  "step7m2": {
+    "ko": "FAIL: seccompProfile RuntimeDefault 가 파드(또는 모든 컨테이너) 시큐리티 컨텍스트에 없습니다.",
+    "en": "FAIL: seccompProfile RuntimeDefault is not set in the pod (or every container) security context.",
+    "ja": "FAIL: seccompProfile RuntimeDefault が Pod(またはすべてのコンテナ)のセキュリティコンテキストに設定されていません。",
+    "zh-CN": "FAIL: Pod（或所有容器）的安全上下文中未设置 seccompProfile RuntimeDefault。"
+  },
+  "step7m3": {
+    "ko": "FAIL: Ready 파드가 {0}/2 입니다.",
+    "en": "FAIL: only {0}/2 pods are Ready.",
+    "ja": "FAIL: Ready な Pod が {0}/2 です。",
+    "zh-CN": "FAIL: 只有 {0}/2 个 Pod 处于 Ready。"
+  },
+  "q7c1": { "ko": "seccompProfile RuntimeDefault 적용", "en": "seccompProfile RuntimeDefault applied", "ja": "seccompProfile RuntimeDefault を適用", "zh-CN": "已应用 seccompProfile RuntimeDefault" },
+  "q7c2": { "ko": "파드 2/2 Ready", "en": "Pods 2/2 Ready", "ja": "Pod 2/2 Ready", "zh-CN": "Pod 2/2 Ready" },
+  "step7ok": {
+    "ko": "PASS: runner 가 RuntimeDefault seccomp 로 돕니다. (5점)",
+    "en": "PASS: runner now runs under the RuntimeDefault seccomp profile. (5 pts)",
+    "ja": "PASS: runner が RuntimeDefault seccomp で動作します。(5点)",
+    "zh-CN": "PASS: runner 现在在 RuntimeDefault seccomp 下运行。(5 分)"
+  },
+
+  "step8m1": {
+    "ko": "FAIL: Deployment 'node-tool' 이 sys-hard 에 없습니다. 삭제하지 말고 고쳐야 합니다.",
+    "en": "FAIL: Deployment 'node-tool' does not exist in sys-hard. Fix it, do not delete it.",
+    "ja": "FAIL: Deployment 'node-tool' が sys-hard にありません。削除せず修正してください。",
+    "zh-CN": "FAIL: 命名空间 sys-hard 中不存在 Deployment 'node-tool'。请修改它，不要删除。"
+  },
+  "step8m2": {
+    "ko": "FAIL: privileged: true 가 남아 있습니다.",
+    "en": "FAIL: privileged: true is still set.",
+    "ja": "FAIL: privileged: true がまだ設定されています。",
+    "zh-CN": "FAIL: 仍然设置了 privileged: true。"
+  },
+  "step8m3": {
+    "ko": "FAIL: hostPID: true 가 남아 있습니다.",
+    "en": "FAIL: hostPID: true is still set.",
+    "ja": "FAIL: hostPID: true がまだ設定されています。",
+    "zh-CN": "FAIL: 仍然设置了 hostPID: true。"
+  },
+  "step8m4": {
+    "ko": "FAIL: hostNetwork: true 가 남아 있습니다.",
+    "en": "FAIL: hostNetwork: true is still set.",
+    "ja": "FAIL: hostNetwork: true がまだ設定されています。",
+    "zh-CN": "FAIL: 仍然设置了 hostNetwork: true。"
+  },
+  "step8m5": {
+    "ko": "FAIL: hostPath 볼륨이 남아 있습니다.",
+    "en": "FAIL: a hostPath volume is still present.",
+    "ja": "FAIL: hostPath ボリュームがまだ残っています。",
+    "zh-CN": "FAIL: 仍然存在 hostPath 卷。"
+  },
+  "step8m6": {
+    "ko": "FAIL: node-tool 파드가 Ready 가 아닙니다.",
+    "en": "FAIL: the node-tool pod is not Ready.",
+    "ja": "FAIL: node-tool の Pod が Ready ではありません。",
+    "zh-CN": "FAIL: node-tool 的 Pod 未处于 Ready。"
+  },
+  "q8c1": { "ko": "privileged 제거", "en": "privileged removed", "ja": "privileged を除去", "zh-CN": "已移除 privileged" },
+  "q8c2": { "ko": "hostPID 제거", "en": "hostPID removed", "ja": "hostPID を除去", "zh-CN": "已移除 hostPID" },
+  "q8c3": { "ko": "hostNetwork 제거", "en": "hostNetwork removed", "ja": "hostNetwork を除去", "zh-CN": "已移除 hostNetwork" },
+  "q8c4": { "ko": "hostPath 볼륨 제거", "en": "hostPath volume removed", "ja": "hostPath ボリュームを除去", "zh-CN": "已移除 hostPath 卷" },
+  "q8c5": { "ko": "파드 Ready 유지", "en": "Pod still Ready", "ja": "Pod は Ready を維持", "zh-CN": "Pod 仍保持 Ready" },
+  "step8ok": {
+    "ko": "PASS: node-tool 의 호스트 접근이 모두 제거됐습니다. (5점)",
+    "en": "PASS: all host access removed from node-tool. (5 pts)",
+    "ja": "PASS: node-tool のホストアクセスがすべて除去されました。(5点)",
+    "zh-CN": "PASS: node-tool 的所有主机访问已被移除。(5 分)"
+  },
+
+  "step9m1": {
+    "ko": "FAIL: Deployment 'secure-app' 이 apps 에 없습니다.",
+    "en": "FAIL: Deployment 'secure-app' does not exist in apps.",
+    "ja": "FAIL: Deployment 'secure-app' が apps にありません。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 Deployment 'secure-app'。"
+  },
+  "step9m2": {
+    "ko": "FAIL: secure-app 파드가 Ready 가 아닙니다. readOnlyRootFilesystem 등으로 기동이 막혔는지 이벤트를 확인하세요.",
+    "en": "FAIL: the secure-app pod is not Ready. Check events — readOnlyRootFilesystem etc. may block startup.",
+    "ja": "FAIL: secure-app の Pod が Ready ではありません。readOnlyRootFilesystem などで起動が妨げられていないかイベントを確認してください。",
+    "zh-CN": "FAIL: secure-app 的 Pod 未处于 Ready。请检查事件 —— readOnlyRootFilesystem 等可能阻碍启动。"
+  },
+  "step9m3": {
+    "ko": "FAIL: runAsNonRoot: true 가 없습니다.",
+    "en": "FAIL: runAsNonRoot: true is not set.",
+    "ja": "FAIL: runAsNonRoot: true が設定されていません。",
+    "zh-CN": "FAIL: 未设置 runAsNonRoot: true。"
+  },
+  "step9m4": {
+    "ko": "FAIL: runAsUser: 10001 이 아닙니다.",
+    "en": "FAIL: runAsUser is not 10001.",
+    "ja": "FAIL: runAsUser が 10001 ではありません。",
+    "zh-CN": "FAIL: runAsUser 不是 10001。"
+  },
+  "step9m5": {
+    "ko": "FAIL: allowPrivilegeEscalation: false 가 없습니다(컨테이너 시큐리티 컨텍스트).",
+    "en": "FAIL: allowPrivilegeEscalation: false is not set (container security context).",
+    "ja": "FAIL: allowPrivilegeEscalation: false が設定されていません(コンテナのセキュリティコンテキスト)。",
+    "zh-CN": "FAIL: 未设置 allowPrivilegeEscalation: false（容器安全上下文）。"
+  },
+  "step9m6": {
+    "ko": "FAIL: capabilities.drop 에 ALL 이 없습니다.",
+    "en": "FAIL: capabilities.drop does not include ALL.",
+    "ja": "FAIL: capabilities.drop に ALL が含まれていません。",
+    "zh-CN": "FAIL: capabilities.drop 未包含 ALL。"
+  },
+  "step9m7": {
+    "ko": "FAIL: readOnlyRootFilesystem: true 가 없습니다.",
+    "en": "FAIL: readOnlyRootFilesystem: true is not set.",
+    "ja": "FAIL: readOnlyRootFilesystem: true が設定されていません。",
+    "zh-CN": "FAIL: 未设置 readOnlyRootFilesystem: true。"
+  },
+  "q9c1": { "ko": "secure-app 생성·Ready", "en": "secure-app created and Ready", "ja": "secure-app を作成・Ready", "zh-CN": "已创建 secure-app 且 Ready" },
+  "q9c2": { "ko": "runAsNonRoot: true", "en": "runAsNonRoot: true", "ja": "runAsNonRoot: true", "zh-CN": "runAsNonRoot: true" },
+  "q9c3": { "ko": "runAsUser: 10001", "en": "runAsUser: 10001", "ja": "runAsUser: 10001", "zh-CN": "runAsUser: 10001" },
+  "q9c4": { "ko": "allowPrivilegeEscalation: false", "en": "allowPrivilegeEscalation: false", "ja": "allowPrivilegeEscalation: false", "zh-CN": "allowPrivilegeEscalation: false" },
+  "q9c5": { "ko": "capabilities.drop: [ALL]", "en": "capabilities.drop: [ALL]", "ja": "capabilities.drop: [ALL]", "zh-CN": "capabilities.drop: [ALL]" },
+  "q9c6": { "ko": "readOnlyRootFilesystem: true", "en": "readOnlyRootFilesystem: true", "ja": "readOnlyRootFilesystem: true", "zh-CN": "readOnlyRootFilesystem: true" },
+  "step9ok": {
+    "ko": "PASS: secure-app 이 비루트·비상승·읽기전용으로 돕니다. (7점)",
+    "en": "PASS: secure-app runs non-root, non-escalating, read-only. (7 pts)",
+    "ja": "PASS: secure-app が非 root・権限昇格なし・読み取り専用で動作します。(7点)",
+    "zh-CN": "PASS: secure-app 以非 root、禁止提权、只读方式运行。(7 分)"
+  },
+
+  "step10m1": {
+    "ko": "FAIL: restricted-ns 의 enforce 라벨이 'restricted' 가 아닙니다(현재: {0}).",
+    "en": "FAIL: restricted-ns's enforce label is not 'restricted' (current: {0}).",
+    "ja": "FAIL: restricted-ns の enforce ラベルが 'restricted' ではありません(現在: {0})。",
+    "zh-CN": "FAIL: restricted-ns 的 enforce 标签不是 'restricted'（当前：{0}）。"
+  },
+  "step10m2": {
+    "ko": "FAIL: Deployment 'legacy' 가 restricted-ns 에 없습니다. 삭제하지 말고 고쳐야 합니다.",
+    "en": "FAIL: Deployment 'legacy' does not exist in restricted-ns. Fix it, do not delete it.",
+    "ja": "FAIL: Deployment 'legacy' が restricted-ns にありません。削除せず修正してください。",
+    "zh-CN": "FAIL: 命名空间 restricted-ns 中不存在 Deployment 'legacy'。请修改它，不要删除。"
+  },
+  "step10m3": {
+    "ko": "FAIL: legacy 의 Running 파드가 없습니다. 롤아웃이 admission 에 막혔는지 'kubectl describe rs' 로 확인하세요.",
+    "en": "FAIL: no Running pod for legacy. Check 'kubectl describe rs' — admission may be rejecting the rollout.",
+    "ja": "FAIL: legacy の Running な Pod がありません。'kubectl describe rs' で admission がロールアウトを拒否していないか確認してください。",
+    "zh-CN": "FAIL: legacy 没有 Running 的 Pod。请用 'kubectl describe rs' 检查 —— admission 可能在拒绝此次滚动更新。"
+  },
+  "step10m4": {
+    "ko": "FAIL: 파드가 restricted 기준을 충족하지 않습니다 — '{0}' 항목을 확인하세요.",
+    "en": "FAIL: the pod does not satisfy restricted — check '{0}'.",
+    "ja": "FAIL: Pod が restricted 基準を満たしていません — '{0}' を確認してください。",
+    "zh-CN": "FAIL: Pod 不满足 restricted 标准 —— 请检查 '{0}'。"
+  },
+  "step10m5": {
+    "ko": "FAIL: legacy 가 Ready 가 아닙니다.",
+    "en": "FAIL: legacy is not Ready.",
+    "ja": "FAIL: legacy が Ready ではありません。",
+    "zh-CN": "FAIL: legacy 未处于 Ready。"
+  },
+  "q10c1": { "ko": "enforce=restricted 라벨 적용", "en": "enforce=restricted label applied", "ja": "enforce=restricted ラベルを適用", "zh-CN": "已应用 enforce=restricted 标签" },
+  "q10c2": { "ko": "파드가 restricted 기준 충족", "en": "Pod satisfies the restricted profile", "ja": "Pod が restricted 基準を満たす", "zh-CN": "Pod 满足 restricted 标准" },
+  "q10c3": { "ko": "legacy Ready", "en": "legacy Ready", "ja": "legacy Ready", "zh-CN": "legacy Ready" },
+  "step10ok": {
+    "ko": "PASS: restricted-ns 가 restricted 를 강제하고 legacy 가 그 기준으로 돕니다. (7점)",
+    "en": "PASS: restricted-ns enforces restricted and legacy complies. (7 pts)",
+    "ja": "PASS: restricted-ns が restricted を強制し、legacy がその基準で動作します。(7点)",
+    "zh-CN": "PASS: restricted-ns 强制 restricted，且 legacy 符合该标准。(7 分)"
+  },
+
+  "step11m1": {
+    "ko": "FAIL: 답안 파일 ~/answers/q11.txt 가 없습니다.",
+    "en": "FAIL: answer file ~/answers/q11.txt is missing.",
+    "ja": "FAIL: 答案ファイル ~/answers/q11.txt がありません。",
+    "zh-CN": "FAIL: 答案文件 ~/answers/q11.txt 不存在。"
+  },
+  "step11m2": {
+    "ko": "FAIL: q11.txt 의 값이 db-creds 의 password 와 다릅니다. base64 디코드했는지 확인하세요.",
+    "en": "FAIL: q11.txt does not match db-creds's password. Did you base64-decode it?",
+    "ja": "FAIL: q11.txt の値が db-creds の password と一致しません。base64 デコードしましたか？",
+    "zh-CN": "FAIL: q11.txt 的值与 db-creds 的 password 不一致。是否做了 base64 解码？"
+  },
+  "step11m3": {
+    "ko": "FAIL: Secret 'api-token' 이 apps 에 없거나 token 키가 없습니다.",
+    "en": "FAIL: Secret 'api-token' does not exist in apps or has no token key.",
+    "ja": "FAIL: Secret 'api-token' が apps にないか、token キーがありません。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 Secret 'api-token'，或缺少 token 键。"
+  },
+  "step11m4": {
+    "ko": "FAIL: api-token 의 token 값이 cks-2026 이 아닙니다.",
+    "en": "FAIL: api-token's token value is not cks-2026.",
+    "ja": "FAIL: api-token の token 値が cks-2026 ではありません。",
+    "zh-CN": "FAIL: api-token 的 token 值不是 cks-2026。"
+  },
+  "step11m5": {
+    "ko": "FAIL: 파드 'secret-user' 가 apps 에 없습니다.",
+    "en": "FAIL: pod 'secret-user' does not exist in apps.",
+    "ja": "FAIL: Pod 'secret-user' が apps にありません。",
+    "zh-CN": "FAIL: 命名空间 apps 中不存在 Pod 'secret-user'。"
+  },
+  "step11m6": {
+    "ko": "FAIL: secret-user 가 Running 이 아닙니다(현재: {0}).",
+    "en": "FAIL: secret-user is not Running (current: {0}).",
+    "ja": "FAIL: secret-user が Running ではありません(現在: {0})。",
+    "zh-CN": "FAIL: secret-user 未处于 Running（当前：{0}）。"
+  },
+  "step11m7": {
+    "ko": "FAIL: db-creds 가 /etc/creds 에 볼륨으로 마운트되지 않았습니다.",
+    "en": "FAIL: db-creds is not volume-mounted at /etc/creds.",
+    "ja": "FAIL: db-creds が /etc/creds にボリュームとしてマウントされていません。",
+    "zh-CN": "FAIL: db-creds 未以卷形式挂载到 /etc/creds。"
+  },
+  "q11c1": { "ko": "password 값 추출", "en": "password value extracted", "ja": "password 値を抽出", "zh-CN": "已提取 password 值" },
+  "q11c2": { "ko": "Secret api-token 생성(token=cks-2026)", "en": "Secret api-token created (token=cks-2026)", "ja": "Secret api-token を作成(token=cks-2026)", "zh-CN": "已创建 Secret api-token(token=cks-2026)" },
+  "q11c3": { "ko": "secret-user 가 db-creds 를 /etc/creds 에 마운트", "en": "secret-user mounts db-creds at /etc/creds", "ja": "secret-user が db-creds を /etc/creds にマウント", "zh-CN": "secret-user 将 db-creds 挂载到 /etc/creds" },
+  "step11ok": {
+    "ko": "PASS: Secret 추출·생성·마운트를 모두 처리했습니다. (6점)",
+    "en": "PASS: secret extraction, creation and mounting all done. (6 pts)",
+    "ja": "PASS: Secret の抽出・作成・マウントをすべて処理しました。(6点)",
+    "zh-CN": "PASS: Secret 的提取、创建与挂载已全部完成。(6 分)"
+  },
+
+  "step12m1": {
+    "ko": "FAIL: ~/work/audit/Dockerfile 이 없습니다. 파일을 지우지 말고 고쳐야 합니다.",
+    "en": "FAIL: ~/work/audit/Dockerfile is missing. Edit the file, do not delete it.",
+    "ja": "FAIL: ~/work/audit/Dockerfile がありません。ファイルを削除せず修正してください。",
+    "zh-CN": "FAIL: ~/work/audit/Dockerfile 不存在。请修改文件，不要删除。"
+  },
+  "step12m2": {
+    "ko": "FAIL: 베이스 이미지가 여전히 latest 입니다.",
+    "en": "FAIL: the base image is still latest.",
+    "ja": "FAIL: ベースイメージがまだ latest です。",
+    "zh-CN": "FAIL: 基础镜像仍然是 latest。"
+  },
+  "step12m3": {
+    "ko": "FAIL: 베이스 이미지가 nginx:1.26 이 아닙니다({0}).",
+    "en": "FAIL: the base image is not nginx:1.26 ({0}).",
+    "ja": "FAIL: ベースイメージが nginx:1.26 ではありません({0})。",
+    "zh-CN": "FAIL: 基础镜像不是 nginx:1.26（{0}）。"
+  },
+  "step12m4": {
+    "ko": "FAIL: ENV API_KEY 줄이 아직 남아 있습니다.",
+    "en": "FAIL: the ENV API_KEY line is still present.",
+    "ja": "FAIL: ENV API_KEY の行がまだ残っています。",
+    "zh-CN": "FAIL: ENV API_KEY 行仍然存在。"
+  },
+  "step12m5": {
+    "ko": "FAIL: USER 지시자가 없습니다 — 기본이 root 로 실행됩니다.",
+    "en": "FAIL: there is no USER instruction — it runs as root by default.",
+    "ja": "FAIL: USER 命令がありません — デフォルトで root として実行されます。",
+    "zh-CN": "FAIL: 没有 USER 指令 —— 默认以 root 运行。"
+  },
+  "step12m6": {
+    "ko": "FAIL: 여전히 USER root 로 실행됩니다.",
+    "en": "FAIL: it still runs as USER root.",
+    "ja": "FAIL: まだ USER root として実行されます。",
+    "zh-CN": "FAIL: 仍然以 USER root 运行。"
+  },
+  "step12m7": {
+    "ko": "FAIL: COPY/CMD 줄이 사라졌습니다. 결함만 고치고 나머지는 유지해야 합니다.",
+    "en": "FAIL: the COPY/CMD lines are gone. Fix the defects, keep the rest.",
+    "ja": "FAIL: COPY/CMD の行が消えています。欠陥だけ修正し、残りは維持してください。",
+    "zh-CN": "FAIL: COPY/CMD 行不见了。只修复缺陷，其余保持不变。"
+  },
+  "q12c1": { "ko": "베이스 이미지 nginx:1.26 고정", "en": "Base image pinned to nginx:1.26", "ja": "ベースイメージを nginx:1.26 に固定", "zh-CN": "基础镜像固定为 nginx:1.26" },
+  "q12c2": { "ko": "하드코딩 크리덴셜 제거", "en": "Hard-coded credential removed", "ja": "ハードコードされた認証情報を除去", "zh-CN": "已移除硬编码的凭据" },
+  "q12c3": { "ko": "비루트 사용자로 실행", "en": "Runs as a non-root user", "ja": "非 root ユーザーで実行", "zh-CN": "以非 root 用户运行" },
+  "q12c4": { "ko": "COPY·CMD 유지", "en": "COPY and CMD kept", "ja": "COPY・CMD を維持", "zh-CN": "保留 COPY 与 CMD" },
+  "step12ok": {
+    "ko": "PASS: Dockerfile 의 보안 결함 3건을 모두 고쳤습니다. (7점)",
+    "en": "PASS: all three Dockerfile defects fixed. (7 pts)",
+    "ja": "PASS: Dockerfile の3件のセキュリティ欠陥をすべて修正しました。(7点)",
+    "zh-CN": "PASS: Dockerfile 的三处安全缺陷已全部修复。(7 分)"
+  },
+
+  "step13m1": {
+    "ko": "FAIL: 답안 파일 ~/answers/q13.txt 가 없습니다.",
+    "en": "FAIL: answer file ~/answers/q13.txt is missing.",
+    "ja": "FAIL: 答案ファイル ~/answers/q13.txt がありません。",
+    "zh-CN": "FAIL: 答案文件 ~/answers/q13.txt 不存在。"
+  },
+  "step13m2": {
+    "ko": "FAIL: 목록이 다릅니다(제출: {0}). CRITICAL 이 있는 이미지의 Deployment 만, 빠짐없이 적어야 합니다.",
+    "en": "FAIL: the list is wrong (submitted: {0}). Name exactly the deployments whose images have CRITICAL findings.",
+    "ja": "FAIL: リストが違います(提出: {0})。CRITICAL が検出されたイメージの Deployment だけを漏れなく挙げてください。",
+    "zh-CN": "FAIL: 列表有误（提交：{0}）。请准确无遗地列出镜像存在 CRITICAL 发现的 Deployment。"
+  },
+  "step13m3": {
+    "ko": "FAIL: '{0}' 가 replicas 0 으로 스케일되지 않았습니다.",
+    "en": "FAIL: '{0}' is not scaled to 0 replicas.",
+    "ja": "FAIL: '{0}' が replicas 0 にスケールされていません。",
+    "zh-CN": "FAIL: '{0}' 未缩容到 0 个副本。"
+  },
+  "step13m4": {
+    "ko": "FAIL: 취약점 없는 batch-app 까지 내려갔습니다. 그것은 계속 돌아야 합니다.",
+    "en": "FAIL: the clean batch-app went down too. It must keep running.",
+    "ja": "FAIL: 脆弱性のない batch-app まで停止しています。それは動作を継続する必要があります。",
+    "zh-CN": "FAIL: 无漏洞的 batch-app 也被停掉了。它必须保持运行。"
+  },
+  "q13c1": { "ko": "CRITICAL 대상 식별(frontend-app, report-app)", "en": "CRITICAL images identified (frontend-app, report-app)", "ja": "CRITICAL 対象を特定(frontend-app、report-app)", "zh-CN": "已识别 CRITICAL 目标(frontend-app、report-app)" },
+  "q13c2": { "ko": "두 Deployment replicas 0 격리", "en": "Both deployments scaled to 0", "ja": "2つの Deployment を replicas 0 に隔離", "zh-CN": "两个 Deployment 均缩容到 0" },
+  "q13c3": { "ko": "batch-app 정상 유지", "en": "batch-app left running", "ja": "batch-app を正常に維持", "zh-CN": "batch-app 保持正常运行" },
+  "step13ok": {
+    "ko": "PASS: 취약 이미지를 정확히 골라 격리했습니다. (7점)",
+    "en": "PASS: vulnerable images correctly identified and quarantined. (7 pts)",
+    "ja": "PASS: 脆弱なイメージを正確に選び隔離しました。(7点)",
+    "zh-CN": "PASS: 已准确识别并隔离有漏洞的镜像。(7 分)"
+  },
+
+  "step14m1": {
+    "ko": "FAIL: Deployment 'pinned' 가 supply 에 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: Deployment 'pinned' does not exist in supply. If you deleted it, restart the lab.",
+    "ja": "FAIL: Deployment 'pinned' が supply にありません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 命名空间 supply 中不存在 Deployment 'pinned'。如果已删除，请重新开始实验。"
+  },
+  "step14m2": {
+    "ko": "FAIL: 다이제스트 형식이 틀립니다({0}). nginx@sha256:<64자리 16진수> 여야 합니다.",
+    "en": "FAIL: bad digest reference ({0}). It must be nginx@sha256:<64 hex chars>.",
+    "ja": "FAIL: ダイジェストの形式が不正です({0})。nginx@sha256:<64桁の16進数> である必要があります。",
+    "zh-CN": "FAIL: 摘要格式有误（{0}）。必须为 nginx@sha256:<64 位十六进制>。"
+  },
+  "step14m3": {
+    "ko": "FAIL: 아직 태그로 참조합니다({0}). @sha256 다이제스트로 바꿔야 합니다.",
+    "en": "FAIL: still referenced by tag ({0}). Switch to an @sha256 digest.",
+    "ja": "FAIL: まだタグで参照しています({0})。@sha256 ダイジェストに切り替えてください。",
+    "zh-CN": "FAIL: 仍以标签引用（{0}）。请改为 @sha256 摘要。"
+  },
+  "step14m4": {
+    "ko": "FAIL: pinned 파드가 Ready 가 아닙니다 — 다이제스트가 실제 이미지와 맞는지 확인하세요.",
+    "en": "FAIL: the pinned pod is not Ready — check that the digest matches a real image.",
+    "ja": "FAIL: pinned の Pod が Ready ではありません — ダイジェストが実在するイメージと一致するか確認してください。",
+    "zh-CN": "FAIL: pinned 的 Pod 未处于 Ready —— 请确认摘要与真实镜像匹配。"
+  },
+  "q14c1": { "ko": "nginx@sha256 다이제스트 참조", "en": "Image referenced as nginx@sha256 digest", "ja": "nginx@sha256 ダイジェストで参照", "zh-CN": "镜像以 nginx@sha256 摘要引用" },
+  "q14c2": { "ko": "파드 Ready(다이제스트 유효)", "en": "Pod Ready (digest is valid)", "ja": "Pod Ready(ダイジェストが有効)", "zh-CN": "Pod Ready（摘要有效）" },
+  "step14ok": {
+    "ko": "PASS: pinned 가 다이제스트로 고정됐습니다. (6점)",
+    "en": "PASS: pinned now pulls by digest. (6 pts)",
+    "ja": "PASS: pinned がダイジェストで固定されました。(6点)",
+    "zh-CN": "PASS: pinned 现在按摘要固定。(6 分)"
+  },
+
+  "step15m1": {
+    "ko": "FAIL: 감사 정책 파일(/var/lib/rancher/k3s/server/audit-policy.yaml)이 없거나 secrets/Metadata 규칙이 없습니다.",
+    "en": "FAIL: the audit policy file (/var/lib/rancher/k3s/server/audit-policy.yaml) is missing or lacks the secrets/Metadata rule.",
+    "ja": "FAIL: 監査ポリシーファイル(/var/lib/rancher/k3s/server/audit-policy.yaml)がないか、secrets/Metadata ルールがありません。",
+    "zh-CN": "FAIL: 审计策略文件(/var/lib/rancher/k3s/server/audit-policy.yaml)不存在，或缺少 secrets/Metadata 规则。"
+  },
+  "step15m2": {
+    "ko": "FAIL: /etc/rancher/k3s/config.yaml 에 audit-policy-file/audit-log-path 인자가 없습니다.",
+    "en": "FAIL: /etc/rancher/k3s/config.yaml lacks the audit-policy-file/audit-log-path args.",
+    "ja": "FAIL: /etc/rancher/k3s/config.yaml に audit-policy-file/audit-log-path 引数がありません。",
+    "zh-CN": "FAIL: /etc/rancher/k3s/config.yaml 缺少 audit-policy-file/audit-log-path 参数。"
+  },
+  "step15m3": {
+    "ko": "FAIL: 감사 로그 파일이 없습니다. 로그 디렉터리를 만들고 'sudo systemctl restart k3s' 를 했는지 확인하세요.",
+    "en": "FAIL: the audit log file does not exist. Create the log directory and 'sudo systemctl restart k3s'.",
+    "ja": "FAIL: 監査ログファイルがありません。ログディレクトリを作成し、'sudo systemctl restart k3s' を実行したか確認してください。",
+    "zh-CN": "FAIL: 审计日志文件不存在。请创建日志目录并执行 'sudo systemctl restart k3s'。"
+  },
+  "step15m4": {
+    "ko": "FAIL: Secret 조회가 감사 로그에 남지 않습니다. 정책의 리소스·레벨을 확인하세요.",
+    "en": "FAIL: reading a Secret leaves no audit entry. Check the policy's resources and level.",
+    "ja": "FAIL: Secret の参照が監査ログに残りません。ポリシーの resources・level を確認してください。",
+    "zh-CN": "FAIL: 读取 Secret 未在审计日志中留下记录。请检查策略的 resources 与 level。"
+  },
+  "q15c1": { "ko": "감사 정책 파일(secrets → Metadata)", "en": "Audit policy file (secrets → Metadata)", "ja": "監査ポリシーファイル(secrets → Metadata)", "zh-CN": "审计策略文件(secrets → Metadata)" },
+  "q15c2": { "ko": "apiserver 감사 인자 구성", "en": "apiserver audit args configured", "ja": "apiserver の監査引数を構成", "zh-CN": "已配置 apiserver 审计参数" },
+  "q15c3": { "ko": "감사 로그 파일 생성", "en": "Audit log file created", "ja": "監査ログファイルを作成", "zh-CN": "已创建审计日志文件" },
+  "q15c4": { "ko": "Secret 조회가 로그에 기록됨", "en": "Secret reads land in the log", "ja": "Secret の参照がログに記録される", "zh-CN": "Secret 读取被记入日志" },
+  "step15ok": {
+    "ko": "PASS: apiserver 감사 로깅이 동작합니다. (8점)",
+    "en": "PASS: API server audit logging works. (8 pts)",
+    "ja": "PASS: apiserver の監査ログが動作します。(8点)",
+    "zh-CN": "PASS: apiserver 审计日志正常工作。(8 分)"
+  },
+
+  "step16m1": {
+    "ko": "FAIL: 답안 파일 ~/answers/q16.txt 가 없습니다.",
+    "en": "FAIL: answer file ~/answers/q16.txt is missing.",
+    "ja": "FAIL: 答案ファイル ~/answers/q16.txt がありません。",
+    "zh-CN": "FAIL: 答案文件 ~/answers/q16.txt 不存在。"
+  },
+  "step16m2": {
+    "ko": "FAIL: '{0}' 는 침해 워크로드가 아닙니다. 각 파드의 프로세스 목록을 다시 조사하세요.",
+    "en": "FAIL: '{0}' is not the compromised workload. Re-inspect each pod's process list.",
+    "ja": "FAIL: '{0}' は侵害されたワークロードではありません。各 Pod のプロセス一覧を再調査してください。",
+    "zh-CN": "FAIL: '{0}' 不是被入侵的工作负载。请重新排查每个 Pod 的进程列表。"
+  },
+  "step16m3": {
+    "ko": "FAIL: replicas 는 0 인데 파드가 아직 남아 있습니다. 종료를 기다렸다 다시 제출하세요.",
+    "en": "FAIL: replicas is 0 but pods still remain. Wait for termination and resubmit.",
+    "ja": "FAIL: replicas は 0 ですが Pod がまだ残っています。終了を待って再提出してください。",
+    "zh-CN": "FAIL: replicas 为 0 但 Pod 仍然存在。请等待终止后重新提交。"
+  },
+  "step16m4": {
+    "ko": "FAIL: logshipper 가 격리되지 않았습니다(replicas: {0}). 0 으로 스케일하세요.",
+    "en": "FAIL: logshipper is not quarantined (replicas: {0}). Scale it to 0.",
+    "ja": "FAIL: logshipper が隔離されていません(replicas: {0})。0 にスケールしてください。",
+    "zh-CN": "FAIL: logshipper 未被隔离（replicas：{0}）。请缩容到 0。"
+  },
+  "step16m5": {
+    "ko": "FAIL: 무관한 워크로드 '{0}' 가 내려가 있습니다. web·metrics 는 계속 돌아야 합니다.",
+    "en": "FAIL: innocent workload '{0}' is down. web and metrics must keep running.",
+    "ja": "FAIL: 無関係なワークロード '{0}' が停止しています。web・metrics は動作を継続する必要があります。",
+    "zh-CN": "FAIL: 无关的工作负载 '{0}' 被停掉了。web 与 metrics 必须保持运行。"
+  },
+  "q16c1": { "ko": "침해 워크로드 식별(logshipper)", "en": "Compromised workload identified (logshipper)", "ja": "侵害ワークロードを特定(logshipper)", "zh-CN": "已识别被入侵的工作负载(logshipper)" },
+  "q16c2": { "ko": "logshipper 격리(replicas 0, 파드 소멸)", "en": "logshipper quarantined (0 replicas, pods gone)", "ja": "logshipper を隔離(replicas 0、Pod 消滅)", "zh-CN": "logshipper 已隔离（0 副本，Pod 已消失）" },
+  "q16c3": { "ko": "web·metrics 정상 유지", "en": "web and metrics left running", "ja": "web・metrics を正常に維持", "zh-CN": "web 与 metrics 保持正常运行" },
+  "step16ok": {
+    "ko": "PASS: 채굴 파드를 정확히 찾아 격리했습니다. (12점)",
+    "en": "PASS: the mining pod was found and quarantined. (12 pts)",
+    "ja": "PASS: マイニング Pod を正確に見つけて隔離しました。(12点)",
+    "zh-CN": "PASS: 已准确找到并隔离挖矿 Pod。(12 分)"
+  }
+}

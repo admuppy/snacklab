@@ -1,0 +1,926 @@
+{
+  "q1c1": {
+    "ko": "파드 logger 존재",
+    "en": "Pod logger exists",
+    "ja": "Pod logger が存在",
+    "zh-CN": "Pod logger 存在"
+  },
+  "q1c2": {
+    "ko": "컨테이너 app·streamer 구성",
+    "en": "Containers app and streamer present",
+    "ja": "コンテナ app・streamer の構成",
+    "zh-CN": "包含容器 app 与 streamer"
+  },
+  "q1c3": {
+    "ko": "emptyDir 볼륨을 양쪽에 /var/log/app 로 공유",
+    "en": "emptyDir volume shared at /var/log/app in both containers",
+    "ja": "emptyDir ボリュームを両方に /var/log/app で共有",
+    "zh-CN": "emptyDir 卷在两个容器中共享挂载到 /var/log/app"
+  },
+  "q1c4": {
+    "ko": "파드 Running",
+    "en": "Pod is Running",
+    "ja": "Pod が Running",
+    "zh-CN": "Pod 处于 Running"
+  },
+  "q1c5": {
+    "ko": "사이드카 로그에 tick 스트림 확인",
+    "en": "Sidecar log actually streams the tick lines",
+    "ja": "サイドカーのログに tick のストリームを確認",
+    "zh-CN": "Sidecar 日志中确实流出 tick 行"
+  },
+  "step1m1": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'logger' 가 없습니다.",
+    "en": "FAIL: pod 'logger' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'logger' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'logger'。"
+  },
+  "step1m2": {
+    "ko": "FAIL: 컨테이너 구성이 app·streamer 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: containers are not app and streamer (found: {0}).",
+    "ja": "FAIL: コンテナ構成が app・streamer ではありません(現在: {0})。",
+    "zh-CN": "FAIL: 容器不是 app 与 streamer（当前：{0}）。"
+  },
+  "step1m3": {
+    "ko": "FAIL: 두 컨테이너가 같은 emptyDir 볼륨을 /var/log/app 에 마운트하고 있지 않습니다.",
+    "en": "FAIL: the two containers do not share one emptyDir volume mounted at /var/log/app.",
+    "ja": "FAIL: 2 つのコンテナが同じ emptyDir ボリュームを /var/log/app にマウントしていません。",
+    "zh-CN": "FAIL: 两个容器没有共享同一个 emptyDir 卷并挂载到 /var/log/app。"
+  },
+  "step1m4": {
+    "ko": "FAIL: 파드가 Running 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: the pod is not Running (currently: {0}).",
+    "ja": "FAIL: Pod が Running ではありません(現在: {0})。",
+    "zh-CN": "FAIL: Pod 不是 Running（当前：{0}）。"
+  },
+  "step1m5": {
+    "ko": "FAIL: streamer 컨테이너 로그에 tick 줄이 없습니다. tail -F 로 app.log 를 따라가고 있는지 확인하세요.",
+    "en": "FAIL: the streamer container's log shows no tick lines. Check it tails app.log with tail -F.",
+    "ja": "FAIL: streamer コンテナのログに tick の行がありません。tail -F で app.log を追っているか確認してください。",
+    "zh-CN": "FAIL: streamer 容器的日志中没有 tick 行。请确认它用 tail -F 跟踪 app.log。"
+  },
+  "q2c1": {
+    "ko": "Job pi — completions 3 · parallelism 2",
+    "en": "Job pi — completions 3, parallelism 2",
+    "ja": "Job pi — completions 3 · parallelism 2",
+    "zh-CN": "Job pi —— completions 3 · parallelism 2"
+  },
+  "q2c2": {
+    "ko": "Job pi — 3회 모두 성공",
+    "en": "Job pi — succeeded 3 times",
+    "ja": "Job pi — 3 回すべて成功",
+    "zh-CN": "Job pi —— 成功 3 次"
+  },
+  "q2c3": {
+    "ko": "CronJob cleanup — 스케줄 0 3 * * *",
+    "en": "CronJob cleanup — schedule 0 3 * * *",
+    "ja": "CronJob cleanup — スケジュール 0 3 * * *",
+    "zh-CN": "CronJob cleanup —— 调度 0 3 * * *"
+  },
+  "q2c4": {
+    "ko": "CronJob cleanup — concurrencyPolicy Forbid",
+    "en": "CronJob cleanup — concurrencyPolicy Forbid",
+    "ja": "CronJob cleanup — concurrencyPolicy Forbid",
+    "zh-CN": "CronJob cleanup —— concurrencyPolicy Forbid"
+  },
+  "q2c5": {
+    "ko": "CronJob cleanup — successfulJobsHistoryLimit 1",
+    "en": "CronJob cleanup — successfulJobsHistoryLimit 1",
+    "ja": "CronJob cleanup — successfulJobsHistoryLimit 1",
+    "zh-CN": "CronJob cleanup —— successfulJobsHistoryLimit 1"
+  },
+  "step2m1": {
+    "ko": "FAIL: batch 네임스페이스에 {0} '{1}' 이 없습니다.",
+    "en": "FAIL: {0} '{1}' does not exist in namespace batch.",
+    "ja": "FAIL: batch 名前空間に {0} '{1}' がありません。",
+    "zh-CN": "FAIL: 命名空间 batch 中不存在 {0} '{1}'。"
+  },
+  "step2m2": {
+    "ko": "FAIL: Job pi 의 completions/parallelism 이 3/2 가 아닙니다 (현재: {0}/{1}).",
+    "en": "FAIL: Job pi's completions/parallelism is not 3/2 (found: {0}/{1}).",
+    "ja": "FAIL: Job pi の completions/parallelism が 3/2 ではありません(現在: {0}/{1})。",
+    "zh-CN": "FAIL: Job pi 的 completions/parallelism 不是 3/2（当前：{0}/{1}）。"
+  },
+  "step2m3": {
+    "ko": "FAIL: Job pi 의 성공 횟수가 3 이 아닙니다 (현재: {0}). 명령이 실패하거나 아직 실행 중일 수 있습니다.",
+    "en": "FAIL: Job pi has not succeeded 3 times (currently: {0}). The command may be failing or still running.",
+    "ja": "FAIL: Job pi の成功回数が 3 ではありません(現在: {0})。コマンドが失敗しているか、まだ実行中の可能性があります。",
+    "zh-CN": "FAIL: Job pi 的成功次数不是 3（当前：{0}）。命令可能失败，或者仍在运行中。"
+  },
+  "step2m4": {
+    "ko": "FAIL: CronJob cleanup 의 스케줄이 '0 3 * * *' 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: CronJob cleanup's schedule is not '0 3 * * *' (found: {0}).",
+    "ja": "FAIL: CronJob cleanup のスケジュールが '0 3 * * *' ではありません(現在: {0})。",
+    "zh-CN": "FAIL: CronJob cleanup 的调度不是 '0 3 * * *'（当前：{0}）。"
+  },
+  "step2m5": {
+    "ko": "FAIL: CronJob cleanup 의 concurrencyPolicy 가 Forbid 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: CronJob cleanup's concurrencyPolicy is not Forbid (found: {0}).",
+    "ja": "FAIL: CronJob cleanup の concurrencyPolicy が Forbid ではありません(現在: {0})。",
+    "zh-CN": "FAIL: CronJob cleanup 的 concurrencyPolicy 不是 Forbid（当前：{0}）。"
+  },
+  "step2m6": {
+    "ko": "FAIL: CronJob cleanup 의 successfulJobsHistoryLimit 이 1 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: CronJob cleanup's successfulJobsHistoryLimit is not 1 (found: {0}).",
+    "ja": "FAIL: CronJob cleanup の successfulJobsHistoryLimit が 1 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: CronJob cleanup 的 successfulJobsHistoryLimit 不是 1（当前：{0}）。"
+  },
+  "q3c1": {
+    "ko": "init 컨테이너 구성",
+    "en": "Init container present",
+    "ja": "init コンテナの構成",
+    "zh-CN": "包含 init 容器"
+  },
+  "q3c2": {
+    "ko": "볼륨 공유 — init /work ↔ 메인 /usr/share/nginx/html",
+    "en": "Volume shared — init /work ↔ main /usr/share/nginx/html",
+    "ja": "ボリューム共有 — init /work ↔ メイン /usr/share/nginx/html",
+    "zh-CN": "卷共享 —— init /work ↔ 主容器 /usr/share/nginx/html"
+  },
+  "q3c3": {
+    "ko": "파드 Ready",
+    "en": "Pod is Ready",
+    "ja": "Pod が Ready",
+    "zh-CN": "Pod 处于 Ready"
+  },
+  "q3c4": {
+    "ko": "HTTP 응답에 ready-to-serve 확인",
+    "en": "HTTP response serves ready-to-serve",
+    "ja": "HTTP 応答に ready-to-serve を確認",
+    "zh-CN": "HTTP 响应返回 ready-to-serve"
+  },
+  "step3m1": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'web-init' 이 없습니다.",
+    "en": "FAIL: pod 'web-init' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'web-init' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'web-init'。"
+  },
+  "step3m2": {
+    "ko": "FAIL: initContainers 가 없습니다.",
+    "en": "FAIL: the pod has no initContainers.",
+    "ja": "FAIL: initContainers がありません。",
+    "zh-CN": "FAIL: Pod 没有 initContainers。"
+  },
+  "step3m3": {
+    "ko": "FAIL: init 컨테이너의 /work 와 메인 컨테이너의 /usr/share/nginx/html 이 같은 볼륨이 아닙니다.",
+    "en": "FAIL: the init container's /work and the main container's /usr/share/nginx/html are not the same volume.",
+    "ja": "FAIL: init コンテナの /work とメインコンテナの /usr/share/nginx/html が同じボリュームではありません。",
+    "zh-CN": "FAIL: init 容器的 /work 与主容器的 /usr/share/nginx/html 不是同一个卷。"
+  },
+  "step3m4": {
+    "ko": "FAIL: 파드가 Ready 가 아닙니다.",
+    "en": "FAIL: the pod is not Ready.",
+    "ja": "FAIL: Pod が Ready ではありません。",
+    "zh-CN": "FAIL: Pod 不是 Ready。"
+  },
+  "step3m5": {
+    "ko": "FAIL: 파드 IP 에 HTTP 요청해도 'ready-to-serve' 가 응답되지 않습니다. init 컨테이너가 index.html 을 만들었는지 확인하세요.",
+    "en": "FAIL: an HTTP request to the pod IP does not return 'ready-to-serve'. Check the init container wrote index.html.",
+    "ja": "FAIL: Pod IP に HTTP リクエストしても 'ready-to-serve' が返りません。init コンテナが index.html を作成したか確認してください。",
+    "zh-CN": "FAIL: 向 Pod IP 发起 HTTP 请求没有返回 'ready-to-serve'。请确认 init 容器写入了 index.html。"
+  },
+  "q4c1": {
+    "ko": "전략 — maxSurge 1 · maxUnavailable 0",
+    "en": "Strategy — maxSurge 1, maxUnavailable 0",
+    "ja": "戦略 — maxSurge 1 · maxUnavailable 0",
+    "zh-CN": "策略 —— maxSurge 1 · maxUnavailable 0"
+  },
+  "q4c2": {
+    "ko": "이미지 nginx:1.26 으로 갱신",
+    "en": "Image updated to nginx:1.26",
+    "ja": "イメージを nginx:1.26 に更新",
+    "zh-CN": "镜像已更新为 nginx:1.26"
+  },
+  "q4c3": {
+    "ko": "롤아웃 리비전 증가",
+    "en": "Rollout revision advanced",
+    "ja": "ロールアウトのリビジョンが増加",
+    "zh-CN": "滚动更新 revision 已递增"
+  },
+  "q4c4": {
+    "ko": "2개 레플리카 모두 새 버전으로 Ready",
+    "en": "Both replicas updated and Ready",
+    "ja": "2 つのレプリカがすべて新バージョンで Ready",
+    "zh-CN": "2 个副本都以新版本 Ready"
+  },
+  "step4m1": {
+    "ko": "FAIL: prod 네임스페이스에 Deployment 'api' 가 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: Deployment 'api' does not exist in namespace prod. If you deleted it, restart the lab.",
+    "ja": "FAIL: prod 名前空間に Deployment 'api' がありません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Deployment 'api'。如果已删除，请重新开始实验。"
+  },
+  "step4m2": {
+    "ko": "FAIL: 업데이트 전략이 RollingUpdate 가 아닙니다.",
+    "en": "FAIL: the update strategy is not RollingUpdate.",
+    "ja": "FAIL: 更新戦略が RollingUpdate ではありません。",
+    "zh-CN": "FAIL: 更新策略不是 RollingUpdate。"
+  },
+  "step4m3": {
+    "ko": "FAIL: strategy.rollingUpdate.{0} 가 {1} 이 아닙니다 (현재: {2}).",
+    "en": "FAIL: strategy.rollingUpdate.{0} is not {1} (found: {2}).",
+    "ja": "FAIL: strategy.rollingUpdate.{0} が {1} ではありません(現在: {2})。",
+    "zh-CN": "FAIL: strategy.rollingUpdate.{0} 不是 {1}（当前：{2}）。"
+  },
+  "step4m4": {
+    "ko": "FAIL: 컨테이너 이미지가 nginx:1.26 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: the container image is not nginx:1.26 (found: {0}).",
+    "ja": "FAIL: コンテナイメージが nginx:1.26 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: 容器镜像不是 nginx:1.26（当前：{0}）。"
+  },
+  "step4m5": {
+    "ko": "FAIL: 롤아웃 리비전이 2 이상이 아닙니다 (현재: {0}). 이미지를 교체한 롤링 업데이트가 일어나지 않았습니다.",
+    "en": "FAIL: the rollout revision is not >= 2 (currently: {0}). No rolling update with the new image has happened.",
+    "ja": "FAIL: ロールアウトのリビジョンが 2 以上ではありません(現在: {0})。新しいイメージへのローリングアップデートが起きていません。",
+    "zh-CN": "FAIL: 滚动更新 revision 未达到 2 以上（当前：{0}）。没有发生更换镜像的滚动更新。"
+  },
+  "step4m6": {
+    "ko": "FAIL: 레플리카 2개가 전부 새 버전으로 Ready 가 아닙니다 (ready {0} · updated {1}).",
+    "en": "FAIL: not all 2 replicas are updated and Ready (ready {0}, updated {1}).",
+    "ja": "FAIL: 2 つのレプリカがすべて新バージョンで Ready ではありません(ready {0} · updated {1})。",
+    "zh-CN": "FAIL: 2 个副本没有全部以新版本 Ready（ready {0} · updated {1}）。"
+  },
+  "q5c1": {
+    "ko": "shop-canary — nginx:1.26 · replicas 1",
+    "en": "shop-canary — nginx:1.26, replicas 1",
+    "ja": "shop-canary — nginx:1.26 · replicas 1",
+    "zh-CN": "shop-canary —— nginx:1.26 · replicas 1"
+  },
+  "q5c2": {
+    "ko": "카나리 파드 라벨 app=shop · track=canary",
+    "en": "Canary pod labels app=shop, track=canary",
+    "ja": "カナリア Pod のラベル app=shop · track=canary",
+    "zh-CN": "金丝雀 Pod 标签 app=shop · track=canary"
+  },
+  "q5c3": {
+    "ko": "stable(shop) replicas 3 으로 축소·Ready",
+    "en": "Stable shop scaled to 3 replicas and Ready",
+    "ja": "stable(shop) を replicas 3 に縮小・Ready",
+    "zh-CN": "stable（shop）缩容到 replicas 3 且 Ready"
+  },
+  "q5c4": {
+    "ko": "서비스 뒤 stable 3 : canary 1 (엔드포인트 4개)",
+    "en": "Service backs 3 stable : 1 canary (4 endpoints)",
+    "ja": "サービスの背後が stable 3 : canary 1(エンドポイント 4 件)",
+    "zh-CN": "Service 后端为 3 stable : 1 canary（4 个 endpoint）"
+  },
+  "step5m1": {
+    "ko": "FAIL: prod 네임스페이스에 Deployment 'shop-canary' 가 없습니다.",
+    "en": "FAIL: Deployment 'shop-canary' does not exist in namespace prod.",
+    "ja": "FAIL: prod 名前空間に Deployment 'shop-canary' がありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Deployment 'shop-canary'。"
+  },
+  "step5m2": {
+    "ko": "FAIL: shop-canary 가 nginx:1.26 · replicas 1 이 아닙니다 (현재: {0} · {1}).",
+    "en": "FAIL: shop-canary is not nginx:1.26 with replicas 1 (found: {0}, {1}).",
+    "ja": "FAIL: shop-canary が nginx:1.26 · replicas 1 ではありません(現在: {0} · {1})。",
+    "zh-CN": "FAIL: shop-canary 不是 nginx:1.26 · replicas 1（当前：{0} · {1}）。"
+  },
+  "step5m3": {
+    "ko": "FAIL: 카나리 파드 라벨이 app=shop · track=canary 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: canary pod labels are not app=shop, track=canary (found: {0}).",
+    "ja": "FAIL: カナリア Pod のラベルが app=shop · track=canary ではありません(現在: {0})。",
+    "zh-CN": "FAIL: 金丝雀 Pod 的标签不是 app=shop · track=canary（当前：{0}）。"
+  },
+  "step5m4": {
+    "ko": "FAIL: shop 이 replicas 3 · Ready 3 이 아닙니다 (현재: {0} · ready {1}).",
+    "en": "FAIL: shop is not at replicas 3 with 3 Ready (found: {0}, ready {1}).",
+    "ja": "FAIL: shop が replicas 3 · Ready 3 ではありません(現在: {0} · ready {1})。",
+    "zh-CN": "FAIL: shop 不是 replicas 3 · Ready 3（当前：{0} · ready {1}）。"
+  },
+  "step5m5": {
+    "ko": "FAIL: shop-svc 엔드포인트가 stable 3 + canary 1 = 4개가 아니거나 카나리 파드가 빠져 있습니다 (현재 {0}개). 카나리 파드에 app=shop 라벨이 있는지 확인하세요.",
+    "en": "FAIL: shop-svc's endpoints are not the 4 of 3 stable + 1 canary, or the canary pod is missing (currently {0}). Check the canary pod carries the app=shop label.",
+    "ja": "FAIL: shop-svc のエンドポイントが stable 3 + canary 1 = 4 件でないか、カナリア Pod が含まれていません(現在 {0} 件)。カナリア Pod に app=shop ラベルがあるか確認してください。",
+    "zh-CN": "FAIL: shop-svc 的 endpoint 不是 3 stable + 1 canary = 4 个，或者缺少金丝雀 Pod（当前 {0} 个）。请确认金丝雀 Pod 带有 app=shop 标签。"
+  },
+  "q6c1": {
+    "ko": "오버레이 kustomization — base 참조",
+    "en": "Overlay kustomization refers to the base",
+    "ja": "オーバーレイ kustomization — base を参照",
+    "zh-CN": "Overlay 的 kustomization 引用 base"
+  },
+  "q6c2": {
+    "ko": "hello-web 이 prod 네임스페이스에 배포됨",
+    "en": "hello-web deployed into namespace prod",
+    "ja": "hello-web が prod 名前空間にデプロイ済み",
+    "zh-CN": "hello-web 已部署到命名空间 prod"
+  },
+  "q6c3": {
+    "ko": "replicas 2",
+    "en": "Replicas 2",
+    "ja": "replicas 2",
+    "zh-CN": "replicas 2"
+  },
+  "q6c4": {
+    "ko": "이미지 nginx:1.26",
+    "en": "Image nginx:1.26",
+    "ja": "イメージ nginx:1.26",
+    "zh-CN": "镜像 nginx:1.26"
+  },
+  "q6c5": {
+    "ko": "2개 레플리카 Ready",
+    "en": "Both replicas Ready",
+    "ja": "2 つのレプリカが Ready",
+    "zh-CN": "2 个副本 Ready"
+  },
+  "step6m1": {
+    "ko": "FAIL: ~/work/kustomize/overlays/prod 에 base 를 참조하는 kustomization.yaml 이 없습니다.",
+    "en": "FAIL: ~/work/kustomize/overlays/prod has no kustomization.yaml referring to the base.",
+    "ja": "FAIL: ~/work/kustomize/overlays/prod に base を参照する kustomization.yaml がありません。",
+    "zh-CN": "FAIL: ~/work/kustomize/overlays/prod 中没有引用 base 的 kustomization.yaml。"
+  },
+  "step6m2": {
+    "ko": "FAIL: prod 네임스페이스에 Deployment 'hello-web' 이 없습니다. 오버레이를 apply -k 했는지 확인하세요.",
+    "en": "FAIL: Deployment 'hello-web' does not exist in namespace prod. Did you apply -k the overlay?",
+    "ja": "FAIL: prod 名前空間に Deployment 'hello-web' がありません。オーバーレイを apply -k したか確認してください。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Deployment 'hello-web'。是否用 apply -k 应用了 overlay？"
+  },
+  "step6m3": {
+    "ko": "FAIL: replicas 가 2 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: replicas is not 2 (found: {0}).",
+    "ja": "FAIL: replicas が 2 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: replicas 不是 2（当前：{0}）。"
+  },
+  "step6m4": {
+    "ko": "FAIL: 이미지가 nginx:1.26 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: the image is not nginx:1.26 (found: {0}).",
+    "ja": "FAIL: イメージが nginx:1.26 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: 镜像不是 nginx:1.26（当前：{0}）。"
+  },
+  "step6m5": {
+    "ko": "FAIL: 2개 레플리카가 Ready 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: not both replicas are Ready (currently: {0}).",
+    "ja": "FAIL: 2 つのレプリカが Ready ではありません(現在: {0})。",
+    "zh-CN": "FAIL: 2 个副本没有全部 Ready（当前：{0}）。"
+  },
+  "q7c1": {
+    "ko": "readinessProbe — httpGet /:80 · delay 3 · period 5",
+    "en": "readinessProbe — httpGet /:80, delay 3, period 5",
+    "ja": "readinessProbe — httpGet /:80 · delay 3 · period 5",
+    "zh-CN": "readinessProbe —— httpGet /:80 · delay 3 · period 5"
+  },
+  "q7c2": {
+    "ko": "livenessProbe — httpGet /:80 · period 10",
+    "en": "livenessProbe — httpGet /:80, period 10",
+    "ja": "livenessProbe — httpGet /:80 · period 10",
+    "zh-CN": "livenessProbe —— httpGet /:80 · period 10"
+  },
+  "q7c3": {
+    "ko": "파드 Ready",
+    "en": "Pod is Ready",
+    "ja": "Pod が Ready",
+    "zh-CN": "Pod 处于 Ready"
+  },
+  "step7m1": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'probe-pod' 가 없습니다.",
+    "en": "FAIL: pod 'probe-pod' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'probe-pod' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'probe-pod'。"
+  },
+  "step7m2": {
+    "ko": "FAIL: readinessProbe 가 httpGet / port 80 · initialDelaySeconds 3 · periodSeconds 5 규격이 아닙니다.",
+    "en": "FAIL: the readinessProbe is not httpGet / port 80 with initialDelaySeconds 3 and periodSeconds 5.",
+    "ja": "FAIL: readinessProbe が httpGet / port 80 · initialDelaySeconds 3 · periodSeconds 5 の仕様ではありません。",
+    "zh-CN": "FAIL: readinessProbe 不符合 httpGet / port 80 · initialDelaySeconds 3 · periodSeconds 5 的规格。"
+  },
+  "step7m3": {
+    "ko": "FAIL: livenessProbe 가 httpGet / port 80 · periodSeconds 10 규격이 아닙니다.",
+    "en": "FAIL: the livenessProbe is not httpGet / port 80 with periodSeconds 10.",
+    "ja": "FAIL: livenessProbe が httpGet / port 80 · periodSeconds 10 の仕様ではありません。",
+    "zh-CN": "FAIL: livenessProbe 不符合 httpGet / port 80 · periodSeconds 10 的规格。"
+  },
+  "step7m4": {
+    "ko": "FAIL: 파드가 Ready 가 아닙니다. 프로브 경로·포트가 실제로 응답하는지 확인하세요.",
+    "en": "FAIL: the pod is not Ready. Check the probe path and port actually answer.",
+    "ja": "FAIL: Pod が Ready ではありません。プローブのパスとポートが実際に応答するか確認してください。",
+    "zh-CN": "FAIL: Pod 不是 Ready。请确认探针的路径和端口确实有响应。"
+  },
+  "q8c1": {
+    "ko": "답안 파일에 실패 로그 저장",
+    "en": "Failure log saved in the answer file",
+    "ja": "答案ファイルに失敗ログを保存",
+    "zh-CN": "答案文件中保存了失败日志"
+  },
+  "q8c2": {
+    "ko": "Deployment orders — Available 복구",
+    "en": "Deployment orders repaired to Available",
+    "ja": "Deployment orders — Available に復旧",
+    "zh-CN": "Deployment orders 修复为 Available"
+  },
+  "q8c3": {
+    "ko": "지정된 명령으로 교체",
+    "en": "Command replaced as specified",
+    "ja": "指定されたコマンドに差し替え",
+    "zh-CN": "命令已替换为指定命令"
+  },
+  "step8m1": {
+    "ko": "FAIL: ~/answers/q8.txt 에 실패 원인이 담긴 로그가 없습니다. kubectl logs 출력을 저장하세요.",
+    "en": "FAIL: ~/answers/q8.txt does not hold the failure log. Save the kubectl logs output.",
+    "ja": "FAIL: ~/answers/q8.txt に失敗原因を含むログがありません。kubectl logs の出力を保存してください。",
+    "zh-CN": "FAIL: ~/answers/q8.txt 中没有包含失败原因的日志。请保存 kubectl logs 的输出。"
+  },
+  "step8m2": {
+    "ko": "FAIL: broken 네임스페이스에 Deployment 'orders' 가 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: Deployment 'orders' does not exist in namespace broken. If you deleted it, restart the lab.",
+    "ja": "FAIL: broken 名前空間に Deployment 'orders' がありません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 命名空间 broken 中不存在 Deployment 'orders'。如果已删除，请重新开始实验。"
+  },
+  "step8m3": {
+    "ko": "FAIL: orders 가 아직 Available 이 아닙니다.",
+    "en": "FAIL: orders is still not Available.",
+    "ja": "FAIL: orders がまだ Available ではありません。",
+    "zh-CN": "FAIL: orders 仍然不是 Available。"
+  },
+  "step8m4": {
+    "ko": "FAIL: 컨테이너 명령이 문제에서 지정한 명령으로 바뀌지 않았습니다.",
+    "en": "FAIL: the container command was not replaced with the one the task specified.",
+    "ja": "FAIL: コンテナのコマンドが問題で指定したコマンドに差し替えられていません。",
+    "zh-CN": "FAIL: 容器命令没有替换为题目指定的命令。"
+  },
+  "q9c1": {
+    "ko": "Deployment report-api 적용됨",
+    "en": "Deployment report-api applied",
+    "ja": "Deployment report-api が適用済み",
+    "zh-CN": "Deployment report-api 已应用"
+  },
+  "q9c2": {
+    "ko": "CronJob report-gen 적용됨",
+    "en": "CronJob report-gen applied",
+    "ja": "CronJob report-gen が適用済み",
+    "zh-CN": "CronJob report-gen 已应用"
+  },
+  "q9c3": {
+    "ko": "파일의 apiVersion 이 현행 버전으로 수정됨",
+    "en": "The file's apiVersions corrected to current ones",
+    "ja": "ファイルの apiVersion を現行バージョンに修正",
+    "zh-CN": "文件中的 apiVersion 已修正为当前版本"
+  },
+  "q9c4": {
+    "ko": "report-api Ready",
+    "en": "report-api is Ready",
+    "ja": "report-api が Ready",
+    "zh-CN": "report-api 处于 Ready"
+  },
+  "step9m1": {
+    "ko": "FAIL: batch 네임스페이스에 {0} '{1}' 이 없습니다. 파일을 고쳐 적용했는지 확인하세요.",
+    "en": "FAIL: {0} '{1}' does not exist in namespace batch. Did you fix and apply the file?",
+    "ja": "FAIL: batch 名前空間に {0} '{1}' がありません。ファイルを修正して適用したか確認してください。",
+    "zh-CN": "FAIL: 命名空间 batch 中不存在 {0} '{1}'。是否修好文件并应用了？"
+  },
+  "step9m2": {
+    "ko": "FAIL: ~/work/legacy/stack.yaml 의 apiVersion 이 apps/v1 · batch/v1 으로 수정되지 않았습니다(v1beta1 이 남아 있으면 안 됩니다).",
+    "en": "FAIL: ~/work/legacy/stack.yaml's apiVersions are not corrected to apps/v1 and batch/v1 (no v1beta1 may remain).",
+    "ja": "FAIL: ~/work/legacy/stack.yaml の apiVersion が apps/v1 · batch/v1 に修正されていません(v1beta1 が残っていてはいけません)。",
+    "zh-CN": "FAIL: ~/work/legacy/stack.yaml 的 apiVersion 没有修正为 apps/v1 · batch/v1（不能残留 v1beta1）。"
+  },
+  "step9m3": {
+    "ko": "FAIL: report-api 가 Ready 가 아닙니다.",
+    "en": "FAIL: report-api is not Ready.",
+    "ja": "FAIL: report-api が Ready ではありません。",
+    "zh-CN": "FAIL: report-api 不是 Ready。"
+  },
+  "q10c1": {
+    "ko": "ConfigMap app-config — mode·timeout 값",
+    "en": "ConfigMap app-config — mode and timeout values",
+    "ja": "ConfigMap app-config — mode・timeout の値",
+    "zh-CN": "ConfigMap app-config —— mode 与 timeout 的值"
+  },
+  "q10c2": {
+    "ko": "Secret db-cred — user·pass 값",
+    "en": "Secret db-cred — user and pass values",
+    "ja": "Secret db-cred — user・pass の値",
+    "zh-CN": "Secret db-cred —— user 与 pass 的值"
+  },
+  "q10c3": {
+    "ko": "APP_MODE ← configMapKeyRef(app-config/mode)",
+    "en": "APP_MODE via configMapKeyRef(app-config/mode)",
+    "ja": "APP_MODE ← configMapKeyRef(app-config/mode)",
+    "zh-CN": "APP_MODE ← configMapKeyRef(app-config/mode)"
+  },
+  "q10c4": {
+    "ko": "컨테이너 안 APP_MODE=production 확인",
+    "en": "APP_MODE=production visible inside the container",
+    "ja": "コンテナ内で APP_MODE=production を確認",
+    "zh-CN": "容器内可见 APP_MODE=production"
+  },
+  "q10c5": {
+    "ko": "/etc/creds/user 마운트 내용 확인",
+    "en": "/etc/creds/user mounted with the right content",
+    "ja": "/etc/creds/user のマウント内容を確認",
+    "zh-CN": "/etc/creds/user 挂载内容正确"
+  },
+  "step10m1": {
+    "ko": "FAIL: ConfigMap 'app-config'(mode=production, timeout=30)가 dev 에 없습니다.",
+    "en": "FAIL: ConfigMap 'app-config' (mode=production, timeout=30) is missing in dev.",
+    "ja": "FAIL: ConfigMap 'app-config'(mode=production, timeout=30)が dev にありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中缺少 ConfigMap 'app-config'（mode=production, timeout=30）。"
+  },
+  "step10m2": {
+    "ko": "FAIL: Secret 'db-cred'(user=admin, pass=S3cret1)가 dev 에 없습니다.",
+    "en": "FAIL: Secret 'db-cred' (user=admin, pass=S3cret1) is missing in dev.",
+    "ja": "FAIL: Secret 'db-cred'(user=admin, pass=S3cret1)が dev にありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中缺少 Secret 'db-cred'（user=admin, pass=S3cret1）。"
+  },
+  "step10m3": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'webapp' 이 없습니다.",
+    "en": "FAIL: pod 'webapp' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'webapp' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'webapp'。"
+  },
+  "step10m4": {
+    "ko": "FAIL: APP_MODE 가 configMapKeyRef 로 app-config 의 mode 키를 참조하지 않습니다(리터럴 값은 인정되지 않습니다).",
+    "en": "FAIL: APP_MODE does not reference app-config's mode key via configMapKeyRef (a literal value does not count).",
+    "ja": "FAIL: APP_MODE が configMapKeyRef で app-config の mode キーを参照していません(リテラル値は認められません)。",
+    "zh-CN": "FAIL: APP_MODE 没有通过 configMapKeyRef 引用 app-config 的 mode 键（字面量值不算数）。"
+  },
+  "step10m5": {
+    "ko": "FAIL: 컨테이너 안에서 APP_MODE=production 이 보이지 않습니다.",
+    "en": "FAIL: APP_MODE=production is not visible inside the container.",
+    "ja": "FAIL: コンテナ内で APP_MODE=production が確認できません。",
+    "zh-CN": "FAIL: 容器内看不到 APP_MODE=production。"
+  },
+  "step10m6": {
+    "ko": "FAIL: 컨테이너의 /etc/creds/user 가 'admin' 이 아닙니다. Secret 볼륨 마운트를 확인하세요.",
+    "en": "FAIL: /etc/creds/user inside the container is not 'admin'. Check the Secret volume mount.",
+    "ja": "FAIL: コンテナの /etc/creds/user が 'admin' ではありません。Secret のボリュームマウントを確認してください。",
+    "zh-CN": "FAIL: 容器内的 /etc/creds/user 不是 'admin'。请检查 Secret 卷挂载。"
+  },
+  "q11c1": {
+    "ko": "runAsUser 1000 · runAsNonRoot",
+    "en": "runAsUser 1000, runAsNonRoot",
+    "ja": "runAsUser 1000 · runAsNonRoot",
+    "zh-CN": "runAsUser 1000 · runAsNonRoot"
+  },
+  "q11c2": {
+    "ko": "allowPrivilegeEscalation false",
+    "en": "allowPrivilegeEscalation false",
+    "ja": "allowPrivilegeEscalation false",
+    "zh-CN": "allowPrivilegeEscalation false"
+  },
+  "q11c3": {
+    "ko": "readOnlyRootFilesystem true",
+    "en": "readOnlyRootFilesystem true",
+    "ja": "readOnlyRootFilesystem true",
+    "zh-CN": "readOnlyRootFilesystem true"
+  },
+  "q11c4": {
+    "ko": "capabilities drop ALL",
+    "en": "Capabilities drop ALL",
+    "ja": "capabilities drop ALL",
+    "zh-CN": "capabilities drop ALL"
+  },
+  "q11c5": {
+    "ko": "Running · 실제 uid 1000",
+    "en": "Running, actually uid 1000",
+    "ja": "Running · 実際に uid 1000",
+    "zh-CN": "Running · 实际 uid 1000"
+  },
+  "step11m1": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'secure-app' 이 없습니다.",
+    "en": "FAIL: pod 'secure-app' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'secure-app' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'secure-app'。"
+  },
+  "step11m2": {
+    "ko": "FAIL: runAsUser 1000 과 runAsNonRoot true 가 설정돼 있지 않습니다.",
+    "en": "FAIL: runAsUser 1000 and runAsNonRoot true are not set.",
+    "ja": "FAIL: runAsUser 1000 と runAsNonRoot true が設定されていません。",
+    "zh-CN": "FAIL: 没有设置 runAsUser 1000 和 runAsNonRoot true。"
+  },
+  "step11m3": {
+    "ko": "FAIL: 컨테이너에 allowPrivilegeEscalation: false 가 없습니다.",
+    "en": "FAIL: the container lacks allowPrivilegeEscalation: false.",
+    "ja": "FAIL: コンテナに allowPrivilegeEscalation: false がありません。",
+    "zh-CN": "FAIL: 容器缺少 allowPrivilegeEscalation: false。"
+  },
+  "step11m4": {
+    "ko": "FAIL: 컨테이너에 readOnlyRootFilesystem: true 가 없습니다.",
+    "en": "FAIL: the container lacks readOnlyRootFilesystem: true.",
+    "ja": "FAIL: コンテナに readOnlyRootFilesystem: true がありません。",
+    "zh-CN": "FAIL: 容器缺少 readOnlyRootFilesystem: true。"
+  },
+  "step11m5": {
+    "ko": "FAIL: capabilities 가 전부 drop(ALL) 되지 않았습니다.",
+    "en": "FAIL: capabilities are not all dropped (ALL).",
+    "ja": "FAIL: capabilities がすべて drop(ALL)されていません。",
+    "zh-CN": "FAIL: capabilities 没有全部丢弃（ALL）。"
+  },
+  "step11m6": {
+    "ko": "FAIL: 파드가 Running·uid 1000 상태가 아닙니다 (현재: {0} · uid {1}). readOnlyRootFilesystem 이면 쓰기 공간(/tmp emptyDir)이 필요합니다.",
+    "en": "FAIL: the pod is not Running as uid 1000 (currently: {0}, uid {1}). With readOnlyRootFilesystem you need a writable /tmp emptyDir.",
+    "ja": "FAIL: Pod が Running・uid 1000 の状態ではありません(現在: {0} · uid {1})。readOnlyRootFilesystem の場合は書き込み領域(/tmp emptyDir)が必要です。",
+    "zh-CN": "FAIL: Pod 不是以 uid 1000 运行的 Running 状态（当前：{0} · uid {1}）。readOnlyRootFilesystem 时需要可写空间（/tmp emptyDir）。"
+  },
+  "q12c1": {
+    "ko": "ServiceAccount app-sa 존재",
+    "en": "ServiceAccount app-sa exists",
+    "ja": "ServiceAccount app-sa が存在",
+    "zh-CN": "ServiceAccount app-sa 存在"
+  },
+  "q12c2": {
+    "ko": "파드가 app-sa 를 사용",
+    "en": "Pod uses app-sa",
+    "ja": "Pod が app-sa を使用",
+    "zh-CN": "Pod 使用 app-sa"
+  },
+  "q12c3": {
+    "ko": "automountServiceAccountToken false",
+    "en": "automountServiceAccountToken false",
+    "ja": "automountServiceAccountToken false",
+    "zh-CN": "automountServiceAccountToken false"
+  },
+  "q12c4": {
+    "ko": "파드 안에 토큰이 실제로 없음",
+    "en": "No token actually mounted in the pod",
+    "ja": "Pod 内にトークンが実際に存在しない",
+    "zh-CN": "Pod 内确实没有令牌"
+  },
+  "step12m1": {
+    "ko": "FAIL: dev 네임스페이스에 ServiceAccount 'app-sa' 가 없습니다.",
+    "en": "FAIL: ServiceAccount 'app-sa' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に ServiceAccount 'app-sa' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 ServiceAccount 'app-sa'。"
+  },
+  "step12m2": {
+    "ko": "FAIL: dev 네임스페이스에 파드 'sa-pod' 가 없습니다.",
+    "en": "FAIL: pod 'sa-pod' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に Pod 'sa-pod' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 Pod 'sa-pod'。"
+  },
+  "step12m3": {
+    "ko": "FAIL: 파드의 serviceAccountName 이 app-sa 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: the pod's serviceAccountName is not app-sa (found: {0}).",
+    "ja": "FAIL: Pod の serviceAccountName が app-sa ではありません(現在: {0})。",
+    "zh-CN": "FAIL: Pod 的 serviceAccountName 不是 app-sa（当前：{0}）。"
+  },
+  "step12m4": {
+    "ko": "FAIL: 파드 스펙에 automountServiceAccountToken: false 가 없습니다.",
+    "en": "FAIL: the pod spec lacks automountServiceAccountToken: false.",
+    "ja": "FAIL: Pod スペックに automountServiceAccountToken: false がありません。",
+    "zh-CN": "FAIL: Pod spec 中缺少 automountServiceAccountToken: false。"
+  },
+  "step12m5": {
+    "ko": "FAIL: 파드 안에 ServiceAccount 토큰 디렉터리가 여전히 마운트돼 있습니다.",
+    "en": "FAIL: the ServiceAccount token directory is still mounted inside the pod.",
+    "ja": "FAIL: Pod 内に ServiceAccount のトークンディレクトリがまだマウントされています。",
+    "zh-CN": "FAIL: Pod 内仍然挂载着 ServiceAccount 令牌目录。"
+  },
+  "step12m6": {
+    "ko": "FAIL: 파드가 Running 이 아니라 토큰 부재를 확인할 수 없습니다 (현재: {0}).",
+    "en": "FAIL: the pod is not Running, so the token's absence cannot be verified (currently: {0}).",
+    "ja": "FAIL: Pod が Running でないため、トークンの不在を確認できません(現在: {0})。",
+    "zh-CN": "FAIL: Pod 不是 Running，无法确认令牌是否缺失（当前：{0}）。"
+  },
+  "q13c1": {
+    "ko": "Deployment worker — replicas 2",
+    "en": "Deployment worker — replicas 2",
+    "ja": "Deployment worker — replicas 2",
+    "zh-CN": "Deployment worker —— replicas 2"
+  },
+  "q13c2": {
+    "ko": "requests cpu 100m · memory 64Mi",
+    "en": "Requests cpu 100m, memory 64Mi",
+    "ja": "requests cpu 100m · memory 64Mi",
+    "zh-CN": "requests cpu 100m · memory 64Mi"
+  },
+  "q13c3": {
+    "ko": "limits cpu 200m · memory 128Mi",
+    "en": "Limits cpu 200m, memory 128Mi",
+    "ja": "limits cpu 200m · memory 128Mi",
+    "zh-CN": "limits cpu 200m · memory 128Mi"
+  },
+  "q13c4": {
+    "ko": "Quota 안에서 2개 레플리카 Ready",
+    "en": "Both replicas Ready inside the quota",
+    "ja": "Quota の範囲内で 2 つのレプリカが Ready",
+    "zh-CN": "在配额之内 2 个副本 Ready"
+  },
+  "step13m1": {
+    "ko": "FAIL: batch 네임스페이스에 Deployment 'worker' 가 없습니다.",
+    "en": "FAIL: Deployment 'worker' does not exist in namespace batch.",
+    "ja": "FAIL: batch 名前空間に Deployment 'worker' がありません。",
+    "zh-CN": "FAIL: 命名空间 batch 中不存在 Deployment 'worker'。"
+  },
+  "step13m2": {
+    "ko": "FAIL: replicas 가 2 가 아닙니다 (현재: {0}).",
+    "en": "FAIL: replicas is not 2 (found: {0}).",
+    "ja": "FAIL: replicas が 2 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: replicas 不是 2（当前：{0}）。"
+  },
+  "step13m3": {
+    "ko": "FAIL: requests 가 cpu 100m · memory 64Mi 가 아닙니다.",
+    "en": "FAIL: requests are not cpu 100m and memory 64Mi.",
+    "ja": "FAIL: requests が cpu 100m · memory 64Mi ではありません。",
+    "zh-CN": "FAIL: requests 不是 cpu 100m · memory 64Mi。"
+  },
+  "step13m4": {
+    "ko": "FAIL: limits 가 cpu 200m · memory 128Mi 가 아닙니다.",
+    "en": "FAIL: limits are not cpu 200m and memory 128Mi.",
+    "ja": "FAIL: limits が cpu 200m · memory 128Mi ではありません。",
+    "zh-CN": "FAIL: limits 不是 cpu 200m · memory 128Mi。"
+  },
+  "step13m5": {
+    "ko": "FAIL: 2개 레플리카가 Ready 가 아닙니다 (현재: {0}). requests 없이 만들면 Quota 가 파드 생성을 거부합니다 — kubectl get events -n batch 를 확인하세요.",
+    "en": "FAIL: not both replicas are Ready (currently: {0}). Without requests the quota rejects pod creation — check kubectl get events -n batch.",
+    "ja": "FAIL: 2 つのレプリカが Ready ではありません(現在: {0})。requests なしで作ると Quota が Pod の作成を拒否します — kubectl get events -n batch を確認してください。",
+    "zh-CN": "FAIL: 2 个副本没有全部 Ready（当前：{0}）。不写 requests 的话配额会拒绝创建 Pod —— 请查看 kubectl get events -n batch。"
+  },
+  "q14c1": {
+    "ko": "frontend-svc — ClusterIP·포트·엔드포인트 규격",
+    "en": "frontend-svc — ClusterIP, port and endpoints correct",
+    "ja": "frontend-svc — ClusterIP・ポート・エンドポイントが仕様どおり",
+    "zh-CN": "frontend-svc —— ClusterIP、端口与 endpoint 符合规格"
+  },
+  "q14c2": {
+    "ko": "frontend-np — NodePort 타입",
+    "en": "frontend-np — type NodePort",
+    "ja": "frontend-np — タイプ NodePort",
+    "zh-CN": "frontend-np —— 类型为 NodePort"
+  },
+  "q14c3": {
+    "ko": "nodePort 30080",
+    "en": "nodePort 30080",
+    "ja": "nodePort 30080",
+    "zh-CN": "nodePort 30080"
+  },
+  "q14c4": {
+    "ko": "frontend-np 엔드포인트 연결",
+    "en": "frontend-np endpoints wired",
+    "ja": "frontend-np のエンドポイントが接続済み",
+    "zh-CN": "frontend-np 的 endpoint 已接通"
+  },
+  "q14c5": {
+    "ko": "서비스 DNS 로 실제 HTTP 응답",
+    "en": "Real HTTP response via service DNS",
+    "ja": "サービス DNS で実際に HTTP 応答",
+    "zh-CN": "通过 Service DNS 得到真实 HTTP 响应"
+  },
+  "q14c6": {
+    "ko": "노드 30080 포트로 실제 응답",
+    "en": "Real response on node port 30080",
+    "ja": "ノードの 30080 ポートで実際に応答",
+    "zh-CN": "节点 30080 端口有真实响应"
+  },
+  "step14m1": {
+    "ko": "FAIL: prod 네임스페이스에 Service '{0}' 가 없습니다.",
+    "en": "FAIL: Service '{0}' does not exist in namespace prod.",
+    "ja": "FAIL: prod 名前空間に Service '{0}' がありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Service '{0}'。"
+  },
+  "step14m2": {
+    "ko": "FAIL: {0} 의 타입이 {1} 이 아닙니다.",
+    "en": "FAIL: {0} is not of type {1}.",
+    "ja": "FAIL: {0} のタイプが {1} ではありません。",
+    "zh-CN": "FAIL: {0} 的类型不是 {1}。"
+  },
+  "step14m3": {
+    "ko": "FAIL: {0} 의 포트가 80 이 아닙니다.",
+    "en": "FAIL: {0}'s port is not 80.",
+    "ja": "FAIL: {0} のポートが 80 ではありません。",
+    "zh-CN": "FAIL: {0} 的端口不是 80。"
+  },
+  "step14m4": {
+    "ko": "FAIL: {0} 의 엔드포인트가 비어 있습니다. 셀렉터가 app=frontend 파드를 가리키는지 확인하세요.",
+    "en": "FAIL: {0} has no endpoints. Check the selector targets the app=frontend pods.",
+    "ja": "FAIL: {0} のエンドポイントが空です。セレクターが app=frontend の Pod を指しているか確認してください。",
+    "zh-CN": "FAIL: {0} 的 endpoint 为空。请确认选择器指向 app=frontend 的 Pod。"
+  },
+  "step14m5": {
+    "ko": "FAIL: nodePort 가 30080 이 아닙니다 (현재: {0}).",
+    "en": "FAIL: the nodePort is not 30080 (found: {0}).",
+    "ja": "FAIL: nodePort が 30080 ではありません(現在: {0})。",
+    "zh-CN": "FAIL: nodePort 不是 30080（当前：{0}）。"
+  },
+  "step14m6": {
+    "ko": "FAIL: 검증용 client 파드가 없어 통신 채점을 할 수 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: the client probe pod is missing, so traffic cannot be graded. If you deleted it, restart the lab.",
+    "ja": "FAIL: 検証用の client Pod が存在しないため、通信を採点できません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 验证用的 client Pod 不存在，无法对通信评分。如果已删除，请重新开始实验。"
+  },
+  "step14m7": {
+    "ko": "FAIL: 서비스 DNS(frontend-svc.prod...)로 HTTP 응답이 오지 않습니다.",
+    "en": "FAIL: no HTTP response via the service DNS (frontend-svc.prod...).",
+    "ja": "FAIL: サービス DNS(frontend-svc.prod...)で HTTP 応答が返りません。",
+    "zh-CN": "FAIL: 通过 Service DNS（frontend-svc.prod...）没有得到 HTTP 响应。"
+  },
+  "step14m8": {
+    "ko": "FAIL: 노드의 30080 포트가 응답하지 않습니다.",
+    "en": "FAIL: the node's port 30080 does not answer.",
+    "ja": "FAIL: ノードの 30080 ポートが応答しません。",
+    "zh-CN": "FAIL: 节点的 30080 端口没有响应。"
+  },
+  "q15c1": {
+    "ko": "Ingress web-ing 존재",
+    "en": "Ingress web-ing exists",
+    "ja": "Ingress web-ing が存在",
+    "zh-CN": "Ingress web-ing 存在"
+  },
+  "q15c2": {
+    "ko": "호스트 shop.example.com 규칙",
+    "en": "Rule for host shop.example.com",
+    "ja": "ホスト shop.example.com のルール",
+    "zh-CN": "存在 host 为 shop.example.com 的规则"
+  },
+  "q15c3": {
+    "ko": "/ (Prefix) → frontend-svc:80",
+    "en": "/ (Prefix) → frontend-svc:80",
+    "ja": "/ (Prefix) → frontend-svc:80",
+    "zh-CN": "/ (Prefix) → frontend-svc:80"
+  },
+  "q15c4": {
+    "ko": "/shop (Prefix) → shop-svc:80",
+    "en": "/shop (Prefix) → shop-svc:80",
+    "ja": "/shop (Prefix) → shop-svc:80",
+    "zh-CN": "/shop (Prefix) → shop-svc:80"
+  },
+  "step15m1": {
+    "ko": "FAIL: prod 네임스페이스에 Ingress 'web-ing' 이 없습니다.",
+    "en": "FAIL: Ingress 'web-ing' does not exist in namespace prod.",
+    "ja": "FAIL: prod 名前空間に Ingress 'web-ing' がありません。",
+    "zh-CN": "FAIL: 命名空间 prod 中不存在 Ingress 'web-ing'。"
+  },
+  "step15m2": {
+    "ko": "FAIL: host 가 shop.example.com 인 규칙이 없습니다.",
+    "en": "FAIL: there is no rule for host shop.example.com.",
+    "ja": "FAIL: host が shop.example.com のルールがありません。",
+    "zh-CN": "FAIL: 没有 host 为 shop.example.com 的规则。"
+  },
+  "step15m3": {
+    "ko": "FAIL: 경로 {0} (Prefix) 가 {1} 의 80 포트로 라우팅되지 않습니다.",
+    "en": "FAIL: path {0} (Prefix) does not route to {1} port 80.",
+    "ja": "FAIL: パス {0} (Prefix) が {1} のポート 80 にルーティングされていません。",
+    "zh-CN": "FAIL: 路径 {0}（Prefix）没有路由到 {1} 的 80 端口。"
+  },
+  "q16c1": {
+    "ko": "NetworkPolicy cache-guard 존재",
+    "en": "NetworkPolicy cache-guard exists",
+    "ja": "NetworkPolicy cache-guard が存在",
+    "zh-CN": "NetworkPolicy cache-guard 存在"
+  },
+  "q16c2": {
+    "ko": "대상 podSelector app=cache",
+    "en": "Targets podSelector app=cache",
+    "ja": "対象 podSelector が app=cache",
+    "zh-CN": "目标 podSelector 为 app=cache"
+  },
+  "q16c3": {
+    "ko": "role=client 만 허용하는 ingress 규칙",
+    "en": "Ingress rule admits role=client only",
+    "ja": "role=client のみ許可する ingress ルール",
+    "zh-CN": "ingress 规则仅放行 role=client"
+  },
+  "q16c4": {
+    "ko": "client → cache 통신 허용 확인",
+    "en": "client → cache traffic allowed",
+    "ja": "client → cache の通信を許可",
+    "zh-CN": "client → cache 通信被允许"
+  },
+  "q16c5": {
+    "ko": "intruder → cache 차단 확인",
+    "en": "intruder → cache traffic blocked",
+    "ja": "intruder → cache の通信を遮断",
+    "zh-CN": "intruder → cache 通信被阻断"
+  },
+  "step16m1": {
+    "ko": "FAIL: dev 네임스페이스에 NetworkPolicy 'cache-guard' 가 없습니다.",
+    "en": "FAIL: NetworkPolicy 'cache-guard' does not exist in namespace dev.",
+    "ja": "FAIL: dev 名前空間に NetworkPolicy 'cache-guard' がありません。",
+    "zh-CN": "FAIL: 命名空间 dev 中不存在 NetworkPolicy 'cache-guard'。"
+  },
+  "step16m2": {
+    "ko": "FAIL: podSelector 가 app=cache 파드를 가리키지 않습니다.",
+    "en": "FAIL: the podSelector does not target app=cache pods.",
+    "ja": "FAIL: podSelector が app=cache の Pod を対象にしていません。",
+    "zh-CN": "FAIL: podSelector 未指向 app=cache 的 Pod。"
+  },
+  "step16m3": {
+    "ko": "FAIL: from 에 role=client podSelector 가 없습니다.",
+    "en": "FAIL: the from clause has no role=client podSelector.",
+    "ja": "FAIL: from に role=client の podSelector がありません。",
+    "zh-CN": "FAIL: from 中没有 role=client 的 podSelector。"
+  },
+  "step16m4": {
+    "ko": "FAIL: cache 파드가 없거나 IP 를 얻지 못해 통신 채점을 할 수 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: the cache pod is missing or has no IP, so traffic cannot be graded. If you deleted it, restart the lab.",
+    "ja": "FAIL: cache Pod が存在しないか IP を取得できず、通信を採点できません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: cache Pod 不存在或未获得 IP，无法对通信评分。如果已删除，请重新开始实验。"
+  },
+  "step16m5": {
+    "ko": "FAIL: 발신 파드 '{0}' 가 없어 통신 채점을 할 수 없습니다. 삭제했다면 랩을 다시 시작해야 합니다.",
+    "en": "FAIL: client pod '{0}' is missing, so traffic cannot be graded. If you deleted it, restart the lab.",
+    "ja": "FAIL: 送信元 Pod '{0}' が存在しないため、通信を採点できません。削除した場合はラボを再開してください。",
+    "zh-CN": "FAIL: 发起端 Pod '{0}' 不存在，无法对通信评分。如果已删除，请重新开始实验。"
+  },
+  "step16m6": {
+    "ko": "FAIL: client → cache 통신이 막혀 있습니다. cache-guard 가 TCP 80 을 허용하는지 확인하세요.",
+    "en": "FAIL: client → cache traffic is blocked. Check cache-guard permits TCP 80.",
+    "ja": "FAIL: client → cache の通信がブロックされています。cache-guard が TCP 80 を許可しているか確認してください。",
+    "zh-CN": "FAIL: client → cache 的通信被阻断。请确认 cache-guard 允许 TCP 80。"
+  },
+  "step16m7": {
+    "ko": "FAIL: intruder → cache 통신이 여전히 됩니다. 정책이 role=client 외를 차단하지 않습니다.",
+    "en": "FAIL: intruder → cache traffic still succeeds. The policy does not block pods other than role=client.",
+    "ja": "FAIL: intruder → cache の通信がまだ成功します。ポリシーが role=client 以外を遮断していません。",
+    "zh-CN": "FAIL: intruder → cache 的通信仍然成功。策略没有阻断 role=client 以外的 Pod。"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "linux-09",
+  "title": {
+    "ko": "CPU·메모리 관리",
+    "en": "CPU and Memory Management",
+    "ja": "CPU・メモリ管理",
+    "zh-CN": "CPU 与内存管理",
+    "zh-TW": "CPU 與記憶體管理",
+    "es": "Gestión de CPU y memoria",
+    "de": "CPU- und Speicherverwaltung"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "자원 관찰",
+        "en": "Observing resources",
+        "ja": "資源の観察",
+        "zh-CN": "资源观察",
+        "zh-TW": "資源觀察",
+        "es": "Observar los recursos",
+        "de": "Ressourcen beobachten"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "우선순위와 CPU 친화도",
+        "en": "Priority and CPU affinity",
+        "ja": "優先度と CPU アフィニティ",
+        "zh-CN": "优先级与 CPU 亲和性",
+        "zh-TW": "優先權與 CPU 親和性",
+        "es": "Prioridad y afinidad de CPU",
+        "de": "Priorität und CPU-Affinität"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "cgroup 메모리 제한과 OOM",
+        "en": "cgroup memory limits and OOM",
+        "ja": "cgroup のメモリ制限と OOM",
+        "zh-CN": "cgroup 内存限制与 OOM",
+        "zh-TW": "cgroup 記憶體限制與 OOM",
+        "es": "Límites de memoria en cgroups y OOM",
+        "de": "cgroup-Speicherlimits und OOM"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

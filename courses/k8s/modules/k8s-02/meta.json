@@ -1,0 +1,57 @@
+{
+  "id": "k8s-02",
+  "title": {
+    "ko": "Service 와 클러스터 네트워킹",
+    "en": "Services and Cluster Networking",
+    "ja": "Service とクラスターネットワーキング",
+    "zh-CN": "Service 与集群网络",
+    "zh-TW": "Service 與叢集網路",
+    "es": "Services y red del clúster",
+    "de": "Services und Cluster-Netzwerk"
+  },
+  "desc": {
+    "ko": "ClusterIP·NodePort·Headless 세 가지 Service 와 CoreDNS 이름 해석으로 클러스터 내부 통신 이해",
+    "en": "ClusterIP, NodePort and Headless Services plus CoreDNS name resolution for in-cluster traffic"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "ClusterIP 로 노출",
+        "en": "Expose with ClusterIP",
+        "ja": "ClusterIP で公開",
+        "zh-CN": "用 ClusterIP 暴露",
+        "zh-TW": "用 ClusterIP 公開",
+        "es": "Exponer con ClusterIP",
+        "de": "Mit ClusterIP veröffentlichen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "NodePort 로 외부 노출",
+        "en": "Expose with NodePort",
+        "ja": "NodePort で外部公開",
+        "zh-CN": "用 NodePort 对外暴露",
+        "zh-TW": "用 NodePort 對外公開",
+        "es": "Exponer con NodePort",
+        "de": "Mit NodePort nach außen veröffentlichen"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "Headless Service 와 DNS",
+        "en": "Headless Service and DNS",
+        "ja": "Headless Service と DNS",
+        "zh-CN": "Headless Service 与 DNS",
+        "zh-TW": "Headless Service 與 DNS",
+        "es": "Headless Service y DNS",
+        "de": "Headless Service und DNS"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[Unit]
+Description=SnackLab OpenStack network bootstrap (br-ex)
+After=openvswitch-switch.service
+Requires=openvswitch-switch.service
+Before=neutron-openvswitch-agent.service neutron-l3-agent.service neutron-dhcp-agent.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# The host's /lib/modules is mounted into learner pods (same mechanism the k3s
+# unit uses for br_netfilter). If the module is missing, OVS may still work via
+# its userspace datapath, so this is best-effort.
+ExecStartPre=-/sbin/modprobe openvswitch
+ExecStart=/usr/bin/ovs-vsctl --may-exist add-br br-ex
+ExecStart=/usr/sbin/ip link set br-ex up
+# DevStack's conventional external range; lives entirely inside the pod netns.
+ExecStart=-/usr/sbin/ip addr add 172.24.4.1/24 dev br-ex
+
+[Install]
+WantedBy=multi-user.target

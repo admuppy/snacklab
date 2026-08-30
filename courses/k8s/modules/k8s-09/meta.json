@@ -1,0 +1,57 @@
+{
+  "id": "k8s-09",
+  "title": {
+    "ko": "NetworkPolicy — 마이크로세그멘테이션",
+    "en": "NetworkPolicy — Microsegmentation",
+    "ja": "NetworkPolicy — マイクロセグメンテーション",
+    "zh-CN": "NetworkPolicy —— 微隔离",
+    "zh-TW": "NetworkPolicy —— 微分段",
+    "es": "NetworkPolicy: microsegmentación",
+    "de": "NetworkPolicy – Mikrosegmentierung"
+  },
+  "desc": {
+    "ko": "기본 차단 정책과 선택적 허용으로 네임스페이스 안 트래픽을 실제로 격리",
+    "en": "Default-deny plus selective allow rules to genuinely isolate traffic inside a namespace"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "기본 연결 확인",
+        "en": "Verify baseline connectivity",
+        "ja": "基本の疎通確認",
+        "zh-CN": "确认基础连通性",
+        "zh-TW": "確認基礎連通性",
+        "es": "Verificar la conectividad base",
+        "de": "Grundkonnektivität prüfen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "기본 거부(default-deny)",
+        "en": "Default-deny ingress",
+        "ja": "既定拒否（default-deny）",
+        "zh-CN": "默认拒绝（default-deny）",
+        "zh-TW": "預設拒絕（default-deny）",
+        "es": "Denegación por defecto (default-deny)",
+        "de": "Standardmäßig verweigern (default-deny)"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "출처 기반 허용",
+        "en": "Allow from a specific source",
+        "ja": "送信元に基づく許可",
+        "zh-CN": "基于来源的放行",
+        "zh-TW": "基於來源的放行",
+        "es": "Permitir desde un origen concreto",
+        "de": "Freigabe nach Quelle"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

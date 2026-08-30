@@ -1,0 +1,57 @@
+{
+  "id": "k8s-05",
+  "title": {
+    "ko": "리소스 요청·제한과 QoS",
+    "en": "Resource Requests, Limits, and QoS",
+    "ja": "リソース要求・制限と QoS",
+    "zh-CN": "资源请求、限制与 QoS",
+    "zh-TW": "資源請求、限制與 QoS",
+    "es": "Peticiones y límites de recursos y QoS",
+    "de": "Ressourcen-Requests, Limits und QoS"
+  },
+  "desc": {
+    "ko": "requests·limits 가 스케줄링과 QoS 클래스, OOM 축출 순서를 어떻게 바꾸는지 실측",
+    "en": "Measure how requests and limits drive scheduling, QoS classes and OOM eviction order"
+  },
+  "duration": 35,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "Guaranteed QoS 파드",
+        "en": "A Guaranteed QoS Pod",
+        "ja": "Guaranteed QoS の Pod",
+        "zh-CN": "Guaranteed QoS 的 Pod",
+        "zh-TW": "Guaranteed QoS 的 Pod",
+        "es": "Un Pod con QoS Guaranteed",
+        "de": "Ein Pod mit QoS „Guaranteed“"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "Burstable QoS 파드",
+        "en": "A Burstable QoS Pod",
+        "ja": "Burstable QoS の Pod",
+        "zh-CN": "Burstable QoS 的 Pod",
+        "zh-TW": "Burstable QoS 的 Pod",
+        "es": "Un Pod con QoS Burstable",
+        "de": "Ein Pod mit QoS „Burstable“"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "LimitRange 기본값",
+        "en": "LimitRange defaults",
+        "ja": "LimitRange の既定値",
+        "zh-CN": "LimitRange 默认值",
+        "zh-TW": "LimitRange 預設值",
+        "es": "Valores por defecto con LimitRange",
+        "de": "LimitRange-Standardwerte"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

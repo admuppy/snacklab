@@ -1,0 +1,63 @@
+# SnackLab single-node deployment — portal container + learner containers on the
+# local docker daemon (no Kubernetes).
+#
+#   cd compose
+#   cp .env.example .env        # optional, tune settings
+#   docker compose up -d --build
+#   open http://localhost:3000
+#
+# SECURITY: the portal mounts the docker socket (it must spawn learner containers),
+# which is root-equivalent on this host, and learner containers run privileged
+# (systemd / k3s need it). Run this stack on a dedicated host/VM and only for
+# audiences you trust. See ../SECURITY.md.
+name: snacklab
+
+services:
+  portal:
+    build:
+      context: ..
+      dockerfile: compose/Dockerfile.portal
+    image: snacklab-portal:compose
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      DRIVER: docker
+      # Registry prefix for image refs without a registry (course.json images, LEARNER_IMAGE).
+      # Locally built tags under the same prefix are used as-is; missing ones are pulled.
+      IMAGE_REGISTRY: ${IMAGE_REGISTRY:-ghcr.io/admuppy}
+      LEARNER_IMAGE: ${LEARNER_IMAGE:-snacklab-linux:v2}
+      # Learner containers join this network (created below) instead of the default bridge.
+      DOCKER_NETWORK: snacklab-learners
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:3000}
+      DEFAULT_LOCALE: ${DEFAULT_LOCALE:-en}
+      ADMIN_USERS: ${ADMIN_USERS:-admin}
+      # Courses are bind-mounted straight from the repo checkout (no content images).
+      CONTENT_DIRS: /app/prototype/content:/courses
+      # Keep progress/accounts on the sessions volume so they survive container recreation.
+      PROGRESS_FILE: /app/prototype/sessions/progress.json
+      USERS_FILE: /app/prototype/sessions/users.json
+      COOKIE_SECRET: ${COOKIE_SECRET:-}
+      MAX_SESSIONS: ${MAX_SESSIONS:-8}
+      MAX_SESSIONS_PER_USER: ${MAX_SESSIONS_PER_USER:-1}
+      TTL_MINUTES: ${TTL_MINUTES:-40}
+      EXTEND_MINUTES: ${EXTEND_MINUTES:-30}
+      IDLE_MINUTES: ${IDLE_MINUTES:-15}
+      IDLE_GRACE_MINUTES: ${IDLE_GRACE_MINUTES:-5}
+      WARM_POOL_SIZE: ${WARM_POOL_SIZE:-1}
+      # AUTH_MODE: local            # off | local | oidc; default auto
+      # OIDC_ISSUER: https://keycloak.example.com/realms/myrealm
+      # OIDC_CLIENT_ID: snacklab
+      # OIDC_CLIENT_SECRET: ...
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../courses:/courses:ro
+      - sessions:/app/prototype/sessions
+    networks: [default, learners]
+
+networks:
+  learners:
+    name: snacklab-learners
+
+volumes:
+  sessions:

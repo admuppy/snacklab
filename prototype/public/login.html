@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SnackLab</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  .wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .box {
+    width: 320px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .box h1 { margin: 0 0 4px; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .box label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .box input {
+    width: 100%; box-sizing: border-box; padding: 8px 10px; font-size: 14px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink);
+  }
+  .box input:focus { outline: none; border-color: var(--accent); }
+  .err { color: var(--danger); font-size: 12.5px; min-height: 16px; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><b>SnackLab</b></span>
+  <span class="spacer"></span>
+</div>
+<div class="wrap">
+  <form class="box" id="f">
+    <h1 data-i18n="loginTitle">로그인</h1>
+    <div>
+      <label for="u" data-i18n="loginUser">사용자명</label>
+      <input id="u" name="user" autocomplete="username" autofocus>
+    </div>
+    <div>
+      <label for="p" data-i18n="loginPass">비밀번호</label>
+      <input id="p" name="pass" type="password" autocomplete="current-password">
+    </div>
+    <div class="err" id="err"></div>
+    <button class="btn primary" type="submit" data-i18n="loginBtn">로그인</button>
+    <div style="font-size:12.5px;text-align:center">
+      <a href="/signup.html" style="color:var(--accent)" data-i18n="loginSignupLink">계정이 없나요? 회원가입</a>
+    </div>
+  </form>
+</div>
+<script src="/i18n.js"></script>
+<script>
+document.getElementById('f').onsubmit = async e => {
+  e.preventDefault();
+  const err = document.getElementById('err');
+  err.textContent = '';
+  const next = new URLSearchParams(location.search).get('next') || '/';
+  const res = await fetch('/auth/local', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user: document.getElementById('u').value.trim(),
+      pass: document.getElementById('p').value,
+      next,
+    }),
+  });
+  const j = await res.json().catch(() => ({}));
+  if (!res.ok) { err.textContent = j.error || t('loginFailed'); return; }
+  location.href = j.next || '/';
+};
+</script>
+</body>
+</html>

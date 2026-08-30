@@ -1,0 +1,75 @@
+# Example production values for SnackLab.
+# Copy to values-live.yaml (gitignored) and adjust for your site:
+#   helm upgrade --install lab ./chart -n snacklab --create-namespace -f chart/values-live.yaml
+
+# Registry prefix for images referenced without a registry (course.json learner images).
+# Point at your own registry for private/air-gapped installs.
+imageRegistry: ghcr.io/admuppy
+
+image:
+  repository: ghcr.io/admuppy/snacklab-portal
+  tag: v1.14
+
+# Default learner environment for the Linux track (systemd PID1 image).
+# Refs without "/" get imageRegistry prepended.
+learner:
+  image: snacklab-linux:v3
+
+# Course bundles injected as init containers. Each image copies its bundle
+# into the shared /courses volume at startup.
+courses:
+- name: k8s
+  image: ghcr.io/admuppy/snacklab-k8s-course:v6
+- name: cka
+  image: ghcr.io/admuppy/snacklab-cka-course:v4
+- name: cks
+  image: ghcr.io/admuppy/snacklab-cks-course:v3
+- name: ckad
+  image: ghcr.io/admuppy/snacklab-ckad-course:v2
+- name: openstack
+  image: ghcr.io/admuppy/snacklab-openstack-course:v1
+
+driver: pod            # pod = real learner pods; sim = UI development without a cluster
+defaultLocale: en      # ko·en·ja·zh-CN·zh-TW·es·de
+publicUrl: https://lab.example.com
+
+adminUsers:
+- admin
+
+auth:
+  # auto: oidc if issuer is set, otherwise local. See chart/templates/NOTES.txt.
+  mode: local
+  usersExistingSecret: lab-users        # users.json made with prototype/userctl.js
+  cookieSecretExistingSecret: lab-cookie
+  # oidc:
+  #   issuer: https://keycloak.example.com/realms/myrealm
+  #   clientId: snacklab
+  #   existingSecret: lab-oidc          # key: clientSecret
+
+# Progress/badge persistence. Works with any StorageClass (local-path, longhorn,
+# nfs-client, ...). Set accessModes to [ReadWriteMany] for NFS-style classes if desired;
+# a single portal replica only needs ReadWriteOnce.
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: ''     # '' = cluster default StorageClass
+
+session:
+  ttlMinutes: 40
+  extendMinutes: 30
+  idleMinutes: 15
+  idleGraceMinutes: 5
+  max: 16
+  maxPerUser: 1
+
+warmPool:
+  min: 1
+  size: 2
+
+ingress:
+  enabled: true
+  className: nginx
+  host: lab.example.com
+  # tls:
+  # - secretName: lab-tls
+  #   hosts: [lab.example.com]

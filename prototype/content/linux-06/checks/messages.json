@@ -1,0 +1,146 @@
+{
+  "step1m1": {
+    "ko": "FAIL: hello-web.service가 active가 아닙니다.",
+    "ja": "FAIL: hello-web.service が active ではありません。",
+    "zh-CN": "FAIL: hello-web.service 不是 active 状态。",
+    "zh-TW": "FAIL: hello-web.service 不是 active 狀態。",
+    "es": "FAIL: hello-web.service no está activo.",
+    "de": "FAIL: hello-web.service ist nicht aktiv.",
+    "en": "FAIL: hello-web.service is not active."
+  },
+  "step1m2": {
+    "ko": "FAIL: hello-web.service가 enable되지 않았습니다 (부팅 자동 기동).",
+    "ja": "FAIL: hello-web.service が enable されていません（起動時の自動開始）。",
+    "zh-CN": "FAIL: hello-web.service 未设为开机自启（enable）。",
+    "zh-TW": "FAIL: hello-web.service 未設為開機自動啟動（enable）。",
+    "es": "FAIL: hello-web.service no está habilitado (arranque automático).",
+    "de": "FAIL: hello-web.service ist nicht aktiviert (Autostart beim Booten).",
+    "en": "FAIL: hello-web.service is not enabled (start on boot)."
+  },
+  "step1m3": {
+    "ko": "FAIL: 8080 포트에서 HTTP 응답이 없습니다.",
+    "ja": "FAIL: 8080 番ポートから HTTP 応答がありません。",
+    "zh-CN": "FAIL: 8080 端口没有 HTTP 响应。",
+    "zh-TW": "FAIL: 8080 連接埠沒有 HTTP 回應。",
+    "es": "FAIL: no hay respuesta HTTP en el puerto 8080.",
+    "de": "FAIL: Auf Port 8080 kommt keine HTTP-Antwort.",
+    "en": "FAIL: no HTTP response on port 8080."
+  },
+  "step1m4": {
+    "ko": "PASS: hello-web 서비스가 8080에서 서비스 중이며 enable 상태입니다.",
+    "ja": "PASS: hello-web が 8080 でサービスしており、enable 状態です。",
+    "zh-CN": "PASS: hello-web 正在 8080 提供服务，且已设为开机自启。",
+    "zh-TW": "PASS: hello-web 正在 8080 提供服務，且已設為開機自動啟動。",
+    "es": "PASS: hello-web sirve en el puerto 8080 y está habilitado.",
+    "de": "PASS: hello-web läuft auf Port 8080 und ist aktiviert.",
+    "en": "PASS: hello-web is serving on 8080 and is enabled."
+  },
+  "step2m1": {
+    "ko": "FAIL: ExecStart({0})가 실행 가능한 파일이 아닙니다. journalctl -u lab-report 에서 203/EXEC 원인을 찾아 고치세요.",
+    "ja": "FAIL: ExecStart（{0}）が実行可能なファイルではありません。journalctl -u lab-report で 203/EXEC の原因を探して直してください。",
+    "zh-CN": "FAIL: ExecStart（{0}）不是可执行文件。请用 journalctl -u lab-report 找出 203/EXEC 的原因并修复。",
+    "zh-TW": "FAIL: ExecStart（{0}）不是可執行檔。請用 journalctl -u lab-report 找出 203/EXEC 的原因並修復。",
+    "es": "FAIL: ExecStart ({0}) no es un archivo ejecutable. Busca la causa del 203/EXEC con journalctl -u lab-report y corrígela.",
+    "de": "FAIL: ExecStart ({0}) ist keine ausführbare Datei. Finde die Ursache des 203/EXEC mit journalctl -u lab-report und behebe sie.",
+    "en": "FAIL: ExecStart ({0}) is not an executable file. Find the cause of the 203/EXEC with journalctl -u lab-report and fix it."
+  },
+  "step2m2": {
+    "ko": "FAIL: lab-report.service가 아직 active가 아닙니다. daemon-reload 후 start 했는지 확인하세요.",
+    "ja": "FAIL: lab-report.service がまだ active ではありません。daemon-reload の後に start したか確認してください。",
+    "zh-CN": "FAIL: lab-report.service 仍不是 active。请确认是否在 daemon-reload 之后执行了 start。",
+    "zh-TW": "FAIL: lab-report.service 仍不是 active。請確認是否在 daemon-reload 之後執行了 start。",
+    "es": "FAIL: lab-report.service todavía no está activo. Comprueba que hiciste start tras daemon-reload.",
+    "de": "FAIL: lab-report.service ist noch nicht aktiv. Prüfe, ob du nach daemon-reload gestartet hast.",
+    "en": "FAIL: lab-report.service is still not active. Check that you started it after daemon-reload."
+  },
+  "step2m3": {
+    "ko": "PASS: lab-report 유닛이 수리되어 정상 동작 중입니다.",
+    "ja": "PASS: lab-report ユニットが修復され正常に動作しています。",
+    "zh-CN": "PASS: lab-report 单元已修复并正常运行。",
+    "zh-TW": "PASS: lab-report 單元已修復並正常運作。",
+    "es": "PASS: el unit lab-report está reparado y funcionando.",
+    "de": "PASS: Die Unit lab-report ist repariert und läuft.",
+    "en": "PASS: the lab-report unit is repaired and running."
+  },
+  "step3m1": {
+    "ko": "FAIL: hello-web의 Restart 정책이 on-failure/always가 아닙니다 (현재: {0}).",
+    "ja": "FAIL: hello-web の Restart ポリシーが on-failure/always ではありません（現在: {0}）。",
+    "zh-CN": "FAIL: hello-web 的 Restart 策略不是 on-failure/always（当前：{0}）。",
+    "zh-TW": "FAIL: hello-web 的 Restart 原則不是 on-failure/always（目前：{0}）。",
+    "es": "FAIL: la política Restart de hello-web no es on-failure/always (actualmente: {0}).",
+    "de": "FAIL: Die Restart-Richtlinie von hello-web ist nicht on-failure/always (aktuell: {0}).",
+    "en": "FAIL: the Restart policy of hello-web is not on-failure/always (currently: {0})."
+  },
+  "step3m2": {
+    "ko": "FAIL: hello-web이 실행 중이 아닙니다.",
+    "ja": "FAIL: hello-web が動いていません。",
+    "zh-CN": "FAIL: hello-web 未在运行。",
+    "zh-TW": "FAIL: hello-web 未在執行。",
+    "es": "FAIL: hello-web no está en ejecución.",
+    "de": "FAIL: hello-web läuft nicht.",
+    "en": "FAIL: hello-web is not running."
+  },
+  "step3m3": {
+    "ko": "FAIL: 프로세스를 죽였는데 되살아나지 않았습니다 (RestartSec이 너무 길지 않은지 확인).",
+    "ja": "FAIL: プロセスを終了させたのに復活しませんでした（RestartSec が長すぎないか確認してください）。",
+    "zh-CN": "FAIL: 杀掉进程后没有被拉起（请检查 RestartSec 是否设得太长）。",
+    "zh-TW": "FAIL: 砍掉行程後沒有被拉起（請檢查 RestartSec 是否設得太長）。",
+    "es": "FAIL: mataste el proceso pero no ha vuelto (revisa que RestartSec no sea demasiado alto).",
+    "de": "FAIL: Der Prozess wurde beendet, aber nicht neu gestartet (prüfe, ob RestartSec zu hoch ist).",
+    "en": "FAIL: you killed the process but it did not come back (check that RestartSec is not too long)."
+  },
+  "step3m4": {
+    "ko": "PASS: 강제 종료 후 systemd가 자동으로 되살렸습니다 (PID {0} → {1}).",
+    "ja": "PASS: 強制終了のあと systemd が自動的に復旧させました（PID {0} → {1}）。",
+    "zh-CN": "PASS: 强制结束后 systemd 自动拉起了进程（PID {0} → {1}）。",
+    "zh-TW": "PASS: 強制結束後 systemd 自動拉起了行程（PID {0} → {1}）。",
+    "es": "PASS: tras el cierre forzado, systemd lo ha reiniciado automáticamente (PID {0} → {1}).",
+    "de": "PASS: Nach dem erzwungenen Beenden hat systemd automatisch neu gestartet (PID {0} → {1}).",
+    "en": "PASS: after the forced kill, systemd restarted it automatically (PID {0} → {1})."
+  },
+  "step4m1": {
+    "ko": "FAIL: lab-tick.timer가 active가 아닙니다.",
+    "ja": "FAIL: lab-tick.timer が active ではありません。",
+    "zh-CN": "FAIL: lab-tick.timer 不是 active 状态。",
+    "zh-TW": "FAIL: lab-tick.timer 不是 active 狀態。",
+    "es": "FAIL: lab-tick.timer no está activo.",
+    "de": "FAIL: lab-tick.timer ist nicht aktiv.",
+    "en": "FAIL: lab-tick.timer is not active."
+  },
+  "step4m2": {
+    "ko": "FAIL: lab-tick.timer가 enable되지 않았습니다.",
+    "ja": "FAIL: lab-tick.timer が enable されていません。",
+    "zh-CN": "FAIL: lab-tick.timer 未设为开机自启。",
+    "zh-TW": "FAIL: lab-tick.timer 未設為開機自動啟動。",
+    "es": "FAIL: lab-tick.timer no está habilitado.",
+    "de": "FAIL: lab-tick.timer ist nicht aktiviert.",
+    "en": "FAIL: lab-tick.timer is not enabled."
+  },
+  "step4m3": {
+    "ko": "FAIL: lab-tick.service의 Type이 oneshot이 아닙니다 (현재: {0}).",
+    "ja": "FAIL: lab-tick.service の Type が oneshot ではありません（現在: {0}）。",
+    "zh-CN": "FAIL: lab-tick.service 的 Type 不是 oneshot（当前：{0}）。",
+    "zh-TW": "FAIL: lab-tick.service 的 Type 不是 oneshot（目前：{0}）。",
+    "es": "FAIL: el Type de lab-tick.service no es oneshot (actualmente: {0}).",
+    "de": "FAIL: Der Type von lab-tick.service ist nicht oneshot (aktuell: {0}).",
+    "en": "FAIL: the Type of lab-tick.service is not oneshot (currently: {0})."
+  },
+  "step4m4": {
+    "ko": "FAIL: list-timers에 lab-tick이 없습니다.",
+    "ja": "FAIL: list-timers に lab-tick がありません。",
+    "zh-CN": "FAIL: list-timers 中没有 lab-tick。",
+    "zh-TW": "FAIL: list-timers 中沒有 lab-tick。",
+    "es": "FAIL: lab-tick no aparece en list-timers.",
+    "de": "FAIL: lab-tick taucht in list-timers nicht auf.",
+    "en": "FAIL: lab-tick does not appear in list-timers."
+  },
+  "step4m5": {
+    "ko": "PASS: lab-tick 타이머가 등록·가동 중입니다.",
+    "ja": "PASS: lab-tick タイマーが登録され稼働しています。",
+    "zh-CN": "PASS: lab-tick 定时器已注册并在运行。",
+    "zh-TW": "PASS: lab-tick 計時器已註冊並在運作。",
+    "es": "PASS: el timer lab-tick está registrado y en marcha.",
+    "de": "PASS: Der Timer lab-tick ist registriert und läuft.",
+    "en": "PASS: the lab-tick timer is registered and running."
+  }
+}

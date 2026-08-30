@@ -1,0 +1,146 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/work/worker.pid 가 없습니다.",
+    "ja": "FAIL: ~/work/worker.pid がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/worker.pid。",
+    "zh-TW": "FAIL: 沒有 ~/work/worker.pid。",
+    "es": "FAIL: no existe ~/work/worker.pid.",
+    "de": "FAIL: ~/work/worker.pid fehlt.",
+    "en": "FAIL: ~/work/worker.pid does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: lab-worker가 실행 중이 아닙니다 (환경 이상 — 새 세션을 시작하세요).",
+    "ja": "FAIL: lab-worker が動いていません（環境の異常 — 新しいセッションを開始してください）。",
+    "zh-CN": "FAIL: lab-worker 未在运行（环境异常 —— 请重新开始一个会话）。",
+    "zh-TW": "FAIL: lab-worker 未在執行（環境異常 —— 請重新開始一個工作階段）。",
+    "es": "FAIL: lab-worker no está en ejecución (entorno anómalo: inicia una sesión nueva).",
+    "de": "FAIL: lab-worker läuft nicht (Umgebungsproblem – starte eine neue Sitzung).",
+    "en": "FAIL: lab-worker is not running (broken environment — start a new session)."
+  },
+  "step1m3": {
+    "ko": "FAIL: worker.pid({0})가 실제 lab-worker PID({1})와 다릅니다.",
+    "ja": "FAIL: worker.pid（{0}）が実際の lab-worker の PID（{1}）と一致しません。",
+    "zh-CN": "FAIL: worker.pid（{0}）与实际 lab-worker 的 PID（{1}）不一致。",
+    "zh-TW": "FAIL: worker.pid（{0}）與實際 lab-worker 的 PID（{1}）不一致。",
+    "es": "FAIL: worker.pid ({0}) no coincide con el PID real de lab-worker ({1}).",
+    "de": "FAIL: worker.pid ({0}) stimmt nicht mit der echten PID von lab-worker ({1}) überein.",
+    "en": "FAIL: worker.pid ({0}) does not match the real lab-worker PID ({1})."
+  },
+  "step1m4": {
+    "ko": "FAIL: ~/work/worker.cmdline 이 없습니다. /proc/<PID>/cmdline을 저장하세요.",
+    "ja": "FAIL: ~/work/worker.cmdline がありません。/proc/<PID>/cmdline を保存してください。",
+    "zh-CN": "FAIL: 没有 ~/work/worker.cmdline。请保存 /proc/<PID>/cmdline。",
+    "zh-TW": "FAIL: 沒有 ~/work/worker.cmdline。請儲存 /proc/<PID>/cmdline。",
+    "es": "FAIL: no existe ~/work/worker.cmdline. Guarda /proc/<PID>/cmdline.",
+    "de": "FAIL: ~/work/worker.cmdline fehlt. Speichere /proc/<PID>/cmdline.",
+    "en": "FAIL: ~/work/worker.cmdline does not exist. Save /proc/<PID>/cmdline."
+  },
+  "step1m5": {
+    "ko": "FAIL: worker.cmdline 내용에 lab-worker가 없습니다.",
+    "ja": "FAIL: worker.cmdline の内容に lab-worker が含まれていません。",
+    "zh-CN": "FAIL: worker.cmdline 的内容中没有 lab-worker。",
+    "zh-TW": "FAIL: worker.cmdline 的內容中沒有 lab-worker。",
+    "es": "FAIL: el contenido de worker.cmdline no incluye lab-worker.",
+    "de": "FAIL: In worker.cmdline kommt lab-worker nicht vor.",
+    "en": "FAIL: worker.cmdline does not mention lab-worker."
+  },
+  "step1m6": {
+    "ko": "PASS: PID와 /proc 정보가 정확합니다.",
+    "ja": "PASS: PID と /proc の情報が正確です。",
+    "zh-CN": "PASS: PID 与 /proc 信息准确。",
+    "zh-TW": "PASS: PID 與 /proc 資訊正確。",
+    "es": "PASS: el PID y la información de /proc son correctos.",
+    "de": "PASS: PID und /proc-Informationen sind korrekt.",
+    "en": "PASS: the PID and /proc details are correct."
+  },
+  "step2m1": {
+    "ko": "FAIL: lab-stubborn이 아직 살아 있습니다. SIGTERM을 무시하는 프로세스입니다 — 다른 시그널을 시도하세요.",
+    "ja": "FAIL: lab-stubborn がまだ生きています。SIGTERM を無視するプロセスです — 別のシグナルを試してください。",
+    "zh-CN": "FAIL: lab-stubborn 仍然存活。该进程会忽略 SIGTERM —— 请尝试其他信号。",
+    "zh-TW": "FAIL: lab-stubborn 仍然存活。該行程會忽略 SIGTERM —— 請嘗試其他訊號。",
+    "es": "FAIL: lab-stubborn sigue vivo. Ignora SIGTERM: prueba con otra señal.",
+    "de": "FAIL: lab-stubborn läuft noch. Der Prozess ignoriert SIGTERM – probiere ein anderes Signal.",
+    "en": "FAIL: lab-stubborn is still alive. It ignores SIGTERM — try another signal."
+  },
+  "step2m2": {
+    "ko": "FAIL: 유닛이 프로세스를 되살렸습니다. systemctl stop(+disable)으로 유닛 차원에서 내려야 합니다.",
+    "ja": "FAIL: ユニットがプロセスを復活させました。systemctl stop（+ disable）でユニットごと止める必要があります。",
+    "zh-CN": "FAIL: 单元又把进程拉了起来。需要用 systemctl stop（+ disable）从单元层面停掉。",
+    "zh-TW": "FAIL: 單元又把行程拉了起來。需要用 systemctl stop（+ disable）從單元層面停掉。",
+    "es": "FAIL: el unit ha revivido el proceso. Deténlo a nivel de unit con systemctl stop (+ disable).",
+    "de": "FAIL: Die Unit hat den Prozess neu gestartet. Stoppe ihn auf Unit-Ebene mit systemctl stop (+ disable).",
+    "en": "FAIL: the unit brought the process back. Stop it at the unit level with systemctl stop (+ disable)."
+  },
+  "step2m3": {
+    "ko": "PASS: SIGKILL 또는 유닛 정지로 lab-stubborn이 종료되었습니다.",
+    "ja": "PASS: SIGKILL またはユニット停止で lab-stubborn が終了しました。",
+    "zh-CN": "PASS: 通过 SIGKILL 或停止单元结束了 lab-stubborn。",
+    "zh-TW": "PASS: 透過 SIGKILL 或停止單元結束了 lab-stubborn。",
+    "es": "PASS: lab-stubborn ha terminado mediante SIGKILL o parando el unit.",
+    "de": "PASS: lab-stubborn wurde per SIGKILL oder Unit-Stopp beendet.",
+    "en": "PASS: lab-stubborn was terminated with SIGKILL or by stopping the unit."
+  },
+  "step3m1": {
+    "ko": "FAIL: lab-batch가 실행 중이 아닙니다.",
+    "ja": "FAIL: lab-batch が動いていません。",
+    "zh-CN": "FAIL: lab-batch 未在运行。",
+    "zh-TW": "FAIL: lab-batch 未在執行。",
+    "es": "FAIL: lab-batch no está en ejecución.",
+    "de": "FAIL: lab-batch läuft nicht.",
+    "en": "FAIL: lab-batch is not running."
+  },
+  "step3m2": {
+    "ko": "FAIL: ~/work/batch.log 가 없습니다. 출력 경로를 인자로 줬는지 확인하세요.",
+    "ja": "FAIL: ~/work/batch.log がありません。出力先を引数で渡したか確認してください。",
+    "zh-CN": "FAIL: 没有 ~/work/batch.log。请确认是否用参数指定了输出路径。",
+    "zh-TW": "FAIL: 沒有 ~/work/batch.log。請確認是否用參數指定了輸出路徑。",
+    "es": "FAIL: no existe ~/work/batch.log. Comprueba que pasaste la ruta de salida como argumento.",
+    "de": "FAIL: ~/work/batch.log fehlt. Prüfe, ob du den Ausgabepfad als Argument übergeben hast.",
+    "en": "FAIL: ~/work/batch.log does not exist. Check that you passed the output path as an argument."
+  },
+  "step3m3": {
+    "ko": "FAIL: lab-batch의 부모가 PID 1이 아닙니다({0}). nohup+&(백그라운드) 또는 setsid로 셸과 분리하세요.",
+    "ja": "FAIL: lab-batch の親が PID 1 ではありません（{0}）。nohup と &（バックグラウンド）または setsid でシェルから切り離してください。",
+    "zh-CN": "FAIL: lab-batch 的父进程不是 PID 1（{0}）。请用 nohup + &（后台）或 setsid 与 shell 分离。",
+    "zh-TW": "FAIL: lab-batch 的父行程不是 PID 1（{0}）。請用 nohup + &（背景）或 setsid 與 shell 分離。",
+    "es": "FAIL: el padre de lab-batch no es el PID 1 ({0}). Desacóplalo del shell con nohup y & (segundo plano) o setsid.",
+    "de": "FAIL: Das Elternteil von lab-batch ist nicht PID 1 ({0}). Löse es mit nohup und & (Hintergrund) oder setsid von der Shell.",
+    "en": "FAIL: the parent of lab-batch is not PID 1 ({0}). Detach it from the shell with nohup and & (background) or setsid."
+  },
+  "step3m4": {
+    "ko": "PASS: 터미널과 분리된 백그라운드 프로세스가 로그를 쓰고 있습니다.",
+    "ja": "PASS: 端末から切り離されたバックグラウンドプロセスがログを書いています。",
+    "zh-CN": "PASS: 已脱离终端的后台进程正在写日志。",
+    "zh-TW": "PASS: 已脫離終端機的背景行程正在寫入記錄。",
+    "es": "PASS: un proceso en segundo plano desacoplado del terminal está escribiendo el log.",
+    "de": "PASS: Ein vom Terminal losgelöster Hintergrundprozess schreibt das Log.",
+    "en": "PASS: a background process detached from the terminal is writing the log."
+  },
+  "step4m1": {
+    "ko": "FAIL: ~/work/port-owner.txt 가 없습니다.",
+    "ja": "FAIL: ~/work/port-owner.txt がありません。",
+    "zh-CN": "FAIL: 没有 ~/work/port-owner.txt。",
+    "zh-TW": "FAIL: 沒有 ~/work/port-owner.txt。",
+    "es": "FAIL: no existe ~/work/port-owner.txt.",
+    "de": "FAIL: ~/work/port-owner.txt fehlt.",
+    "en": "FAIL: ~/work/port-owner.txt does not exist."
+  },
+  "step4m2": {
+    "ko": "FAIL: 5555 포트 점유 프로세스 이름(python3)이 아닙니다. ss -ltnp 또는 lsof -i :5555 로 확인하세요.",
+    "ja": "FAIL: 5555 番ポートを占有しているプロセス名（python3）ではありません。ss -ltnp または lsof -i :5555 で確認してください。",
+    "zh-CN": "FAIL: 不是占用 5555 端口的进程名（python3）。请用 ss -ltnp 或 lsof -i :5555 确认。",
+    "zh-TW": "FAIL: 不是占用 5555 連接埠的行程名稱（python3）。請用 ss -ltnp 或 lsof -i :5555 確認。",
+    "es": "FAIL: no es el nombre del proceso que ocupa el puerto 5555 (python3). Compruébalo con ss -ltnp o lsof -i :5555.",
+    "de": "FAIL: Das ist nicht der Prozessname, der Port 5555 belegt (python3). Prüfe mit ss -ltnp oder lsof -i :5555.",
+    "en": "FAIL: that is not the name of the process holding port 5555 (python3). Check with ss -ltnp or lsof -i :5555."
+  },
+  "step4m3": {
+    "ko": "PASS: 포트 점유 프로세스를 정확히 추적했습니다.",
+    "ja": "PASS: ポートを占有しているプロセスを正確に追跡できました。",
+    "zh-CN": "PASS: 准确追踪到了占用端口的进程。",
+    "zh-TW": "PASS: 準確追蹤到了占用連接埠的行程。",
+    "es": "PASS: has identificado correctamente el proceso que ocupa el puerto.",
+    "de": "PASS: Der Prozess hinter dem Port wurde korrekt ermittelt.",
+    "en": "PASS: you identified the process holding the port correctly."
+  }
+}

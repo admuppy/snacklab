@@ -1,0 +1,7 @@
+# SnackLab: keep mariadb small — the lab DB is tiny and the pod is memory-capped.
+[mysqld]
+bind-address = 127.0.0.1
+innodb_buffer_pool_size = 128M
+max_connections = 100
+skip-log-bin
+performance_schema = OFF

@@ -1,0 +1,64 @@
+{
+  "id": "linux-01",
+  "title": {
+    "ko": "파일 권한과 특수 권한",
+    "en": "File Permissions and Special Bits",
+    "ja": "ファイル権限と特殊権限",
+    "zh-CN": "文件权限与特殊权限",
+    "zh-TW": "檔案權限與特殊權限",
+    "es": "Permisos de archivo y bits especiales",
+    "de": "Dateirechte und Spezialbits"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "기본 권한과 umask",
+        "en": "Basic permissions and umask",
+        "ja": "基本権限と umask",
+        "zh-CN": "基本权限与 umask",
+        "zh-TW": "基本權限與 umask",
+        "es": "Permisos básicos y umask",
+        "de": "Grundrechte und umask"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "setgid와 sticky bit",
+        "en": "setgid and the sticky bit",
+        "ja": "setgid と sticky bit",
+        "zh-CN": "setgid 与 sticky bit",
+        "zh-TW": "setgid 與 sticky bit",
+        "es": "setgid y sticky bit",
+        "de": "setgid und Sticky-Bit"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "ACL로 세밀한 접근 제어",
+        "en": "Fine-grained access with ACLs",
+        "ja": "ACL による細やかなアクセス制御",
+        "zh-CN": "用 ACL 实现细粒度访问控制",
+        "zh-TW": "用 ACL 實作細緻的存取控制",
+        "es": "Control de acceso preciso con ACL",
+        "de": "Feingranulare Zugriffe mit ACLs"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "권한 감사와 수리",
+        "en": "Permission audit and repair",
+        "ja": "権限の監査と修復",
+        "zh-CN": "权限审计与修复",
+        "zh-TW": "權限稽核與修復",
+        "es": "Auditoría y reparación de permisos",
+        "de": "Rechte prüfen und reparieren"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

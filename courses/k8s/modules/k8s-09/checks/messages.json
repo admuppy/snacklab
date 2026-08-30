@@ -1,0 +1,128 @@
+{
+  "step1m1": {
+    "ko": "FAIL: 클라이언트 파드가 없습니다(부트스트랩 대기).",
+    "ja": "FAIL: クライアント Pod がありません（ブートストラップ待ち）。",
+    "zh-CN": "FAIL: 没有客户端 Pod（等待引导完成）。",
+    "zh-TW": "FAIL: 沒有用戶端 Pod（等待啟動程序完成）。",
+    "es": "FAIL: no hay Pod cliente (esperando al bootstrap).",
+    "de": "FAIL: Kein Client-Pod vorhanden (Bootstrap läuft noch).",
+    "en": "FAIL: there is no client Pod (bootstrap still running)."
+  },
+  "step1m2": {
+    "ko": "FAIL: {0} 가 없거나 비어 있습니다. 정책을 걸기 전에 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt' 로 베이스라인을 기록하세요.",
+    "ja": "FAIL: {0} が存在しないか空です。ポリシーを適用する前に 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt' でベースラインを記録してください。",
+    "zh-CN": "FAIL: {0} 不存在或为空。请在应用策略前用 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt' 记录基线。",
+    "zh-TW": "FAIL: {0} 不存在或為空。請在套用政策前用 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt' 記錄基準。",
+    "es": "FAIL: {0} no existe o está vacío. Antes de aplicar la política, registra la línea base con 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt'.",
+    "de": "FAIL: {0} fehlt oder ist leer. Erfasse vor dem Anwenden der Policy die Baseline mit 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt'.",
+    "en": "FAIL: {0} is missing or empty. Before applying any policy, record the baseline with 'kubectl exec client -- wget -q -T 3 -O- http://web > ~/work/baseline.txt'."
+  },
+  "step1m3": {
+    "ko": "FAIL: {0} 에 nginx 응답이 들어 있지 않습니다. client → web 요청 결과를 그대로 저장했나요?",
+    "ja": "FAIL: {0} に nginx の応答が入っていません。client → web のリクエスト結果をそのまま保存しましたか？",
+    "zh-CN": "FAIL: {0} 中没有 nginx 的响应。是否原样保存了 client → web 的请求结果？",
+    "zh-TW": "FAIL: {0} 中沒有 nginx 的回應。是否原樣儲存了 client → web 的請求結果？",
+    "es": "FAIL: {0} no contiene la respuesta de nginx. ¿Guardaste tal cual el resultado de la petición client → web?",
+    "de": "FAIL: In {0} steht keine nginx-Antwort. Hast du das Ergebnis der Anfrage client → web unverändert gespeichert?",
+    "en": "FAIL: {0} does not contain an nginx response. Did you save the result of the client → web request as is?"
+  },
+  "step1m4": {
+    "ko": "PASS: 정책 적용 전 client → web(:80) 통신 베이스라인이 기록되어 있습니다.",
+    "ja": "PASS: ポリシー適用前の client → web(:80) 通信のベースラインが記録されています。",
+    "zh-CN": "PASS: 已记录应用策略前 client → web(:80) 的连通性基线。",
+    "zh-TW": "PASS: 已記錄套用政策前 client → web(:80) 的連通性基準。",
+    "es": "PASS: la línea base de la comunicación client → web(:80) antes de la política está registrada.",
+    "de": "PASS: Die Baseline der Verbindung client → web(:80) vor der Policy ist erfasst.",
+    "en": "PASS: the baseline for client → web(:80) before applying the policy is recorded."
+  },
+  "step2m1": {
+    "ko": "FAIL: NetworkPolicy 'default-deny' 가 없습니다.",
+    "ja": "FAIL: NetworkPolicy 'default-deny' がありません。",
+    "zh-CN": "FAIL: 没有 NetworkPolicy 'default-deny'。",
+    "zh-TW": "FAIL: 沒有 NetworkPolicy 'default-deny'。",
+    "es": "FAIL: no existe la NetworkPolicy 'default-deny'.",
+    "de": "FAIL: Die NetworkPolicy 'default-deny' fehlt.",
+    "en": "FAIL: the NetworkPolicy 'default-deny' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: default-deny 의 policyTypes 에 Ingress 가 없습니다.",
+    "ja": "FAIL: default-deny の policyTypes に Ingress がありません。",
+    "zh-CN": "FAIL: default-deny 的 policyTypes 中没有 Ingress。",
+    "zh-TW": "FAIL: default-deny 的 policyTypes 中沒有 Ingress。",
+    "es": "FAIL: los policyTypes de default-deny no incluyen Ingress.",
+    "de": "FAIL: In den policyTypes von default-deny fehlt Ingress.",
+    "en": "FAIL: the policyTypes of default-deny do not include Ingress."
+  },
+  "step2m3": {
+    "ko": "FAIL: default-deny 의 podSelector 가 app=web 을 고르지 않습니다.",
+    "ja": "FAIL: default-deny の podSelector が app=web を選んでいません。",
+    "zh-CN": "FAIL: default-deny 的 podSelector 没有选中 app=web。",
+    "zh-TW": "FAIL: default-deny 的 podSelector 沒有選中 app=web。",
+    "es": "FAIL: el podSelector de default-deny no selecciona app=web.",
+    "de": "FAIL: Der podSelector von default-deny wählt nicht app=web aus.",
+    "en": "FAIL: the podSelector of default-deny does not select app=web."
+  },
+  "step2m4": {
+    "ko": "FAIL: default-deny 에 ingress 규칙이 있습니다 — 기본 거부는 규칙이 하나도 없어야 합니다.",
+    "ja": "FAIL: default-deny に ingress ルールがあります — 既定拒否はルールが 1 つもあってはいけません。",
+    "zh-CN": "FAIL: default-deny 中存在 ingress 规则 —— 默认拒绝不应有任何规则。",
+    "zh-TW": "FAIL: default-deny 中存在 ingress 規則 —— 預設拒絕不應有任何規則。",
+    "es": "FAIL: default-deny tiene reglas de ingress; la denegación por defecto no debe tener ninguna.",
+    "de": "FAIL: default-deny enthält ingress-Regeln – bei „standardmäßig verweigern“ darf es keine geben.",
+    "en": "FAIL: default-deny has ingress rules — a default-deny policy must have none."
+  },
+  "step2m5": {
+    "ko": "PASS: default-deny 가 적용되어 있습니다 (이후 허용 정책이 추가되어 통신은 열린 상태).",
+    "ja": "PASS: default-deny が適用されています（その後に許可ポリシーが追加され、通信は開いた状態）。",
+    "zh-CN": "PASS: default-deny 已生效（之后又添加了放行策略，因此当前连通）。",
+    "zh-TW": "PASS: default-deny 已生效（之後又新增了放行政策，因此目前連通）。",
+    "es": "PASS: default-deny está aplicada (después se añadió una política de permiso, por eso hay conectividad).",
+    "de": "PASS: default-deny ist aktiv (danach wurde eine Erlaubnis-Policy ergänzt, daher besteht Verbindung).",
+    "en": "PASS: default-deny is in place (an allow policy was added afterwards, so traffic is open again)."
+  },
+  "step2m6": {
+    "ko": "FAIL: 정책이 있는데도 client → web 통신이 됩니다. podSelector 가 app=web 을 고르는지, ingress 규칙이 비어 있는지 확인하세요.",
+    "ja": "FAIL: ポリシーがあるのに client → web の通信ができています。podSelector が app=web を選ぶか、ingress ルールが空かを確認してください。",
+    "zh-CN": "FAIL: 已有策略但 client → web 仍能通信。请确认 podSelector 是否选中 app=web、ingress 规则是否为空。",
+    "zh-TW": "FAIL: 已有政策但 client → web 仍能通訊。請確認 podSelector 是否選中 app=web、ingress 規則是否為空。",
+    "es": "FAIL: aunque existe la política, client → web sigue conectando. Comprueba que el podSelector seleccione app=web y que no haya reglas de ingress.",
+    "de": "FAIL: Trotz Policy funktioniert client → web. Prüfe, ob der podSelector app=web trifft und keine ingress-Regeln vorhanden sind.",
+    "en": "FAIL: the policy exists but client → web still connects. Check that the podSelector selects app=web and that there are no ingress rules."
+  },
+  "step2m7": {
+    "ko": "PASS: default-deny 로 web 으로의 모든 ingress 가 차단되어 client → web 이 막혔습니다.",
+    "ja": "PASS: default-deny により web への ingress がすべて遮断され、client → web が止まりました。",
+    "zh-CN": "PASS: default-deny 阻断了到 web 的所有入站流量，client → web 已被拦截。",
+    "zh-TW": "PASS: default-deny 阻擋了到 web 的所有入站流量，client → web 已被攔截。",
+    "es": "PASS: default-deny bloquea todo el ingress hacia web y client → web queda cortado.",
+    "de": "PASS: default-deny blockiert jeglichen Ingress zu web – client → web ist unterbrochen.",
+    "en": "PASS: default-deny blocks all ingress to web, so client → web is cut off."
+  },
+  "step3m1": {
+    "ko": "FAIL: NetworkPolicy 'web-allow-client' 가 없습니다.",
+    "ja": "FAIL: NetworkPolicy 'web-allow-client' がありません。",
+    "zh-CN": "FAIL: 没有 NetworkPolicy 'web-allow-client'。",
+    "zh-TW": "FAIL: 沒有 NetworkPolicy 'web-allow-client'。",
+    "es": "FAIL: no existe la NetworkPolicy 'web-allow-client'.",
+    "de": "FAIL: Die NetworkPolicy 'web-allow-client' fehlt.",
+    "en": "FAIL: the NetworkPolicy 'web-allow-client' does not exist."
+  },
+  "step3m2": {
+    "ko": "FAIL: 허용 정책이 있는데도 client → web 이 막혀 있습니다. ingress.from 의 podSelector 가 app=client 를 고르는지 확인하세요.",
+    "ja": "FAIL: 許可ポリシーがあるのに client → web が遮断されています。ingress.from の podSelector が app=client を選ぶか確認してください。",
+    "zh-CN": "FAIL: 已有放行策略但 client → web 仍被阻断。请确认 ingress.from 的 podSelector 是否选中 app=client。",
+    "zh-TW": "FAIL: 已有放行政策但 client → web 仍被阻擋。請確認 ingress.from 的 podSelector 是否選中 app=client。",
+    "es": "FAIL: existe la política de permiso pero client → web sigue bloqueado. Comprueba que el podSelector de ingress.from seleccione app=client.",
+    "de": "FAIL: Trotz Erlaubnis-Policy ist client → web blockiert. Prüfe, ob der podSelector unter ingress.from app=client trifft.",
+    "en": "FAIL: the allow policy exists but client → web is still blocked. Check that the podSelector under ingress.from selects app=client."
+  },
+  "step3m3": {
+    "ko": "PASS: web-allow-client 로 app=client 출처만 허용되어 client → web 통신이 복구되었습니다.",
+    "ja": "PASS: web-allow-client により app=client からの通信だけが許可され、client → web が復旧しました。",
+    "zh-CN": "PASS: web-allow-client 只放行来自 app=client 的流量，client → web 已恢复。",
+    "zh-TW": "PASS: web-allow-client 只放行來自 app=client 的流量，client → web 已恢復。",
+    "es": "PASS: web-allow-client solo permite el origen app=client y client → web vuelve a funcionar.",
+    "de": "PASS: web-allow-client erlaubt nur die Quelle app=client – client → web funktioniert wieder.",
+    "en": "PASS: web-allow-client permits only the app=client source, and client → web works again."
+  }
+}

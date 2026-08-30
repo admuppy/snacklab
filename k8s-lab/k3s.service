@@ -1,0 +1,33 @@
+[Unit]
+Description=Lightweight Kubernetes
+Documentation=https://k3s.io
+Wants=network-online.target
+After=network-online.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=notify
+EnvironmentFile=-/etc/systemd/system/k3s.service.env
+KillMode=process
+Delegate=yes
+# systemd 컨테이너에서 자원 제한 완화 (표준 k3s 유닛과 동일)
+LimitNOFILE=1048576
+LimitNPROC=infinity
+LimitCORE=infinity
+TasksMax=infinity
+TimeoutStartSec=0
+Restart=always
+RestartSec=5s
+ExecStartPre=-/sbin/modprobe br_netfilter
+ExecStartPre=-/sbin/modprobe overlay
+# 파드 안 단일노드: local-path(PV)·kube-router(NetworkPolicy 실강제)·coredns 는 유지.
+# traefik·servicelb 는 비활성 — 코스에 Ingress/LoadBalancer 랩이 없고(서비스 랩은 NodePort),
+# helm-install-traefik 잡·traefik 파드가 메모리를 크게 먹어 소형 파드에서 부담이 크다.
+# metrics-server·cloud-controller 도 비활성(소형 노드 부담↓).
+#   --snapshotter=fuse-overlayfs : 파드(overlay 위) 안에서는 containerd overlayfs 스냅샷터를
+#     쓸 수 없어("failed to mount overlay: invalid argument") agent 가 기동되지 않는다. native 는
+#     동작하지만 CoW 가 없어 이미지마다 rootfs 를 통째로 복사 → 느리고 메모리·디스크 과다.
+#     fuse-overlayfs 는 CoW 를 제공해 가볍고 빠르다(k3d 가 컨테이너 안에서 쓰는 방식). /dev/fuse 필요.
+ExecStart=/usr/local/bin/k3s server --write-kubeconfig-mode 0644 --snapshotter=fuse-overlayfs --disable traefik --disable servicelb --disable metrics-server --disable-cloud-controller

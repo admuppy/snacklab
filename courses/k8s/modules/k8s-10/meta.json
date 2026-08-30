@@ -1,0 +1,57 @@
+{
+  "id": "k8s-10",
+  "title": {
+    "ko": "종합 — 고장난 배포 살리기",
+    "en": "Capstone — Reviving a Broken Deployment",
+    "ja": "総合 — 壊れたデプロイを復旧する",
+    "zh-CN": "综合 —— 救活出故障的部署",
+    "zh-TW": "綜合 —— 救活出故障的部署",
+    "es": "Proyecto final: revivir un despliegue roto",
+    "de": "Abschluss – ein kaputtes Deployment retten"
+  },
+  "desc": {
+    "ko": "이미지·셀렉터·프로브·리소스가 얽혀 고장난 배포를 증상에서 원인까지 추적해 복구",
+    "en": "Trace a deployment broken across image, selector, probe and resource issues from symptom to root cause"
+  },
+  "duration": 45,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "이미지 풀 실패 수리",
+        "en": "Fix the image pull failure",
+        "ja": "イメージ取得失敗の修復",
+        "zh-CN": "修复镜像拉取失败",
+        "zh-TW": "修復映像檔提取失敗",
+        "es": "Arreglar el fallo de descarga de imagen",
+        "de": "Fehlgeschlagenen Image-Pull beheben"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "서비스 셀렉터 수리",
+        "en": "Fix the Service selector",
+        "ja": "Service セレクターの修復",
+        "zh-CN": "修复 Service 选择器",
+        "zh-TW": "修復 Service 選擇器",
+        "es": "Arreglar el selector del Service",
+        "de": "Service-Selector reparieren"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "누락된 ConfigMap 수리",
+        "en": "Fix the missing ConfigMap",
+        "ja": "欠落した ConfigMap の修復",
+        "zh-CN": "修复缺失的 ConfigMap",
+        "zh-TW": "修復缺失的 ConfigMap",
+        "es": "Arreglar el ConfigMap que falta",
+        "de": "Fehlendes ConfigMap ergänzen"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

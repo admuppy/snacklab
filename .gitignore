@@ -1,0 +1,15 @@
+# runtime state
+prototype/node_modules/
+prototype/sessions/
+prototype/.cookie-secret
+prototype/users.json
+*.log
+.DS_Store
+
+# site-local config (never commit — may contain internal hosts/credentials)
+chart/values-live.yaml
+build.env
+
+# agent scratch
+.claude/
+NOTES.txt

@@ -1,0 +1,9 @@
+# k8s 코스 랩에서 학습자가 배포하는 컨테이너 이미지 목록.
+# 폐쇄망/에어갭 반입 시 이 목록으로 `k3s ctr images import` 용 tar 를 준비한다.
+# (인터넷/하버 가용 환경에선 첫 파드 스케줄 시 자동 pull 되므로 별도 조치 불필요.)
+docker.io/library/nginx:1.25
+docker.io/library/nginx:1.26
+docker.io/library/nginx:1.27
+docker.io/library/busybox:1.36
+docker.io/library/httpd:2.4
+registry.k8s.io/pause:3.10

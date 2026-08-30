@@ -1,0 +1,58 @@
+{{- if .Values.learner.networkPolicy.enabled }}
+# Learner pod network isolation (requires a CNI that enforces NetworkPolicy, e.g. Calico or Cilium).
+#
+# Why: learner pods run `privileged: true` (systemd and in-pod k3s require it), so they hold
+# every capability and can see host block devices — a determined user can mount the node
+# filesystem and pull the kubelet client certificate from `/var/lib/kubelet/pki`. With that
+# cert they can talk to the apiserver as `system:node:<node>` and read secrets of pods on
+# that node. Since privileged cannot be dropped (the lab won't boot without it), this policy
+# exists to **cut off every path where stolen credentials could be used**.
+#
+# Hence egress is "block all private ranges, allow internet only". Not a single packet can
+# reach cluster internals (apiserver, kubelet :10250, other pods, in-cluster services).
+# Allowing only container image pulls keeps every lab working — all lab-content traffic
+# stays inside the pod (in-pod k3s traffic lives in the pod's own netns, out of scope here).
+#
+# Ingress can be blocked entirely: terminals and checks go through `kubectl exec`
+# (apiserver→kubelet→CRI) and readiness is an exec probe — neither touches the pod network.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "snacklab.fullname" . }}-learner-isolation
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "snacklab.labels" . | nindent 4 }}
+spec:
+  # 포털 파드는 이 라벨이 없어 대상이 아니다. e2e-pod 까지 넣어 검증 파드도 같은 조건에서 돌린다.
+  podSelector:
+    matchExpressions:
+      - key: snacklab/kind
+        operator: In
+        values: [warm-pod, learner-pod, e2e-pod]
+  policyTypes: [Ingress, Egress]
+  ingress: []
+  egress:
+    # ① 클러스터 DNS — 이미지 레지스트리 이름 해석에 필요. CoreDNS 만 콕 집어 허용한다.
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: {{ .Values.learner.networkPolicy.dnsNamespace }}
+          podSelector:
+            matchLabels:
+              {{- toYaml .Values.learner.networkPolicy.dnsSelector | nindent 14 }}
+      ports:
+        - { protocol: UDP, port: 53 }
+        - { protocol: TCP, port: 53 }
+    # ② Internet only (image pulls) — private/cluster/link-local ranges are carved out via
+    #    except. As long as your node/pod/service CIDRs fall inside blockedCidrs (default:
+    #    RFC1918 + 169.254/16), the entire cluster interior is unreachable — verify yours do.
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              {{- toYaml .Values.learner.networkPolicy.blockedCidrs | nindent 14 }}
+      ports:
+        {{- range .Values.learner.networkPolicy.egressPorts }}
+        - { protocol: TCP, port: {{ . }} }
+        {{- end }}
+{{- end }}

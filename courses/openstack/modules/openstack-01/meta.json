@@ -1,0 +1,37 @@
+{
+  "id": "openstack-01",
+  "title": {
+    "ko": "첫 인스턴스 띄우기",
+    "en": "Boot Your First Instance"
+  },
+  "desc": {
+    "ko": "네트워크를 만들고 cirros 인스턴스를 기동·정지하며 OpenStack CLI의 기본 흐름을 익힌다",
+    "en": "Create a network, then boot and stop a cirros instance to learn the core OpenStack CLI workflow"
+  },
+  "duration": 30,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "네트워크와 서브넷 생성",
+        "en": "Create a network and subnet"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "인스턴스 기동 (ACTIVE)",
+        "en": "Boot an instance (ACTIVE)"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "인스턴스 정지 (SHUTOFF)",
+        "en": "Stop the instance (SHUTOFF)"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

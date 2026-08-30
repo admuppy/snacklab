@@ -1,0 +1,218 @@
+[
+ {
+  "id": "linux-01",
+  "no": 1,
+  "track": "linux",
+  "title": {
+   "ko": "파일 권한과 특수 권한",
+   "en": "File Permissions and Special Bits",
+   "ja": "ファイル権限と特殊権限",
+   "zh-CN": "文件权限与特殊权限",
+   "zh-TW": "檔案權限與特殊權限",
+   "es": "Permisos de archivo y bits especiales",
+   "de": "Dateirechte und Spezialbits"
+  },
+  "desc": {
+   "ko": "rwx·umask부터 setgid/sticky, ACL, SUID 감사와 권한 수리까지",
+   "en": "From rwx and umask to setgid/sticky, ACLs, SUID auditing, and permission repair",
+   "ja": "rwx・umask から setgid/sticky、ACL、SUID 監査と権限修復まで",
+   "zh-CN": "从 rwx、umask 到 setgid/sticky、ACL、SUID 审计与权限修复",
+   "zh-TW": "從 rwx、umask 到 setgid/sticky、ACL、SUID 稽核與權限修復",
+   "es": "De rwx y umask a setgid/sticky, ACL, auditoría de SUID y reparación de permisos",
+   "de": "Von rwx und umask über setgid/sticky und ACLs bis zu SUID-Audit und Rechtereparatur"
+  },
+  "duration": 40
+ },
+ {
+  "id": "linux-02",
+  "no": 2,
+  "track": "linux",
+  "title": {
+   "ko": "프로세스와 시그널",
+   "en": "Processes and Signals",
+   "ja": "プロセスとシグナル",
+   "zh-CN": "进程与信号",
+   "zh-TW": "行程與訊號",
+   "es": "Procesos y señales",
+   "de": "Prozesse und Signale"
+  },
+  "desc": {
+   "ko": "ps·/proc 탐색, 시그널 제어, 세션 분리 실행, 포트 점유 추적",
+   "en": "Exploring ps and /proc, signal control, detached execution, tracking port usage",
+   "ja": "ps・/proc の探索、シグナル制御、セッションから切り離した実行、ポート占有の追跡",
+   "zh-CN": "探索 ps 与 /proc、信号控制、脱离会话运行、追踪端口占用",
+   "zh-TW": "探索 ps 與 /proc、訊號控制、脫離工作階段執行、追蹤連接埠占用",
+   "es": "Exploración de ps y /proc, control de señales, ejecución desacoplada y rastreo de puertos ocupados",
+   "de": "ps und /proc erkunden, Signale steuern, losgelöst ausführen, Portbelegung aufspüren"
+  },
+  "duration": 40
+ },
+ {
+  "id": "linux-03",
+  "no": 3,
+  "track": "linux",
+  "title": {
+   "ko": "텍스트 처리 파이프라인",
+   "en": "Text Processing Pipelines",
+   "ja": "テキスト処理パイプライン",
+   "zh-CN": "文本处理管道",
+   "zh-TW": "文字處理管線",
+   "es": "Cadenas de procesamiento de texto",
+   "de": "Textverarbeitungs-Pipelines"
+  },
+  "desc": {
+   "ko": "grep·awk·sed로 액세스 로그 2,000줄에서 답 뽑아내기",
+   "en": "Mining answers from 2,000 lines of access logs with grep, awk, and sed",
+   "ja": "grep・awk・sed で 2,000 行のアクセスログから答えを取り出す",
+   "zh-CN": "用 grep、awk、sed 从 2000 行访问日志中挖出答案",
+   "zh-TW": "用 grep、awk、sed 從 2000 行存取記錄中挖出答案",
+   "es": "Extraer respuestas de 2.000 líneas de logs de acceso con grep, awk y sed",
+   "de": "Antworten aus 2.000 Zeilen Access-Log mit grep, awk und sed gewinnen"
+  },
+  "duration": 40
+ },
+ {
+  "id": "linux-04",
+  "no": 4,
+  "track": "linux",
+  "title": {
+   "ko": "Bash 스크립팅",
+   "en": "Bash Scripting",
+   "ja": "Bash スクリプティング",
+   "zh-CN": "Bash 脚本编程",
+   "zh-TW": "Bash 指令碼",
+   "es": "Scripting en Bash",
+   "de": "Bash-Skripting"
+  },
+  "desc": {
+   "ko": "set -euo pipefail, 인자·종료 코드, trap 정리, 고장난 스크립트 수리",
+   "en": "set -euo pipefail, arguments and exit codes, trap cleanup, fixing a broken script",
+   "ja": "set -euo pipefail、引数と終了コード、trap による後始末、壊れたスクリプトの修復",
+   "zh-CN": "set -euo pipefail、参数与退出码、trap 清理、修复损坏的脚本",
+   "zh-TW": "set -euo pipefail、參數與結束碼、trap 清理、修復損壞的指令碼",
+   "es": "set -euo pipefail, argumentos y códigos de salida, limpieza con trap y reparación de un script roto",
+   "de": "set -euo pipefail, Argumente und Exit-Codes, Aufräumen mit trap, ein kaputtes Skript reparieren"
+  },
+  "duration": 50
+ },
+ {
+  "id": "linux-05",
+  "no": 5,
+  "track": "linux",
+  "title": {
+   "ko": "사용자·그룹과 sudo 최소권한",
+   "en": "Users, Groups, and Least-Privilege sudo",
+   "ja": "ユーザー・グループと sudo 最小権限",
+   "zh-CN": "用户、组与 sudo 最小权限",
+   "zh-TW": "使用者、群組與 sudo 最小權限",
+   "es": "Usuarios, grupos y sudo con mínimo privilegio",
+   "de": "Benutzer, Gruppen und sudo mit minimalen Rechten"
+  },
+  "desc": {
+   "ko": "계정 수명주기 — 생성, 그룹, sudoers 드롭인, 잠금과 비밀번호 정책",
+   "en": "Account lifecycle — creation, groups, sudoers drop-ins, locking and password policy",
+   "ja": "アカウントのライフサイクル — 作成、グループ、sudoers ドロップイン、ロックとパスワードポリシー",
+   "zh-CN": "账号生命周期 —— 创建、用户组、sudoers drop-in、锁定与密码策略",
+   "zh-TW": "帳號生命週期 —— 建立、群組、sudoers drop-in、鎖定與密碼原則",
+   "es": "Ciclo de vida de las cuentas: creación, grupos, drop-ins de sudoers, bloqueo y política de contraseñas",
+   "de": "Konto-Lebenszyklus – Anlegen, Gruppen, sudoers-Drop-ins, Sperren und Passwortrichtlinie"
+  },
+  "duration": 40
+ },
+ {
+  "id": "linux-06",
+  "no": 6,
+  "track": "linux",
+  "title": {
+   "ko": "systemd 서비스와 journald",
+   "en": "systemd Services and journald",
+   "ja": "systemd サービスと journald",
+   "zh-CN": "systemd 服务与 journald",
+   "zh-TW": "systemd 服務與 journald",
+   "es": "Servicios de systemd y journald",
+   "de": "systemd-Dienste und journald"
+  },
+  "desc": {
+   "ko": "유닛 작성, journal로 고장 유닛 수리, Restart 자가복구, 타이머",
+   "en": "Writing units, fixing broken units with the journal, Restart self-healing, timers",
+   "ja": "ユニットの作成、journal による故障ユニットの修復、Restart による自己復旧、タイマー",
+   "zh-CN": "编写单元、用 journal 修复故障单元、Restart 自愈、定时器",
+   "zh-TW": "撰寫單元、用 journal 修復故障單元、Restart 自我修復、計時器",
+   "es": "Escribir units, reparar units rotos con el journal, autorreparación con Restart y timers",
+   "de": "Units schreiben, defekte Units mit dem Journal reparieren, Selbstheilung per Restart, Timer"
+  },
+  "duration": 50
+ },
+ {
+  "id": "linux-07",
+  "no": 7,
+  "track": "linux",
+  "title": {
+   "ko": "네트워킹 진단",
+   "en": "Network Diagnostics",
+   "ja": "ネットワーク診断",
+   "zh-CN": "网络诊断",
+   "zh-TW": "網路診斷",
+   "es": "Diagnóstico de red",
+   "de": "Netzwerkdiagnose"
+  },
+  "desc": {
+   "ko": "ip·ss·curl·getent — 루프백 바인딩 장애를 찾아 고치기",
+   "en": "ip, ss, curl, getent — finding and fixing a loopback binding failure",
+   "ja": "ip・ss・curl・getent — ループバックのバインド障害を見つけて直す",
+   "zh-CN": "ip、ss、curl、getent —— 找出并修复回环绑定故障",
+   "zh-TW": "ip、ss、curl、getent —— 找出並修復回送位址繫結故障",
+   "es": "ip, ss, curl y getent: encontrar y arreglar un fallo de binding en loopback",
+   "de": "ip, ss, curl, getent – einen Loopback-Bind-Fehler finden und beheben"
+  },
+  "duration": 40
+ },
+ {
+  "id": "linux-08",
+  "no": 8,
+  "track": "linux",
+  "title": {
+   "ko": "종합 — 죽은 서비스 살리기",
+   "en": "Capstone — Reviving a Dead Service",
+   "ja": "総合 — 停止したサービスを復旧する",
+   "zh-CN": "综合 —— 救活挂掉的服务",
+   "zh-TW": "綜合 —— 救活掛掉的服務",
+   "es": "Proyecto final: revivir un servicio caído",
+   "de": "Abschluss – einen toten Dienst wiederbeleben"
+  },
+  "desc": {
+   "ko": "3중 장애(경로 오타→포트 충돌→권한)를 journal과 ss로 수습하는 실전",
+   "en": "A triple failure (path typo → port conflict → permissions) resolved with journal and ss",
+   "ja": "三重障害（パス誤り→ポート衝突→権限）を journal と ss で収拾する実戦",
+   "zh-CN": "用 journal 与 ss 收拾三重故障（路径写错 → 端口冲突 → 权限）",
+   "zh-TW": "用 journal 與 ss 收拾三重故障（路徑寫錯 → 連接埠衝突 → 權限）",
+   "es": "Un fallo triple (ruta mal escrita → conflicto de puerto → permisos) resuelto con el journal y ss",
+   "de": "Ein Dreifachfehler (Pfadtippfehler → Portkonflikt → Rechte), gelöst mit Journal und ss"
+  },
+  "duration": 60
+ },
+ {
+  "id": "linux-09",
+  "no": 9,
+  "track": "linux",
+  "title": {
+   "ko": "CPU·메모리 관리",
+   "en": "CPU and Memory Management",
+   "ja": "CPU・メモリ管理",
+   "zh-CN": "CPU 与内存管理",
+   "zh-TW": "CPU 與記憶體管理",
+   "es": "Gestión de CPU y memoria",
+   "de": "CPU- und Speicherverwaltung"
+  },
+  "desc": {
+   "ko": "vmstat·free·cgroup으로 자원 관찰, nice/taskset 우선순위, cgroup 메모리 상한과 OOM 분석",
+   "en": "Observing resources with vmstat, free, and cgroups; nice/taskset priorities; cgroup memory limits and OOM analysis",
+   "ja": "vmstat・free・cgroup での資源観察、nice/taskset による優先度、cgroup のメモリ上限と OOM 分析",
+   "zh-CN": "用 vmstat、free、cgroup 观察资源，用 nice/taskset 调优先级，cgroup 内存上限与 OOM 分析",
+   "zh-TW": "用 vmstat、free、cgroup 觀察資源，用 nice/taskset 調優先權，cgroup 記憶體上限與 OOM 分析",
+   "es": "Observar recursos con vmstat, free y cgroups; prioridades con nice/taskset; límites de memoria en cgroups y análisis de OOM",
+   "de": "Ressourcen mit vmstat, free und cgroups beobachten, Prioritäten mit nice/taskset, cgroup-Speicherlimits und OOM-Analyse"
+  },
+  "duration": 45
+ }
+]

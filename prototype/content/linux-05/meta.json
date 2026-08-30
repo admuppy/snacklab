@@ -1,0 +1,64 @@
+{
+  "id": "linux-05",
+  "title": {
+    "ko": "사용자·그룹과 sudo 최소권한",
+    "en": "Users, Groups, and Least-Privilege sudo",
+    "ja": "ユーザー・グループと sudo 最小権限",
+    "zh-CN": "用户、组与 sudo 最小权限",
+    "zh-TW": "使用者、群組與 sudo 最小權限",
+    "es": "Usuarios, grupos y sudo con mínimo privilegio",
+    "de": "Benutzer, Gruppen und sudo mit minimalen Rechten"
+  },
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "사용자 생성",
+        "en": "Creating users",
+        "ja": "ユーザーの作成",
+        "zh-CN": "创建用户",
+        "zh-TW": "建立使用者",
+        "es": "Crear usuarios",
+        "de": "Benutzer anlegen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "그룹 구성",
+        "en": "Setting up groups",
+        "ja": "グループの構成",
+        "zh-CN": "配置用户组",
+        "zh-TW": "設定群組",
+        "es": "Configurar grupos",
+        "de": "Gruppen einrichten"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "sudoers 최소권한",
+        "en": "Least-privilege sudoers",
+        "ja": "sudoers の最小権限",
+        "zh-CN": "sudoers 最小权限",
+        "zh-TW": "sudoers 最小權限",
+        "es": "sudoers con mínimo privilegio",
+        "de": "sudoers mit minimalen Rechten"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
+        "ko": "계정 잠금과 비밀번호 정책",
+        "en": "Account locking and password policy",
+        "ja": "アカウントのロックとパスワードポリシー",
+        "zh-CN": "账号锁定与密码策略",
+        "zh-TW": "帳號鎖定與密碼原則",
+        "es": "Bloqueo de cuentas y política de contraseñas",
+        "de": "Konten sperren und Passwortrichtlinie"
+      },
+      "check": "step4.sh"
+    }
+  ]
+}

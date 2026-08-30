@@ -1,0 +1,57 @@
+{
+  "id": "k8s-07",
+  "title": {
+    "ko": "스토리지 — PV·PVC·StatefulSet",
+    "en": "Storage — PV, PVC, StatefulSet",
+    "ja": "ストレージ — PV・PVC・StatefulSet",
+    "zh-CN": "存储 —— PV、PVC 与 StatefulSet",
+    "zh-TW": "儲存 —— PV、PVC 與 StatefulSet",
+    "es": "Almacenamiento: PV, PVC y StatefulSet",
+    "de": "Storage – PV, PVC, StatefulSet"
+  },
+  "desc": {
+    "ko": "PV·PVC 정적/동적 바인딩과 StatefulSet 의 안정적 식별자·볼륨 유지 확인",
+    "en": "Static and dynamic PV/PVC binding, plus StatefulSet stable identities and volume retention"
+  },
+  "duration": 40,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "PVC 생성",
+        "en": "Create a PVC",
+        "ja": "PVC の作成",
+        "zh-CN": "创建 PVC",
+        "zh-TW": "建立 PVC",
+        "es": "Crear un PVC",
+        "de": "Ein PVC anlegen"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "파드에 마운트·바인딩·기록",
+        "en": "Mount, bind, and write",
+        "ja": "Pod へのマウント・バインド・書き込み",
+        "zh-CN": "挂载到 Pod、绑定并写入",
+        "zh-TW": "掛載到 Pod、繫結並寫入",
+        "es": "Montar, enlazar y escribir",
+        "de": "Einhängen, binden und schreiben"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "StatefulSet 와 volumeClaimTemplates",
+        "en": "StatefulSet with volumeClaimTemplates",
+        "ja": "StatefulSet と volumeClaimTemplates",
+        "zh-CN": "StatefulSet 与 volumeClaimTemplates",
+        "zh-TW": "StatefulSet 與 volumeClaimTemplates",
+        "es": "StatefulSet con volumeClaimTemplates",
+        "de": "StatefulSet mit volumeClaimTemplates"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}

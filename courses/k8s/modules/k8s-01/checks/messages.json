@@ -1,0 +1,110 @@
+{
+  "step1m1": {
+    "ko": "FAIL: Deployment 'web' 가 없습니다. 'kubectl create deployment web ...' 로 만드세요.",
+    "ja": "FAIL: Deployment 'web' がありません。'kubectl create deployment web ...' で作成してください。",
+    "zh-CN": "FAIL: 没有 Deployment 'web'。请用 'kubectl create deployment web ...' 创建。",
+    "zh-TW": "FAIL: 沒有 Deployment 'web'。請用 'kubectl create deployment web ...' 建立。",
+    "es": "FAIL: no existe el Deployment 'web'. Créalo con 'kubectl create deployment web ...'.",
+    "de": "FAIL: Das Deployment 'web' fehlt. Lege es mit 'kubectl create deployment web ...' an.",
+    "en": "FAIL: the Deployment 'web' does not exist. Create it with 'kubectl create deployment web ...'."
+  },
+  "step1m2": {
+    "ko": "FAIL: web 의 replicas 가 3 이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: web の replicas が 3 ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: web 的 replicas 不是 3（当前 {0}）。",
+    "zh-TW": "FAIL: web 的 replicas 不是 3（目前 {0}）。",
+    "es": "FAIL: las réplicas de web no son 3 (actualmente {0}).",
+    "de": "FAIL: web hat nicht 3 Replicas (aktuell {0}).",
+    "en": "FAIL: web does not have 3 replicas (currently {0})."
+  },
+  "step1m3": {
+    "ko": "FAIL: Ready 레플리카가 3 이 아닙니다 (현재 {0}). 파드가 모두 Running 인지 확인하세요.",
+    "ja": "FAIL: Ready のレプリカが 3 ではありません（現在 {0}）。すべての Pod が Running か確認してください。",
+    "zh-CN": "FAIL: Ready 副本不是 3（当前 {0}）。请确认所有 Pod 都是 Running。",
+    "zh-TW": "FAIL: Ready 副本不是 3（目前 {0}）。請確認所有 Pod 都是 Running。",
+    "es": "FAIL: no hay 3 réplicas Ready (actualmente {0}). Comprueba que todos los Pods estén en Running.",
+    "de": "FAIL: Es sind nicht 3 Replicas Ready (aktuell {0}). Prüfe, ob alle Pods Running sind.",
+    "en": "FAIL: there are not 3 Ready replicas (currently {0}). Check that all Pods are Running."
+  },
+  "step1m4": {
+    "ko": "PASS: Deployment web 이 3개 레플리카로 모두 Ready 입니다.",
+    "ja": "PASS: Deployment web の 3 レプリカがすべて Ready です。",
+    "zh-CN": "PASS: Deployment web 的 3 个副本全部 Ready。",
+    "zh-TW": "PASS: Deployment web 的 3 個副本全部 Ready。",
+    "es": "PASS: las 3 réplicas del Deployment web están Ready.",
+    "de": "PASS: Alle 3 Replicas des Deployments web sind Ready.",
+    "en": "PASS: all 3 replicas of the Deployment web are Ready."
+  },
+  "step2m1": {
+    "ko": "FAIL: 롤링 업데이트가 아직 완료되지 않았습니다 (updated={0}, ready={1}). 'kubectl rollout status' 로 완료를 기다리세요.",
+    "ja": "FAIL: ローリングアップデートがまだ完了していません（updated={0}, ready={1}）。'kubectl rollout status' で完了を待ってください。",
+    "zh-CN": "FAIL: 滚动更新尚未完成（updated={0}, ready={1}）。请用 'kubectl rollout status' 等待完成。",
+    "zh-TW": "FAIL: 滾動更新尚未完成（updated={0}, ready={1}）。請用 'kubectl rollout status' 等待完成。",
+    "es": "FAIL: la actualización progresiva aún no ha terminado (updated={0}, ready={1}). Espera con 'kubectl rollout status'.",
+    "de": "FAIL: Das Rolling Update ist noch nicht abgeschlossen (updated={0}, ready={1}). Warte mit 'kubectl rollout status'.",
+    "en": "FAIL: the rolling update has not finished yet (updated={0}, ready={1}). Wait for it with 'kubectl rollout status'."
+  },
+  "step2m2": {
+    "ko": "PASS: nginx:1.26 으로 롤링 업데이트가 완료되었습니다.",
+    "ja": "PASS: nginx:1.26 へのローリングアップデートが完了しました。",
+    "zh-CN": "PASS: 已完成到 nginx:1.26 的滚动更新。",
+    "zh-TW": "PASS: 已完成到 nginx:1.26 的滾動更新。",
+    "es": "PASS: la actualización progresiva a nginx:1.26 ha finalizado.",
+    "de": "PASS: Das Rolling Update auf nginx:1.26 ist abgeschlossen.",
+    "en": "PASS: the rolling update to nginx:1.26 completed."
+  },
+  "step2m3": {
+    "ko": "FAIL: nginx:1.26 으로 업데이트한 흔적이 없습니다 (현재 이미지 {0}). 'kubectl set image deploy/web *=nginx:1.26' 을 실행했나요?",
+    "ja": "FAIL: nginx:1.26 へ更新した形跡がありません（現在のイメージ {0}）。'kubectl set image deploy/web *=nginx:1.26' を実行しましたか？",
+    "zh-CN": "FAIL: 没有更新到 nginx:1.26 的痕迹（当前镜像 {0}）。是否执行了 'kubectl set image deploy/web *=nginx:1.26'？",
+    "zh-TW": "FAIL: 沒有更新到 nginx:1.26 的痕跡（目前映像 {0}）。是否執行了 'kubectl set image deploy/web *=nginx:1.26'？",
+    "es": "FAIL: no hay rastro de la actualización a nginx:1.26 (imagen actual {0}). ¿Ejecutaste 'kubectl set image deploy/web *=nginx:1.26'?",
+    "de": "FAIL: Keine Spur eines Updates auf nginx:1.26 (aktuelles Image {0}). Hast du 'kubectl set image deploy/web *=nginx:1.26' ausgeführt?",
+    "en": "FAIL: no trace of an update to nginx:1.26 (current image {0}). Did you run 'kubectl set image deploy/web *=nginx:1.26'?"
+  },
+  "step2m4": {
+    "ko": "PASS: nginx:1.26 롤링 업데이트가 수행되었습니다 (이후 롤백됨).",
+    "ja": "PASS: nginx:1.26 へのローリングアップデートが実施されました（その後ロールバック済み）。",
+    "zh-CN": "PASS: 已执行到 nginx:1.26 的滚动更新（之后已回滚）。",
+    "zh-TW": "PASS: 已執行到 nginx:1.26 的滾動更新（之後已回溯）。",
+    "es": "PASS: se realizó la actualización progresiva a nginx:1.26 (luego revertida).",
+    "de": "PASS: Das Rolling Update auf nginx:1.26 wurde durchgeführt (danach zurückgerollt).",
+    "en": "PASS: the rolling update to nginx:1.26 was performed (and later rolled back)."
+  },
+  "step3m1": {
+    "ko": "FAIL: 롤백 후 이미지가 nginx:1.25 가 아닙니다 (현재 {0}). 'kubectl rollout undo deploy/web' 했나요?",
+    "ja": "FAIL: ロールバック後のイメージが nginx:1.25 ではありません（現在 {0}）。'kubectl rollout undo deploy/web' を実行しましたか？",
+    "zh-CN": "FAIL: 回滚后的镜像不是 nginx:1.25（当前 {0}）。是否执行了 'kubectl rollout undo deploy/web'？",
+    "zh-TW": "FAIL: 回溯後的映像不是 nginx:1.25（目前 {0}）。是否執行了 'kubectl rollout undo deploy/web'？",
+    "es": "FAIL: tras el rollback la imagen no es nginx:1.25 (actualmente {0}). ¿Ejecutaste 'kubectl rollout undo deploy/web'?",
+    "de": "FAIL: Nach dem Rollback ist das Image nicht nginx:1.25 (aktuell {0}). Hast du 'kubectl rollout undo deploy/web' ausgeführt?",
+    "en": "FAIL: after the rollback the image is not nginx:1.25 (currently {0}). Did you run 'kubectl rollout undo deploy/web'?"
+  },
+  "step3m2": {
+    "ko": "FAIL: 롤아웃 리비전이 3 미만입니다 (현재 최신 리비전 {0}). set image 후 rollout undo 로 되돌렸나요?",
+    "ja": "FAIL: ロールアウトのリビジョンが 3 未満です（現在の最新リビジョン {0}）。set image のあと rollout undo で戻しましたか？",
+    "zh-CN": "FAIL: 发布修订号小于 3（当前最新修订 {0}）。是否在 set image 之后用 rollout undo 回滚？",
+    "zh-TW": "FAIL: 發布修訂號小於 3（目前最新修訂 {0}）。是否在 set image 之後用 rollout undo 回溯？",
+    "es": "FAIL: la revisión del despliegue es menor que 3 (última revisión {0}). ¿Hiciste rollout undo después del set image?",
+    "de": "FAIL: Die Rollout-Revision ist kleiner als 3 (aktuell {0}). Hast du nach set image ein rollout undo gemacht?",
+    "en": "FAIL: the rollout revision is below 3 (latest revision {0}). Did you roll back with rollout undo after set image?"
+  },
+  "step3m3": {
+    "ko": "FAIL: 롤백 후 Ready 레플리카가 3 이 아닙니다 (현재 {0}).",
+    "ja": "FAIL: ロールバック後の Ready レプリカが 3 ではありません（現在 {0}）。",
+    "zh-CN": "FAIL: 回滚后 Ready 副本不是 3（当前 {0}）。",
+    "zh-TW": "FAIL: 回溯後 Ready 副本不是 3（目前 {0}）。",
+    "es": "FAIL: tras el rollback no hay 3 réplicas Ready (actualmente {0}).",
+    "de": "FAIL: Nach dem Rollback sind nicht 3 Replicas Ready (aktuell {0}).",
+    "en": "FAIL: there are not 3 Ready replicas after the rollback (currently {0})."
+  },
+  "step3m4": {
+    "ko": "PASS: nginx:1.25 로 롤백하고 3개 레플리카가 Ready 입니다.",
+    "ja": "PASS: nginx:1.25 にロールバックし、3 レプリカが Ready です。",
+    "zh-CN": "PASS: 已回滚到 nginx:1.25，且 3 个副本 Ready。",
+    "zh-TW": "PASS: 已回溯到 nginx:1.25，且 3 個副本 Ready。",
+    "es": "PASS: rollback a nginx:1.25 con 3 réplicas Ready.",
+    "de": "PASS: Rollback auf nginx:1.25 erfolgt, 3 Replicas sind Ready.",
+    "en": "PASS: rolled back to nginx:1.25 with 3 replicas Ready."
+  }
+}

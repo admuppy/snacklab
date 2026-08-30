@@ -1,0 +1,101 @@
+{
+  "step1m1": {
+    "ko": "FAIL: Deployment 'shop' 이 없습니다.",
+    "ja": "FAIL: Deployment 'shop' がありません。",
+    "zh-CN": "FAIL: 没有 Deployment 'shop'。",
+    "zh-TW": "FAIL: 沒有 Deployment 'shop'。",
+    "es": "FAIL: no existe el Deployment 'shop'.",
+    "de": "FAIL: Das Deployment 'shop' fehlt.",
+    "en": "FAIL: the Deployment 'shop' does not exist."
+  },
+  "step1m2": {
+    "ko": "FAIL: 이미지가 아직 잘못된 태그({0})입니다. 'kubectl set image' 로 유효한 태그(예: nginx:1.26)로 고치세요.",
+    "ja": "FAIL: イメージがまだ誤ったタグ（{0}）のままです。'kubectl set image' で有効なタグ（例: nginx:1.26）に直してください。",
+    "zh-CN": "FAIL: 镜像仍是错误的标签（{0}）。请用 'kubectl set image' 改为有效标签（如 nginx:1.26）。",
+    "zh-TW": "FAIL: 映像仍是錯誤的標籤（{0}）。請用 'kubectl set image' 改為有效標籤（如 nginx:1.26）。",
+    "es": "FAIL: la imagen sigue con una etiqueta incorrecta ({0}). Corrígela con 'kubectl set image' a una válida (p. ej. nginx:1.26).",
+    "de": "FAIL: Das Image hat noch den falschen Tag ({0}). Korrigiere ihn mit 'kubectl set image' auf einen gültigen (z. B. nginx:1.26).",
+    "en": "FAIL: the image still has the wrong tag ({0}). Fix it to a valid tag (e.g. nginx:1.26) with 'kubectl set image'."
+  },
+  "step1m3": {
+    "ko": "FAIL: shop 의 Ready 레플리카가 2 미만입니다 (현재 {0}). 파드 상태를 'kubectl get pod -l app=shop' 로 확인하세요.",
+    "ja": "FAIL: shop の Ready レプリカが 2 未満です（現在 {0}）。'kubectl get pod -l app=shop' で Pod の状態を確認してください。",
+    "zh-CN": "FAIL: shop 的 Ready 副本少于 2（当前 {0}）。请用 'kubectl get pod -l app=shop' 查看 Pod 状态。",
+    "zh-TW": "FAIL: shop 的 Ready 副本少於 2（目前 {0}）。請用 'kubectl get pod -l app=shop' 查看 Pod 狀態。",
+    "es": "FAIL: shop tiene menos de 2 réplicas Ready (actualmente {0}). Revisa el estado de los Pods con 'kubectl get pod -l app=shop'.",
+    "de": "FAIL: shop hat weniger als 2 Ready-Replicas (aktuell {0}). Prüfe den Pod-Status mit 'kubectl get pod -l app=shop'.",
+    "en": "FAIL: shop has fewer than 2 Ready replicas (currently {0}). Check the Pod status with 'kubectl get pod -l app=shop'."
+  },
+  "step1m4": {
+    "ko": "PASS: 이미지({0}) 수리로 Deployment shop 이 2개 레플리카 모두 Ready 입니다.",
+    "ja": "PASS: イメージ（{0}）の修復により Deployment shop の 2 レプリカがすべて Ready です。",
+    "zh-CN": "PASS: 修复镜像（{0}）后，Deployment shop 的 2 个副本全部 Ready。",
+    "zh-TW": "PASS: 修復映像（{0}）後，Deployment shop 的 2 個副本全部 Ready。",
+    "es": "PASS: tras corregir la imagen ({0}), las 2 réplicas del Deployment shop están Ready.",
+    "de": "PASS: Nach der Image-Korrektur ({0}) sind beide Replicas des Deployments shop Ready.",
+    "en": "PASS: after fixing the image ({0}), both replicas of the Deployment shop are Ready."
+  },
+  "step2m1": {
+    "ko": "FAIL: Service 'shop' 이 없습니다.",
+    "ja": "FAIL: Service 'shop' がありません。",
+    "zh-CN": "FAIL: 没有 Service 'shop'。",
+    "zh-TW": "FAIL: 沒有 Service 'shop'。",
+    "es": "FAIL: no existe el Service 'shop'.",
+    "de": "FAIL: Der Service 'shop' fehlt.",
+    "en": "FAIL: the Service 'shop' does not exist."
+  },
+  "step2m2": {
+    "ko": "FAIL: Service shop 의 셀렉터가 app=shop 이 아닙니다 (현재 app={0}). 파드 라벨과 맞추세요.",
+    "ja": "FAIL: Service shop のセレクターが app=shop ではありません（現在 app={0}）。Pod のラベルに合わせてください。",
+    "zh-CN": "FAIL: Service shop 的选择器不是 app=shop（当前 app={0}）。请与 Pod 标签保持一致。",
+    "zh-TW": "FAIL: Service shop 的選擇器不是 app=shop（目前 app={0}）。請與 Pod 標籤保持一致。",
+    "es": "FAIL: el selector del Service shop no es app=shop (actualmente app={0}). Ajústalo a las etiquetas de los Pods.",
+    "de": "FAIL: Der Selector des Services shop ist nicht app=shop (aktuell app={0}). Passe ihn an die Pod-Labels an.",
+    "en": "FAIL: the selector of the Service shop is not app=shop (currently app={0}). Match it to the Pod labels."
+  },
+  "step2m3": {
+    "ko": "FAIL: Service shop 의 엔드포인트가 비어 있습니다. shop 파드가 Ready 이고 셀렉터가 맞는지 확인하세요.",
+    "ja": "FAIL: Service shop のエンドポイントが空です。shop の Pod が Ready で、セレクターが一致するか確認してください。",
+    "zh-CN": "FAIL: Service shop 的端点为空。请确认 shop 的 Pod 是否 Ready 且选择器匹配。",
+    "zh-TW": "FAIL: Service shop 的端點為空。請確認 shop 的 Pod 是否 Ready 且選擇器相符。",
+    "es": "FAIL: los endpoints del Service shop están vacíos. Comprueba que los Pods de shop estén Ready y que el selector coincida.",
+    "de": "FAIL: Die Endpoints des Services shop sind leer. Prüfe, ob die shop-Pods Ready sind und der Selector passt.",
+    "en": "FAIL: the Service shop has no endpoints. Check that the shop Pods are Ready and that the selector matches."
+  },
+  "step2m4": {
+    "ko": "PASS: Service shop 이 파드로 라우팅됩니다 (endpoints: {0}).",
+    "ja": "PASS: Service shop が Pod にルーティングされています（endpoints: {0}）。",
+    "zh-CN": "PASS: Service shop 已路由到 Pod（endpoints: {0}）。",
+    "zh-TW": "PASS: Service shop 已路由到 Pod（endpoints: {0}）。",
+    "es": "PASS: el Service shop enruta a los Pods (endpoints: {0}).",
+    "de": "PASS: Der Service shop leitet an die Pods weiter (Endpoints: {0}).",
+    "en": "PASS: the Service shop routes to the Pods (endpoints: {0})."
+  },
+  "step3m1": {
+    "ko": "FAIL: ConfigMap 'cart-config' 가 없습니다. cart 파드가 참조하는 이 ConfigMap 을 만드세요.",
+    "ja": "FAIL: ConfigMap 'cart-config' がありません。cart Pod が参照するこの ConfigMap を作成してください。",
+    "zh-CN": "FAIL: 没有 ConfigMap 'cart-config'。请创建 cart Pod 所引用的这个 ConfigMap。",
+    "zh-TW": "FAIL: 沒有 ConfigMap 'cart-config'。請建立 cart Pod 所參照的這個 ConfigMap。",
+    "es": "FAIL: no existe el ConfigMap 'cart-config'. Créalo, ya que el Pod cart lo referencia.",
+    "de": "FAIL: Das ConfigMap 'cart-config' fehlt. Lege es an – der Pod cart referenziert es.",
+    "en": "FAIL: the ConfigMap 'cart-config' does not exist. Create it — the cart Pod references it."
+  },
+  "step3m2": {
+    "ko": "FAIL: Deployment cart 의 Ready 레플리카가 없습니다 (현재 {0}). ConfigMap 생성 후 파드가 재생성되기까지 잠시 기다리세요.",
+    "ja": "FAIL: Deployment cart に Ready なレプリカがありません（現在 {0}）。ConfigMap 作成後、Pod が作り直されるまで少し待ってください。",
+    "zh-CN": "FAIL: Deployment cart 没有 Ready 的副本（当前 {0}）。创建 ConfigMap 后请稍等 Pod 重建。",
+    "zh-TW": "FAIL: Deployment cart 沒有 Ready 的副本（目前 {0}）。建立 ConfigMap 後請稍等 Pod 重建。",
+    "es": "FAIL: el Deployment cart no tiene réplicas Ready (actualmente {0}). Tras crear el ConfigMap, espera a que se recreen los Pods.",
+    "de": "FAIL: Das Deployment cart hat keine Ready-Replicas (aktuell {0}). Warte nach dem Anlegen des ConfigMaps, bis die Pods neu erstellt werden.",
+    "en": "FAIL: the Deployment cart has no Ready replicas (currently {0}). After creating the ConfigMap, wait a moment for the Pods to be recreated."
+  },
+  "step3m3": {
+    "ko": "PASS: cart-config 생성으로 Deployment cart 가 Ready 입니다. 3중 장애를 모두 수리했습니다.",
+    "ja": "PASS: cart-config の作成により Deployment cart が Ready になりました。三重障害をすべて修復しました。",
+    "zh-CN": "PASS: 创建 cart-config 后 Deployment cart 已 Ready。三重故障全部修复完毕。",
+    "zh-TW": "PASS: 建立 cart-config 後 Deployment cart 已 Ready。三重故障全部修復完畢。",
+    "es": "PASS: al crear cart-config, el Deployment cart está Ready. Has reparado los tres fallos.",
+    "de": "PASS: Mit cart-config ist das Deployment cart Ready. Alle drei Fehler sind behoben.",
+    "en": "PASS: with cart-config created, the Deployment cart is Ready. All three failures are fixed."
+  }
+}
