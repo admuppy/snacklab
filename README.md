@@ -13,9 +13,19 @@ automated grading, mock exams.
 
 Each learner gets an **isolated, disposable environment** created on demand — a
 privileged pod running systemd, with a full single-node k3s cluster or an all-in-one
-OpenStack inside it when the track needs one — plus guides, a web terminal, automated
-step grading, progress tracking, and badges. A self-hosted alternative to
+OpenStack inside it when the track needs one. A self-hosted alternative to
 Isovalent Labs / Killercoda-style platforms.
+
+Built for:
+
+- **HR / L&D teams** evaluating a tool to grow in-house engineering skills and
+  measure learning progress — auto-graded steps and exam scores give objective,
+  per-learner results out of the box
+- **Onboarding new team members** — a ready-made, self-paced path through Linux,
+  Kubernetes, and OpenStack fundamentals, no workstation setup required
+- **Certification study groups** — realistic timed CKA / CKAD / CKS mock exams
+- **Platform / infra teams** that need a self-hosted, air-gap-friendly lab the
+  whole organization can share
 
 ## 🚀 Try it in 60 seconds
 
@@ -40,7 +50,7 @@ Requires Node.js ≥ 18; the only runtime dependencies are express and ws.
   exam mode adds partial credit and one-shot full-exam scoring.
 - 📝 **Mock exams that feel real** — 120-minute CKA/CKAD/CKS runs with real exam
   domain weighting, pass badges, per-question explanations, and an "exam language"
-  prompt limiting the UI to languages the real exams offer (en·ja·zh-CN).
+  prompt limiting the UI to what the real exams offer (en·ja·zh-CN).
 - 🌏 **i18n first** — 7 UI locales (ko·en·ja·zh-CN·zh-TW·es·de); guides and grading
   messages localized with sane fallbacks.
 - ⚡ **Warm pool** — pre-provisioned learner pods for instant session start, tunable
@@ -56,7 +66,7 @@ Requires Node.js ≥ 18; the only runtime dependencies are express and ws.
 |---|---|---|
 | Linux intermediate | linux-01 – 09 (permissions, processes, text, Bash, accounts, systemd, networking, capstone, resources) | systemd PID1 pod |
 | Kubernetes deep-dive | k8s-01 – 10 (workloads, services, config, probes, resources, scheduling, storage, RBAC, NetworkPolicy, troubleshooting) | single-node k3s in a pod |
-| CKA / CKAD / CKS mock exams | 120 min each, real exam domain weighting, partial credit, explanations, pass badges | single-node k3s in a pod |
+| CKA / CKAD / CKS mock exams | cka-01 · ckad-01 · cks-01 (120 min, 15–16 questions each) | single-node k3s in a pod |
 | OpenStack essentials | openstack-01 (networks, instance lifecycle — more coming) | all-in-one OpenStack (Caracal) in a pod, nova fake driver |
 
 The OpenStack track runs keystone·glance·neutron·nova with the **fake virt driver**:
@@ -86,8 +96,6 @@ instances "boot" as pure state machines, so the whole cloud idles at ~0.05 CPU /
            (terminal & checks go through `kubectl exec` — no sshd, no ingress)
 ```
 
-- **Portal**: one Node.js process; sessions, warm pool, grading, and exam scoring all
-  live in `prototype/server.js`.
 - **Drivers**: `pod` (learner pods on Kubernetes), `docker` (privileged sibling
   containers via the docker socket), `sim` (no backend — UI development).
 - **Content**: course bundles (`course.json` + modules) ship as tiny content images
@@ -97,8 +105,7 @@ instances "boot" as pure state machines, so the whole cloud idles at ~0.05 CPU /
 ## Repository layout
 
 ```
-prototype/           the app (Node.js, single server.js on express + ws)
-  server.js          portal server — session drivers (sim|pod|docker), warm pool, grading, exam mode, i18n
+prototype/           the app — the entire portal is one Node.js server.js (express + ws)
   userctl.js         local account CLI
   public/            static UI (catalog / lab / admin, i18n.js)
   content/           built-in content (linux-01 – 09)
@@ -124,7 +131,7 @@ build.sh / deploy.sh in-cluster kaniko build & helm deploy helpers
 | Privileged pods | required | learner pods run systemd (and k3s / OpenStack) as PID 1 |
 | CNI | NetworkPolicy-enforcing CNI (Calico, Cilium) strongly recommended | the chart ships a learner-isolation NetworkPolicy; it is a no-op on CNIs that don't enforce (e.g. plain flannel) |
 | StorageClass | optional | only for progress/badge persistence; any dynamic provisioner works (local-path, Longhorn, NFS, Ceph, ...) |
-| Registry | any | images must be pullable by the cluster; `imageRegistry` value re-points everything for private/air-gapped registries |
+| Registry | any | anything the cluster can pull from (see `imageRegistry` below) |
 
 ### Recommended sizing
 
@@ -165,7 +172,7 @@ Key values (see `chart/values.yaml` for the full list):
 - `courses` — content images to mount (k8s / cka / cks / ckad / openstack, or your own).
 - `persistence.*` — progress/badge storage; `storageClass: ''` uses the cluster
   default, `accessModes` is overridable for NFS-style (RWX-only) provisioners.
-- `warmPool.*` — pre-provisioned pods; also adjustable live from the admin dashboard.
+- `warmPool.*` — warm pool size and behaviour.
 - `session.*` — TTL, idle timeout, per-user and global session caps.
 
 ### Building images
@@ -246,7 +253,8 @@ renders them per-locale via `checks/messages.json`. Full conventions:
 
 - [x] Docker Compose single-node deployment (no Kubernetes required)
 - [x] OpenStack track (fake-driver all-in-one)
-- [ ] Publish pre-built images (ghcr.io) and a packaged Helm chart
+- [x] Publish pre-built images (ghcr.io)
+- [ ] Packaged Helm chart
 - [ ] More OpenStack modules (security groups, routers, keystone deep-dive) and a COA-style mock exam
 - [ ] arm64 image builds
 - [ ] Pluggable content repositories

@@ -11,8 +11,17 @@
 ![i18n](https://img.shields.io/badge/i18n-7_locales-purple)
 
 학습자마다 **격리된 일회용 환경**을 즉석에서 만들어 준다 — systemd가 도는 privileged 파드에,
-트랙에 따라 그 안에 단일노드 k3s 클러스터나 올인원 OpenStack까지 통째로. 가이드·웹터미널·
-스텝별 자동 채점·진도·뱃지가 함께 제공된다. Isovalent Labs / Killercoda 류의 셀프호스팅 대안.
+트랙에 따라 그 안에 단일노드 k3s 클러스터나 올인원 OpenStack까지 통째로.
+Isovalent Labs / Killercoda 류의 셀프호스팅 대안.
+
+이런 곳에 잘 맞는다:
+
+- 사내 기술역량 증진·학습 성취도 평가 도구 도입을 고민하는 **인사·교육(HR/L&D) 담당자** —
+  스텝별 자동 채점과 시험 점수가 학습자별 객관적 결과 데이터로 바로 쌓인다
+- **신규 팀 합류자 온보딩** — Linux·Kubernetes·OpenStack 기초를 스스로 따라가는
+  학습 경로, 워크스테이션 세팅 불필요
+- CKA / CKAD / CKS 를 준비하는 **자격증 스터디** — 실전 같은 시간제 모의고사
+- 셀프호스팅·폐쇄망 랩이 필요한 **플랫폼/인프라 팀** — 조직 전체가 공유하는 실습 환경
 
 ## 🚀 60초 체험
 
@@ -49,7 +58,7 @@ Node.js 18 이상 필요. 런타임 의존성은 express·ws 뿐이다.
 |---|---|---|
 | Linux 중급 | linux-01 ~ 09 (권한·프로세스·텍스트·Bash·계정·systemd·네트워킹·종합·자원관리) | systemd PID1 파드 |
 | Kubernetes 심화 | k8s-01 ~ 10 (워크로드·서비스·구성·프로브·리소스·스케줄링·스토리지·RBAC·NetworkPolicy·트러블슈팅) | 파드 안 단일노드 k3s |
-| CKA / CKAD / CKS 모의고사 | 각 120분, 실제 시험 도메인 배점·부분점수·해설·합격 뱃지 | 파드 안 단일노드 k3s |
+| CKA / CKAD / CKS 모의고사 | cka-01 · ckad-01 · cks-01 (각 120분, 15~16문항) | 파드 안 단일노드 k3s |
 | OpenStack 입문 | openstack-01 (네트워크·인스턴스 라이프사이클 — 확장 예정) | 파드 안 올인원 OpenStack(Caracal), nova fake 드라이버 |
 
 OpenStack 트랙은 keystone·glance·neutron·nova를 **fake virt 드라이버**로 돌린다:
@@ -79,7 +88,6 @@ OpenStack 트랙은 keystone·glance·neutron·nova를 **fake virt 드라이버*
         (터미널·체크는 전부 `kubectl exec` 경유 — sshd·ingress 없음)
 ```
 
-- **포털**: Node.js 프로세스 하나. 세션·웜풀·채점·시험 채점이 전부 `prototype/server.js` 안에.
 - **드라이버**: `pod`(쿠버네티스 학습자 파드), `docker`(docker 소켓으로 privileged 형제
   컨테이너), `sim`(백엔드 없음 — UI 개발용).
 - **콘텐츠**: 코스 번들(`course.json` + modules)은 작은 콘텐츠 이미지로 배포되고
@@ -89,8 +97,7 @@ OpenStack 트랙은 keystone·glance·neutron·nova를 **fake virt 드라이버*
 ## 구조
 
 ```
-prototype/           앱 (Node.js, express + ws 기반 단일 server.js)
-  server.js          포털 서버 — 세션 드라이버(sim|pod|docker), 웜풀, 채점, 시험모드, i18n
+prototype/           앱 — 포털 전체가 단일 server.js (express + ws)
   userctl.js         로컬 계정 CLI
   public/            정적 UI (카탈로그/랩/관리자, i18n.js)
   content/           내장 콘텐츠 (linux-01~09)
@@ -116,7 +123,7 @@ build.sh / deploy.sh 클러스터 내 kaniko 빌드·helm 배포
 | Privileged pod | 필수 | 학습자 파드가 systemd(및 k3s·OpenStack)를 PID1 로 돌린다 |
 | CNI | NetworkPolicy 를 강제하는 CNI(Calico, Cilium) 강력 권장 | 차트에 학습자 격리 NetworkPolicy 포함 — 미강제 CNI(순정 flannel 등)에선 무효 |
 | StorageClass | 선택 | 진도/뱃지 영속화용. 동적 프로비저너 아무거나 (local-path, Longhorn, NFS, Ceph, ...) |
-| 레지스트리 | 아무거나 | 클러스터가 pull 가능하면 됨. `imageRegistry` 값 하나로 폐쇄망 레지스트리 전환 |
+| 레지스트리 | 아무거나 | 클러스터가 pull 가능하면 됨 (아래 `imageRegistry` 참고) |
 
 ### 권장 스펙
 
@@ -152,7 +159,7 @@ helm upgrade --install lab ./chart -n snacklab --create-namespace \
 - `courses` — 마운트할 콘텐츠 이미지 (k8s / cka / cks / ckad / openstack, 또는 자체 코스).
 - `persistence.*` — 진도/뱃지 저장. `storageClass: ''` 는 클러스터 기본, NFS 계열
   (RWX 전용) 프로비저너는 `accessModes` 재정의 가능.
-- `warmPool.*` — 사전 준비 파드. admin 대시보드에서 실시간 조절도 가능.
+- `warmPool.*` — 웜풀 크기·동작.
 - `session.*` — TTL·유휴 타임아웃·사용자당/전체 세션 상한.
 
 ### 이미지 빌드
@@ -229,7 +236,8 @@ docker compose up -d --build
 
 - [x] Docker Compose 싱글 노드 배포 (쿠버네티스 불필요)
 - [x] OpenStack 트랙 (fake 드라이버 올인원)
-- [ ] 사전 빌드 이미지(ghcr.io)·패키징된 Helm 차트 배포
+- [x] 사전 빌드 이미지 배포 (ghcr.io)
+- [ ] 패키징된 Helm 차트
 - [ ] OpenStack 모듈 확장(보안그룹·라우터·keystone 심화)·COA 스타일 모의고사
 - [ ] arm64 이미지 빌드
 - [ ] 플러그형 콘텐츠 저장소
