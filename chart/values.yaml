@@ -2,6 +2,8 @@ adminUsers:
 - admin
 affinity: {}
 auth:
+  # mode=local 이고 usersExistingSecret이 없을 때 첫 기동 시 만드는 adminUsers[0] 계정의 초기 비밀번호
+  adminPassword: ChangeMe
   cookieSecretExistingSecret: ''
   mode: auto
   oidc:

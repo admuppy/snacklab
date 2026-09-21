@@ -31,6 +31,7 @@ if [ -f "$COURSE_JSON" ]; then
   MODULES_DIR=$COURSE_DIR/modules
   IMAGE=${IMAGE:-$(jq -r '.image' "$COURSE_JSON")}
   HOST_MODULES=$(jq -r '.hostModules // false' "$COURSE_JSON")
+  CLUSTER_INIT=$(jq -r '.clusterInit // false' "$COURSE_JSON")   # true → k3s embedded etcd (포털 pod 드라이버와 동일)
   CPU_REQ=$(jq -r '.resources.requests.cpu // "500m"' "$COURSE_JSON")
   MEM_REQ=$(jq -r '.resources.requests.memory // "1Gi"' "$COURSE_JSON")
   CPU_LIM=$(jq -r '.resources.limits.cpu // "2"' "$COURSE_JSON")
@@ -45,6 +46,7 @@ else
   MODULES_DIR=$COURSE_DIR
   IMAGE=${IMAGE:?"course.json 이 없는 디렉터리 — IMAGE 환경변수로 학습자 이미지를 지정하세요"}
   HOST_MODULES=${HOST_MODULES:-false}
+  CLUSTER_INIT=${CLUSTER_INIT:-false}
   CPU_REQ=${CPU_REQ:-250m}; MEM_REQ=${MEM_REQ:-256Mi}
   CPU_LIM=${CPU_LIM:-2};    MEM_LIM=${MEM_LIM:-2Gi}
   EPH_REQ=${EPH_REQ:-2Gi};  EPH_LIM=${EPH_LIM:-8Gi}
@@ -123,7 +125,7 @@ run_in_pod() { # $1=pod $2=script $3=timeout [$4=모듈 디렉터리(메시지 �
 
 new_pod() { # $1=pod 이름
   sed -e "s/__NAME__/$1/g" -e "s/__KIND__/e2e-pod/g" -e "s/__NS__/$NS/g" \
-      -e "s#__IMAGE__#$IMAGE#g" \
+      -e "s#__IMAGE__#$IMAGE#g" -e "s/__CLUSTER_INIT__/$CLUSTER_INIT/g" \
       -e "s/__CPU_REQ__/$CPU_REQ/g" -e "s/__MEM_REQ__/$MEM_REQ/g" \
       -e "s/__CPU_LIM__/$CPU_LIM/g" -e "s/__MEM_LIM__/$MEM_LIM/g" \
       -e "s/__EPH_REQ__/$EPH_REQ/g" -e "s/__EPH_LIM__/$EPH_LIM/g" \

@@ -112,6 +112,18 @@ if (USERS_SEED_FILE && !fs.existsSync(USERS_FILE) && fs.existsSync(USERS_SEED_FI
   fs.copyFileSync(USERS_SEED_FILE, USERS_FILE);
   console.log(`[auth] users 시드 복사: ${USERS_SEED_FILE} → ${USERS_FILE}`);
 }
+// 최초 관리자 부트스트랩: AUTH_MODE=local 인데 users.json(시드 포함)이 없으면 ADMIN_USERS 첫 계정을
+// ADMIN_INITIAL_PASSWORD(기본 ChangeMe)로 만든다 — 첫 로그인 후 반드시 비밀번호를 바꿀 것.
+if ((process.env.AUTH_MODE || '').trim() === 'local' && !fs.existsSync(USERS_FILE)) {
+  const user = ADMIN_USERS[0];
+  const pass = process.env.ADMIN_INITIAL_PASSWORD || 'ChangeMe';
+  const salt = crypto.randomBytes(16);
+  const hash = 'scrypt:' + salt.toString('base64') + ':' + crypto.scryptSync(pass, salt, 32).toString('base64');
+  fs.mkdirSync(path.dirname(USERS_FILE), { recursive: true });
+  fs.writeFileSync(USERS_FILE, JSON.stringify([{ user, name: user, admin: true, hash }], null, 2) + '\n', { mode: 0o600 });
+  console.log(`[auth] 초기 관리자 생성: ${user} → ${USERS_FILE}` +
+    (process.env.ADMIN_INITIAL_PASSWORD ? '' : ' (기본 비밀번호 ChangeMe — 즉시 변경하세요)'));
+}
 const AUTH_MODE = (() => {
   const m = (process.env.AUTH_MODE || 'auto').trim();
   if (m === 'auto' || m === '') return OIDC_ISSUER ? 'oidc' : (fs.existsSync(USERS_FILE) ? 'local' : 'off');

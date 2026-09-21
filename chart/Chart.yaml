@@ -1,5 +1,5 @@
 name: snacklab
-version: 0.3.0
+version: 0.3.1
 description: SnackLab — browser-based hands-on lab portal with step-verified labs in
   disposable pod/VM environments
 keywords:
@@ -8,5 +8,5 @@ keywords:
 - education
 - kubevirt
 apiVersion: v2
-appVersion: "v1.14"
+appVersion: "v1.15"
 type: application

@@ -39,8 +39,12 @@ adminUsers:
 auth:
   # auto: oidc if issuer is set, otherwise local. See chart/templates/NOTES.txt.
   mode: local
-  usersExistingSecret: lab-users        # users.json made with prototype/userctl.js
-  cookieSecretExistingSecret: lab-cookie
+  # First boot creates adminUsers[0] with this password (change it after logging in).
+  adminPassword: ChangeMe
+  # Optional: seed users.json from a Secret instead (made with prototype/userctl.js)
+  # usersExistingSecret: lab-users
+  # Optional: cookie signing key that survives pod restarts (key: cookieSecret)
+  # cookieSecretExistingSecret: lab-cookie
   # oidc:
   #   issuer: https://keycloak.example.com/realms/myrealm
   #   clientId: snacklab

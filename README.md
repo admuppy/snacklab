@@ -160,8 +160,36 @@ Rules of thumb:
 
 ```bash
 helm upgrade --install lab ./chart -n snacklab --create-namespace \
+  --set auth.adminPassword='<initial admin password>' \
   -f chart/values-example.yaml   # copy & edit for your site first
 ```
+
+With `auth.mode: local` the portal creates the first admin account on first boot:
+user `adminUsers[0]` (default `admin`), password `auth.adminPassword`
+(default **`ChangeMe`** — change it right after logging in). The account is written to
+`users.json` on the sessions volume and only when that file does not exist yet, so later
+changes to `adminPassword` are ignored; manage accounts from the admin dashboard
+(`/admin.html`).
+
+Optional Secrets:
+
+- `auth.usersExistingSecret` — seed `users.json` from a Secret instead of the generated
+  admin (key `users.json`, made with `node prototype/userctl.js add <user> --admin`).
+  Like the generated admin it is copied only on first boot.
+- `auth.cookieSecretExistingSecret` — cookie signing key (key `cookieSecret`) so logins
+  survive portal restarts; without it a random key is generated per pod.
+
+```bash
+kubectl -n snacklab create secret generic lab-cookie \
+  --from-literal=cookieSecret=$(openssl rand -hex 32)
+```
+
+If you point the chart at a Secret that does not exist, the portal pod fails with
+`MountVolume.SetUp failed for volume "users" : secret "lab-users" not found` (or a
+`CreateContainerConfigError` for the cookie Secret) — create it, then
+`kubectl -n snacklab rollout restart deploy/lab-snacklab`.
+
+To try the portal without login, use `--set auth.mode=off` (internal demos only).
 
 Key values (see `chart/values.yaml` for the full list):
 

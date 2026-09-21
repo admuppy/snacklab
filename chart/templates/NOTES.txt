@@ -17,18 +17,21 @@ driver={{ .Values.driver }}{{ if eq .Values.driver "pod" }} · 학습자 이미�
 {{- if eq $mode "off" }}
 
 주의: 인증이 꺼져 있습니다 — 내부망 데모 전용으로만 쓰세요.
-자체 로그인(local)을 쓰려면:
-  node prototype/userctl.js add <계정> --admin        # users.json 생성 (scrypt 해시)
-  kubectl -n {{ .Release.Namespace }} create secret generic lab-users --from-file=users.json
-  helm upgrade ... --set auth.mode=local --set auth.usersExistingSecret=lab-users
+자체 로그인(local)을 쓰려면 (첫 기동 때 관리자 계정 자동 생성):
+  helm upgrade ... --set auth.mode=local --set auth.adminPassword=<초기 비밀번호>
 {{- end }}
 {{- if eq $mode "local" }}
 {{- if .Values.auth.signup }}
 셀프 가입 활성: 신규 가입은 승인 대기 상태로 시작 — 관리자 대시보드(/admin.html) 계정 관리에서 승인하세요.
 {{- end }}
+{{- if .Values.auth.usersExistingSecret }}
 Secret {{ .Values.auth.usersExistingSecret }}은 최초 시드로만 복사되며, 이후 원본은 sessions 볼륨의 users.json입니다.
 초기 계정 수정: userctl.js로 users.json 수정 후 Secret 갱신 (첫 기동 전에만 반영)
   node prototype/userctl.js add <계정> [--admin] && kubectl -n {{ .Release.Namespace }} create secret generic {{ .Values.auth.usersExistingSecret }} --from-file=users.json --dry-run=client -o yaml | kubectl apply -f -
+{{- else }}
+초기 관리자: {{ index .Values.adminUsers 0 }} / auth.adminPassword{{ if eq (.Values.auth.adminPassword | default "ChangeMe") "ChangeMe" }} (기본값 ChangeMe — 로그인 후 즉시 변경하세요){{ end }}
+첫 기동 때 sessions 볼륨에 users.json이 없을 때만 생성되며, 이후 adminPassword 변경은 반영되지 않습니다.
+{{- end }}
 {{- end }}
 {{- if not .Values.persistence.enabled }}
 주의: persistence.enabled=false — 포털 pod 재생성 시 진행기록(progress.json)이 유실됩니다.

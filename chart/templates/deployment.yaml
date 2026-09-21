@@ -7,9 +7,6 @@
 {{- if and (eq .Values.auth.mode "oidc") (not .Values.auth.oidc.issuer) }}
 {{- fail "auth.mode=oidc requires auth.oidc.issuer" }}
 {{- end }}
-{{- if and (eq .Values.auth.mode "local") (not .Values.auth.usersExistingSecret) }}
-{{- fail "auth.mode=local requires auth.usersExistingSecret (users.json made by userctl.js)" }}
-{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -103,10 +100,18 @@ spec:
                   name: {{ .Values.auth.cookieSecretExistingSecret }}
                   key: cookieSecret
             {{- end }}
-            {{- if .Values.auth.usersExistingSecret }}
-            # Secret은 최초 시드만 — 가입/승인이 파일을 수정하므로 원본은 sessions 볼륨(쓰기 가능)
-            - { name: USERS_SEED_FILE, value: "/auth/users.json" }
+            # 가입/승인이 파일을 수정하므로 원본은 sessions 볼륨(쓰기 가능)
             - { name: USERS_FILE, value: "/app/prototype/sessions/users.json" }
+            {{- if .Values.auth.usersExistingSecret }}
+            # Secret은 최초 시드만
+            - { name: USERS_SEED_FILE, value: "/auth/users.json" }
+            {{- else if eq .Values.auth.mode "local" }}
+            # 시드 Secret이 없으면 첫 기동 때 adminUsers[0] 계정을 이 비밀번호로 생성
+            - name: ADMIN_INITIAL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "snacklab.fullname" . }}-admin
+                  key: password
             {{- end }}
             {{- if not .Values.auth.signup }}
             - { name: SIGNUP_ENABLED, value: "0" }

@@ -148,8 +148,33 @@ build.sh / deploy.sh 클러스터 내 kaniko 빌드·helm 배포
 
 ```bash
 helm upgrade --install lab ./chart -n snacklab --create-namespace \
+  --set auth.adminPassword='<초기 관리자 비밀번호>' \
   -f chart/values-example.yaml   # 사이트에 맞게 복사·수정 후 사용
 ```
+
+`auth.mode: local`이면 포털이 첫 기동 때 관리자 계정을 만듭니다: 계정 `adminUsers[0]`
+(기본 `admin`), 비밀번호 `auth.adminPassword`(기본값 **`ChangeMe`** — 로그인 후 바로 바꾸세요).
+계정은 sessions 볼륨의 `users.json`에 기록되며 이 파일이 아직 없을 때만 생성되므로, 이후
+`adminPassword`를 바꿔도 반영되지 않습니다 — 계정은 관리자 대시보드(`/admin.html`)에서 관리하세요.
+
+선택 Secret:
+
+- `auth.usersExistingSecret` — 자동 생성 관리자 대신 Secret으로 `users.json` 시드
+  (키 `users.json`, `node prototype/userctl.js add <계정> --admin`으로 생성). 역시 첫 기동 때만 복사됩니다.
+- `auth.cookieSecretExistingSecret` — 쿠키 서명 키(키 `cookieSecret`). 지정하면 포털 재시작 후에도
+  로그인이 유지되고, 없으면 파드마다 임의 키를 생성합니다.
+
+```bash
+kubectl -n snacklab create secret generic lab-cookie \
+  --from-literal=cookieSecret=$(openssl rand -hex 32)
+```
+
+존재하지 않는 Secret을 지정하면 포털 pod가
+`MountVolume.SetUp failed for volume "users" : secret "lab-users" not found`(쿠키 Secret이면
+`CreateContainerConfigError`)로 실패합니다 — Secret을 만든 뒤
+`kubectl -n snacklab rollout restart deploy/lab-snacklab`로 재시작하세요.
+
+로그인 없이 먼저 띄워 보려면 `--set auth.mode=off`(내부망 데모 전용).
 
 주요 값 (전체는 `chart/values.yaml` 참고):
 
