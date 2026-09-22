@@ -277,16 +277,6 @@ A module is `meta.json + guide.md (+ locales) + bootstrap.sh + checks/*.sh + sol
 renders them per-locale via `checks/messages.json`. Full conventions:
 [docs/content-authoring-conventions.md](docs/content-authoring-conventions.md).
 
-## Roadmap
-
-- [x] Docker Compose single-node deployment (no Kubernetes required)
-- [x] OpenStack track (fake-driver all-in-one)
-- [x] Publish pre-built images (ghcr.io)
-- [ ] Packaged Helm chart
-- [ ] More OpenStack modules (security groups, routers, keystone deep-dive) and a COA-style mock exam
-- [ ] arm64 image builds
-- [ ] Pluggable content repositories
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and PRs welcome — content contributions

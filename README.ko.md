@@ -257,16 +257,6 @@ docker compose up -d --build
 로케일 렌더링한다. 규칙 전체:
 [docs/content-authoring-conventions.md](docs/content-authoring-conventions.md).
 
-## 로드맵
-
-- [x] Docker Compose 싱글 노드 배포 (쿠버네티스 불필요)
-- [x] OpenStack 트랙 (fake 드라이버 올인원)
-- [x] 사전 빌드 이미지 배포 (ghcr.io)
-- [ ] 패키징된 Helm 차트
-- [ ] OpenStack 모듈 확장(보안그룹·라우터·keystone 심화)·COA 스타일 모의고사
-- [ ] arm64 이미지 빌드
-- [ ] 플러그형 콘텐츠 저장소
-
 ## 기여
 
 [CONTRIBUTING.md](CONTRIBUTING.md) 참고. 이슈·PR 환영 — 특히 콘텐츠(새 모듈/트랙, 번역)
