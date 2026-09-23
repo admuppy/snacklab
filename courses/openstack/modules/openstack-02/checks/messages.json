@@ -1,0 +1,86 @@
+{
+  "step1m1": {
+    "ko": "FAIL: ~/images/blank.qcow2 가 없습니다. 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' 로 만드세요.",
+    "en": "FAIL: ~/images/blank.qcow2 is missing. Create it with 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G'."
+  },
+  "step1m2": {
+    "ko": "FAIL: blank.qcow2 의 포맷이 qcow2 가 아닙니다 (현재 {0}). -f qcow2 옵션을 확인하세요.",
+    "en": "FAIL: blank.qcow2 is not qcow2 (currently {0}). Check the -f qcow2 option."
+  },
+  "step1m3": {
+    "ko": "FAIL: 가상 크기가 1GiB(1073741824 바이트)가 아닙니다 (현재 {0}).",
+    "en": "FAIL: the virtual size is not 1 GiB (1073741824 bytes); it is {0}."
+  },
+  "step1m4": {
+    "ko": "PASS: 1GiB 가상 크기의 빈 qcow2 디스크를 만들었습니다.",
+    "en": "PASS: you created an empty 1 GiB qcow2 disk."
+  },
+  "step2m1": {
+    "ko": "FAIL: ~/images/cirros-raw.img 가 없습니다. 'qemu-img convert -f qcow2 -O raw' 로 변환하세요.",
+    "en": "FAIL: ~/images/cirros-raw.img is missing. Convert it with 'qemu-img convert -f qcow2 -O raw'."
+  },
+  "step2m2": {
+    "ko": "FAIL: cirros-raw.img 가 raw 포맷이 아닙니다 (현재 {0}). -O raw 를 확인하세요.",
+    "en": "FAIL: cirros-raw.img is not raw (currently {0}). Check -O raw."
+  },
+  "step2m3": {
+    "ko": "FAIL: ~/images/cirros-lab.qcow2 가 없습니다. raw 를 다시 qcow2 로 변환하세요.",
+    "en": "FAIL: ~/images/cirros-lab.qcow2 is missing. Convert the raw disk back to qcow2."
+  },
+  "step2m4": {
+    "ko": "FAIL: cirros-lab.qcow2 가 qcow2 포맷이 아닙니다 (현재 {0}). -O qcow2 를 확인하세요.",
+    "en": "FAIL: cirros-lab.qcow2 is not qcow2 (currently {0}). Check -O qcow2."
+  },
+  "step2m5": {
+    "ko": "FAIL: raw 와 qcow2 의 가상 크기가 다릅니다. 같은 디스크에서 변환했는지 확인하세요.",
+    "en": "FAIL: the raw and qcow2 disks report different virtual sizes. Convert from the same source."
+  },
+  "step2m6": {
+    "ko": "PASS: cirros 디스크를 raw 로 풀었다가 다시 qcow2 로 변환했습니다.",
+    "en": "PASS: you converted the cirros disk to raw and back to qcow2."
+  },
+  "step3m1": {
+    "ko": "FAIL: 이미지 'cirros-lab' 이 glance 에 없습니다. 'openstack image create ... cirros-lab' 으로 올리세요.",
+    "en": "FAIL: the image 'cirros-lab' is not in glance. Upload it with 'openstack image create ... cirros-lab'."
+  },
+  "step3m2": {
+    "ko": "FAIL: disk_format 이 qcow2 가 아닙니다 (현재 {0}). --disk-format qcow2 를 확인하세요.",
+    "en": "FAIL: disk_format is not qcow2 (currently {0}). Check --disk-format qcow2."
+  },
+  "step3m3": {
+    "ko": "FAIL: container_format 이 bare 가 아닙니다 (현재 {0}). --container-format bare 를 확인하세요.",
+    "en": "FAIL: container_format is not bare (currently {0}). Check --container-format bare."
+  },
+  "step3m4": {
+    "ko": "FAIL: 이미지 상태가 active 가 아닙니다 (현재 {0}). --file 로 디스크를 함께 올렸는지 확인하세요.",
+    "en": "FAIL: the image status is not active (currently {0}). Check that you uploaded the disk with --file."
+  },
+  "step3m5": {
+    "ko": "FAIL: min_disk 가 1 이 아닙니다 (현재 {0}). --min-disk 1 을 지정하세요.",
+    "en": "FAIL: min_disk is not 1 (currently {0}). Set --min-disk 1."
+  },
+  "step3m6": {
+    "ko": "FAIL: min_ram 이 64 가 아닙니다 (현재 {0}). --min-ram 64 를 지정하세요.",
+    "en": "FAIL: min_ram is not 64 (currently {0}). Set --min-ram 64."
+  },
+  "step3m7": {
+    "ko": "FAIL: os_distro 속성이 없습니다. --property os_distro=cirros 를 지정하세요.",
+    "en": "FAIL: the os_distro property is missing. Set --property os_distro=cirros."
+  },
+  "step3m8": {
+    "ko": "FAIL: 인스턴스 'vm2' 가 없습니다. 'openstack server create --image cirros-lab ... vm2' 로 기동하세요.",
+    "en": "FAIL: the instance 'vm2' does not exist. Boot it with 'openstack server create --image cirros-lab ... vm2'."
+  },
+  "step3m9": {
+    "ko": "FAIL: vm2 의 상태가 {0} 입니다. ACTIVE 가 될 때까지 기다리세요.",
+    "en": "FAIL: vm2 is in state {0}. Wait until it reaches ACTIVE."
+  },
+  "step3m10": {
+    "ko": "FAIL: vm2 가 cirros-lab 이미지로 기동되지 않았습니다 (현재 {0}).",
+    "en": "FAIL: vm2 was not booted from the cirros-lab image (currently {0})."
+  },
+  "step3m11": {
+    "ko": "PASS: 직접 만든 qcow2 이미지를 glance 에 올리고 그 이미지로 인스턴스를 기동했습니다.",
+    "en": "PASS: you uploaded your own qcow2 image to glance and booted an instance from it."
+  }
+}

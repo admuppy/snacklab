@@ -7,7 +7,7 @@
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![Node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-v1.27%2B-326CE5)
-![Modules](https://img.shields.io/badge/modules-23-orange)
+![Modules](https://img.shields.io/badge/modules-24-orange)
 ![i18n](https://img.shields.io/badge/i18n-7_locales-purple)
 
 학습자마다 **격리된 일회용 환경**을 즉석에서 만들어 준다 — systemd가 도는 privileged 파드에,
@@ -59,7 +59,7 @@ Node.js 18 이상 필요. 런타임 의존성은 express·ws 뿐이다.
 | Linux 중급 | linux-01 ~ 09 (권한·프로세스·텍스트·Bash·계정·systemd·네트워킹·종합·자원관리) | systemd PID1 파드 |
 | Kubernetes 심화 | k8s-01 ~ 10 (워크로드·서비스·구성·프로브·리소스·스케줄링·스토리지·RBAC·NetworkPolicy·트러블슈팅) | 파드 안 단일노드 k3s |
 | CKA / CKAD / CKS 모의고사 | cka-01 · ckad-01 · cks-01 (각 120분, 15~16문항) | 파드 안 단일노드 k3s |
-| OpenStack 입문 | openstack-01 (네트워크·인스턴스 라이프사이클 — 확장 예정) | 파드 안 올인원 OpenStack(Caracal), nova fake 드라이버 |
+| OpenStack 입문 | openstack-01 ~ 02 (서비스 카탈로그·네트워크·인스턴스 라이프사이클·프로젝트, qcow2 이미지 제작·업로드) | 파드 안 올인원 OpenStack(Caracal), nova fake 드라이버 |
 
 OpenStack 트랙은 keystone·glance·neutron·nova를 **fake virt 드라이버**로 돌린다:
 인스턴스가 실제 VM 없이 상태 머신으로만 "부팅"되므로 클라우드 전체가 유휴 ~0.05 CPU /

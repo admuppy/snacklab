@@ -8,7 +8,7 @@ automated grading, mock exams.
 ![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![Node](https://img.shields.io/badge/node-%E2%89%A518-brightgreen)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-v1.27%2B-326CE5)
-![Modules](https://img.shields.io/badge/modules-23-orange)
+![Modules](https://img.shields.io/badge/modules-24-orange)
 ![i18n](https://img.shields.io/badge/i18n-7_locales-purple)
 
 Each learner gets an **isolated, disposable environment** created on demand — a
@@ -67,7 +67,7 @@ Requires Node.js ≥ 18; the only runtime dependencies are express and ws.
 | Linux intermediate | linux-01 – 09 (permissions, processes, text, Bash, accounts, systemd, networking, capstone, resources) | systemd PID1 pod |
 | Kubernetes deep-dive | k8s-01 – 10 (workloads, services, config, probes, resources, scheduling, storage, RBAC, NetworkPolicy, troubleshooting) | single-node k3s in a pod |
 | CKA / CKAD / CKS mock exams | cka-01 · ckad-01 · cks-01 (120 min, 15–16 questions each) | single-node k3s in a pod |
-| OpenStack essentials | openstack-01 (networks, instance lifecycle — more coming) | all-in-one OpenStack (Caracal) in a pod, nova fake driver |
+| OpenStack essentials | openstack-01 – 02 (service catalog, networks, instance lifecycle, projects; building and uploading qcow2 images) | all-in-one OpenStack (Caracal) in a pod, nova fake driver |
 
 The OpenStack track runs keystone·glance·neutron·nova with the **fake virt driver**:
 instances "boot" as pure state machines, so the whole cloud idles at ~0.05 CPU /

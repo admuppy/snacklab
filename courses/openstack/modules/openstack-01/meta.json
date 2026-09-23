@@ -5,10 +5,10 @@
     "en": "Boot Your First Instance"
   },
   "desc": {
-    "ko": "네트워크를 만들고 cirros 인스턴스를 기동·정지하며 OpenStack CLI의 기본 흐름을 익힌다",
-    "en": "Create a network, then boot and stop a cirros instance to learn the core OpenStack CLI workflow"
+    "ko": "서비스 카탈로그와 nova 구성을 읽고, 네트워크를 만들어 cirros 인스턴스를 기동·조회·정지하며 OpenStack CLI의 기본 흐름을 익힌다",
+    "en": "Read the service catalog and nova's components, then create a network and boot, list and stop a cirros instance to learn the core OpenStack CLI workflow"
   },
-  "duration": 30,
+  "duration": 40,
   "available": true,
   "driver": "pod",
   "steps": [
@@ -28,10 +28,17 @@
     },
     {
       "title": {
+        "ko": "프로젝트 전체 인스턴스 조회",
+        "en": "List instances across projects"
+      },
+      "check": "step3.sh"
+    },
+    {
+      "title": {
         "ko": "인스턴스 정지 (SHUTOFF)",
         "en": "Stop the instance (SHUTOFF)"
       },
-      "check": "step3.sh"
+      "check": "step4.sh"
     }
   ]
 }

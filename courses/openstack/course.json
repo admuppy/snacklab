@@ -10,8 +10,8 @@
     "de": "OpenStack-Grundlagen"
   },
   "desc": {
-    "ko": "파드 안 전용 올인원 OpenStack(Caracal)에서 keystone·glance·neutron·nova를 CLI로 익힌다. 인스턴스는 fake 드라이버로 떠서 가볍고 빠르다.",
-    "en": "Hands-on keystone, glance, neutron and nova on a private all-in-one OpenStack (Caracal) inside your pod. Instances run on the fake driver — light and instant."
+    "ko": "파드 안 전용 올인원 OpenStack(Caracal)에서 keystone·glance·neutron·nova를 CLI로 익히고, qcow2 이미지를 직접 만들어 올린다. 인스턴스는 fake 드라이버로 떠서 가볍고 빠르다.",
+    "en": "Hands-on keystone, glance, neutron and nova on a private all-in-one OpenStack (Caracal) inside your pod, including building and uploading your own qcow2 image. Instances run on the fake driver — light and instant."
   },
   "image": "snacklab-openstack:v1",
   "hostModules": true,
@@ -26,6 +26,7 @@
     }
   },
   "modules": [
-    "openstack-01"
+    "openstack-01",
+    "openstack-02"
   ]
 }

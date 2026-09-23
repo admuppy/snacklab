@@ -40,14 +40,38 @@
     "en": "PASS: vm1 is ACTIVE on net1."
   },
   "step3m1": {
+    "ko": "FAIL: ~/all-servers.txt 가 없거나 비어 있습니다. 가이드의 저장 명령을 실행하세요.",
+    "en": "FAIL: ~/all-servers.txt is missing or empty. Run the save command from the guide."
+  },
+  "step3m2": {
+    "ko": "FAIL: 인스턴스 'vm1' 이 없습니다. 2단계를 먼저 끝내세요.",
+    "en": "FAIL: the instance 'vm1' does not exist. Finish step 2 first."
+  },
+  "step3m3": {
+    "ko": "FAIL: 저장된 목록에 vm1 이 없습니다. 인스턴스를 만든 뒤 다시 조회해 저장하세요.",
+    "en": "FAIL: the saved list does not contain vm1. Re-run the query after the instance exists."
+  },
+  "step3m4": {
+    "ko": "FAIL: 현재 토큰의 프로젝트를 확인하지 못했습니다. 'openstack token issue' 로 자격증명을 확인하세요.",
+    "en": "FAIL: could not read the project of the current token. Check your credentials with 'openstack token issue'."
+  },
+  "step3m5": {
+    "ko": "FAIL: 저장된 목록에 프로젝트 ID가 없습니다. \"-c 'Project ID'\" 를 함께 지정하세요.",
+    "en": "FAIL: the saved list has no project ID. Add \"-c 'Project ID'\" to the command."
+  },
+  "step3m6": {
+    "ko": "PASS: 모든 프로젝트의 인스턴스 목록을 프로젝트 ID와 함께 조회했습니다.",
+    "en": "PASS: you listed instances across all projects, including the project ID."
+  },
+  "step4m1": {
     "ko": "FAIL: 인스턴스 'vm1' 이 없습니다.",
     "en": "FAIL: the instance 'vm1' does not exist."
   },
-  "step3m2": {
+  "step4m2": {
     "ko": "FAIL: vm1 의 상태가 SHUTOFF 가 아닙니다 (현재 {0}). 'openstack server stop vm1' 으로 정지하세요.",
     "en": "FAIL: vm1 is not SHUTOFF (currently {0}). Stop it with 'openstack server stop vm1'."
   },
-  "step3m3": {
+  "step4m3": {
     "ko": "PASS: vm1 이 SHUTOFF 상태입니다.",
     "en": "PASS: vm1 is SHUTOFF."
   }

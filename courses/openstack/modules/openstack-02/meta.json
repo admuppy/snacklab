@@ -1,0 +1,37 @@
+{
+  "id": "openstack-02",
+  "title": {
+    "ko": "qcow2 이미지 만들어 올리기",
+    "en": "Build and Upload a qcow2 Image"
+  },
+  "desc": {
+    "ko": "qemu-img 로 qcow2 디스크를 만들고 포맷을 변환한 뒤, glance 에 올려 그 이미지로 인스턴스를 기동한다",
+    "en": "Create and convert disks with qemu-img, then upload the qcow2 image to glance and boot an instance from it"
+  },
+  "duration": 30,
+  "available": true,
+  "driver": "pod",
+  "steps": [
+    {
+      "title": {
+        "ko": "빈 qcow2 디스크 만들기",
+        "en": "Create an empty qcow2 disk"
+      },
+      "check": "step1.sh"
+    },
+    {
+      "title": {
+        "ko": "디스크 포맷 변환 (qcow2 ↔ raw)",
+        "en": "Convert disk formats (qcow2 ↔ raw)"
+      },
+      "check": "step2.sh"
+    },
+    {
+      "title": {
+        "ko": "glance 에 올리고 인스턴스 기동",
+        "en": "Upload to glance and boot an instance"
+      },
+      "check": "step3.sh"
+    }
+  ]
+}
