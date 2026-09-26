@@ -40,8 +40,8 @@ if [ -f "$COURSE_JSON" ]; then
   EPH_LIM=$(jq -r '.resources.limits["ephemeral-storage"] // "8Gi"' "$COURSE_JSON")
   DEFAULT_MODULES=$(jq -r '.modules[]' "$COURSE_JSON")
 else
-  # 내장 콘텐츠(prototype/content/): 기본 학습자 이미지로 돈다. 이미지는 IMAGE 로 지정/덮어쓰기.
-  #   IMAGE=<registry>/snacklab-linux:v3 ./deploy/e2e-course.sh prototype/content linux-01
+  # 내장 콘텐츠(v0.1/content/): 기본 학습자 이미지로 돈다. 이미지는 IMAGE 로 지정/덮어쓰기.
+  #   IMAGE=<registry>/snacklab-linux:v3 ./deploy/e2e-course.sh v0.1/content linux-01
   [ -d "$COURSE_DIR" ] || { echo "디렉터리 없음: $COURSE_DIR"; exit 1; }
   MODULES_DIR=$COURSE_DIR
   IMAGE=${IMAGE:?"course.json 이 없는 디렉터리 — IMAGE 환경변수로 학습자 이미지를 지정하세요"}

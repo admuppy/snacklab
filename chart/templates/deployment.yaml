@@ -76,10 +76,10 @@ spec:
             - { name: LEARNER_EPH_REQUEST, value: {{ index .Values.learner.resources.requests "ephemeral-storage" | quote }} }
             - { name: LEARNER_EPH_LIMIT, value: {{ index .Values.learner.resources.limits "ephemeral-storage" | quote }} }
             {{- if .Values.courses }}
-            - { name: CONTENT_DIRS, value: "/app/prototype/content:/courses" }
+            - { name: CONTENT_DIRS, value: "/app/v0.1/content:/courses" }
             {{- end }}
             {{- if .Values.persistence.enabled }}
-            - { name: PROGRESS_FILE, value: "/app/prototype/sessions/progress.json" }
+            - { name: PROGRESS_FILE, value: "/app/v0.1/sessions/progress.json" }
             {{- end }}
             {{- if ne .Values.auth.mode "auto" }}
             - { name: AUTH_MODE, value: {{ .Values.auth.mode | quote }} }
@@ -101,7 +101,7 @@ spec:
                   key: cookieSecret
             {{- end }}
             # 가입/승인이 파일을 수정하므로 원본은 sessions 볼륨(쓰기 가능)
-            - { name: USERS_FILE, value: "/app/prototype/sessions/users.json" }
+            - { name: USERS_FILE, value: "/app/v0.1/sessions/users.json" }
             {{- if .Values.auth.usersExistingSecret }}
             # Secret은 최초 시드만
             - { name: USERS_SEED_FILE, value: "/auth/users.json" }
@@ -120,7 +120,7 @@ spec:
             {{- toYaml . | nindent 12 }}
             {{- end }}
           volumeMounts:
-            - { name: state, mountPath: /app/prototype/sessions }
+            - { name: state, mountPath: /app/v0.1/sessions }
             {{- if .Values.courses }}
             - { name: courses, mountPath: /courses, readOnly: true }
             {{- end }}

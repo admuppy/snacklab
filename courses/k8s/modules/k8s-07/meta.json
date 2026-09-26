@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "PV·PVC 정적/동적 바인딩과 StatefulSet 의 안정적 식별자·볼륨 유지 확인",
-    "en": "Static and dynamic PV/PVC binding, plus StatefulSet stable identities and volume retention"
+    "en": "Static and dynamic PV/PVC binding, plus StatefulSet stable identities and volume retention",
+    "ja": "PV・PVC の静的/動的バインディングと、StatefulSet の安定した識別子とボリューム維持を確かめる",
+    "zh-CN": "验证 PV、PVC 的静态/动态绑定,以及 StatefulSet 的稳定标识和卷保留",
+    "zh-TW": "驗證 PV、PVC 的靜態/動態繫結,以及 StatefulSet 的穩定標識和卷保留",
+    "es": "Vinculación estática y dinámica de PV/PVC, más las identidades estables y la retención de volúmenes de StatefulSet",
+    "de": "Statische und dynamische PV/PVC-Bindung sowie stabile Identitäten und Volume-Erhalt bei StatefulSets"
   },
   "duration": 40,
   "available": true,

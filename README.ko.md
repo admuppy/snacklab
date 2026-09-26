@@ -28,7 +28,7 @@ Isovalent Labs / Killercoda 류의 셀프호스팅 대안.
 클러스터 없이도 된다 — `sim` 드라이버가 세션을 흉내내므로 UI 전체를 바로 둘러볼 수 있다:
 
 ```bash
-git clone https://github.com/admuppy/snacklab && cd snacklab/prototype
+git clone https://github.com/admuppy/snacklab && cd snacklab/v0.1
 npm ci
 DRIVER=sim node server.js
 # http://localhost:3000
@@ -97,7 +97,7 @@ OpenStack 트랙은 keystone·glance·neutron·nova를 **fake virt 드라이버*
 ## 구조
 
 ```
-prototype/           앱 — 포털 전체가 단일 server.js (express + ws)
+v0.1/           앱 — 포털 전체가 단일 server.js (express + ws)
   userctl.js         로컬 계정 CLI
   public/            정적 UI (카탈로그/랩/관리자, i18n.js)
   content/           내장 콘텐츠 (linux-01~09)
@@ -160,7 +160,7 @@ helm upgrade --install lab ./chart -n snacklab --create-namespace \
 선택 Secret:
 
 - `auth.usersExistingSecret` — 자동 생성 관리자 대신 Secret으로 `users.json` 시드
-  (키 `users.json`, `node prototype/userctl.js add <계정> --admin`으로 생성). 역시 첫 기동 때만 복사됩니다.
+  (키 `users.json`, `node v0.1/userctl.js add <계정> --admin`으로 생성). 역시 첫 기동 때만 복사됩니다.
 - `auth.cookieSecretExistingSecret` — 쿠키 서명 키(키 `cookieSecret`). 지정하면 포털 재시작 후에도
   로그인이 유지되고, 없으면 파드마다 임의 키를 생성합니다.
 

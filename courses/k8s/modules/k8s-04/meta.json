@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "liveness·readiness·startup 프로브로 고장난 컨테이너를 자동 재시작·트래픽 차단시키기",
-    "en": "Use liveness, readiness and startup probes to restart broken containers and pull them out of service"
+    "en": "Use liveness, readiness and startup probes to restart broken containers and pull them out of service",
+    "ja": "liveness・readiness・startup プローブで、壊れたコンテナを自動で再起動させ、トラフィックから外す",
+    "zh-CN": "用 liveness、readiness、startup 探针让故障容器自动重启并停止接收流量",
+    "zh-TW": "用 liveness、readiness、startup 探針讓故障容器自動重啟並停止接收流量",
+    "es": "Usa sondas liveness, readiness y startup para reiniciar contenedores rotos y retirarlos del servicio",
+    "de": "Mit Liveness-, Readiness- und Startup-Probes kaputte Container neu starten und aus dem Verkehr ziehen"
   },
   "duration": 35,
   "available": true,

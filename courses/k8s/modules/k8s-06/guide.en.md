@@ -10,6 +10,9 @@ This cluster has a single node. Get its name with:
 node=$(kubectl get nodes -o jsonpath='{.items[0].metadata.name}'); echo "$node"
 ```
 
+- `$( ... )` — command substitution; `{.items[0].metadata.name}` extracts the first node's name into the shell variable `node`.
+- `; echo "$node"` — prints it to confirm. Later commands refer to it as `"$node"`.
+
 > Reference: [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) ·
 > [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 
@@ -23,6 +26,8 @@ Label the node:
 ```bash
 kubectl label node "$node" disktype=ssd
 ```
+
+- `kubectl label <resource> <name> key=value` — adds a label. Use `--overwrite` to change an existing key, `key-` to remove it.
 
 Create the nodeAffinity Pod:
 
@@ -43,11 +48,17 @@ spec:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — feeds the YAML up to the `EOF` line to kubectl on stdin. `-f -` means "read stdin instead of a file"; quoting `'EOF'` stops the shell from expanding `$` inside the body.
+- `requiredDuringSchedulingIgnoredDuringExecution` — **must** hold at scheduling time; Pods already running are not evicted if the label changes later.
+- `matchExpressions: {key: disktype, operator: In, values: [ssd]}` — only nodes whose `disktype` label is `ssd` qualify (other operators: `NotIn`, `Exists`, …).
+
 Check Pod placement:
 
 ```bash
 kubectl get pod affine -o wide      # NODE column = our node
 ```
+
+- The `NODE` column from `-o wide` shows which node the Pod landed on.
 
 Remove the label (`kubectl label node "$node" disktype-`) and a new such Pod goes `Pending` —
 try it.
@@ -63,17 +74,25 @@ Taint the node:
 kubectl taint nodes "$node" lab=demo:NoSchedule
 ```
 
+- `kubectl taint nodes <node> key=value:effect` — taints the node. Effects: `NoSchedule` (reject new Pods), `PreferNoSchedule` (avoid if possible), `NoExecute` (also evict running Pods).
+- Remove it by appending `-`: `kubectl taint nodes "$node" lab=demo:NoSchedule-`
+
 A Pod without a toleration stays Pending (demo):
 
 ```bash
 kubectl run notol --image=nginx:1.26; kubectl get pod notol      # Pending
 ```
 
+- `;` — runs the next command after the first finishes, so you see the Pod's status right after creating it.
+- With no toleration it stays `Pending`; `kubectl describe pod notol` shows `untolerated taint` in Events.
+
 Delete the demo Pod:
 
 ```bash
 kubectl delete pod notol
 ```
+
+- `kubectl delete pod <name>` — deletes the Pod. Leaving the test Pod around would get in the way of later checks.
 
 Create the tolerating Pod:
 
@@ -90,11 +109,16 @@ spec:
 EOF
 ```
 
+- `tolerations` — taints this Pod can tolerate; `key`, `value` and `effect` must match the node's taint.
+- `operator: Equal` also compares the value; `Exists` accepts any value for the key.
+
 Check Pod status:
 
 ```bash
 kubectl get pod tolerant -o wide     # Running
 ```
+
+- Thanks to the toleration it can land on the tainted node and becomes `Running`.
 
 > `NoSchedule` only blocks new Pods; `NoExecute` also evicts existing Pods that don't tolerate
 > the taint.
@@ -126,11 +150,17 @@ spec:
 EOF
 ```
 
+- `kind: DaemonSet` — no `replicas`; keeps exactly one Pod on every eligible node.
+- `selector.matchLabels` must match `template.metadata.labels`.
+- Because of the `lab` taint on the node, the same `tolerations` are needed here too.
+
 Check DaemonSet status:
 
 ```bash
 kubectl get ds node-agent           # DESIRED=CURRENT=READY=1
 ```
+
+- `ds` is short for `daemonset`. `DESIRED` — nodes that should run a Pod, `CURRENT` — Pods created, `READY` — Pods ready.
 
 Success when `DESIRED` and `READY` equal the node count (1).
 

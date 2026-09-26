@@ -27,7 +27,7 @@ By default auth is off (everyone is anonymous; `admin` features need an account)
 To enable local accounts:
 
 ```bash
-docker compose exec -e USERS_FILE=/app/prototype/sessions/users.json \
+docker compose exec -e USERS_FILE=/app/v0.1/sessions/users.json \
   portal node userctl.js add admin
 docker compose restart portal
 ```

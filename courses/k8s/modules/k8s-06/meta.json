@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "nodeSelector·어피니티·테인트/톨러레이션·DaemonSet 으로 파드 배치를 직접 통제",
-    "en": "Control pod placement with nodeSelector, affinity, taints/tolerations and DaemonSets"
+    "en": "Control pod placement with nodeSelector, affinity, taints/tolerations and DaemonSets",
+    "ja": "nodeSelector・アフィニティ・テイント/トレレーション・DaemonSet で Pod の配置を直接コントロールする",
+    "zh-CN": "用 nodeSelector、亲和性、污点/容忍和 DaemonSet 直接控制 Pod 的调度位置",
+    "zh-TW": "用 nodeSelector、親和性、汙點/容忍和 DaemonSet 直接控制 Pod 的排程位置",
+    "es": "Controla la ubicación de los pods con nodeSelector, afinidad, taints/tolerations y DaemonSets",
+    "de": "Pod-Platzierung mit nodeSelector, Affinity, Taints/Tolerations und DaemonSets selbst steuern"
   },
   "duration": 40,
   "available": true,

@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "requests·limits 가 스케줄링과 QoS 클래스, OOM 축출 순서를 어떻게 바꾸는지 실측",
-    "en": "Measure how requests and limits drive scheduling, QoS classes and OOM eviction order"
+    "en": "Measure how requests and limits drive scheduling, QoS classes and OOM eviction order",
+    "ja": "requests・limits がスケジューリングと QoS クラス、OOM による退避の順序をどう変えるかを実測する",
+    "zh-CN": "实测 requests 和 limits 如何影响调度、QoS 类别以及 OOM 驱逐顺序",
+    "zh-TW": "實測 requests 和 limits 如何影響排程、QoS 類別以及 OOM 驅逐順序",
+    "es": "Mide cómo influyen los requests y limits en la planificación, las clases de QoS y el orden de desalojo por OOM",
+    "de": "Messen, wie Requests und Limits Scheduling, QoS-Klassen und die Reihenfolge der OOM-Verdrängung bestimmen"
   },
   "duration": 35,
   "available": true,

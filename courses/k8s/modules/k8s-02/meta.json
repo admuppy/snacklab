@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "ClusterIP·NodePort·Headless 세 가지 Service 와 CoreDNS 이름 해석으로 클러스터 내부 통신 이해",
-    "en": "ClusterIP, NodePort and Headless Services plus CoreDNS name resolution for in-cluster traffic"
+    "en": "ClusterIP, NodePort and Headless Services plus CoreDNS name resolution for in-cluster traffic",
+    "ja": "ClusterIP・NodePort・Headless の 3 種類の Service と CoreDNS の名前解決で、クラスター内部の通信を理解する",
+    "zh-CN": "通过 ClusterIP、NodePort、Headless 三种 Service 和 CoreDNS 名称解析,理解集群内部通信",
+    "zh-TW": "透過 ClusterIP、NodePort、Headless 三種 Service 和 CoreDNS 名稱解析,理解叢集內部通訊",
+    "es": "Services ClusterIP, NodePort y headless, más la resolución de nombres de CoreDNS, para el tráfico dentro del clúster",
+    "de": "ClusterIP-, NodePort- und Headless-Services sowie CoreDNS-Namensauflösung für den clusterinternen Verkehr"
   },
   "duration": 35,
   "available": true,

@@ -13,7 +13,7 @@ Thanks for your interest! Issues and pull requests are welcome.
 ## Development setup
 
 ```bash
-cd prototype
+cd v0.1
 DRIVER=sim node server.js     # Node.js >= 18, no npm install needed
 ```
 

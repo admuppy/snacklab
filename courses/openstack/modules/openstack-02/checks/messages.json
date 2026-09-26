@@ -1,86 +1,191 @@
 {
   "step1m1": {
     "ko": "FAIL: ~/images/blank.qcow2 가 없습니다. 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' 로 만드세요.",
-    "en": "FAIL: ~/images/blank.qcow2 is missing. Create it with 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G'."
+    "en": "FAIL: ~/images/blank.qcow2 is missing. Create it with 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G'.",
+    "ja": "FAIL: ~/images/blank.qcow2 がありません。'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' で作成してください。",
+    "zh-CN": "FAIL: 没有 ~/images/blank.qcow2。请用 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' 创建。",
+    "zh-TW": "FAIL: 沒有 ~/images/blank.qcow2。請用 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' 建立。",
+    "es": "FAIL: falta ~/images/blank.qcow2. Créalo con 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G'.",
+    "de": "FAIL: ~/images/blank.qcow2 fehlt. Lege es mit 'qemu-img create -f qcow2 ~/images/blank.qcow2 1G' an."
   },
   "step1m2": {
     "ko": "FAIL: blank.qcow2 의 포맷이 qcow2 가 아닙니다 (현재 {0}). -f qcow2 옵션을 확인하세요.",
-    "en": "FAIL: blank.qcow2 is not qcow2 (currently {0}). Check the -f qcow2 option."
+    "en": "FAIL: blank.qcow2 is not qcow2 (currently {0}). Check the -f qcow2 option.",
+    "ja": "FAIL: blank.qcow2 が qcow2 ではありません(現在 {0})。-f qcow2 オプションを確認してください。",
+    "zh-CN": "FAIL: blank.qcow2 不是 qcow2(当前 {0})。请检查 -f qcow2 选项。",
+    "zh-TW": "FAIL: blank.qcow2 不是 qcow2(當前 {0})。請檢查 -f qcow2 選項。",
+    "es": "FAIL: blank.qcow2 no es qcow2 (actualmente {0}). Revisa la opción -f qcow2.",
+    "de": "FAIL: blank.qcow2 ist nicht qcow2 (aktuell {0}). Prüfe die Option -f qcow2."
   },
   "step1m3": {
     "ko": "FAIL: 가상 크기가 1GiB(1073741824 바이트)가 아닙니다 (현재 {0}).",
-    "en": "FAIL: the virtual size is not 1 GiB (1073741824 bytes); it is {0}."
+    "en": "FAIL: the virtual size is not 1 GiB (1073741824 bytes); it is {0}.",
+    "ja": "FAIL: 仮想サイズが 1 GiB(1073741824 バイト)ではありません。現在 {0} です。",
+    "zh-CN": "FAIL: 虚拟大小不是 1 GiB(1073741824 字节),当前为 {0}。",
+    "zh-TW": "FAIL: 虛擬大小不是 1 GiB(1073741824 位元組),當前為 {0}。",
+    "es": "FAIL: el tamaño virtual no es 1 GiB (1073741824 bytes); es {0}.",
+    "de": "FAIL: Die virtuelle Größe ist nicht 1 GiB (1073741824 Bytes), sondern {0}."
   },
   "step1m4": {
     "ko": "PASS: 1GiB 가상 크기의 빈 qcow2 디스크를 만들었습니다.",
-    "en": "PASS: you created an empty 1 GiB qcow2 disk."
+    "en": "PASS: you created an empty 1 GiB qcow2 disk.",
+    "ja": "PASS: 1 GiB の空の qcow2 ディスクを作りました。",
+    "zh-CN": "PASS: 已创建 1 GiB 的空 qcow2 磁盘。",
+    "zh-TW": "PASS: 已建立 1 GiB 的空 qcow2 磁碟。",
+    "es": "PASS: has creado un disco qcow2 vacío de 1 GiB.",
+    "de": "PASS: Du hast eine leere qcow2-Disk mit 1 GiB erstellt."
   },
   "step2m1": {
     "ko": "FAIL: ~/images/cirros-raw.img 가 없습니다. 'qemu-img convert -f qcow2 -O raw' 로 변환하세요.",
-    "en": "FAIL: ~/images/cirros-raw.img is missing. Convert it with 'qemu-img convert -f qcow2 -O raw'."
+    "en": "FAIL: ~/images/cirros-raw.img is missing. Convert it with 'qemu-img convert -f qcow2 -O raw'.",
+    "ja": "FAIL: ~/images/cirros-raw.img がありません。'qemu-img convert -f qcow2 -O raw' で変換してください。",
+    "zh-CN": "FAIL: 没有 ~/images/cirros-raw.img。请用 'qemu-img convert -f qcow2 -O raw' 转换。",
+    "zh-TW": "FAIL: 沒有 ~/images/cirros-raw.img。請用 'qemu-img convert -f qcow2 -O raw' 轉換。",
+    "es": "FAIL: falta ~/images/cirros-raw.img. Conviértelo con 'qemu-img convert -f qcow2 -O raw'.",
+    "de": "FAIL: ~/images/cirros-raw.img fehlt. Konvertiere mit 'qemu-img convert -f qcow2 -O raw'."
   },
   "step2m2": {
     "ko": "FAIL: cirros-raw.img 가 raw 포맷이 아닙니다 (현재 {0}). -O raw 를 확인하세요.",
-    "en": "FAIL: cirros-raw.img is not raw (currently {0}). Check -O raw."
+    "en": "FAIL: cirros-raw.img is not raw (currently {0}). Check -O raw.",
+    "ja": "FAIL: cirros-raw.img が raw ではありません(現在 {0})。-O raw を確認してください。",
+    "zh-CN": "FAIL: cirros-raw.img 不是 raw(当前 {0})。请检查 -O raw。",
+    "zh-TW": "FAIL: cirros-raw.img 不是 raw(當前 {0})。請檢查 -O raw。",
+    "es": "FAIL: cirros-raw.img no es raw (actualmente {0}). Revisa -O raw.",
+    "de": "FAIL: cirros-raw.img ist nicht raw (aktuell {0}). Prüfe -O raw."
   },
   "step2m3": {
     "ko": "FAIL: ~/images/cirros-lab.qcow2 가 없습니다. raw 를 다시 qcow2 로 변환하세요.",
-    "en": "FAIL: ~/images/cirros-lab.qcow2 is missing. Convert the raw disk back to qcow2."
+    "en": "FAIL: ~/images/cirros-lab.qcow2 is missing. Convert the raw disk back to qcow2.",
+    "ja": "FAIL: ~/images/cirros-lab.qcow2 がありません。raw ディスクを qcow2 に戻して変換してください。",
+    "zh-CN": "FAIL: 没有 ~/images/cirros-lab.qcow2。请把 raw 磁盘转换回 qcow2。",
+    "zh-TW": "FAIL: 沒有 ~/images/cirros-lab.qcow2。請把 raw 磁碟轉換回 qcow2。",
+    "es": "FAIL: falta ~/images/cirros-lab.qcow2. Vuelve a convertir el disco raw a qcow2.",
+    "de": "FAIL: ~/images/cirros-lab.qcow2 fehlt. Konvertiere die raw-Disk zurück in qcow2."
   },
   "step2m4": {
     "ko": "FAIL: cirros-lab.qcow2 가 qcow2 포맷이 아닙니다 (현재 {0}). -O qcow2 를 확인하세요.",
-    "en": "FAIL: cirros-lab.qcow2 is not qcow2 (currently {0}). Check -O qcow2."
+    "en": "FAIL: cirros-lab.qcow2 is not qcow2 (currently {0}). Check -O qcow2.",
+    "ja": "FAIL: cirros-lab.qcow2 が qcow2 ではありません(現在 {0})。-O qcow2 を確認してください。",
+    "zh-CN": "FAIL: cirros-lab.qcow2 不是 qcow2(当前 {0})。请检查 -O qcow2。",
+    "zh-TW": "FAIL: cirros-lab.qcow2 不是 qcow2(當前 {0})。請檢查 -O qcow2。",
+    "es": "FAIL: cirros-lab.qcow2 no es qcow2 (actualmente {0}). Revisa -O qcow2.",
+    "de": "FAIL: cirros-lab.qcow2 ist nicht qcow2 (aktuell {0}). Prüfe -O qcow2."
   },
   "step2m5": {
     "ko": "FAIL: raw 와 qcow2 의 가상 크기가 다릅니다. 같은 디스크에서 변환했는지 확인하세요.",
-    "en": "FAIL: the raw and qcow2 disks report different virtual sizes. Convert from the same source."
+    "en": "FAIL: the raw and qcow2 disks report different virtual sizes. Convert from the same source.",
+    "ja": "FAIL: raw と qcow2 のディスクの仮想サイズが違います。同じ元ファイルから変換してください。",
+    "zh-CN": "FAIL: raw 与 qcow2 磁盘的虚拟大小不同。请从同一个源文件转换。",
+    "zh-TW": "FAIL: raw 與 qcow2 磁碟的虛擬大小不同。請從同一個原始檔轉換。",
+    "es": "FAIL: los discos raw y qcow2 indican tamaños virtuales distintos. Conviértelos desde el mismo origen.",
+    "de": "FAIL: raw- und qcow2-Disk melden unterschiedliche virtuelle Größen. Konvertiere aus derselben Quelle."
   },
   "step2m6": {
     "ko": "PASS: cirros 디스크를 raw 로 풀었다가 다시 qcow2 로 변환했습니다.",
-    "en": "PASS: you converted the cirros disk to raw and back to qcow2."
+    "en": "PASS: you converted the cirros disk to raw and back to qcow2.",
+    "ja": "PASS: cirros のディスクを raw に変換し、qcow2 に戻しました。",
+    "zh-CN": "PASS: 已把 cirros 磁盘转换为 raw,再转换回 qcow2。",
+    "zh-TW": "PASS: 已把 cirros 磁碟轉換為 raw,再轉換回 qcow2。",
+    "es": "PASS: has convertido el disco de cirros a raw y de nuevo a qcow2.",
+    "de": "PASS: Du hast die cirros-Disk nach raw und zurück nach qcow2 konvertiert."
   },
   "step3m1": {
     "ko": "FAIL: 이미지 'cirros-lab' 이 glance 에 없습니다. 'openstack image create ... cirros-lab' 으로 올리세요.",
-    "en": "FAIL: the image 'cirros-lab' is not in glance. Upload it with 'openstack image create ... cirros-lab'."
+    "en": "FAIL: the image 'cirros-lab' is not in glance. Upload it with 'openstack image create ... cirros-lab'.",
+    "ja": "FAIL: イメージ 'cirros-lab' が glance にありません。'openstack image create ... cirros-lab' でアップロードしてください。",
+    "zh-CN": "FAIL: glance 中没有镜像 'cirros-lab'。请用 'openstack image create ... cirros-lab' 上传。",
+    "zh-TW": "FAIL: glance 中沒有映像 'cirros-lab'。請用 'openstack image create ... cirros-lab' 上傳。",
+    "es": "FAIL: la imagen 'cirros-lab' no está en glance. Súbela con 'openstack image create ... cirros-lab'.",
+    "de": "FAIL: Das Image 'cirros-lab' ist nicht in glance. Lade es mit 'openstack image create ... cirros-lab' hoch."
   },
   "step3m2": {
     "ko": "FAIL: disk_format 이 qcow2 가 아닙니다 (현재 {0}). --disk-format qcow2 를 확인하세요.",
-    "en": "FAIL: disk_format is not qcow2 (currently {0}). Check --disk-format qcow2."
+    "en": "FAIL: disk_format is not qcow2 (currently {0}). Check --disk-format qcow2.",
+    "ja": "FAIL: disk_format が qcow2 ではありません(現在 {0})。--disk-format qcow2 を確認してください。",
+    "zh-CN": "FAIL: disk_format 不是 qcow2(当前 {0})。请检查 --disk-format qcow2。",
+    "zh-TW": "FAIL: disk_format 不是 qcow2(當前 {0})。請檢查 --disk-format qcow2。",
+    "es": "FAIL: disk_format no es qcow2 (actualmente {0}). Revisa --disk-format qcow2.",
+    "de": "FAIL: disk_format ist nicht qcow2 (aktuell {0}). Prüfe --disk-format qcow2."
   },
   "step3m3": {
     "ko": "FAIL: container_format 이 bare 가 아닙니다 (현재 {0}). --container-format bare 를 확인하세요.",
-    "en": "FAIL: container_format is not bare (currently {0}). Check --container-format bare."
+    "en": "FAIL: container_format is not bare (currently {0}). Check --container-format bare.",
+    "ja": "FAIL: container_format が bare ではありません(現在 {0})。--container-format bare を確認してください。",
+    "zh-CN": "FAIL: container_format 不是 bare(当前 {0})。请检查 --container-format bare。",
+    "zh-TW": "FAIL: container_format 不是 bare(當前 {0})。請檢查 --container-format bare。",
+    "es": "FAIL: container_format no es bare (actualmente {0}). Revisa --container-format bare.",
+    "de": "FAIL: container_format ist nicht bare (aktuell {0}). Prüfe --container-format bare."
   },
   "step3m4": {
     "ko": "FAIL: 이미지 상태가 active 가 아닙니다 (현재 {0}). --file 로 디스크를 함께 올렸는지 확인하세요.",
-    "en": "FAIL: the image status is not active (currently {0}). Check that you uploaded the disk with --file."
+    "en": "FAIL: the image status is not active (currently {0}). Check that you uploaded the disk with --file.",
+    "ja": "FAIL: イメージの状態が active ではありません(現在 {0})。--file でディスクをアップロードしたか確認してください。",
+    "zh-CN": "FAIL: 镜像状态不是 active(当前 {0})。请确认是否用 --file 上传了磁盘。",
+    "zh-TW": "FAIL: 映像狀態不是 active(當前 {0})。請確認是否用 --file 上傳了磁碟。",
+    "es": "FAIL: el estado de la imagen no es active (actualmente {0}). Comprueba que subiste el disco con --file.",
+    "de": "FAIL: Der Image-Status ist nicht active (aktuell {0}). Prüfe, ob du die Disk mit --file hochgeladen hast."
   },
   "step3m5": {
     "ko": "FAIL: min_disk 가 1 이 아닙니다 (현재 {0}). --min-disk 1 을 지정하세요.",
-    "en": "FAIL: min_disk is not 1 (currently {0}). Set --min-disk 1."
+    "en": "FAIL: min_disk is not 1 (currently {0}). Set --min-disk 1.",
+    "ja": "FAIL: min_disk が 1 ではありません(現在 {0})。--min-disk 1 を指定してください。",
+    "zh-CN": "FAIL: min_disk 不是 1(当前 {0})。请指定 --min-disk 1。",
+    "zh-TW": "FAIL: min_disk 不是 1(當前 {0})。請指定 --min-disk 1。",
+    "es": "FAIL: min_disk no es 1 (actualmente {0}). Indica --min-disk 1.",
+    "de": "FAIL: min_disk ist nicht 1 (aktuell {0}). Setze --min-disk 1."
   },
   "step3m6": {
     "ko": "FAIL: min_ram 이 64 가 아닙니다 (현재 {0}). --min-ram 64 를 지정하세요.",
-    "en": "FAIL: min_ram is not 64 (currently {0}). Set --min-ram 64."
+    "en": "FAIL: min_ram is not 64 (currently {0}). Set --min-ram 64.",
+    "ja": "FAIL: min_ram が 64 ではありません(現在 {0})。--min-ram 64 を指定してください。",
+    "zh-CN": "FAIL: min_ram 不是 64(当前 {0})。请指定 --min-ram 64。",
+    "zh-TW": "FAIL: min_ram 不是 64(當前 {0})。請指定 --min-ram 64。",
+    "es": "FAIL: min_ram no es 64 (actualmente {0}). Indica --min-ram 64.",
+    "de": "FAIL: min_ram ist nicht 64 (aktuell {0}). Setze --min-ram 64."
   },
   "step3m7": {
     "ko": "FAIL: os_distro 속성이 없습니다. --property os_distro=cirros 를 지정하세요.",
-    "en": "FAIL: the os_distro property is missing. Set --property os_distro=cirros."
+    "en": "FAIL: the os_distro property is missing. Set --property os_distro=cirros.",
+    "ja": "FAIL: os_distro プロパティがありません。--property os_distro=cirros を指定してください。",
+    "zh-CN": "FAIL: 缺少 os_distro 属性。请指定 --property os_distro=cirros。",
+    "zh-TW": "FAIL: 缺少 os_distro 屬性。請指定 --property os_distro=cirros。",
+    "es": "FAIL: falta la propiedad os_distro. Indica --property os_distro=cirros.",
+    "de": "FAIL: Die Eigenschaft os_distro fehlt. Setze --property os_distro=cirros."
   },
   "step3m8": {
     "ko": "FAIL: 인스턴스 'vm2' 가 없습니다. 'openstack server create --image cirros-lab ... vm2' 로 기동하세요.",
-    "en": "FAIL: the instance 'vm2' does not exist. Boot it with 'openstack server create --image cirros-lab ... vm2'."
+    "en": "FAIL: the instance 'vm2' does not exist. Boot it with 'openstack server create --image cirros-lab ... vm2'.",
+    "ja": "FAIL: インスタンス 'vm2' がありません。'openstack server create --image cirros-lab ... vm2' で起動してください。",
+    "zh-CN": "FAIL: 没有实例 'vm2'。请用 'openstack server create --image cirros-lab ... vm2' 启动。",
+    "zh-TW": "FAIL: 沒有例項 'vm2'。請用 'openstack server create --image cirros-lab ... vm2' 啟動。",
+    "es": "FAIL: no existe la instancia 'vm2'. Arráncala con 'openstack server create --image cirros-lab ... vm2'.",
+    "de": "FAIL: Die Instanz 'vm2' fehlt. Boote sie mit 'openstack server create --image cirros-lab ... vm2'."
   },
   "step3m9": {
     "ko": "FAIL: vm2 의 상태가 {0} 입니다. ACTIVE 가 될 때까지 기다리세요.",
-    "en": "FAIL: vm2 is in state {0}. Wait until it reaches ACTIVE."
+    "en": "FAIL: vm2 is in state {0}. Wait until it reaches ACTIVE.",
+    "ja": "FAIL: vm2 は {0} の状態です。ACTIVE になるまで待ってください。",
+    "zh-CN": "FAIL: vm2 处于 {0} 状态。请等到它变为 ACTIVE。",
+    "zh-TW": "FAIL: vm2 處於 {0} 狀態。請等到它變為 ACTIVE。",
+    "es": "FAIL: vm2 está en estado {0}. Espera a que llegue a ACTIVE.",
+    "de": "FAIL: vm2 ist im Zustand {0}. Warte, bis sie ACTIVE ist."
   },
   "step3m10": {
     "ko": "FAIL: vm2 가 cirros-lab 이미지로 기동되지 않았습니다 (현재 {0}).",
-    "en": "FAIL: vm2 was not booted from the cirros-lab image (currently {0})."
+    "en": "FAIL: vm2 was not booted from the cirros-lab image (currently {0}).",
+    "ja": "FAIL: vm2 は cirros-lab イメージから起動されていません(現在 {0})。",
+    "zh-CN": "FAIL: vm2 不是用 cirros-lab 镜像启动的(当前 {0})。",
+    "zh-TW": "FAIL: vm2 不是用 cirros-lab 映像啟動的(當前 {0})。",
+    "es": "FAIL: vm2 no se arrancó desde la imagen cirros-lab (actualmente {0}).",
+    "de": "FAIL: vm2 wurde nicht aus dem Image cirros-lab gebootet (aktuell {0})."
   },
   "step3m11": {
     "ko": "PASS: 직접 만든 qcow2 이미지를 glance 에 올리고 그 이미지로 인스턴스를 기동했습니다.",
-    "en": "PASS: you uploaded your own qcow2 image to glance and booted an instance from it."
+    "en": "PASS: you uploaded your own qcow2 image to glance and booted an instance from it.",
+    "ja": "PASS: 自作の qcow2 イメージを glance にアップロードし、そこからインスタンスを起動しました。",
+    "zh-CN": "PASS: 已把自己制作的 qcow2 镜像上传到 glance,并用它启动了实例。",
+    "zh-TW": "PASS: 已把自己製作的 qcow2 映像上傳到 glance,並用它啟動了例項。",
+    "es": "PASS: has subido tu propia imagen qcow2 a glance y has arrancado una instancia a partir de ella.",
+    "de": "PASS: Du hast dein eigenes qcow2-Image zu glance hochgeladen und daraus eine Instanz gebootet."
   }
 }

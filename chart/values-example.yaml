@@ -41,7 +41,7 @@ auth:
   mode: local
   # First boot creates adminUsers[0] with this password (change it after logging in).
   adminPassword: ChangeMe
-  # Optional: seed users.json from a Secret instead (made with prototype/userctl.js)
+  # Optional: seed users.json from a Secret instead (made with v0.1/userctl.js)
   # usersExistingSecret: lab-users
   # Optional: cookie signing key that survives pod restarts (key: cookieSecret)
   # cookieSecretExistingSecret: lab-cookie

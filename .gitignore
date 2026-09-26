@@ -1,8 +1,8 @@
 # runtime state
-prototype/node_modules/
-prototype/sessions/
-prototype/.cookie-secret
-prototype/users.json
+v0.1/node_modules/
+v0.1/sessions/
+v0.1/.cookie-secret
+v0.1/users.json
 *.log
 .DS_Store
 

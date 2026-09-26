@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "설정과 비밀값을 이미지에서 분리해 환경변수·볼륨으로 주입하고 갱신 반영 방식까지 확인",
-    "en": "Separate config and secrets from the image, inject them as env vars and volumes, and see how updates propagate"
+    "en": "Separate config and secrets from the image, inject them as env vars and volumes, and see how updates propagate",
+    "ja": "設定と機密情報をイメージから切り離し、環境変数・ボリュームとして注入し、更新がどう反映されるかまで確かめる",
+    "zh-CN": "把配置和敏感信息从镜像中分离出来,以环境变量和卷的形式注入,并确认更新如何生效",
+    "zh-TW": "把配置和敏感資訊從映像中分離出來,以環境變數和卷的形式注入,並確認更新如何生效",
+    "es": "Separa la configuración y los secretos de la imagen, inyéctalos como variables de entorno y volúmenes, y comprueba cómo se propagan los cambios",
+    "de": "Konfiguration und Secrets vom Image trennen, als Umgebungsvariablen und Volumes einspeisen und sehen, wie sich Änderungen auswirken"
   },
   "duration": 30,
   "available": true,

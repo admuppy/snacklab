@@ -12,15 +12,15 @@ RUN apt-get update \
  && apt-get purge -y curl && apt-get autoremove -y \
  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app/prototype
+WORKDIR /app/v0.1
 
 # Dependency layer before sources for build caching
-COPY prototype/package.json prototype/package-lock.json ./
+COPY v0.1/package.json v0.1/package-lock.json ./
 RUN npm ci --omit=dev
 
-COPY prototype/ ./
+COPY v0.1/ ./
 
 # Session state volume mount point (progress, users.json, warm pool config)
-RUN mkdir -p /app/prototype/sessions
+RUN mkdir -p /app/v0.1/sessions
 
 CMD ["node", "server.js"]

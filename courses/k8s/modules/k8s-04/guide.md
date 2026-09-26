@@ -44,11 +44,18 @@ spec:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — `EOF` 줄까지의 YAML 을 표준입력으로 넘겨 적용한다. `-f -` 는 "파일 대신 stdin", 따옴표 친 `'EOF'` 는 본문의 `$` 를 셸이 치환하지 않게 한다.
+- `livenessProbe.exec.command` — 컨테이너 안에서 이 명령을 실행해 종료코드 0 이면 성공으로 본다(`httpGet`, `tcpSocket` 방식도 있다).
+- `initialDelaySeconds` — 첫 검사 전 대기, `periodSeconds` — 검사 간격, `failureThreshold: 1` — 1회 실패로 곧바로 재시작.
+- `args` 의 셸 스크립트가 30초 뒤 `/tmp/healthy` 를 지워 일부러 장애를 만든다.
+
 파드 확인:
 
 ```bash
 kubectl get pod -l app=web
 ```
+
+- `READY` 는 readiness 결과, `RESTARTS` 는 liveness 실패로 인한 재시작 횟수를 보여 준다.
 
 ## 2. readinessProbe 정의
 
@@ -60,11 +67,16 @@ kubectl get pod -l app=web
 kubectl get pod -l app=web -o wide
 ```
 
+- `-o wide` — 파드 IP·노드·readiness gate 등 추가 열을 함께 본다.
+
 readiness 프로브 설정 확인:
 
 ```bash
 kubectl describe pod -l app=web | grep -A3 -i readiness
 ```
+
+- `kubectl describe pod -l app=web` — 라벨로 고른 파드의 상세 정보(프로브 설정 포함)를 출력한다.
+- `grep -A3 -i readiness` — 대소문자 무시(`-i`)로 `readiness` 줄과 그 뒤 3줄을 본다.
 
 `readinessProbe` 가 통과하는 동안 파드는 Ready 상태이고, 실패하면(파일이 지워진 뒤) 잠시
 `READY 0/1` 로 빠졌다가 재시작 후 다시 Ready 로 돌아온다.
@@ -80,11 +92,15 @@ kubectl describe pod -l app=web | grep -A3 -i readiness
 kubectl get pod -l app=web -w        # RESTARTS 가 0 → 1 로 (Ctrl+C 로 종료)
 ```
 
+- `-w` (`--watch`) — 한 번 출력하고 끝나지 않고 변경될 때마다 새 줄을 출력한다. `Ctrl+C` 로 빠져나온다.
+
 프로브 이벤트 확인:
 
 ```bash
 kubectl describe pod -l app=web | grep -A2 -i "Liveness\|Killing\|Started"
 ```
+
+- `grep "A\|B\|C"` — `\|` 는 기본 정규식의 OR. 프로브 실패(`Liveness`), 컨테이너 종료(`Killing`), 재기동(`Started`) 이벤트를 한꺼번에 본다.
 
 `RESTARTS` 가 1 이상이 되면 자가치유가 동작한 것이다. 직접 앞당기려면
 `kubectl exec deploy/web -- rm -f /tmp/healthy` 로 파일을 지워도 된다.

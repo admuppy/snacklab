@@ -27,7 +27,7 @@ driver={{ .Values.driver }}{{ if eq .Values.driver "pod" }} · 학습자 이미�
 {{- if .Values.auth.usersExistingSecret }}
 Secret {{ .Values.auth.usersExistingSecret }}은 최초 시드로만 복사되며, 이후 원본은 sessions 볼륨의 users.json입니다.
 초기 계정 수정: userctl.js로 users.json 수정 후 Secret 갱신 (첫 기동 전에만 반영)
-  node prototype/userctl.js add <계정> [--admin] && kubectl -n {{ .Release.Namespace }} create secret generic {{ .Values.auth.usersExistingSecret }} --from-file=users.json --dry-run=client -o yaml | kubectl apply -f -
+  node v0.1/userctl.js add <계정> [--admin] && kubectl -n {{ .Release.Namespace }} create secret generic {{ .Values.auth.usersExistingSecret }} --from-file=users.json --dry-run=client -o yaml | kubectl apply -f -
 {{- else }}
 초기 관리자: {{ index .Values.adminUsers 0 }} / auth.adminPassword{{ if eq (.Values.auth.adminPassword | default "ChangeMe") "ChangeMe" }} (기본값 ChangeMe — 로그인 후 즉시 변경하세요){{ end }}
 첫 기동 때 sessions 볼륨에 users.json이 없을 때만 생성되며, 이후 adminPassword 변경은 반영되지 않습니다.

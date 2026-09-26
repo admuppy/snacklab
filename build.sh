@@ -93,8 +93,8 @@ kubectl get secret "$PUSH_SECRET" -n "$NS" >/dev/null 2>&1 || {
 kubectl delete pod "$POD" -n "$NS" --ignore-not-found --wait=true
 
 # Stream the build context tar to kaniko via stdin (excluding node_modules/.git/sessions)
-tar czf - --exclude=./prototype/node_modules --exclude=./.git \
-    --exclude=./prototype/sessions --exclude=./chart/values-live.yaml . \
+tar czf - --exclude=./v0.1/node_modules --exclude=./.git \
+    --exclude=./v0.1/sessions --exclude=./chart/values-live.yaml . \
 | kubectl run "$POD" -n "$NS" -i --restart=Never --pod-running-timeout=5m \
     --image=gcr.io/kaniko-project/executor:latest \
     --overrides='{

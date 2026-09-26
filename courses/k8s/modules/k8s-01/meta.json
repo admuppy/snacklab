@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "레플리카 선언·롤링 업데이트·리비전 롤백까지 Deployment 컨트롤러의 수렴 동작을 손으로 확인",
-    "en": "Declare replicas, roll out an update, and roll back a revision to see the Deployment controller converge"
+    "en": "Declare replicas, roll out an update, and roll back a revision to see the Deployment controller converge",
+    "ja": "レプリカの宣言、ローリングアップデート、リビジョンのロールバックまで、Deployment コントローラーの収束動作を手で確かめる",
+    "zh-CN": "从声明副本、滚动更新到版本回滚,亲手验证 Deployment 控制器的收敛行为",
+    "zh-TW": "從宣告副本、滾動更新到版本回滾,親手驗證 Deployment 控制器的收斂行為",
+    "es": "Declara réplicas, despliega una actualización y vuelve a una revisión para ver cómo converge el controlador de Deployment",
+    "de": "Replicas deklarieren, ein Update ausrollen und eine Revision zurückrollen — so siehst du, wie der Deployment-Controller konvergiert"
   },
   "duration": 35,
   "available": true,

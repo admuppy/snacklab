@@ -33,10 +33,10 @@ services:
       DEFAULT_LOCALE: ${DEFAULT_LOCALE:-en}
       ADMIN_USERS: ${ADMIN_USERS:-admin}
       # Courses are bind-mounted straight from the repo checkout (no content images).
-      CONTENT_DIRS: /app/prototype/content:/courses
+      CONTENT_DIRS: /app/v0.1/content:/courses
       # Keep progress/accounts on the sessions volume so they survive container recreation.
-      PROGRESS_FILE: /app/prototype/sessions/progress.json
-      USERS_FILE: /app/prototype/sessions/users.json
+      PROGRESS_FILE: /app/v0.1/sessions/progress.json
+      USERS_FILE: /app/v0.1/sessions/users.json
       COOKIE_SECRET: ${COOKIE_SECRET:-}
       MAX_SESSIONS: ${MAX_SESSIONS:-8}
       MAX_SESSIONS_PER_USER: ${MAX_SESSIONS_PER_USER:-1}
@@ -52,7 +52,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ../courses:/courses:ro
-      - sessions:/app/prototype/sessions
+      - sessions:/app/v0.1/sessions
     networks: [default, learners]
 
 networks:

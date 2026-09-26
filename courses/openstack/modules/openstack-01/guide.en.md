@@ -31,6 +31,9 @@ Check the service catalog:
 openstack service list
 ```
 
+- `openstack <object> <action>` — the basic shape of the OpenStack CLI; here the object is `service`, the action `list`.
+- Lists the services registered in the keystone service catalog. For the endpoint URLs use `openstack endpoint list`.
+
 `Name` is the service's name and `Type` is the standard string for its role. The CLI resolves
 endpoints by **type**: `openstack image list` looks up the `image` type and calls glance. In other
 words, the first word of a command (`image`, `network`, `server`, …) maps to a type in this table.
@@ -51,6 +54,8 @@ Check the compute host:
 ```bash
 openstack compute service list
 ```
+
+- Shows nova's background processes (scheduler, conductor, compute) with their host, `Status` (enabled/disabled) and `State` (up/down).
 
 `State` is `up` when the process is alive; `Status` tells you whether an operator has disabled it.
 This is the first table to look at when instances fail to schedule — nothing reaches a host whose
@@ -73,17 +78,25 @@ Create the network `net1`:
 openstack network create net1
 ```
 
+- Creates the L2 virtual network `net1` in neutron. It has no IP range yet, so instances couldn't get an address — the subnet in the next command provides it.
+
 Create the subnet `subnet1` on `net1` with the `192.168.100.0/24` range:
 
 ```bash
 openstack subnet create --network net1 --subnet-range 192.168.100.0/24 subnet1
 ```
 
+- `--network net1` — the network the subnet belongs to.
+- `--subnet-range 192.168.100.0/24` — the CIDR; the gateway (`.1` by default) and DHCP pool are derived automatically.
+- The final argument `subnet1` is the subnet name.
+
 List networks to verify:
 
 ```bash
 openstack network list
 ```
+
+- When the `Subnets` column shows the new subnet's ID, the network is ready.
 
 ## 2. Boot an instance (ACTIVE)
 
@@ -95,11 +108,15 @@ List available images:
 openstack image list
 ```
 
+- Images registered in glance. Only images with `Status` `active` can be used to create instances.
+
 List flavors:
 
 ```bash
 openstack flavor list
 ```
+
+- A flavor is a hardware-size template (vCPU, RAM, disk) for instances; `m1.tiny` is the smallest.
 
 Boot the instance:
 
@@ -107,11 +124,17 @@ Boot the instance:
 openstack server create --flavor m1.tiny --image cirros --network net1 vm1
 ```
 
+- `--flavor m1.tiny` — hardware size, `--image cirros` — disk image to boot, `--network net1` — network to create and attach a port on.
+- The final argument `vm1` is the instance name. The command only submits the request and returns (`BUILD`), so check the status separately.
+
 Watch until the status is `ACTIVE` (it can take a few seconds):
 
 ```bash
 openstack server show vm1 -c status -c addresses
 ```
+
+- `openstack server show <name>` — details of one instance.
+- `-c <column>` — show only the chosen columns (fields); repeatable. `addresses` shows the assigned IP, e.g. `net1=192.168.100.x`.
 
 ## 3. List instances across projects
 
@@ -128,11 +151,16 @@ See which project your current token belongs to:
 openstack token issue -c project_id -f value
 ```
 
+- `openstack token issue` — gets a keystone token with your current credentials and shows its details.
+- `-c project_id -f value` — only the `project_id` column, printed as a bare value (`-f value`) without table borders — handy in scripts.
+
 This lab already has projects such as `admin`, `service` and `demo`. List them:
 
 ```bash
 openstack project list
 ```
+
+- Projects (ID and name) in keystone; match the `project_id` from the previous command to a name here.
 
 `--all-projects` asks for **resources from every project at once**. It is an operator option for
 looking at the whole cloud, so it needs the admin role; a regular user gets a permission error.
@@ -147,11 +175,17 @@ Include the project ID:
 openstack server list --all-projects -c ID -c Name -c Status -c 'Project ID'
 ```
 
+- `--all-projects` — list instances from every project (needs the admin role).
+- `-c <column>` — show only the chosen columns (fields); repeatable. Quote column names that contain spaces (`'Project ID'`).
+
 Save the result to a file for grading:
 
 ```bash
 openstack server list --all-projects -c ID -c Name -c Status -c 'Project ID' -f value > ~/all-servers.txt
 ```
+
+- `-f value` — prints space-separated values instead of a table.
+- `> ~/all-servers.txt` — saves (overwrites) that output to a file; the check script reads it.
 
 > Reference: [Manage projects, users, and roles](https://docs.openstack.org/keystone/latest/admin/manage-projects-users-and-roles.html)
 
@@ -165,8 +199,12 @@ Stop the instance:
 openstack server stop vm1
 ```
 
+- Shuts the instance down (powers it off). Its disk, IP and other resources stay, and `openstack server start vm1` turns it back on. To remove it entirely use `openstack server delete`.
+
 Verify the status is `SHUTOFF`:
 
 ```bash
 openstack server show vm1 -c status
 ```
+
+- Confirm `status` changed to `SHUTOFF`; if not yet, run it again after a few seconds.

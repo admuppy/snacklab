@@ -44,11 +44,18 @@ spec:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — feeds the YAML up to the `EOF` line to kubectl on stdin. `-f -` means "read stdin instead of a file"; quoting `'EOF'` stops the shell from expanding `$` inside the body.
+- `livenessProbe.exec.command` — runs this command in the container; exit code 0 means healthy (`httpGet` and `tcpSocket` probes also exist).
+- `initialDelaySeconds` — wait before the first check, `periodSeconds` — interval, `failureThreshold: 1` — restart after a single failure.
+- The shell script in `args` deletes `/tmp/healthy` after 30 s to cause a failure on purpose.
+
 Check the Pod:
 
 ```bash
 kubectl get pod -l app=web
 ```
+
+- `READY` reflects readiness; `RESTARTS` counts restarts caused by liveness failures.
 
 ## 2. Define a readinessProbe
 
@@ -61,11 +68,16 @@ Check the Pod status:
 kubectl get pod -l app=web -o wide
 ```
 
+- `-o wide` — adds columns such as Pod IP, node and readiness gates.
+
 Inspect the readiness probe:
 
 ```bash
 kubectl describe pod -l app=web | grep -A3 -i readiness
 ```
+
+- `kubectl describe pod -l app=web` — details (including probe settings) of the Pods selected by label.
+- `grep -A3 -i readiness` — case-insensitive (`-i`) match on `readiness` plus the 3 lines after it.
 
 While the readiness probe passes the Pod is Ready; once the file is gone it briefly drops to
 `READY 0/1`, then returns to Ready after the restart.
@@ -81,11 +93,15 @@ Watch the Pod:
 kubectl get pod -l app=web -w        # RESTARTS goes 0 → 1 (Ctrl+C to stop)
 ```
 
+- `-w` (`--watch`) — instead of exiting after one listing, prints a new line whenever something changes. Leave with `Ctrl+C`.
+
 Check probe events:
 
 ```bash
 kubectl describe pod -l app=web | grep -A2 -i "Liveness\|Killing\|Started"
 ```
+
+- `grep "A\|B\|C"` — `\|` is OR in basic regex; shows probe failures (`Liveness`), container kills (`Killing`) and restarts (`Started`) together.
 
 Success once `RESTARTS` is at least 1. To trigger it immediately, delete the file yourself:
 `kubectl exec deploy/web -- rm -f /tmp/healthy`.

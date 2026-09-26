@@ -30,6 +30,9 @@ OpenStack은 하나의 프로그램이 아니라 **역할이 다른 여러 서�
 openstack service list
 ```
 
+- `openstack <대상> <동작>` — OpenStack CLI 의 기본 형식이다. 여기선 대상 `service`, 동작 `list`.
+- keystone 서비스 카탈로그에 등록된 서비스를 나열한다. 엔드포인트 URL 까지 보려면 `openstack endpoint list`.
+
 출력의 `Name`은 서비스 이름, `Type`은 역할을 나타내는 표준 타입 문자열이다. CLI는 이 **타입**으로
 엔드포인트를 찾는다. 예를 들어 `openstack image list`는 카탈로그에서 `image` 타입을 찾아 glance를
 호출한다. 즉 명령의 첫 단어(`image`·`network`·`server`…)와 여기 보이는 타입이 이어져 있다.
@@ -50,6 +53,8 @@ nova 자체도 **여러 프로세스로 쪼개져** 있다. `openstack compute s
 ```bash
 openstack compute service list
 ```
+
+- nova 의 백그라운드 프로세스(scheduler·conductor·compute)와 그 호스트·`Status`(enabled/disabled)·`State`(up/down)를 보여 준다.
 
 `State`가 `up`이면 그 프로세스가 살아 있다는 뜻이고, `Status`는 운영자가 꺼 둔(disabled) 상태인지를
 나타낸다. 인스턴스가 `ERROR`로 떨어질 때 가장 먼저 보는 표가 이것이다 — nova-compute가 `down`이면
@@ -72,17 +77,25 @@ openstack compute service list
 openstack network create net1
 ```
 
+- neutron 에 L2 가상 네트워크 `net1` 을 만든다. 이 시점엔 IP 대역이 없어 인스턴스가 주소를 받을 수 없다 — 다음 명령의 서브넷이 필요하다.
+
 `192.168.100.0/24` 대역의 서브넷 `subnet1` 을 `net1` 에 생성:
 
 ```bash
 openstack subnet create --network net1 --subnet-range 192.168.100.0/24 subnet1
 ```
 
+- `--network net1` — 서브넷을 붙일 네트워크.
+- `--subnet-range 192.168.100.0/24` — CIDR 대역. 게이트웨이(기본 `.1`)와 DHCP 할당 범위가 자동으로 정해진다.
+- 마지막 인자 `subnet1` — 서브넷 이름.
+
 만들어진 네트워크 확인:
 
 ```bash
 openstack network list
 ```
+
+- `Subnets` 열에 방금 붙인 서브넷 ID 가 보이면 네트워크 준비 완료.
 
 ## 2. 인스턴스 기동 (ACTIVE)
 
@@ -94,11 +107,15 @@ openstack network list
 openstack image list
 ```
 
+- glance 에 등록된 이미지 목록. `Status` 가 `active` 인 이미지만 인스턴스 생성에 쓸 수 있다.
+
 플레이버 확인:
 
 ```bash
 openstack flavor list
 ```
+
+- 플레이버 = 인스턴스 하드웨어 규격(vCPU·RAM·Disk) 템플릿. `m1.tiny` 가 가장 작은 규격이다.
 
 인스턴스 기동:
 
@@ -106,11 +123,17 @@ openstack flavor list
 openstack server create --flavor m1.tiny --image cirros --network net1 vm1
 ```
 
+- `--flavor m1.tiny` — 하드웨어 규격, `--image cirros` — 부팅할 디스크 이미지, `--network net1` — 포트를 만들어 붙일 네트워크.
+- 마지막 인자 `vm1` — 인스턴스 이름. 명령은 요청만 접수하고 바로 돌아오므로(`BUILD`) 상태는 따로 확인한다.
+
 상태가 `ACTIVE` 가 될 때까지 확인(몇 초 걸릴 수 있다):
 
 ```bash
 openstack server show vm1 -c status -c addresses
 ```
+
+- `openstack server show <이름>` — 인스턴스 한 개의 상세 정보.
+- `-c <열>` — 출력할 열(필드)만 고른다. 여러 번 줄 수 있다. `addresses` 에는 `net1=192.168.100.x` 처럼 할당된 IP 가 나온다.
 
 ## 3. 프로젝트 전체 인스턴스 조회
 
@@ -127,11 +150,16 @@ openstack server show vm1 -c status -c addresses
 openstack token issue -c project_id -f value
 ```
 
+- `openstack token issue` — 현재 자격증명으로 keystone 토큰을 발급받아 그 정보를 보여 준다.
+- `-c project_id -f value` — `project_id` 열만, 표 테두리 없이 값(`-f value`)으로 출력한다. 스크립트에서 쓰기 좋은 형식이다.
+
 이 랩에는 `admin`, `service`, `demo` 같은 프로젝트가 이미 만들어져 있다. 프로젝트 목록 확인:
 
 ```bash
 openstack project list
 ```
+
+- keystone 에 있는 프로젝트(ID·이름) 목록. 앞 명령에서 본 `project_id` 가 어느 프로젝트인지 여기서 맞춰 볼 수 있다.
 
 `--all-projects` 는 **모든 프로젝트의 자원을 한 번에 보여 달라**는 인자다. 클라우드 전체를 봐야 하는
 운영자용 옵션이라 admin 역할이 있어야 동작하고, 일반 사용자가 쓰면 권한 오류가 난다.
@@ -141,6 +169,8 @@ openstack project list
 ```bash
 openstack server list --all-projects
 ```
+
+- `--all-projects` — 모든 프로젝트의 인스턴스를 조회한다(admin 역할 필요).
 
 기본 출력에는 프로젝트 ID 열이 보이지 않는다. 어느 프로젝트의 인스턴스인지 알아야 하므로
 `-c 'Project ID'` 로 그 열을 직접 골라 준다. `--long` 은 태스크 상태·호스트 같은 운영 정보를 더
@@ -152,11 +182,16 @@ openstack server list --all-projects
 openstack server list --all-projects -c ID -c Name -c Status -c 'Project ID'
 ```
 
+- `-c <열>` — 출력할 열(필드)만 고른다. 여러 번 줄 수 있다. 열 이름에 공백이 있으면 따옴표로 감싼다(`'Project ID'`).
+
 채점용으로 이 결과를 파일에 남긴다:
 
 ```bash
 openstack server list --all-projects -c ID -c Name -c Status -c 'Project ID' -f value > ~/all-servers.txt
 ```
+
+- `-f value` — 표 대신 공백 구분 값만 출력한다.
+- `> ~/all-servers.txt` — 그 출력을 파일로 저장(덮어쓰기)한다. 체크 스크립트가 이 파일을 읽는다.
 
 > 참고: [Manage projects, users, and roles](https://docs.openstack.org/keystone/latest/admin/manage-projects-users-and-roles.html)
 
@@ -170,8 +205,12 @@ openstack server list --all-projects -c ID -c Name -c Status -c 'Project ID' -f 
 openstack server stop vm1
 ```
 
+- 인스턴스를 정상 종료(전원 끄기)한다. 디스크·IP 등 자원은 그대로 남고 `openstack server start vm1` 로 다시 켤 수 있다. 완전히 지우려면 `openstack server delete`.
+
 상태가 `SHUTOFF` 인지 확인:
 
 ```bash
 openstack server show vm1 -c status
 ```
+
+- `status` 가 `SHUTOFF` 로 바뀌었는지 확인한다. 바로 바뀌지 않으면 몇 초 뒤 다시 실행한다.

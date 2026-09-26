@@ -1,5 +1,5 @@
 .git
-prototype/node_modules
-prototype/sessions
-prototype/users.json
+v0.1/node_modules
+v0.1/sessions
+v0.1/users.json
 chart/values-live.yaml

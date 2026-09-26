@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "기본 차단 정책과 선택적 허용으로 네임스페이스 안 트래픽을 실제로 격리",
-    "en": "Default-deny plus selective allow rules to genuinely isolate traffic inside a namespace"
+    "en": "Default-deny plus selective allow rules to genuinely isolate traffic inside a namespace",
+    "ja": "デフォルト拒否ポリシーと選択的な許可で、ネームスペース内のトラフィックを実際に隔離する",
+    "zh-CN": "用默认拒绝策略加选择性放行,真正隔离命名空间内的流量",
+    "zh-TW": "用預設拒絕策略加選擇性放行,真正隔離名稱空間內的流量",
+    "es": "Denegación por defecto más reglas de permiso selectivas para aislar de verdad el tráfico dentro de un namespace",
+    "de": "Default-deny plus gezielte Allow-Regeln, um den Verkehr innerhalb eines Namespace wirklich zu isolieren"
   },
   "duration": 35,
   "available": true,

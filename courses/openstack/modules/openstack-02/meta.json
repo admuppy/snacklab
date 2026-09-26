@@ -2,11 +2,21 @@
   "id": "openstack-02",
   "title": {
     "ko": "qcow2 이미지 만들어 올리기",
-    "en": "Build and Upload a qcow2 Image"
+    "en": "Build and Upload a qcow2 Image",
+    "ja": "qcow2 イメージを作ってアップロードする",
+    "zh-CN": "制作并上传 qcow2 镜像",
+    "zh-TW": "製作並上傳 qcow2 映像",
+    "es": "Crear y subir una imagen qcow2",
+    "de": "Ein qcow2-Image erstellen und hochladen"
   },
   "desc": {
     "ko": "qemu-img 로 qcow2 디스크를 만들고 포맷을 변환한 뒤, glance 에 올려 그 이미지로 인스턴스를 기동한다",
-    "en": "Create and convert disks with qemu-img, then upload the qcow2 image to glance and boot an instance from it"
+    "en": "Create and convert disks with qemu-img, then upload the qcow2 image to glance and boot an instance from it",
+    "ja": "qemu-img で qcow2 ディスクを作ってフォーマットを変換し、glance にアップロードしてそのイメージでインスタンスを起動する",
+    "zh-CN": "用 qemu-img 制作 qcow2 磁盘并转换格式,然后上传到 glance,用该镜像启动实例",
+    "zh-TW": "用 qemu-img 製作 qcow2 磁碟並轉換格式,然後上傳到 glance,用該映像啟動例項",
+    "es": "Crea y convierte discos con qemu-img; después sube la imagen qcow2 a glance y arranca una instancia a partir de ella",
+    "de": "Disks mit qemu-img erstellen und konvertieren, dann das qcow2-Image zu glance hochladen und daraus eine Instanz booten"
   },
   "duration": 30,
   "available": true,
@@ -15,21 +25,36 @@
     {
       "title": {
         "ko": "빈 qcow2 디스크 만들기",
-        "en": "Create an empty qcow2 disk"
+        "en": "Create an empty qcow2 disk",
+        "ja": "空の qcow2 ディスクを作る",
+        "zh-CN": "创建空的 qcow2 磁盘",
+        "zh-TW": "建立空的 qcow2 磁碟",
+        "es": "Crear un disco qcow2 vacío",
+        "de": "Eine leere qcow2-Disk erstellen"
       },
       "check": "step1.sh"
     },
     {
       "title": {
         "ko": "디스크 포맷 변환 (qcow2 ↔ raw)",
-        "en": "Convert disk formats (qcow2 ↔ raw)"
+        "en": "Convert disk formats (qcow2 ↔ raw)",
+        "ja": "ディスクフォーマットの変換(qcow2 ↔ raw)",
+        "zh-CN": "转换磁盘格式(qcow2 ↔ raw)",
+        "zh-TW": "轉換磁碟格式(qcow2 ↔ raw)",
+        "es": "Convertir formatos de disco (qcow2 ↔ raw)",
+        "de": "Disk-Formate konvertieren (qcow2 ↔ raw)"
       },
       "check": "step2.sh"
     },
     {
       "title": {
         "ko": "glance 에 올리고 인스턴스 기동",
-        "en": "Upload to glance and boot an instance"
+        "en": "Upload to glance and boot an instance",
+        "ja": "glance にアップロードしてインスタンスを起動",
+        "zh-CN": "上传到 glance 并启动实例",
+        "zh-TW": "上傳到 glance 並啟動例項",
+        "es": "Subir a glance y arrancar una instancia",
+        "de": "Zu glance hochladen und eine Instanz booten"
       },
       "check": "step3.sh"
     }

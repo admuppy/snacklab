@@ -30,11 +30,18 @@ spec:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — feeds the YAML up to the `EOF` line to kubectl on stdin. `-f -` means "read stdin instead of a file"; quoting `'EOF'` stops the shell from expanding `$` inside the body.
+- `resources.requests` — the minimum the scheduler reserves on a node; `limits` — the hard ceiling.
+- `cpu: "250m"` — millicores (1000m = 1 CPU); `memory: "64Mi"` — binary mebibytes.
+- Equal requests and limits make the Pod `Guaranteed`.
+
 Check the QoS class:
 
 ```bash
 kubectl get pod guaranteed -o jsonpath='{.status.qosClass}'; echo
 ```
+
+- `{.status.qosClass}` — extracts the QoS class (`Guaranteed`/`Burstable`/`BestEffort`) recorded in the Pod status.
 
 ## 2. A Burstable QoS Pod
 
@@ -58,11 +65,15 @@ spec:
 EOF
 ```
 
+- limits (500m/128Mi) are larger than requests (100m/32Mi) → reserves little, bursts up to the limits when the node has room (`Burstable`).
+
 Check the QoS class:
 
 ```bash
 kubectl get pod burstable -o jsonpath='{.status.qosClass}'; echo
 ```
+
+- `{.status.qosClass}` — extracts the QoS class (`Guaranteed`/`Burstable`/`BestEffort`) recorded in the Pod status.
 
 > With no requests/limits at all a Pod is `BestEffort` — try `kubectl run be --image=nginx:1.26`
 > then `kubectl get pod be -o jsonpath='{.status.qosClass}'`.
@@ -87,17 +98,25 @@ spec:
 EOF
 ```
 
+- `kind: LimitRange` — resource rules applied to containers created in this namespace.
+- `default` — limits filled in when a container sets none; `defaultRequest` — the same for requests.
+- Defaults are injected **at Pod creation**, so existing Pods are not changed.
+
 Create a Pod with no explicit limits — the LimitRange fills them in:
 
 ```bash
 kubectl run defaulted --image=nginx:1.26
 ```
 
+- `kubectl run <name> --image=<image>` — creates a single Pod directly, no Deployment. Resources are deliberately left out here.
+
 Check the injected resources:
 
 ```bash
 kubectl get pod defaulted -o jsonpath='{.spec.containers[0].resources}'; echo
 ```
+
+- `{.spec.containers[0].resources}` — prints the first container's whole resources block as JSON; the values you didn't write were filled in by the LimitRange.
 
 Success when Pod `defaulted` has `resources.limits.memory` set to `128Mi`.
 

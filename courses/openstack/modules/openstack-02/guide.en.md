@@ -36,11 +36,16 @@ Create an empty qcow2 disk with a 1 GiB virtual size:
 qemu-img create -f qcow2 ~/images/blank.qcow2 1G
 ```
 
+- `qemu-img create` — creates a new disk image file.
+- `-f qcow2` — the file's format, then the path, and finally `1G` — the virtual size the guest will see.
+
 Inspect the disk you just created:
 
 ```bash
 qemu-img info ~/images/blank.qcow2
 ```
+
+- `qemu-img info` — shows the image metadata: format (`file format`), virtual size, actual size, cluster size, …
 
 `virtual size` is the disk the guest will see; `disk size` is what the file actually occupies. The
 new disk holds no data, so the two differ wildly — that is sparse allocation.
@@ -50,6 +55,9 @@ Check the size on disk:
 ```bash
 ls -lh ~/images/blank.qcow2
 ```
+
+- `ls -l` — detailed listing (permissions, owner, size, time); `-h` — human-readable sizes (K/M/G).
+- This is the file's apparent size; the blocks actually used show with `du -h`.
 
 ## 2. Convert disk formats (qcow2 ↔ raw)
 
@@ -62,6 +70,8 @@ Check the formats of the registered image:
 openstack image show cirros -c disk_format -c container_format -c size
 ```
 
+- `openstack image show <name>` — properties of a glance image; `-c` picks the `disk_format`, `container_format` and `size` (bytes) columns.
+
 `disk_format` is the format of the disk file itself (qcow2, raw, vmdk, …), while
 `container_format` describes the metadata envelope wrapped around it. `bare` means there is no
 envelope — just the disk — and it is what nearly everyone uses.
@@ -72,11 +82,15 @@ Download the image file:
 openstack image save cirros --file ~/images/cirros-src.img
 ```
 
+- `openstack image save <name> --file <path>` — downloads the image data stored in glance to a local file (despite the name, it's a download).
+
 Check the format of the downloaded file:
 
 ```bash
 qemu-img info ~/images/cirros-src.img
 ```
+
+- Even with a `.img` extension the real format is detected from the content; check the `file format` line.
 
 Convert qcow2 to raw (`-f` is the input format, `-O` the output format):
 
@@ -84,11 +98,16 @@ Convert qcow2 to raw (`-f` is the input format, `-O` the output format):
 qemu-img convert -f qcow2 -O raw ~/images/cirros-src.img ~/images/cirros-raw.img
 ```
 
+- `qemu-img convert` — copies an image into another format (the source is left untouched).
+- `-f qcow2` — input format (lower-case f), `-O raw` — output format (upper-case O), followed by source and destination paths.
+
 Inspect the raw disk:
 
 ```bash
 qemu-img info ~/images/cirros-raw.img
 ```
+
+- raw has no metadata, so you mostly see `file format: raw` and the sizes.
 
 Raw has no structure, so `disk size` sits close to `virtual size`. That is poor for shipping, so
 convert it back.
@@ -99,11 +118,15 @@ Convert raw back to qcow2:
 qemu-img convert -f raw -O qcow2 ~/images/cirros-raw.img ~/images/cirros-lab.qcow2
 ```
 
+- Now raw in, qcow2 out. Empty blocks aren't written, so the file shrinks again (add `-c` to compress as well).
+
 Compare all three files side by side:
 
 ```bash
 ls -lh ~/images/cirros-src.img ~/images/cirros-raw.img ~/images/cirros-lab.qcow2
 ```
+
+- Lists several files at once to compare the source, raw and re-converted qcow2 sizes side by side.
 
 ## 3. Upload to glance and boot an instance
 
@@ -123,11 +146,18 @@ Register the qcow2 file as a glance image:
 openstack image create cirros-lab --disk-format qcow2 --container-format bare --min-disk 1 --min-ram 64 --property os_distro=cirros --file ~/images/cirros-lab.qcow2
 ```
 
+- `openstack image create cirros-lab` — registers a new glance image `cirros-lab`.
+- `--disk-format qcow2 --container-format bare` — the file's real format and envelope (none).
+- `--min-disk 1 --min-ram 64` — minimum disk (GB) and RAM (MB); `--property os_distro=cirros` — arbitrary metadata.
+- `--file <path>` — the local file to upload; `status` becomes `active` once the upload finishes.
+
 Check the result (`status` must be `active`):
 
 ```bash
 openstack image show cirros-lab -c status -c disk_format -c container_format -c min_disk -c min_ram -c properties
 ```
+
+- Pick just the columns needed to confirm the values you registered; `--property` values appear under `properties`.
 
 Confirm it appears in the image list:
 
@@ -135,14 +165,20 @@ Confirm it appears in the image list:
 openstack image list
 ```
 
+- Once `cirros-lab` shows as `active` it can be used for instances.
+
 Boot the instance `vm2` from the image you built:
 
 ```bash
 openstack server create --flavor m1.tiny --image cirros-lab --network net1 vm2
 ```
 
+- Same shape as in module 1, but `--image cirros-lab` points at your own image. The flavor must satisfy `--min-disk`/`--min-ram`.
+
 Check its status and the image it used:
 
 ```bash
 openstack server show vm2 -c status -c image
 ```
+
+- If the `image` column shows `cirros-lab` and its ID, the instance was built from the image you uploaded.

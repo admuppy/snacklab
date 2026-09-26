@@ -12,6 +12,9 @@ consumes the PVC is scheduled** — the PVC is `Pending` at first, which is expe
 kubectl get storageclass         # local-path (default)
 ```
 
+- `storageclass` (short `sc`) — provisioner settings that create PVs on demand. The one marked `(default)` is used when a PVC names no class.
+- The `VOLUMEBINDINGMODE` column shows `WaitForFirstConsumer`.
+
 > Reference: [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) ·
 > [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 
@@ -32,11 +35,17 @@ spec:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — feeds the YAML up to the `EOF` line to kubectl on stdin. `-f -` means "read stdin instead of a file"; quoting `'EOF'` stops the shell from expanding `$` inside the body.
+- `accessModes: [ReadWriteOnce]` — mountable read/write by a single node (RWO); multi-node sharing is `ReadWriteMany` (RWX).
+- `resources.requests.storage: 100Mi` — requested size. `storageClassName` is omitted, so the default class is used.
+
 Check PVC status:
 
 ```bash
 kubectl get pvc data       # STATUS is Pending (WaitForFirstConsumer)
 ```
+
+- `pvc` is short for `persistentvolumeclaim`. `STATUS` changing `Pending` → `Bound` means it is attached to a PV; the `VOLUME` column shows which.
 
 `Pending` is correct with no consuming Pod yet. It binds once a Pod mounts it in the next step.
 
@@ -64,11 +73,16 @@ spec:
 EOF
 ```
 
+- `volumes[].persistentVolumeClaim.claimName: data` — ties the Pod volume to the PVC `data`.
+- `volumeMounts[].mountPath: /data` — mounts it at `/data` in the container, which writes a file right at startup.
+
 Wait for the Pod to be Ready:
 
 ```bash
 kubectl wait --for=condition=Ready pod/writer --timeout=90s
 ```
+
+- `kubectl wait --for=condition=Ready` — waits for the Pod to be Ready; `--timeout=90s` leaves room for volume provisioning.
 
 Check the PVC is bound:
 
@@ -81,6 +95,8 @@ Read the written file:
 ```bash
 kubectl exec writer -- cat /data/marker.txt
 ```
+
+- `kubectl exec <pod> -- <cmd>` — runs a command in the container; here it reads the file written onto the PVC.
 
 Success when the PVC is `Bound` and `/data/marker.txt` is readable. Delete and recreate the Pod
 (mounting the same PVC) and confirm the file survives — that is persistence.
@@ -117,17 +133,26 @@ spec:
 EOF
 ```
 
+- `kind: StatefulSet` — Pods get fixed ordinal names (`web-0`, `web-1`, …) and are created/deleted in order.
+- `serviceName: web-h` — the Headless Service that provides per-Pod DNS (`web-0.web-h`).
+- `volumeClaimTemplates` — a template that stamps out one PVC per Pod. PVCs survive Pod deletion and reattach to the same Pod.
+
 Wait for the rollout:
 
 ```bash
 kubectl rollout status statefulset/web --timeout=120s
 ```
 
+- `kubectl rollout status statefulset/web` — like Deployments, you can wait for a StatefulSet rollout.
+- `--timeout=120s` — allows for PV provisioning and image pulls.
+
 Check the auto-created PVC:
 
 ```bash
 kubectl get pvc                 # www-web-0 is Bound
 ```
+
+- `kubectl get pvc` with no name — every PVC in the namespace, including `www-web-0` generated from the template.
 
 Success when Pod `web-0` is Ready and the auto-created PVC `www-web-0` is `Bound`.
 

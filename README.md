@@ -32,7 +32,7 @@ Built for:
 No cluster needed — the `sim` driver fakes sessions so you can explore the whole UI:
 
 ```bash
-git clone https://github.com/admuppy/snacklab && cd snacklab/prototype
+git clone https://github.com/admuppy/snacklab && cd snacklab/v0.1
 npm ci
 DRIVER=sim node server.js
 # open http://localhost:3000
@@ -105,7 +105,7 @@ instances "boot" as pure state machines, so the whole cloud idles at ~0.05 CPU /
 ## Repository layout
 
 ```
-prototype/           the app — the entire portal is one Node.js server.js (express + ws)
+v0.1/           the app — the entire portal is one Node.js server.js (express + ws)
   userctl.js         local account CLI
   public/            static UI (catalog / lab / admin, i18n.js)
   content/           built-in content (linux-01 – 09)
@@ -174,7 +174,7 @@ changes to `adminPassword` are ignored; manage accounts from the admin dashboard
 Optional Secrets:
 
 - `auth.usersExistingSecret` — seed `users.json` from a Secret instead of the generated
-  admin (key `users.json`, made with `node prototype/userctl.js add <user> --admin`).
+  admin (key `users.json`, made with `node v0.1/userctl.js add <user> --admin`).
   Like the generated admin it is copied only on first boot.
 - `auth.cookieSecretExistingSecret` — cookie signing key (key `cookieSecret`) so logins
   survive portal restarts; without it a random key is generated per pod.

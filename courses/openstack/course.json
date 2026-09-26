@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "파드 안 전용 올인원 OpenStack(Caracal)에서 keystone·glance·neutron·nova를 CLI로 익히고, qcow2 이미지를 직접 만들어 올린다. 인스턴스는 fake 드라이버로 떠서 가볍고 빠르다.",
-    "en": "Hands-on keystone, glance, neutron and nova on a private all-in-one OpenStack (Caracal) inside your pod, including building and uploading your own qcow2 image. Instances run on the fake driver — light and instant."
+    "en": "Hands-on keystone, glance, neutron and nova on a private all-in-one OpenStack (Caracal) inside your pod, including building and uploading your own qcow2 image. Instances run on the fake driver — light and instant.",
+    "ja": "Pod の中の専用オールインワン OpenStack(Caracal)で keystone・glance・neutron・nova を CLI で身につけ、qcow2 イメージを自分で作ってアップロードする。インスタンスは fake ドライバーで動くので軽くて速い。",
+    "zh-CN": "在 Pod 内专属的一体化 OpenStack(Caracal)中用 CLI 上手 keystone、glance、neutron、nova,并亲手制作和上传 qcow2 镜像。实例使用 fake 驱动运行,轻量且即时。",
+    "zh-TW": "在 Pod 內專屬的一體化 OpenStack(Caracal)中用 CLI 上手 keystone、glance、neutron、nova,並親手製作和上傳 qcow2 映像。例項使用 fake 驅動執行,輕量且即時。",
+    "es": "Practica con keystone, glance, neutron y nova en un OpenStack privado todo en uno (Caracal) dentro de tu pod, incluido crear y subir tu propia imagen qcow2. Las instancias usan el controlador fake: ligeras e instantáneas.",
+    "de": "Praxis mit keystone, glance, neutron und nova auf einem privaten All-in-one-OpenStack (Caracal) in deinem Pod, inklusive eigenem qcow2-Image erstellen und hochladen. Instanzen laufen mit dem Fake-Treiber — leicht und sofort."
   },
   "image": "snacklab-openstack:v1",
   "hostModules": true,

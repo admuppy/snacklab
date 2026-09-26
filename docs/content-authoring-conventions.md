@@ -12,7 +12,7 @@ SnackLab의 모든 트랙(Linux, KubeVirt, 향후 신규 트랙)의 `guide.md` /
 - 저작자는 그냥 평범한 마크다운 링크로 쓰면 된다: `[공식 문서](https://kubevirt.io/user-guide/)`
 - 새 창 처리는 **포털이 렌더 시점에 자동으로** 수행한다 — 저작자가 HTML이나
   `target` 속성을 직접 넣을 필요 없음.
-- 구현: `prototype/public/lab.html`의 `renderGuide()`가 `marked.parse()` 직후
+- 구현: `v0.1/public/lab.html`의 `renderGuide()`가 `marked.parse()` 직후
   본문 내 `href`가 `http(s):`인 `<a>`에 `target="_blank"` + `rel="noopener noreferrer"`를
   부여한다. 내부 `#앵커` 링크는 같은 창에서 이동(제외).
 - 새 트랙/새 렌더 경로를 추가하더라도 이 동작을 유지할 것. 마크다운 렌더러를 교체하면
@@ -31,6 +31,27 @@ lab.html 은 코드 블록 클릭 시 `pre.innerText` 전체를 터미널 WS 로
 - `## ` 섹션 수는 steps 수와 같아야 하므로 절대 변하면 안 된다.
 - 시험형 트랙(cka·ckad·cks)은 실제 시험처럼 학습자가 명령을 스스로 구성해야 하므로 이 규약을 강제하지 않는다.
 
+## 명령어 풀이 = 코드 블록 바로 뒤 목록 (2026-09-26)
+
+학습형 트랙(linux·k8s·openstack) 가이드는 실행용 코드 블록 **바로 뒤에** 그 명령의 풀이를 목록으로 단다.
+lab.html 이 `pre + ul` 을 보조 설명 스타일(작은 글씨·왼쪽 선)로 렌더하므로, 코드 블록과 목록 사이에는
+빈 줄 하나만 두고 다른 문단을 끼우지 않는다.
+
+~~~markdown
+```bash
+kubectl create deployment web --image=nginx:1.25 --replicas=3
+```
+
+- `kubectl create deployment web` — YAML 없이 명령형으로 Deployment 를 만든다.
+- `--replicas=3` — 항상 유지할 파드 수(`spec.replicas`).
+~~~
+
+- 항목 형식: `` `명령/옵션` — 설명 ``. 처음 보는 명령·옵션·셸 문법(`$( )`, `>>`, `2>&1`, 히어독 등)을 풀어 준다.
+- 같은 모듈 안에서 이미 풀이한 명령이 다시 나오면 생략해도 된다(daemon-reload, rollout status 등).
+- 종합(캡스톤) 모듈에서는 **해답을 풀이에 적지 않는다** — 주어진 진단 명령의 의미만 설명한다.
+- `guide.md` 와 `guide.en.md` 에 같은 내용을 각 언어로 단다.
+- 시험형 트랙은 해당 없음(명령을 스스로 구성하는 것이 연습).
+
 ## (기존) 스크립트 실행 규약 요약
 
 - **pod 드라이버**(Linux 트랙 등): `bootstrap.sh` / `checks/*.sh` / `solution.sh`는
@@ -40,17 +61,24 @@ lab.html 은 코드 블록 클릭 시 `pre.innerText` 전체를 터미널 WS 로
   `export KUBECONFIG=/etc/rancher/k3s/k3s.yaml` 필수(.bashrc 미적용).
 - `bootstrap.sh`는 멱등, 제한 시간 내 완료.
 - `guide.md`의 `## ` 섹션 수 = `meta.json`의 steps 수 (lab.html이 `## ` 기준으로 split).
-- 이중언어: `guide.md`(ko) + `guide.en.md`(en) 쌍으로 작성.
+- 다국어: `guide.md`(ko 원문) + `guide.<로케일>.md` (en·ja·zh-CN·zh-TW·es·de). 학습형 트랙(linux·k8s·openstack)은
+  7개 로케일을 모두 둔다(2026-09-26). 번역본의 코드 블록은 주석을 제외하고 영문본과 **글자 그대로 같아야** 하고,
+  `## ` 섹션 수·코드 블록 수·풀이 목록 위치·참고 링크도 같아야 한다. 가이드의 **[체크]** 버튼 이름은 각 로케일 UI 라벨
+  (`public/i18n.js` 의 `check`: チェック·校验·驗證·Comprobar·Prüfen)을 따른다.
+- meta.json 의 title/desc/steps[].title, checks/messages.json 도 같은 7개 로케일을 채운다(`{0}` 자리표시자 유지).
 
 ## 로케일 폴백 순서 (guide / explain / 콘텐츠 문자열)
 
-파일: `<base>.<로케일>.md` → **기본 로케일 요청이면 `<base>.md`** → 같은 언어의 다른 지역 변형
+파일: `<base>.<로케일>.md` → **원문 로케일(ko) 요청이면 `<base>.md`** → 같은 언어의 다른 지역 변형
 (zh-TW → zh-CN) → `<base>.en.md` → `<base>.md`.
 문자열(title/desc/steps[].title, checks/messages.json): 요청 로케일 → 같은 언어의 다른 변형 → en
 → 기본 로케일.
 
-- 기본 로케일(ko) 요청에서 `<base>.md` 를 먼저 보는 순서가 빠지면 **한국어 사용자에게 영어 가이드가
-  나간다**(실제로 그런 상태였다). 새 폴백 경로를 만들 때 이 항목을 반드시 지킬 것.
+- 한국어 요청에서 `<base>.md` 를 먼저 보는 순서가 빠지면 **한국어 사용자에게 영어 가이드가
+  나간다**(실제로 두 번 그런 상태였다). 새 폴백 경로를 만들 때 이 항목을 반드시 지킬 것.
+- 확장자 없는 원문의 언어는 `SOURCE_LOCALE`(server.js, 기본 `ko`, env `CONTENT_SOURCE_LOCALE`)로 판정한다.
+  **`DEFAULT_LOCALE`(포털 UI 기본값)로 판정하면 안 된다** — 운영 배포가 `DEFAULT_LOCALE=en` 이라
+  한국어 사용자에게 `guide.en.md` 가 나가던 버그의 원인이었다(2026-09-26 수정).
 - 미번역 로케일에 한국어 원문보다 영어를 주는 것이 의도다.
 - 과목에 따라 **일부 로케일만 번역하는 것이 정답일 수 있다** — CKA 모의고사는 실제 시험이
   영어·일본어·중국어(간체)만 지원하므로 그 3종 + 한국어만 작성한다.

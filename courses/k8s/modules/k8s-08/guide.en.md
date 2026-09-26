@@ -19,11 +19,16 @@ Create the ServiceAccount:
 kubectl create serviceaccount deployer
 ```
 
+- `kubectl create serviceaccount <name>` — creates a ServiceAccount in the current namespace (`default`). Pods use it via `spec.serviceAccountName`.
+- A new ServiceAccount has no permissions; they are granted with a RoleBinding.
+
 Confirm it exists:
 
 ```bash
 kubectl get sa deployer
 ```
+
+- `sa` is short for `serviceaccount`.
 
 ## 2. Role and RoleBinding
 
@@ -52,11 +57,18 @@ roleRef:
 EOF
 ```
 
+- `cat <<'EOF' | kubectl apply -f -` — feeds the YAML up to the `EOF` line to kubectl on stdin. `-f -` means "read stdin instead of a file"; quoting `'EOF'` stops the shell from expanding `$` inside the body.
+- `---` — separates several objects (Role, RoleBinding) created by one apply.
+- `rules[].apiGroups: [""]` — the core API group (pods, services, secrets, …). `resources` — targets, `verbs` — allowed actions.
+- `subjects` — who receives the permissions (a ServiceAccount here); `roleRef` — which Role. `roleRef` cannot be changed after creation.
+
 Inspect the RoleBinding:
 
 ```bash
 kubectl describe rolebinding read-pods
 ```
+
+- Shows at a glance which Role (`Role:`) is bound to which subjects (`Subjects:`).
 
 ## 3. Verify with auth can-i
 
@@ -69,11 +81,16 @@ Set the subject variable:
 SA=system:serviceaccount:default:deployer
 ```
 
+- A ServiceAccount's user name has the form `system:serviceaccount:<namespace>:<name>`; the shell variable `SA` saves typing it.
+
 Test listing pods:
 
 ```bash
 kubectl auth can-i list   pods --as=$SA     # yes
 ```
+
+- `kubectl auth can-i <verb> <resource>` — answers `yes`/`no` for whether that request is allowed.
+- `--as=$SA` — checks while impersonating that subject instead of using your admin rights.
 
 Test deleting pods:
 
@@ -81,11 +98,15 @@ Test deleting pods:
 kubectl auth can-i delete pods --as=$SA     # no
 ```
 
+- `delete` is not in the Role's `verbs`, so this must be `no`.
+
 Test listing secrets:
 
 ```bash
 kubectl auth can-i list   secrets --as=$SA  # no (not in the Role)
 ```
+
+- The Role only covers `pods`, so any other resource (`secrets`) is `no` regardless of verb. See the whole list with `kubectl auth can-i --list --as=$SA`.
 
 Success when `list pods`→yes and `delete pods`→no, confirming least privilege.
 

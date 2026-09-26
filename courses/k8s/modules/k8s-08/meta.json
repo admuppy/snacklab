@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "Role·ClusterRole 과 바인딩으로 ServiceAccount 에 최소권한을 부여하고 auth can-i 로 검증",
-    "en": "Grant least-privilege to ServiceAccounts with Roles, ClusterRoles and bindings, verified via auth can-i"
+    "en": "Grant least-privilege to ServiceAccounts with Roles, ClusterRoles and bindings, verified via auth can-i",
+    "ja": "Role・ClusterRole とバインディングで ServiceAccount に最小権限を与え、auth can-i で検証する",
+    "zh-CN": "用 Role、ClusterRole 及绑定为 ServiceAccount 授予最小权限,并用 auth can-i 验证",
+    "zh-TW": "用 Role、ClusterRole 及繫結為 ServiceAccount 授予最小權限,並用 auth can-i 驗證",
+    "es": "Concede mínimo privilegio a las ServiceAccounts con Roles, ClusterRoles y bindings, verificado con auth can-i",
+    "de": "ServiceAccounts mit Roles, ClusterRoles und Bindings minimale Rechte geben und mit auth can-i überprüfen"
   },
   "duration": 35,
   "available": true,

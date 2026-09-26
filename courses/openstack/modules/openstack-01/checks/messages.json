@@ -1,78 +1,173 @@
 {
   "step1m1": {
     "ko": "FAIL: 네트워크 'net1' 이 없습니다. 'openstack network create net1' 으로 만드세요.",
-    "en": "FAIL: the network 'net1' does not exist. Create it with 'openstack network create net1'."
+    "en": "FAIL: the network 'net1' does not exist. Create it with 'openstack network create net1'.",
+    "ja": "FAIL: ネットワーク 'net1' がありません。'openstack network create net1' で作成してください。",
+    "zh-CN": "FAIL: 没有网络 'net1'。请用 'openstack network create net1' 创建。",
+    "zh-TW": "FAIL: 沒有網路 'net1'。請用 'openstack network create net1' 建立。",
+    "es": "FAIL: no existe la red 'net1'. Créala con 'openstack network create net1'.",
+    "de": "FAIL: Das Netz 'net1' fehlt. Lege es mit 'openstack network create net1' an."
   },
   "step1m2": {
     "ko": "FAIL: 서브넷 'subnet1' 이 없습니다. 'openstack subnet create --network net1 ...' 으로 만드세요.",
-    "en": "FAIL: the subnet 'subnet1' does not exist. Create it with 'openstack subnet create --network net1 ...'."
+    "en": "FAIL: the subnet 'subnet1' does not exist. Create it with 'openstack subnet create --network net1 ...'.",
+    "ja": "FAIL: サブネット 'subnet1' がありません。'openstack subnet create --network net1 ...' で作成してください。",
+    "zh-CN": "FAIL: 没有子网 'subnet1'。请用 'openstack subnet create --network net1 ...' 创建。",
+    "zh-TW": "FAIL: 沒有子網 'subnet1'。請用 'openstack subnet create --network net1 ...' 建立。",
+    "es": "FAIL: no existe la subred 'subnet1'. Créala con 'openstack subnet create --network net1 ...'.",
+    "de": "FAIL: Das Subnetz 'subnet1' fehlt. Lege es mit 'openstack subnet create --network net1 ...' an."
   },
   "step1m3": {
     "ko": "FAIL: subnet1 의 대역이 192.168.100.0/24 가 아닙니다 (현재 {0}).",
-    "en": "FAIL: subnet1's range is not 192.168.100.0/24 (currently {0})."
+    "en": "FAIL: subnet1's range is not 192.168.100.0/24 (currently {0}).",
+    "ja": "FAIL: subnet1 の帯域が 192.168.100.0/24 ではありません(現在 {0})。",
+    "zh-CN": "FAIL: subnet1 的网段不是 192.168.100.0/24(当前 {0})。",
+    "zh-TW": "FAIL: subnet1 的網段不是 192.168.100.0/24(當前 {0})。",
+    "es": "FAIL: el rango de subnet1 no es 192.168.100.0/24 (actualmente {0}).",
+    "de": "FAIL: Der Bereich von subnet1 ist nicht 192.168.100.0/24 (aktuell {0})."
   },
   "step1m4": {
     "ko": "FAIL: subnet1 이 net1 에 속해 있지 않습니다. --network net1 옵션을 확인하세요.",
-    "en": "FAIL: subnet1 does not belong to net1. Check the --network net1 option."
+    "en": "FAIL: subnet1 does not belong to net1. Check the --network net1 option.",
+    "ja": "FAIL: subnet1 が net1 に属していません。--network net1 オプションを確認してください。",
+    "zh-CN": "FAIL: subnet1 不属于 net1。请检查 --network net1 选项。",
+    "zh-TW": "FAIL: subnet1 不屬於 net1。請檢查 --network net1 選項。",
+    "es": "FAIL: subnet1 no pertenece a net1. Revisa la opción --network net1.",
+    "de": "FAIL: subnet1 gehört nicht zu net1. Prüfe die Option --network net1."
   },
   "step1m5": {
     "ko": "PASS: net1 과 subnet1(192.168.100.0/24) 이 준비되었습니다.",
-    "en": "PASS: net1 and subnet1 (192.168.100.0/24) are ready."
+    "en": "PASS: net1 and subnet1 (192.168.100.0/24) are ready.",
+    "ja": "PASS: net1 と subnet1(192.168.100.0/24)の準備ができました。",
+    "zh-CN": "PASS: net1 和 subnet1(192.168.100.0/24)已就绪。",
+    "zh-TW": "PASS: net1 和 subnet1(192.168.100.0/24)已就緒。",
+    "es": "PASS: net1 y subnet1 (192.168.100.0/24) están listas.",
+    "de": "PASS: net1 und subnet1 (192.168.100.0/24) sind bereit."
   },
   "step2m1": {
     "ko": "FAIL: 인스턴스 'vm1' 이 없습니다. 'openstack server create ... vm1' 으로 기동하세요.",
-    "en": "FAIL: the instance 'vm1' does not exist. Boot it with 'openstack server create ... vm1'."
+    "en": "FAIL: the instance 'vm1' does not exist. Boot it with 'openstack server create ... vm1'.",
+    "ja": "FAIL: インスタンス 'vm1' がありません。'openstack server create ... vm1' で起動してください。",
+    "zh-CN": "FAIL: 没有实例 'vm1'。请用 'openstack server create ... vm1' 启动。",
+    "zh-TW": "FAIL: 沒有例項 'vm1'。請用 'openstack server create ... vm1' 啟動。",
+    "es": "FAIL: no existe la instancia 'vm1'. Arráncala con 'openstack server create ... vm1'.",
+    "de": "FAIL: Die Instanz 'vm1' fehlt. Boote sie mit 'openstack server create ... vm1'."
   },
   "step2m2": {
     "ko": "FAIL: vm1 의 상태가 ACTIVE 가 아닙니다 (현재 {0}). 잠시 후 다시 확인하거나 'openstack server show vm1' 으로 원인을 보세요.",
-    "en": "FAIL: vm1 is not ACTIVE (currently {0}). Wait a moment, or inspect it with 'openstack server show vm1'."
+    "en": "FAIL: vm1 is not ACTIVE (currently {0}). Wait a moment, or inspect it with 'openstack server show vm1'.",
+    "ja": "FAIL: vm1 が ACTIVE ではありません(現在 {0})。少し待つか、'openstack server show vm1' で確認してください。",
+    "zh-CN": "FAIL: vm1 不是 ACTIVE(当前 {0})。请稍等,或用 'openstack server show vm1' 查看。",
+    "zh-TW": "FAIL: vm1 不是 ACTIVE(當前 {0})。請稍等,或用 'openstack server show vm1' 檢視。",
+    "es": "FAIL: vm1 no está ACTIVE (actualmente {0}). Espera un momento o revísala con 'openstack server show vm1'.",
+    "de": "FAIL: vm1 ist nicht ACTIVE (aktuell {0}). Warte kurz oder prüfe sie mit 'openstack server show vm1'."
   },
   "step2m3": {
     "ko": "FAIL: vm1 의 플레이버가 m1.tiny 가 아닙니다 (현재 {0}).",
-    "en": "FAIL: vm1's flavor is not m1.tiny (currently {0})."
+    "en": "FAIL: vm1's flavor is not m1.tiny (currently {0}).",
+    "ja": "FAIL: vm1 のフレーバーが m1.tiny ではありません(現在 {0})。",
+    "zh-CN": "FAIL: vm1 的规格不是 m1.tiny(当前 {0})。",
+    "zh-TW": "FAIL: vm1 的規格不是 m1.tiny(當前 {0})。",
+    "es": "FAIL: el flavor de vm1 no es m1.tiny (actualmente {0}).",
+    "de": "FAIL: Der Flavor von vm1 ist nicht m1.tiny (aktuell {0})."
   },
   "step2m4": {
     "ko": "FAIL: vm1 이 net1 네트워크에 연결되어 있지 않습니다. --network net1 옵션을 확인하세요.",
-    "en": "FAIL: vm1 is not attached to the net1 network. Check the --network net1 option."
+    "en": "FAIL: vm1 is not attached to the net1 network. Check the --network net1 option.",
+    "ja": "FAIL: vm1 が net1 ネットワークに接続されていません。--network net1 オプションを確認してください。",
+    "zh-CN": "FAIL: vm1 没有连接到 net1 网络。请检查 --network net1 选项。",
+    "zh-TW": "FAIL: vm1 沒有連線到 net1 網路。請檢查 --network net1 選項。",
+    "es": "FAIL: vm1 no está conectada a la red net1. Revisa la opción --network net1.",
+    "de": "FAIL: vm1 ist nicht mit dem Netz net1 verbunden. Prüfe die Option --network net1."
   },
   "step2m5": {
     "ko": "PASS: vm1 이 net1 위에서 ACTIVE 입니다.",
-    "en": "PASS: vm1 is ACTIVE on net1."
+    "en": "PASS: vm1 is ACTIVE on net1.",
+    "ja": "PASS: vm1 が net1 上で ACTIVE です。",
+    "zh-CN": "PASS: vm1 在 net1 上处于 ACTIVE 状态。",
+    "zh-TW": "PASS: vm1 在 net1 上處於 ACTIVE 狀態。",
+    "es": "PASS: vm1 está ACTIVE en net1.",
+    "de": "PASS: vm1 ist ACTIVE in net1."
   },
   "step3m1": {
     "ko": "FAIL: ~/all-servers.txt 가 없거나 비어 있습니다. 가이드의 저장 명령을 실행하세요.",
-    "en": "FAIL: ~/all-servers.txt is missing or empty. Run the save command from the guide."
+    "en": "FAIL: ~/all-servers.txt is missing or empty. Run the save command from the guide.",
+    "ja": "FAIL: ~/all-servers.txt がないか空です。ガイドの保存コマンドを実行してください。",
+    "zh-CN": "FAIL: ~/all-servers.txt 不存在或为空。请执行指南中的保存命令。",
+    "zh-TW": "FAIL: ~/all-servers.txt 不存在或為空。請執行指南中的儲存命令。",
+    "es": "FAIL: ~/all-servers.txt no existe o está vacío. Ejecuta el comando de guardado de la guía.",
+    "de": "FAIL: ~/all-servers.txt fehlt oder ist leer. Führe den Speicherbefehl aus der Anleitung aus."
   },
   "step3m2": {
     "ko": "FAIL: 인스턴스 'vm1' 이 없습니다. 2단계를 먼저 끝내세요.",
-    "en": "FAIL: the instance 'vm1' does not exist. Finish step 2 first."
+    "en": "FAIL: the instance 'vm1' does not exist. Finish step 2 first.",
+    "ja": "FAIL: インスタンス 'vm1' がありません。先にステップ 2 を終えてください。",
+    "zh-CN": "FAIL: 没有实例 'vm1'。请先完成第 2 步。",
+    "zh-TW": "FAIL: 沒有例項 'vm1'。請先完成第 2 步。",
+    "es": "FAIL: no existe la instancia 'vm1'. Termina primero el paso 2.",
+    "de": "FAIL: Die Instanz 'vm1' fehlt. Schließe zuerst Schritt 2 ab."
   },
   "step3m3": {
     "ko": "FAIL: 저장된 목록에 vm1 이 없습니다. 인스턴스를 만든 뒤 다시 조회해 저장하세요.",
-    "en": "FAIL: the saved list does not contain vm1. Re-run the query after the instance exists."
+    "en": "FAIL: the saved list does not contain vm1. Re-run the query after the instance exists.",
+    "ja": "FAIL: 保存した一覧に vm1 がありません。インスタンスができてから参照し直してください。",
+    "zh-CN": "FAIL: 保存的列表中没有 vm1。请在实例创建后重新查询。",
+    "zh-TW": "FAIL: 儲存的列表中沒有 vm1。請在例項建立後重新查詢。",
+    "es": "FAIL: la lista guardada no contiene vm1. Vuelve a consultar cuando exista la instancia.",
+    "de": "FAIL: Die gespeicherte Liste enthält vm1 nicht. Frage erneut ab, sobald die Instanz existiert."
   },
   "step3m4": {
     "ko": "FAIL: 현재 토큰의 프로젝트를 확인하지 못했습니다. 'openstack token issue' 로 자격증명을 확인하세요.",
-    "en": "FAIL: could not read the project of the current token. Check your credentials with 'openstack token issue'."
+    "en": "FAIL: could not read the project of the current token. Check your credentials with 'openstack token issue'.",
+    "ja": "FAIL: 現在のトークンのプロジェクトを読めませんでした。'openstack token issue' で認証情報を確認してください。",
+    "zh-CN": "FAIL: 无法读取当前令牌所属的项目。请用 'openstack token issue' 检查凭据。",
+    "zh-TW": "FAIL: 無法讀取當前令牌所屬的專案。請用 'openstack token issue' 檢查憑據。",
+    "es": "FAIL: no se pudo leer el proyecto del token actual. Revisa tus credenciales con 'openstack token issue'.",
+    "de": "FAIL: Das Projekt des aktuellen Tokens konnte nicht gelesen werden. Prüfe deine Zugangsdaten mit 'openstack token issue'."
   },
   "step3m5": {
     "ko": "FAIL: 저장된 목록에 프로젝트 ID가 없습니다. \"-c 'Project ID'\" 를 함께 지정하세요.",
-    "en": "FAIL: the saved list has no project ID. Add \"-c 'Project ID'\" to the command."
+    "en": "FAIL: the saved list has no project ID. Add \"-c 'Project ID'\" to the command.",
+    "ja": "FAIL: 保存した一覧にプロジェクト ID がありません。コマンドに \"-c 'Project ID'\" を追加してください。",
+    "zh-CN": "FAIL: 保存的列表中没有项目 ID。请在命令中加上 \"-c 'Project ID'\"。",
+    "zh-TW": "FAIL: 儲存的列表中沒有專案 ID。請在命令中加上 \"-c 'Project ID'\"。",
+    "es": "FAIL: la lista guardada no tiene el ID de proyecto. Añade \"-c 'Project ID'\" al comando.",
+    "de": "FAIL: Die gespeicherte Liste enthält keine Projekt-ID. Ergänze den Befehl um \"-c 'Project ID'\"."
   },
   "step3m6": {
     "ko": "PASS: 모든 프로젝트의 인스턴스 목록을 프로젝트 ID와 함께 조회했습니다.",
-    "en": "PASS: you listed instances across all projects, including the project ID."
+    "en": "PASS: you listed instances across all projects, including the project ID.",
+    "ja": "PASS: プロジェクト ID を含めて、すべてのプロジェクトのインスタンスを参照しました。",
+    "zh-CN": "PASS: 已包含项目 ID 查询了所有项目的实例。",
+    "zh-TW": "PASS: 已包含專案 ID 查詢了所有專案的例項。",
+    "es": "PASS: has listado las instancias de todos los proyectos, incluido el ID de proyecto.",
+    "de": "PASS: Du hast die Instanzen aller Projekte samt Projekt-ID aufgelistet."
   },
   "step4m1": {
     "ko": "FAIL: 인스턴스 'vm1' 이 없습니다.",
-    "en": "FAIL: the instance 'vm1' does not exist."
+    "en": "FAIL: the instance 'vm1' does not exist.",
+    "ja": "FAIL: インスタンス 'vm1' がありません。",
+    "zh-CN": "FAIL: 没有实例 'vm1'。",
+    "zh-TW": "FAIL: 沒有例項 'vm1'。",
+    "es": "FAIL: no existe la instancia 'vm1'.",
+    "de": "FAIL: Die Instanz 'vm1' fehlt."
   },
   "step4m2": {
     "ko": "FAIL: vm1 의 상태가 SHUTOFF 가 아닙니다 (현재 {0}). 'openstack server stop vm1' 으로 정지하세요.",
-    "en": "FAIL: vm1 is not SHUTOFF (currently {0}). Stop it with 'openstack server stop vm1'."
+    "en": "FAIL: vm1 is not SHUTOFF (currently {0}). Stop it with 'openstack server stop vm1'.",
+    "ja": "FAIL: vm1 が SHUTOFF ではありません(現在 {0})。'openstack server stop vm1' で停止してください。",
+    "zh-CN": "FAIL: vm1 不是 SHUTOFF(当前 {0})。请用 'openstack server stop vm1' 停止。",
+    "zh-TW": "FAIL: vm1 不是 SHUTOFF(當前 {0})。請用 'openstack server stop vm1' 停止。",
+    "es": "FAIL: vm1 no está SHUTOFF (actualmente {0}). Detenla con 'openstack server stop vm1'.",
+    "de": "FAIL: vm1 ist nicht SHUTOFF (aktuell {0}). Stoppe sie mit 'openstack server stop vm1'."
   },
   "step4m3": {
     "ko": "PASS: vm1 이 SHUTOFF 상태입니다.",
-    "en": "PASS: vm1 is SHUTOFF."
+    "en": "PASS: vm1 is SHUTOFF.",
+    "ja": "PASS: vm1 は SHUTOFF です。",
+    "zh-CN": "PASS: vm1 已处于 SHUTOFF 状态。",
+    "zh-TW": "PASS: vm1 已處於 SHUTOFF 狀態。",
+    "es": "PASS: vm1 está SHUTOFF.",
+    "de": "PASS: vm1 ist SHUTOFF."
   }
 }

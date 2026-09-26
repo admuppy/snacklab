@@ -2,11 +2,21 @@
   "id": "openstack-01",
   "title": {
     "ko": "첫 인스턴스 띄우기",
-    "en": "Boot Your First Instance"
+    "en": "Boot Your First Instance",
+    "ja": "最初のインスタンスを起動する",
+    "zh-CN": "启动第一台实例",
+    "zh-TW": "啟動第一臺例項",
+    "es": "Arranca tu primera instancia",
+    "de": "Die erste Instanz starten"
   },
   "desc": {
     "ko": "서비스 카탈로그와 nova 구성을 읽고, 네트워크를 만들어 cirros 인스턴스를 기동·조회·정지하며 OpenStack CLI의 기본 흐름을 익힌다",
-    "en": "Read the service catalog and nova's components, then create a network and boot, list and stop a cirros instance to learn the core OpenStack CLI workflow"
+    "en": "Read the service catalog and nova's components, then create a network and boot, list and stop a cirros instance to learn the core OpenStack CLI workflow",
+    "ja": "サービスカタログと nova の構成を読み、ネットワークを作って cirros インスタンスを起動・参照・停止しながら、OpenStack CLI の基本の流れを身につける",
+    "zh-CN": "阅读服务目录和 nova 的构成,创建网络并启动、查询、停止 cirros 实例,掌握 OpenStack CLI 的基本流程",
+    "zh-TW": "閱讀服務目錄和 nova 的構成,建立網路並啟動、查詢、停止 cirros 例項,掌握 OpenStack CLI 的基本流程",
+    "es": "Lee el catálogo de servicios y los componentes de nova; después crea una red y arranca, lista y detén una instancia cirros para aprender el flujo básico de la CLI de OpenStack",
+    "de": "Servicekatalog und nova-Komponenten lesen, dann ein Netz anlegen und eine cirros-Instanz booten, auflisten und stoppen — der grundlegende Ablauf der OpenStack-CLI"
   },
   "duration": 40,
   "available": true,
@@ -15,28 +25,48 @@
     {
       "title": {
         "ko": "네트워크와 서브넷 생성",
-        "en": "Create a network and subnet"
+        "en": "Create a network and subnet",
+        "ja": "ネットワークとサブネットの作成",
+        "zh-CN": "创建网络和子网",
+        "zh-TW": "建立網路和子網",
+        "es": "Crear una red y una subred",
+        "de": "Ein Netz und ein Subnetz anlegen"
       },
       "check": "step1.sh"
     },
     {
       "title": {
         "ko": "인스턴스 기동 (ACTIVE)",
-        "en": "Boot an instance (ACTIVE)"
+        "en": "Boot an instance (ACTIVE)",
+        "ja": "インスタンスの起動(ACTIVE)",
+        "zh-CN": "启动实例(ACTIVE)",
+        "zh-TW": "啟動例項(ACTIVE)",
+        "es": "Arrancar una instancia (ACTIVE)",
+        "de": "Eine Instanz booten (ACTIVE)"
       },
       "check": "step2.sh"
     },
     {
       "title": {
         "ko": "프로젝트 전체 인스턴스 조회",
-        "en": "List instances across projects"
+        "en": "List instances across projects",
+        "ja": "プロジェクト全体のインスタンスを参照",
+        "zh-CN": "查询所有项目的实例",
+        "zh-TW": "查詢所有專案的例項",
+        "es": "Listar instancias de todos los proyectos",
+        "de": "Instanzen aller Projekte auflisten"
       },
       "check": "step3.sh"
     },
     {
       "title": {
         "ko": "인스턴스 정지 (SHUTOFF)",
-        "en": "Stop the instance (SHUTOFF)"
+        "en": "Stop the instance (SHUTOFF)",
+        "ja": "インスタンスの停止(SHUTOFF)",
+        "zh-CN": "停止实例(SHUTOFF)",
+        "zh-TW": "停止例項(SHUTOFF)",
+        "es": "Detener la instancia (SHUTOFF)",
+        "de": "Die Instanz stoppen (SHUTOFF)"
       },
       "check": "step4.sh"
     }

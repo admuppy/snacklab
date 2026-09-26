@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SnackLab</title>
+<link rel="stylesheet" href="/style.css">
+<style>
+  .page { max-width: 1080px; margin: 0 auto; padding: 36px 20px 80px; }
+  .hero { margin-bottom: 28px; }
+  .hero h1 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .hero p { color: var(--ink-2); margin: 0; max-width: 60em; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; margin-top: 26px; }
+  .card {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    padding: 18px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .card .no { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--accent); }
+  .card h3 { margin: 0; font-size: 15.5px; font-weight: 750; }
+  .card .desc { font-size: 13px; color: var(--ink-2); flex: 1; }
+  .card .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .card .dur { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .card.soon { opacity: 0.55; }
+  /* ── 색인 + 검색 툴바 (스티키) ── */
+  .catalog-tools { position: sticky; top: 0; z-index: 30; background: var(--bg); padding: 12px 0 10px; margin-top: 18px; }
+  .catalog-tools .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .idx-chip {
+    cursor: pointer; font: inherit; font-size: 12.5px; padding: 5px 12px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    display: inline-flex; align-items: center; gap: 7px;
+  }
+  .idx-chip:hover { border-color: var(--accent); }
+  .idx-chip .cnt { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .idx-search { margin-left: auto; }
+  .idx-search input {
+    font: inherit; font-size: 13px; padding: 6px 13px; border-radius: 999px; width: 210px;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  }
+  .idx-search input:focus { outline: none; border-color: var(--accent); }
+  .idx-actions button { font: inherit; font-size: 12px; color: var(--muted); background: none; border: none; cursor: pointer; padding: 4px 2px; }
+  .idx-actions button:hover { color: var(--accent); }
+  /* ── 접이식 트랙 섹션 ── */
+  .track { margin-top: 18px; }
+  .track:first-of-type { margin-top: 6px; }
+  /* 헤더 = 누르면 펼쳐지는 바. button 은 color 를 상속하지 않으므로 반드시 명시할 것 */
+  .track-head {
+    display: flex; align-items: center; gap: 14px; width: 100%; cursor: pointer; user-select: none;
+    text-align: left; margin: 0; padding: 14px 16px; font: inherit; color: var(--ink);
+    border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+    transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  }
+  .track-head:hover { border-color: var(--accent); background: var(--surface-2); }
+  .track-head:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .track:not(.collapsed) .track-head {
+    border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+  }
+  /* 트랙 아이콘 타일 */
+  .track-head .th-icon {
+    flex: none; width: 42px; height: 42px; border-radius: 11px; display: grid; place-items: center;
+    font-size: 23px; line-height: 1; background: var(--surface-2); border: 1px solid var(--line);
+  }
+  .track-head .th-icon.k8s { background: #326ce5; border-color: #326ce5; }
+  .track-head .th-icon.cka { background: #2d2438; border-color: #4b3d63; }
+  .track-head .th-icon.linux { background: #f7f3e8; border-color: #e6dcc4; }
+  .track-head .th-icon svg { width: 26px; height: 26px; display: block; }
+  .track-head .th-main { flex: 1; min-width: 0; }
+  .track-head h2 { margin: 0 0 3px; font-size: 1.15rem; font-weight: 800; letter-spacing: -0.01em; color: var(--ink); }
+  .track-head p { margin: 0; font-size: 13px; color: var(--ink-2); }
+  .track-head .th-meta { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .track-head .th-meta .th-done { color: var(--accent); font-weight: 700; }
+  /* 펼침/접힘 어포던스 — 문구 + 캐럿 */
+  .track-head .th-toggle {
+    flex: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+    font-size: 12px; font-weight: 700; color: var(--ink-2);
+    border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; background: var(--bg);
+  }
+  .track-head:hover .th-toggle { color: var(--accent); border-color: var(--accent); }
+  .track-head .caret { font-size: 10px; transition: transform 0.18s; }
+  .track.collapsed .track-head .caret { transform: rotate(-90deg); }
+  .track .cards {
+    margin-top: 0; padding: 16px; border: 1px solid var(--line); border-top: 0;
+    border-radius: 0 0 14px 14px; background: rgba(255, 255, 255, 0.012);
+  }
+  .track.collapsed .cards { display: none; }
+  @media (max-width: 560px) {
+    .track-head .th-toggle span:not(.caret) { display: none; }
+    .track-head { gap: 10px; padding: 12px; }
+  }
+  .no-results { color: var(--muted); font-size: 13.5px; padding: 30px 4px; }
+  .mybadges { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 18px; margin-top: 18px; }
+  .mybadges h3 { margin: 0 0 12px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
+  .card .done-chip { font-size: 11px; font-weight: 700; color: var(--accent); }
+  .card.completed { border-color: var(--accent); }
+  /* ── 좌상단 계정 메뉴 ── */
+  .userwrap { position: relative; display: inline-flex; }
+  .userbtn { cursor: pointer; font: inherit; font-size: 12px; }
+  .userbtn::after { content: ' ▾'; color: var(--muted); }
+  .usermenu {
+    display: none; position: absolute; top: calc(100% + 8px); right: 0; z-index: 40;
+    min-width: 320px; max-width: 420px; max-height: 70vh; overflow-y: auto;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 12px 16px 14px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+  .usermenu.open { display: block; }
+  .usermenu h3 { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
+  .um-track { margin: 10px 0 4px; font-size: 12px; font-weight: 800; }
+  .um-track .um-trackdone { font-weight: 700; font-size: 11px; color: var(--warn); margin-left: 6px; }
+  .um-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    padding: 4px 0; font-size: 12.5px; border-top: 1px solid var(--line);
+  }
+  .um-row .um-title { color: var(--ink); }
+  .um-row .um-stat { color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .um-row.done .um-stat { color: var(--accent); }
+  .um-empty { font-size: 12.5px; color: var(--muted); padding: 4px 0; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <span class="logo"><b>SnackLab</b></span>
+  <span class="chip" data-i18n="version">v0.1</span>
+  <span class="spacer"></span>
+  <span class="userwrap">
+    <button class="chip userbtn" id="who">…</button>
+    <div class="usermenu" id="userMenu">
+      <h3 data-i18n="myProgress">내 진행도</h3>
+      <div id="userMenuBody"></div>
+    </div>
+  </span>
+  <a class="btn" href="/admin.html" id="adminBtn" style="display:none" data-i18n="admin">관리자</a>
+  <a class="btn" href="/auth/logout" id="logoutBtn" style="display:none" data-i18n="logout">로그아웃</a>
+</div>
+<div class="page">
+  <div class="hero">
+    <h1 data-i18n="heroTitle">실습 카탈로그</h1>
+    <p data-i18n="heroDesc">브라우저만으로 접속해 단계별 시나리오를 따라가는 실습 환경입니다.</p>
+  </div>
+  <div class="mybadges" id="myBadges" style="display:none">
+    <h3 data-i18n="myBadges">내 뱃지</h3>
+    <div class="badge-strip" id="badgeStrip"></div>
+  </div>
+  <div class="catalog-tools" id="tools" style="display:none">
+    <div class="row">
+      <span class="idx-actions"></span>
+      <span id="index"></span>
+      <span class="idx-search"><input id="search" type="search" autocomplete="off"></span>
+    </div>
+  </div>
+  <div id="tracks"></div>
+</div>
+<script src="/i18n.js"></script>
+<script>
+async function main() {
+  const meRes = await fetch('/api/me');
+  if (meRes.status === 401) { location.href = '/auth/login?next=' + encodeURIComponent(location.pathname + location.search); return; }
+  const me = await meRes.json();
+  document.getElementById('who').textContent = me.name || me.user;
+  document.getElementById('adminBtn').style.display = me.admin ? '' : 'none';
+  document.getElementById('logoutBtn').style.display = me.authOn ? '' : 'none';
+
+  // 가입 후 미승인 계정: 카탈로그 대신 승인 대기 안내
+  if (me.authOn && me.approved === false) {
+    document.querySelector('.page').innerHTML = `
+      <div class="hero" style="max-width:560px;margin:60px auto;text-align:center">
+        <div style="font-size:44px;margin-bottom:14px">⏳</div>
+        <h1>${t('pendingTitle')}</h1>
+        <p style="margin-top:10px">${t('pendingDesc')}</p>
+      </div>`;
+    return;
+  }
+
+  const TRACKS = {
+    linux: { name: t('trackLinuxName'), desc: t('trackLinuxDesc') },
+  };
+
+  // 트랙 아이콘: linux=펭귄, k8s=쿠버네티스 조타륜(파란 타일), 그 외=책
+  const K8S_SVG = `<svg viewBox="0 0 24 24" role="img" aria-hidden="true"
+      fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M12 1 20.6 5.14 22.72 14.45 16.77 21.91 7.23 21.91 1.28 14.45 3.4 5.14Z"/>
+    <circle cx="12" cy="12" r="2.5" fill="#fff" stroke="none"/>
+    <path d="M12 4.2V8M17.6 8.3l-3 2.2M15.5 15.4l-1.2-3.6M8.5 15.4l1.2-3.6M6.4 8.3l3 2.2"/>
+  </svg>`;
+  const trackIcon = (trk) => {
+    if (trk === 'linux') return `<span class="th-icon linux" aria-hidden="true">🐧</span>`;
+    if (trk === 'k8s') return `<span class="th-icon k8s">${K8S_SVG}</span>`;
+    if (trk === 'cka') return `<span class="th-icon cka" aria-hidden="true">🎓</span>`;
+    return `<span class="th-icon" aria-hidden="true">📘</span>`;
+  };
+  const chipIcon = (trk) => (trk === 'linux' ? '🐧' : trk === 'k8s' ? '☸️' : trk === 'cka' ? '🎓' : '📘');
+  const [labs, prog] = await Promise.all([
+    (await fetch('/api/labs')).json(),
+    fetch('/api/progress').then(r => r.ok ? r.json() : { labs: {}, badges: [] }).catch(() => ({ labs: {}, badges: [] })),
+  ]);
+  // 획득 뱃지 스트립 (트랙 완주 🏆를 앞에)
+  if (prog.badges.length) {
+    document.getElementById('myBadges').style.display = '';
+    const strip = document.getElementById('badgeStrip');
+    for (const b of [...prog.badges].sort((a, b) => (a.type === 'track' ? -1 : 1) - (b.type === 'track' ? -1 : 1))) {
+      strip.appendChild(badgeEl(b));
+    }
+  }
+  // 좌상단 계정 메뉴 — 트랙별 랩 진행도·날짜 (이수일 또는 최근 진행일)
+  const fmtDate = ts => new Date(ts).toLocaleDateString(LANG === 'en' ? 'en-US' : 'ko-KR');
+  const menuBody = document.getElementById('userMenuBody');
+  const started = labs.filter(l => prog.labs[l.id]);
+  if (!started.length) {
+    menuBody.innerHTML = `<div class="um-empty">${t('progNone')}</div>`;
+  } else {
+    const byTrack = new Map();
+    for (const lab of started) {
+      const trk = lab.track || 'linux';
+      if (!byTrack.has(trk)) byTrack.set(trk, []);
+      byTrack.get(trk).push(lab);
+    }
+    for (const [trk, list] of byTrack) {
+      const head = document.createElement('div');
+      head.className = 'um-track';
+      head.textContent = (TRACKS[trk] || { name: list[0].trackTitle || trk }).name;
+      const tdone = (prog.tracks || {})[trk];
+      if (tdone) {
+        const s = document.createElement('span');
+        s.className = 'um-trackdone';
+        s.textContent = t('trackDoneAt', fmtDate(tdone));
+        head.appendChild(s);
+      }
+      menuBody.appendChild(head);
+      for (const lab of list) {
+        const p = prog.labs[lab.id];
+        const row = document.createElement('div');
+        row.className = 'um-row' + (p.completedAt ? ' done' : '');
+        const title = document.createElement('span');
+        title.className = 'um-title';
+        title.textContent = String(lab.no).padStart(2, '0') + '. ' + lab.title;
+        const stat = document.createElement('span');
+        stat.className = 'um-stat';
+        // 시험형 랩은 단계 통과 수보다 점수가 진도다
+        stat.textContent = p.completedAt
+          ? `${badgeIcon(lab.track, lab.no)} ${t('progDoneAt', fmtDate(p.completedAt))}`
+          : p.exam
+            ? `${t('examProgScore', p.exam.best, p.exam.max)} · ${fmtDate(p.exam.lastAt)}`
+            : t('progLastAt', p.passed, p.total, fmtDate(p.lastAt));
+        row.append(title, stat);
+        menuBody.appendChild(row);
+      }
+    }
+  }
+  const menu = document.getElementById('userMenu');
+  document.getElementById('who').onclick = e => { e.stopPropagation(); menu.classList.toggle('open'); };
+  document.addEventListener('click', e => { if (!menu.contains(e.target)) menu.classList.remove('open'); });
+
+  const root = document.getElementById('tracks');
+  const groups = new Map();
+  for (const lab of labs) {
+    const trk = lab.track || 'linux';
+    if (!groups.has(trk)) groups.set(trk, []);
+    groups.get(trk).push(lab);
+  }
+
+  // 트랙 접힘 상태 영속 (트랙 id 배열). 저장된 상태가 없으면 **전부 접힌 채**로 시작한다
+  // — 카탈로그 첫 화면에서 트랙 구성이 한눈에 보이도록.
+  const COLLAPSE_KEY = 'lab_tracks_collapsed';
+  const saved = localStorage.getItem(COLLAPSE_KEY);
+  const collapsed = new Set(saved ? JSON.parse(saved) : [...groups.keys()]);
+  const saveCollapsed = () => localStorage.setItem(COLLAPSE_KEY, JSON.stringify([...collapsed]));
+
+  // 헤더의 접힘 어포던스(문구·캐럿·aria)를 섹션 상태에 맞춘다
+  const syncHead = (sec, head) => {
+    const isCollapsed = sec.classList.contains('collapsed');
+    head.setAttribute('aria-expanded', String(!isCollapsed));
+    head.querySelector('.tg-label').textContent = isCollapsed ? t('showLabs') : t('hideLabs');
+  };
+
+  const sections = [];  // { trk, el, cards:[{lab, el}] }
+  for (const [trk, list] of groups) {
+    // 내장 트랙은 UI 사전, 주입 과목은 course.json title/desc(API의 trackTitle/trackDesc)
+    const info = TRACKS[trk] || { name: list[0].trackTitle || trk, desc: list[0].trackDesc || '' };
+    const sec = document.createElement('section');
+    sec.className = 'track' + (collapsed.has(trk) ? ' collapsed' : '');
+    sec.id = 'track-' + trk;
+    // 트랙 진행도: 이수한 available 모듈 / 전체 available 모듈
+    const avail = list.filter(l => l.available);
+    const doneCount = avail.filter(l => (prog.labs[l.id] || {}).completedAt).length;
+    const meta = avail.length
+      ? `<span class="th-meta"><span class="th-done">${doneCount ? '✓ ' + doneCount + ' / ' + avail.length : avail.length}</span></span>`
+      : '';
+    const head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'track-head';
+    head.setAttribute('aria-expanded', String(!collapsed.has(trk)));
+    head.setAttribute('aria-controls', 'cards-' + trk);
+    head.innerHTML = `${trackIcon(trk)}<span class="th-main"><h2>${info.name}</h2><p>${info.desc}</p></span>${meta}`
+      + `<span class="th-toggle"><span class="tg-label"></span><span class="caret">▾</span></span>`;
+    const box = document.createElement('div');
+    box.className = 'cards';
+    box.id = 'cards-' + trk;
+    const cards = [];
+    for (const lab of list) {
+      const p = prog.labs[lab.id];
+      const isDone = !!(p && p.completedAt);
+      const el = document.createElement('div');
+      el.className = 'card' + (lab.available ? '' : ' soon') + (isDone ? ' completed' : '');
+      const progTxt = isDone
+        ? ` · <span class="done-chip">${badgeIcon(lab.track, lab.no)} ${t('completed')}</span>`
+        : (p && p.exam ? ` · <span class="done-chip">${t('examProgScore', p.exam.best, p.exam.max)}</span>`
+        : (p && p.passed ? ` · <span class="done-chip">${t('stepsProgress', p.passed, p.total)}</span>` : ''));
+      el.innerHTML = `
+        <span class="no">${t('module')} ${String(lab.no).padStart(2, '0')}</span>
+        <h3>${lab.title}</h3>
+        <div class="desc">${lab.desc || ''}</div>
+        <div class="foot">
+          <span class="dur">${lab.duration ? t('minutes', lab.duration) + ' · ' : ''}${(lab.steps || []).length ? t('steps', lab.steps.length) : t('preparing')}${progTxt}</span>
+          <button class="btn ${lab.available ? 'primary' : ''}" ${lab.available ? '' : 'disabled'}>
+            ${lab.available ? t('start') : t('preparing')}
+          </button>
+        </div>`;
+      if (lab.available) {
+        el.querySelector('button').onclick = async (e) => {
+          e.target.disabled = true;
+          e.target.textContent = t('allocating');
+          const res = await fetch('/api/sessions', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ labId: lab.id }),
+          });
+          const s = await res.json();
+          if (!res.ok) { alert(s.error); e.target.disabled = false; e.target.textContent = t('start'); return; }
+          location.href = '/lab.html?s=' + s.id;
+        };
+      }
+      box.appendChild(el);
+      cards.push({ lab, el });
+    }
+    head.onclick = () => {
+      const now = sec.classList.toggle('collapsed');
+      if (now) collapsed.add(trk); else collapsed.delete(trk);
+      syncHead(sec, head);
+      saveCollapsed();
+    };
+    sec.append(head, box);
+    root.appendChild(sec);
+    syncHead(sec, head);
+    sections.push({ trk, info, el: sec, head, cards });
+  }
+
+  // ── 색인 칩: 트랙으로 스크롤 + 펼치기 ──
+  const indexWrap = document.getElementById('index');
+  for (const s of sections) {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'idx-chip';
+    chip.innerHTML = `<span aria-hidden="true">${chipIcon(s.trk)}</span> ${s.info.name} <span class="cnt">${s.cards.length}</span>`;
+    chip.onclick = () => {
+      s.el.classList.remove('collapsed');
+      syncHead(s.el, s.head);
+      collapsed.delete(s.trk); saveCollapsed();
+      s.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    indexWrap.appendChild(chip);
+  }
+
+  // ── 모두 펼치기 / 접기 ──
+  const actions = document.querySelector('.idx-actions');
+  const expandBtn = document.createElement('button');
+  const collapseBtn = document.createElement('button');
+  expandBtn.textContent = t('expandAll');
+  collapseBtn.textContent = t('collapseAll');
+  const setAll = (doCollapse) => {
+    for (const s of sections) {
+      s.el.classList.toggle('collapsed', doCollapse);
+      if (doCollapse) collapsed.add(s.trk); else collapsed.delete(s.trk);
+      syncHead(s.el, s.head);
+    }
+    saveCollapsed();
+  };
+  expandBtn.onclick = () => setAll(false);
+  collapseBtn.onclick = () => setAll(true);
+  actions.append(expandBtn, collapseBtn);
+
+  // ── 검색: 제목·설명 필터, 일치 섹션 자동 펼침 ──
+  const search = document.getElementById('search');
+  search.placeholder = t('searchPh');
+  let emptyEl = null;
+  search.oninput = () => {
+    const q = search.value.trim().toLowerCase();
+    let anyHit = false;
+    for (const s of sections) {
+      let secHit = 0;
+      for (const c of s.cards) {
+        const hit = !q || (c.lab.title + ' ' + (c.lab.desc || '')).toLowerCase().includes(q);
+        c.el.style.display = hit ? '' : 'none';
+        if (hit) secHit++;
+      }
+      s.el.style.display = secHit ? '' : 'none';
+      if (q && secHit) { s.el.classList.remove('collapsed'); syncHead(s.el, s.head); }
+      if (secHit) anyHit = true;
+    }
+    // 검색어를 지우면 저장된 접힘 상태 복원
+    if (!q) for (const s of sections) {
+      s.el.classList.toggle('collapsed', collapsed.has(s.trk));
+      syncHead(s.el, s.head);
+    }
+    if (!emptyEl) { emptyEl = document.createElement('div'); emptyEl.className = 'no-results'; root.appendChild(emptyEl); }
+    emptyEl.textContent = anyHit ? '' : t('noResults');
+    emptyEl.style.display = anyHit ? 'none' : '';
+  };
+
+  document.getElementById('tools').style.display = sections.length ? '' : 'none';
+}
+main();
+</script>
+</body>
+</html>

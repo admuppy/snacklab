@@ -11,7 +11,12 @@
   },
   "desc": {
     "ko": "이미지·셀렉터·프로브·리소스가 얽혀 고장난 배포를 증상에서 원인까지 추적해 복구",
-    "en": "Trace a deployment broken across image, selector, probe and resource issues from symptom to root cause"
+    "en": "Trace a deployment broken across image, selector, probe and resource issues from symptom to root cause",
+    "ja": "イメージ・セレクター・プローブ・リソースが絡んで壊れたデプロイを、症状から原因まで追跡して復旧する",
+    "zh-CN": "追查因镜像、选择器、探针和资源问题交织而出故障的部署,从症状一路找到根因并修复",
+    "zh-TW": "追查因映像、選擇器、探針和資源問題交織而出故障的部署,從症狀一路找到根因並修復",
+    "es": "Rastrea un despliegue roto por problemas de imagen, selector, sonda y recursos, desde el síntoma hasta la causa raíz",
+    "de": "Ein durch Image-, Selektor-, Probe- und Ressourcenprobleme kaputtes Deployment vom Symptom bis zur Ursache verfolgen und reparieren"
   },
   "duration": 45,
   "available": true,
